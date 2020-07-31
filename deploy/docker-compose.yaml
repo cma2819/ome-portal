@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes: 
+      - ome-db:/var/lib/mysql
+    ports:
+      - "3307:3306"
+volumes:
+  ome-db:
