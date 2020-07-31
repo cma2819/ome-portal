@@ -1,0 +1,142 @@
+openapi: 3.0.2
+info:
+  title: OME Portal API
+  version: '0.9.0'
+servers:
+  - url: http://localhost:8080
+    description: Local mock server
+  - url: https://marathon.online/api/v1
+    description: Production server
+  - url: https://dev.marathon.online/api/v1
+    description: Development server
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
+  /twitter/tweets:
+    get:
+      summary: Get tweets
+      tags:
+        - twitter
+      responses:
+        '200':
+          description: Get recently tweets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timeline'
+    post:
+      summary: Post new tweet
+      tags:
+        - twitter
+      requestBody:
+        description: Tweet content
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetRequest'
+      responses:
+        '200':
+          description: Tweet content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+        '422':
+          description: Bad request content
+  /twitter/tweets/{id}:
+    delete:
+      summary: Delete tweet
+      tags:
+        - twitter
+      parameters:
+        - name: id
+          in: path
+          description: Tweet id you want to delete
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Not Found
+  /twitter/medias:
+    post:
+      summary: Upload media
+      tags:
+        - twitter
+      requestBody:
+        description: Upload media data
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                media:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Success to upload media
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwitterMedia'
+        '413':
+          description: Image is too large
+components:
+  schemas:
+    TwitterUser:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 6253282
+        name:
+          type: string
+          example: Twitter API
+        screenName:
+          type: string
+          example: twitterapi
+    TwitterMedia:
+      type: object
+      properties:
+        mediaId:
+          type: number
+          example: 114080493040967680
+    Timeline:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tweet'
+    Tweet:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1050118621198921728
+        text:
+          type: string
+          example: To make room for more expression, we will now count all emojis as equal—including those with gender‍‍‍ ‍‍and skin t… https://t.co/MkGjXf9aXm
+        user:
+          $ref: '#/components/schemas/TwitterUser'
+        createdAt:
+          type: string
+          format: date-time
+          example: 2018-10-10T20:19:24Z
+    TweetRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          maxLength: 140
+          example: This is example of tweet, URL will be t.co link wrapped.
+        mediaIds:
+          type: array
+          items:
+            type: number
+            example: 114080493040967680
+      required:
+        - text
