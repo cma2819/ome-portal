@@ -1,27 +1,50 @@
 {
     "private": true,
     "scripts": {
+        "autofix": "eslint --fix --ext .ts,.vue resources/ts",
         "db:up": "docker-compose -f ./deploy/docker-compose.yaml up -d --build",
         "db:down": "docker-compose -f ./deploy/docker-compose.yaml down",
         "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development parcel build resources/ts/*.ts -d public/js/ --no-minify",
-        "watch": "parcel watch resources/ts/*.ts -d public/js/",
-        "hot": "parcel resources/ts/*.ts -d public/js/",
+        "development": "cross-env NODE_ENV=development parcel build resources/ts/entries/*.ts -d public/assets/ --no-minify --public-url ./",
+        "watch": "parcel watch resources/ts/entries/*.ts -d public/assets/ --public-url ./",
+        "hot": "parcel resources/ts/entries/*.ts -d public/assets/ --public-url ./",
         "prod": "npm run production",
-        "production": "parcel build resources/ts/*.ts -d public/js/",
+        "production": "parcel build resources/ts/entries/*.ts -d public/assets/ --public-url ./",
         "docs:setup": "node ./docs/setup.js",
         "mock-server:generate": "node ./docs/generate-api-server",
         "mock-server": "node ./docs/output/nodejs-server"
     },
     "devDependencies": {
+        "@types/twitter-text": "^2.0.0",
         "@types/webpack": "^4.41.21",
+        "@typescript-eslint/eslint-plugin": "^3.7.1",
+        "@typescript-eslint/parser": "^3.7.1",
+        "@vue/component-compiler-utils": "^3.2.0",
         "axios": "^0.19",
         "cross-env": "^7.0",
+        "eslint": "^7.6.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-vue": "^6.2.2",
         "node-wget": "^0.4.3",
         "parcel-bundler": "^1.12.4",
-        "typescript": "^3.9.7"
+        "sass": "^1.26.10",
+        "typescript": "^3.9.7",
+        "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "vue": "^3.0.0-rc.5"
+        "@fortawesome/fontawesome-free": "^5.14.0",
+        "twitter-text": "^3.1.0",
+        "vue": "^2.6.11",
+        "vue-class-component": "^7.2.5",
+        "vue-hot-reload-api": "^2.3.4",
+        "vue-i18n": "^8.20.0",
+        "vue-property-decorator": "^9.0.0",
+        "vue-router": "^3.3.4",
+        "vuetify": "^2.3.7",
+        "vuex": "^3.5.1",
+        "vuex-module-decorators": "^0.17.0"
+    },
+    "alias": {
+        "vue": "./node_modules/vue/dist/vue.common.js"
     }
 }
