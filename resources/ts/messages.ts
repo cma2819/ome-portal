@@ -1,0 +1,17 @@
+import { LocaleMessages } from 'vue-i18n';
+
+export const messages: LocaleMessages = {
+    ja: {
+      twitter: {
+        labels: {
+          list: 'ツイート一覧',
+          input: 'ツイート投稿',
+          media: '画像を追加（4ファイルまで）',
+          update: '更新'
+        },
+        actions: {
+          post: '投稿'
+        }
+      }
+    }
+}

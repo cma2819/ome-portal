@@ -46,6 +46,10 @@ paths:
                 $ref: '#/components/schemas/Tweet'
         '422':
           description: Bad request content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /twitter/tweets/{id}:
     delete:
       summary: Delete tweet
@@ -87,8 +91,15 @@ paths:
                 $ref: '#/components/schemas/TwitterMedia'
         '413':
           description: Image is too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: string
+      example: The message about error.
     TwitterUser:
       type: object
       properties:
