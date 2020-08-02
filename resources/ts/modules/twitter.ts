@@ -17,6 +17,13 @@ class Twitter extends VuexModule {
     this.timeline = [tweet, ...this.timeline];
   }
 
+  @Mutation
+  private _removeTweetFromTimeline(id: number): void {
+    this.timeline = this.timeline.filter((tweet) => {
+      return tweet.id !== id;
+    });
+  }
+
   @Action
   public async updateTimeline(): Promise<void> {
     const timeline = await apiModule.getTweets();
@@ -25,7 +32,12 @@ class Twitter extends VuexModule {
 
   @Action
   public addTweetToTimeline(tweet: Tweet): void {
-    this,this._addTweetToTimeline(tweet);
+    this._addTweetToTimeline(tweet);
+  }
+
+  @Action
+  public removeTweetFromTimeline(id: number): void {
+    this._removeTweetFromTimeline(id);
   }
 }
 

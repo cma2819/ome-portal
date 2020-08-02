@@ -11,9 +11,15 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12">
+      <v-col
+        cols="12"
+      >
         <v-row>
-          <v-col cols="9">
+          <v-col
+            cols="9"
+            md="8"
+            lg="6"
+          >
             <h3>{{ $t('twitter.labels.list') }}</h3>
           </v-col>
           <v-col
@@ -24,12 +30,16 @@
               color="info"
               @click="updateTimeline"
             >
-              {{ $t('twitter.labels.update') }}
+              {{ $t('twitter.actions.update') }}
             </v-btn>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12">
+          <v-col
+            cols="12"
+            md="8"
+            lg="6"
+          >
             <transition-group name="timeline">
               <tweet-card
                 v-for="tweet in twitter.timeline"
