@@ -1,7 +1,7 @@
 import { getModule, Module, Action } from 'vuex-module-decorators';
 import store from '../plugins/store';
 import { ApiClient } from '../lib/apiClient';
-import { Timeline, Tweet, TwitterMedia } from '../lib/models/twitter';
+import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -39,7 +39,7 @@ class Api extends ApiClient {
   }
 
   @Action
-  public async postMedia(media: File): Promise<TwitterMedia> {
+  public async postMedia(media: File): Promise<TwitterUploadMedia> {
     const formData = new FormData();
     formData.append('media', media);
     const response = await this.post({
@@ -47,6 +47,15 @@ class Api extends ApiClient {
       params: formData
     });
     return response;
+  }
+
+  @Action
+  public async deleteTweet(id: number): Promise<boolean> {
+    await this.delete({
+      endpoint: 'twitter/tweets',
+      id: id.toString()
+    });
+    return true;
   }
 }
 

@@ -5,6 +5,8 @@ info:
 servers:
   - url: http://localhost:8080
     description: Local mock server
+  - url: http://localhost:8000/api/v1
+    description: Local development server
   - url: https://marathon.online/api/v1
     description: Production server
   - url: https://dev.marathon.online/api/v1
@@ -88,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TwitterMedia'
+                $ref: '#/components/schemas/TwitterUploadMedia'
         '413':
           description: Image is too large
           content:
@@ -112,7 +114,7 @@ components:
         screenName:
           type: string
           example: twitterapi
-    TwitterMedia:
+    TwitterUploadMedia:
       type: object
       properties:
         mediaId:
@@ -133,10 +135,28 @@ components:
           example: To make room for more expression, we will now count all emojis as equal—including those with gender‍‍‍ ‍‍and skin t… https://t.co/MkGjXf9aXm
         user:
           $ref: '#/components/schemas/TwitterUser'
+        medias:
+          type: array
+          items:
+            $ref: '#/components/schemas/TwitterMedia'
+            maxLength: 4
         createdAt:
           type: string
           format: date-time
           example: 2018-10-10T20:19:24Z
+    TwitterMedia:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 861627472244162561
+        mediaUrl:
+          type: string
+          example: https://pbs.twimg.com/media/C_UdnvPUwAE3Dnn.jpg
+        type:
+          type: string
+          enum: [photo, video, animated_gif]
+          example: photo
     TweetRequest:
       type: object
       properties:

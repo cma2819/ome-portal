@@ -63,6 +63,19 @@ export class ApiClient extends VuexModule {
     }
   }
 
+  @Action
+  protected async delete(payload: { endpoint: string, id: string}): Promise<any> {
+    const headers = this.bearer ? {
+      Authorization: `Bearer ${this.bearer}`
+    } : null;
+    try {
+      const response = await axios.delete(`${this.host}/${payload.endpoint}/${payload.id}`, { headers });
+      return response.data;
+    } catch (e) {
+      throw this.handleError(e);
+    }
+  }
+
   private handleError(error: AxiosError): ApiError {
     if (error.response) {
       return {
