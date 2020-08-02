@@ -50,7 +50,7 @@ class InmemoryTwitterMediaRepository implements TwitterMediaRepository
         }
         $media = PartialTwitterMedia::createPartial(
             $this->nextId(),
-            $file->getStream()->getMetadata()['url'],
+            $file->getStream()->getMetadata()['uri'],
             $type
         );
         $this->medias[$media->getId()] = $media;
