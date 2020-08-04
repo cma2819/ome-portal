@@ -30,6 +30,12 @@ And build assets with parcel.
 npm run dev
 ```
 
+Generate application key for Laravel framework.
+
+``` sh
+php artisan key:generate
+```
+
 ## Run application
 
 Below command run application with artisan.
@@ -39,6 +45,10 @@ php artisan serve
 ```
 
 ## Setup Swagger Mock
+
+This application has api document written as Swagger/OpenAPI yaml.
+
+And you can setup mock server with swagger-codegen. This requires java (maybe jre > 9 but not tested yet).
 
 First, run script for download swagger-codegen jar file.
 
