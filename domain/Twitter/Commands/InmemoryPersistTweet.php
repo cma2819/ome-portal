@@ -4,27 +4,52 @@ namespace Ome\Twitter\Commands;
 
 use Carbon\Carbon;
 use Ome\Twitter\Entities\PartialTweet;
-use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetCommand;
-use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetFeedback;
-use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetInput;
+use Ome\Twitter\Entities\Tweet;
+use Ome\Twitter\Entities\TwitterMedia;
+use Ome\Twitter\Interfaces\Commands\PersistTweetCommand;
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 
 class InmemoryPersistTweet implements PersistTweetCommand
 {
+    /** @var TwitterMedia[] */
+    protected array $twitterMedias = [];
+
+    /** @var Tweet[] */
     protected array $tweets = [];
 
-    public function execute(PersistTweetInput $input): PersistTweetFeedback
+    public function __construct(
+        array $medias = []
+    ) {
+        $this->twitterMedias = $medias;
+    }
+
+    public function execute(Tweet $input): TweetDto
     {
         $now = Carbon::now();
 
         $nextId = $this->nextId();
         $tweet = PartialTweet::createPartial(
             $nextId,
-            $input->getTweet()->getText(),
-            $input->getTweet()->getMediaIds(),
+            $input->getText(),
+            $input->getMediaIds(),
             $now
         );
         $this->tweets[$nextId] = $tweet;
-        return new PersistTweetFeedback($tweet);
+        $medias = [];
+        foreach ($tweet->getMediaIds() as $mediaId) {
+            foreach ($this->twitterMedias as $media) {
+                if ($media->getId() === $mediaId) {
+                    $medias[] = $media;
+                    continue;
+                }
+            }
+        }
+        return new TweetDto(
+            $tweet->getId(),
+            $tweet->getText(),
+            $medias,
+            $tweet->getCreatedAt()
+        );
     }
 
     public function nextId(): int

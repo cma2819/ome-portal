@@ -1,6 +1,6 @@
 <?php
 
-namespace Ome\Twitter\Interfaces\Queries\Timeline;
+namespace Ome\Twitter\Interfaces\Queries;
 
 use Ome\Twitter\Interfaces\Dto\TweetDto;
 

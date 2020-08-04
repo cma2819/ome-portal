@@ -3,8 +3,7 @@
 namespace Ome\Twitter\UseCases;
 
 use Ome\Twitter\Entities\Tweet;
-use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetCommand;
-use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetInput;
+use Ome\Twitter\Interfaces\Commands\PersistTweetCommand;
 use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetRequest;
 use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetResponse;
 use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetUseCase;
@@ -28,9 +27,7 @@ class PostTweetInteractor implements PostTweetUseCase
             $postTweetRequest->getMediaIds()
         );
         return new PostTweetResponse(
-            $this->tweetCommand->execute(
-                new PersistTweetInput($tweet)
-            )->getTweet()
+            $this->tweetCommand->execute($tweet)
         );
     }
 }

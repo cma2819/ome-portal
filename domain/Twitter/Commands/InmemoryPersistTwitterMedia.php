@@ -4,26 +4,22 @@ namespace Ome\Twitter\Commands;
 
 use Ome\Twitter\Entities\PartialTwitterMedia;
 use Ome\Twitter\Entities\TwitterMedia;
-use Ome\Twitter\Interfaces\Commands\PersistTwitterMedia\PersistTwitterMediaCommand;
-use Ome\Twitter\Interfaces\Commands\PersistTwitterMedia\PersistTwitterMediaInput;
-use Ome\Twitter\Interfaces\Commands\PersistTwitterMedia\PersistTwitterMediaFeedback;
+use Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand;
 
 class InmemoryPersistTwitterMedia implements PersistTwitterMediaCommand
 {
     /** @var TwitterMedia[] */
     private array $twitterMedias = [];
 
-    public function execute(PersistTwitterMediaInput $input): PersistTwitterMediaFeedback
+    public function execute(TwitterMedia $input): TwitterMedia
     {
         $nextId = $this->nextId();
-        $this->twitterMedia[$nextId] = $input->getTwitterMedia();
+        $this->twitterMedia[$nextId] = $input;
 
-        return new PersistTwitterMediaFeedback(
-            PartialTwitterMedia::createPartial(
-                $nextId,
-                $input->getTwitterMedia()->getMediaUrl(),
-                $input->getTwitterMedia()->getType(),
-            )
+        return PartialTwitterMedia::createPartial(
+            $nextId,
+            $input->getMediaUrl(),
+            $input->getType(),
         );
     }
 
