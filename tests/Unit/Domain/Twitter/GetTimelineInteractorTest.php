@@ -4,8 +4,8 @@ namespace Tests\Unit\Domain\Twitter;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 use Ome\Twitter\Interfaces\Queries\Timeline\TimelineQuery;
-use Ome\Twitter\Interfaces\Queries\Timeline\TweetDto;
 use Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineResponse;
 use Ome\Twitter\Queries\InmemoryTimelineQuery;
 use Ome\Twitter\UseCases\GetTimelineInteractor;

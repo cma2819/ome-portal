@@ -2,6 +2,8 @@
 
 namespace Ome\Twitter\Interfaces\Queries\Timeline;
 
+use Ome\Twitter\Interfaces\Dto\TweetDto;
+
 interface TimelineQuery
 {
     /**

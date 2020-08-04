@@ -9,8 +9,9 @@ class GetTimelineResponse
     /** @var TweetDto[] */
     private array $timeline;
 
-    public function __construct(array $timeline)
-    {
+    public function __construct(
+        array $timeline
+    ) {
         $this->timeline = $timeline;
     }
 

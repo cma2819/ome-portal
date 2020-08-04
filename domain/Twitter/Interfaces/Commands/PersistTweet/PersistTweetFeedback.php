@@ -2,14 +2,14 @@
 
 namespace Ome\Twitter\Interfaces\Commands\PersistTweet;
 
-use Ome\Twitter\Entities\Tweet;
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 
 class PersistTweetFeedback
 {
-    private Tweet $tweet;
+    private TweetDto $tweet;
 
     public function __construct(
-        Tweet $tweet
+        TweetDto $tweet
     )
     {
         $this->tweet = $tweet;

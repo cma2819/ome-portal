@@ -2,16 +2,15 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\PostTweet;
 
-use Ome\Twitter\Entities\Tweet;
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 
 class PostTweetResponse
 {
-    private Tweet $tweet;
+    private TweetDto $tweet;
 
     public function __construct(
-        Tweet $tweet
-    )
-    {
+        TweetDto $tweet
+    ) {
         $this->tweet = $tweet;
     }
 

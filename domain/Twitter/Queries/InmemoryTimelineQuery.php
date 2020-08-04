@@ -2,8 +2,8 @@
 
 namespace Ome\Twitter\Queries;
 
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 use Ome\Twitter\Interfaces\Queries\Timeline\TimelineQuery;
-use Ome\Twitter\Interfaces\Queries\Timeline\TweetDto;
 
 class InmemoryTimelineQuery implements TimelineQuery
 {

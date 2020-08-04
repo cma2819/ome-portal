@@ -13,3 +13,5 @@ yarn-error.log
 
 .cache
 /public/assets
+
+.php_cs.cache
