@@ -1,9 +1,8 @@
 <?php
 
-namespace Ome\Twitter\Interfaces\Queries\Timeline;
+namespace Ome\Twitter\Interfaces\Dto;
 
 use DateTimeInterface;
-use JsonSerializable;
 
 class TweetDto
 {
