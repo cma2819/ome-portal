@@ -54,8 +54,11 @@ class TwitterMediaType implements ValueObject
         return $this->mediaType;
     }
 
-    public function equalsTo(self $opponent): bool
+    public function equalsTo($opponent): bool
     {
+        if (!($opponent instanceof self) || !($opponent instanceof ValueObject)) {
+            return false;
+        }
         return $this->value() === $opponent->value();
     }
 }

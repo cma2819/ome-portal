@@ -3,23 +3,34 @@
 namespace Ome\Twitter\UseCases;
 
 use Ome\Twitter\Entities\Tweet;
-use Ome\Twitter\Interfaces\Repositories\TweetRepository;
-use Ome\Twitter\Interfaces\UseCases\PostTweetUseCase;
+use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetCommand;
+use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetInput;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetRequest;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetResponse;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetUseCase;
 
 class PostTweetInteractor implements PostTweetUseCase
 {
 
-    protected TweetRepository $tweetRepository;
+    protected PersistTweetCommand $tweetCommand;
 
     public function __construct(
-        TweetRepository $tweetRepository
+        PersistTweetCommand $tweetCommand
     )
     {
-        $this->tweetRepository = $tweetRepository;
+        $this->tweetCommand = $tweetCommand;
     }
 
-    public function interact(string $content, array $mediaIds): Tweet
+    public function interact(PostTweetRequest $postTweetRequest): PostTweetResponse
     {
-        return $this->tweetRepository->save($content, $mediaIds);
+        $tweet = Tweet::createNewTweet(
+            $postTweetRequest->getContent(),
+            $postTweetRequest->getMediaIds()
+        );
+        return new PostTweetResponse(
+            $this->tweetCommand->execute(
+                new PersistTweetInput($tweet)
+            )->getTweet()
+        );
     }
 }

@@ -3,8 +3,9 @@
 namespace Tests\Unit\Domain\Twitter;
 
 use GuzzleHttp\Psr7\UploadedFile;
+use Ome\Twitter\Commands\InmemoryPersistTwitterMedia;
 use Ome\Twitter\Interfaces\Repositories\TwitterMediaRepository;
-use Ome\Twitter\Repositories\InmemoryTwitterMediaRepository;
+use Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaRequest;
 use Ome\Twitter\UseCases\UploadMediaInteractor;
 use Ome\Twitter\Values\TwitterMediaType;
 use org\bovigo\vfs\content\LargeFileContent;
@@ -21,19 +22,21 @@ class UploadMediaInteractorTest extends TestCase
     protected function setUp(): void
     {
         $this->root = vfsStream::setUp('root');
-        $this->twitterMediaRepository = new InmemoryTwitterMediaRepository();
     }
 
     /** @test */
     public function testUploadMedia()
     {
         $file = vfsStream::newFile('test.jpeg')->at($this->root)->setContent(LargeFileContent::withMegabytes(1));
-        $result = (new UploadMediaInteractor($this->twitterMediaRepository))->interact(
-            new UploadedFile($file->url(), $file->size(), UPLOAD_ERR_OK, $file->getName(), 'image/jpeg')
+        $response = (new UploadMediaInteractor(
+            new InmemoryPersistTwitterMedia
+        ))->interact(
+            new UploadMediaRequest(
+                new UploadedFile($file->url(), $file->size(), UPLOAD_ERR_OK, $file->getName(), 'image/jpeg')
+            )
         );
 
-        $this->assertEquals(1, $result->getId());
-        $this->assertEquals(TwitterMediaType::photo(), $result->getType());
+        $this->assertEquals(1, $response->getTwitterMedia()->getId());
+        $this->assertEquals(TwitterMediaType::photo(), $response->getTwitterMedia()->getType());
     }
-
 }

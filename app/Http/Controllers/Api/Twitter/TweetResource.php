@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\Twitter;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Twitter\TweetStoreRequest;
 use Illuminate\Http\Request;
-use Ome\Twitter\UseCases\GetTimelineInteractor;
+use Ome\Twitter\Interfaces\UseCases\GetTimelineUseCase;
+use Ome\Twitter\Interfaces\UseCases\PostTweetUseCase;
 
 class TweetResource extends Controller
 {
@@ -13,7 +15,7 @@ class TweetResource extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GetTimelineInteractor $getTimelineUseCase)
+    public function index(GetTimelineUseCase $getTimelineUseCase)
     {
         return $getTimelineUseCase->interact();
     }
@@ -24,9 +26,12 @@ class TweetResource extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(
+        PostTweetUseCase $postTweetUseCase,
+        TweetStoreRequest $request
+    )
     {
-        //
+        return $postTweetUseCase->interact($request->text, $request->mediaIds);
     }
 
     /**
