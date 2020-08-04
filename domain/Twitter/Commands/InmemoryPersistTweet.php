@@ -45,10 +45,8 @@ class InmemoryPersistTweet implements PersistTweetCommand
             }
         }
         return new TweetDto(
-            $tweet->getId(),
-            $tweet->getText(),
+            $tweet,
             $medias,
-            $tweet->getCreatedAt()
         );
     }
 

@@ -2,48 +2,34 @@
 
 namespace Ome\Twitter\Interfaces\Dto;
 
-use DateTimeInterface;
+use Ome\Twitter\Entities\Tweet;
 
 class TweetDto
 {
-    protected int $id;
-
-    protected string $text;
+    private Tweet $tweet;
 
     /** @var TwitterMedia[] */
-    protected array $medias;
+    private array $medias;
 
-    protected DateTimeInterface $createdAt;
-
-
+    /**
+     * @param Tweet $tweet
+     * @param TwitterMedia[] $medias
+     */
     public function __construct(
-        int $id,
-        string $text,
-        array $medias,
-        DateTimeInterface $createdAt
+        Tweet $tweet,
+        array $medias
     )
     {
-        $this->id = $id;
-        $this->text = $text;
+        $this->tweet = $tweet;
         $this->medias = $medias;
-        $this->createdAt = $createdAt;
-    }
-
-
-    /**
-     * Get the value of id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
-     * Get the value of text
+     * Get the value of tweet
      */
-    public function getText()
+    public function getTweet()
     {
-        return $this->text;
+        return $this->tweet;
     }
 
     /**
@@ -54,11 +40,4 @@ class TweetDto
         return $this->medias;
     }
 
-    /**
-     * Get the value of createdAt
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
 }

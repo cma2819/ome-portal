@@ -3,21 +3,13 @@
 namespace Tests\Unit\Domain\Twitter;
 
 use Carbon\Carbon;
-use Carbon\CarbonImmutable;
 use Ome\Twitter\Commands\InmemoryPersistTweet;
 use Ome\Twitter\Entities\PartialTweet;
 use Ome\Twitter\Entities\PartialTwitterMedia;
-use Ome\Twitter\Entities\PartialTwitterUser;
-use Ome\Twitter\Entities\Tweet;
 use Ome\Twitter\Entities\TwitterUser;
-use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetCommand;
 use Ome\Twitter\Interfaces\Dto\TweetDto;
-use Ome\Twitter\Interfaces\Repositories\TweetRepository;
 use Ome\Twitter\Interfaces\Repositories\TwitterMediaRepository;
 use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetRequest;
-use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetResponse;
-use Ome\Twitter\Repositories\InmemoryTweetRepository;
-use Ome\Twitter\Repositories\InmemoryTwitterMediaRepository;
 use Ome\Twitter\UseCases\PostTweetInteractor;
 use Ome\Twitter\Values\TwitterMediaType;
 use PHPUnit\Framework\TestCase;
@@ -47,10 +39,13 @@ class PostTweetInteractorTest extends TestCase
 
         $this->assertEquals(
             new TweetDto(
-                1,
-                'test tweet',
-                [],
-                $now
+                PartialTweet::createPartial(
+                    1,
+                    'test tweet',
+                    [],
+                    $now
+                ),
+                []
             ),
             $response->getTweet()
         );
@@ -93,8 +88,12 @@ class PostTweetInteractorTest extends TestCase
 
         $this->assertEquals(
             new TweetDto(
-                1,
-                'test tweet',
+                PartialTweet::createPartial(
+                    1,
+                    'test tweet',
+                    [1, 2, 3, 4],
+                    $now
+                ),
                 [
                     PartialTwitterMedia::createPartial(
                         1, 'test1.png', TwitterMediaType::photo()
@@ -108,8 +107,7 @@ class PostTweetInteractorTest extends TestCase
                     PartialTwitterMedia::createPartial(
                         4, 'test1.png', TwitterMediaType::photo()
                     ),
-                ],
-                $now
+                ]
             ),
             $response->getTweet()
         );
