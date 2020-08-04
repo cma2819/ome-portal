@@ -3,8 +3,7 @@
 namespace Ome\Twitter\UseCases;
 
 use Ome\Twitter\Entities\Tweet;
-use Ome\Twitter\Interfaces\Queries\Timeline\TimelineQuery;
-use Ome\Twitter\Interfaces\Repositories\TweetRepository;
+use Ome\Twitter\Interfaces\Queries\TimelineQuery;
 use Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineResponse;
 use Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineUseCase;
 

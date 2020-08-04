@@ -8,8 +8,10 @@ use Ome\Twitter\Commands\InmemoryPersistTweet;
 use Ome\Twitter\Entities\PartialTweet;
 use Ome\Twitter\Entities\PartialTwitterMedia;
 use Ome\Twitter\Entities\PartialTwitterUser;
+use Ome\Twitter\Entities\Tweet;
 use Ome\Twitter\Entities\TwitterUser;
 use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetCommand;
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 use Ome\Twitter\Interfaces\Repositories\TweetRepository;
 use Ome\Twitter\Interfaces\Repositories\TwitterMediaRepository;
 use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetRequest;
@@ -44,7 +46,7 @@ class PostTweetInteractorTest extends TestCase
         );
 
         $this->assertEquals(
-            PartialTweet::createPartial(
+            new TweetDto(
                 1,
                 'test tweet',
                 [],
@@ -54,7 +56,12 @@ class PostTweetInteractorTest extends TestCase
         );
 
         $this->assertEquals([
-            1 => $response->getTweet()
+            1 => PartialTweet::createPartial(
+                1,
+                'test tweet',
+                [],
+                $now
+            )
         ], $persistTweetCommand->getTweets());
     }
 
@@ -64,24 +71,56 @@ class PostTweetInteractorTest extends TestCase
         $now = Carbon::now();
         Carbon::setTestNow($now);
 
-        $persistTweetCommand = new InmemoryPersistTweet;
+        $initialMedias = [
+            1 => PartialTwitterMedia::createPartial(
+                1, 'test1.png', TwitterMediaType::photo()
+            ),
+            2 => PartialTwitterMedia::createPartial(
+                2, 'test1.png', TwitterMediaType::photo()
+            ),
+            3 => PartialTwitterMedia::createPartial(
+                3, 'test1.png', TwitterMediaType::photo()
+            ),
+            4 => PartialTwitterMedia::createPartial(
+                4, 'test1.png', TwitterMediaType::photo()
+            ),
+        ];
+        $persistTweetCommand = new InmemoryPersistTweet($initialMedias);
 
         $response = (new PostTweetInteractor($persistTweetCommand))->interact(
             new PostTweetRequest('test tweet', [1, 2, 3, 4])
         );
 
         $this->assertEquals(
-            PartialTweet::createPartial(
+            new TweetDto(
                 1,
                 'test tweet',
-                [1, 2, 3, 4],
+                [
+                    PartialTwitterMedia::createPartial(
+                        1, 'test1.png', TwitterMediaType::photo()
+                    ),
+                    PartialTwitterMedia::createPartial(
+                        2, 'test1.png', TwitterMediaType::photo()
+                    ),
+                    PartialTwitterMedia::createPartial(
+                        3, 'test1.png', TwitterMediaType::photo()
+                    ),
+                    PartialTwitterMedia::createPartial(
+                        4, 'test1.png', TwitterMediaType::photo()
+                    ),
+                ],
                 $now
             ),
             $response->getTweet()
         );
 
         $this->assertEquals([
-            1 => $response->getTweet()
+            1 => PartialTweet::createPartial(
+                1,
+                'test tweet',
+                [1, 2, 3, 4],
+                $now
+            )
         ], $persistTweetCommand->getTweets());
     }
 }
