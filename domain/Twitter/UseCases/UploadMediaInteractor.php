@@ -3,24 +3,31 @@
 namespace Ome\Twitter\UseCases;
 
 use Ome\Twitter\Entities\TwitterMedia;
-use Ome\Twitter\Interfaces\Repositories\TwitterMediaRepository;
-use Ome\Twitter\Interfaces\UseCases\UploadMediaUseCase;
-use Psr\Http\Message\UploadedFileInterface;
+use Ome\Twitter\Interfaces\Commands\PersistTwitterMedia\PersistTwitterMediaCommand;
+use Ome\Twitter\Interfaces\Commands\PersistTwitterMedia\PersistTwitterMediaInput;
+use Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaRequest;
+use Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaResponse;
+use Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaUseCase;
 
 class UploadMediaInteractor implements UploadMediaUseCase
 {
 
-    protected TwitterMediaRepository $twitterMediaRepository;
+    protected PersistTwitterMediaCommand $persistTwitterMediaCommand;
 
     public function __construct(
-        TwitterMediaRepository $twitterMediaRepository
+        PersistTwitterMediaCommand $persistTwitterMediaCommand
     )
     {
-        $this->twitterMediaRepository = $twitterMediaRepository;
+        $this->persistTwitterMediaCommand = $persistTwitterMediaCommand;
     }
 
-    public function interact(UploadedFileInterface $file): TwitterMedia
+    public function interact(UploadMediaRequest $uploadMediaRequest): UploadMediaResponse
     {
-        return $this->twitterMediaRepository->save($file);
+        $uploadFile = $uploadMediaRequest->getFile();
+        $twitterMedia = TwitterMedia::createNewMediaFromUploadedFile($uploadFile);
+        $input = new PersistTwitterMediaInput($twitterMedia);
+        return new UploadMediaResponse(
+            $this->persistTwitterMediaCommand->execute($input)->getTwitterMedia()
+        );
     }
 }

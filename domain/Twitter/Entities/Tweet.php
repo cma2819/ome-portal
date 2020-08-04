@@ -5,54 +5,62 @@ namespace Ome\Twitter\Entities;
 use DateTime;
 use DateTimeInterface;
 use JsonSerializable;
+use Ome\Exceptions\UnmatchedContextException;
 
 class Tweet implements JsonSerializable
 {
-    protected int $id;
+    protected ?int $id;
 
     protected string $text;
 
-    protected TwitterUser $user;
+    /** @var int[] */
+    protected array $mediaIds;
 
-    /** @var TwitterMedia[] */
-    protected array $medias;
-
-    protected DateTimeInterface $createdAt;
+    protected ?DateTimeInterface $createdAt;
 
     /**
      * @param integer $id
-     * @param string $text
-     * @param TwitterUser $user
-     * @param TwitterMedia[] $medias
+     * @param string $text Not validate in application because tweet character counting is complex. Twitter will validate this.
+     * @param int[] $mediaIds
      * @param DateTimeInterface $createdAt
      */
     protected function __construct(
-        int $id,
+        ?int $id,
         string $text,
-        TwitterUser $user,
-        array $medias,
-        DateTimeInterface $createdAt
+        array $mediaIds,
+        ?DateTimeInterface $createdAt
     ) {
+        if (count($mediaIds) > 4) {
+            throw new UnmatchedContextException(
+                self::class,
+                'Tweet has max 4 medias. ' . count($mediaIds) . ' medias received.'
+            );
+        }
         $this->id = $id;
         $this->text = $text;
-        $this->user = $user;
-        $this->medias = $medias;
+        $this->mediaIds = $mediaIds;
         $this->createdAt = $createdAt;
+    }
+
+    public static function createNewTweet(
+        string $text,
+        array $mediaIds
+    ) {
+        return new self(null, $text, $mediaIds, null);
     }
 
     public static function createFromApiJson(array $json): self
     {
         $mediaArrayJson = $json['extended_entities']['media'];
-        $medias = [];
+        $mediaIds = [];
 
         foreach ($mediaArrayJson as $mediaJson) {
-            $medias[] = TwitterMedia::createFromApiJson($mediaJson);
+            $medias[] = $mediaJson['id'];
         }
         return new self(
             $json['id'],
             $json['text'],
-            TwitterUser::createFromApiJson($json['user']),
-            $medias,
+            $mediaIds,
             new DateTime($json['created_at'])
         );
     }
@@ -89,22 +97,6 @@ class Tweet implements JsonSerializable
     }
 
     /**
-     * Get the value of user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Get the value of medias
-     */
-    public function getMedias()
-    {
-        return $this->medias;
-    }
-
-    /**
      * Get the value of createdAt
      */
     public function getCreatedAt()
@@ -112,4 +104,12 @@ class Tweet implements JsonSerializable
         return $this->createdAt;
     }
 
+
+    /**
+     * Get the value of mediaIds
+     */
+    public function getMediaIds()
+    {
+        return $this->mediaIds;
+    }
 }

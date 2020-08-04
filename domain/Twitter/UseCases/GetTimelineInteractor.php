@@ -3,17 +3,19 @@
 namespace Ome\Twitter\UseCases;
 
 use Ome\Twitter\Entities\Tweet;
+use Ome\Twitter\Interfaces\Queries\Timeline\TimelineQuery;
 use Ome\Twitter\Interfaces\Repositories\TweetRepository;
-use Ome\Twitter\Interfaces\UseCases\GetTimelineUseCase;
+use Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineResponse;
+use Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineUseCase;
 
-class GetTimelineInteractor implements GetTimelineUseCase{
-    protected TweetRepository $tweetRepository;
+class GetTimelineInteractor implements GetTimelineUseCase
+{
+    protected TimelineQuery $timelineQuery;
 
     public function __construct(
-        TweetRepository $tweetRepository
-    )
-    {
-        $this->tweetRepository = $tweetRepository;
+        TimelineQuery $timelineQuery
+    ) {
+        $this->timelineQuery = $timelineQuery;
     }
 
     /**
@@ -21,8 +23,8 @@ class GetTimelineInteractor implements GetTimelineUseCase{
      *
      * @return Tweet[]
      */
-    public function interact(): array
+    public function interact(): GetTimelineResponse
     {
-        return $this->tweetRepository->listTweet();
+        return new GetTimelineResponse($this->timelineQuery->fetch());
     }
 }

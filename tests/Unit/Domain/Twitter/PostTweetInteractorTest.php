@@ -4,12 +4,16 @@ namespace Tests\Unit\Domain\Twitter;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Ome\Twitter\Commands\InmemoryPersistTweet;
 use Ome\Twitter\Entities\PartialTweet;
 use Ome\Twitter\Entities\PartialTwitterMedia;
 use Ome\Twitter\Entities\PartialTwitterUser;
 use Ome\Twitter\Entities\TwitterUser;
+use Ome\Twitter\Interfaces\Commands\PersistTweet\PersistTweetCommand;
 use Ome\Twitter\Interfaces\Repositories\TweetRepository;
 use Ome\Twitter\Interfaces\Repositories\TwitterMediaRepository;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetRequest;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetResponse;
 use Ome\Twitter\Repositories\InmemoryTweetRepository;
 use Ome\Twitter\Repositories\InmemoryTwitterMediaRepository;
 use Ome\Twitter\UseCases\PostTweetInteractor;
@@ -20,42 +24,11 @@ class PostTweetInteractorTest extends TestCase
 {
     protected TwitterUser $user;
 
-    protected TweetRepository $tweetRepository;
-
     protected TwitterMediaRepository $mediaRepository;
 
     protected function setUp(): void
     {
-        $this->user = PartialTwitterUser::createPartial(1000, 'Test User', 'test_user');
-        $medias = [
-            1 => PartialTwitterMedia::createPartial(
-                1,
-                'media 1',
-                TwitterMediaType::photo()
-            ),
-            2 => PartialTwitterMedia::createPartial(
-                2,
-                'media 2',
-                TwitterMediaType::photo()
-            ),
-            3 => PartialTwitterMedia::createPartial(
-                3,
-                'media 3',
-                TwitterMediaType::photo()
-            ),
-            4 => PartialTwitterMedia::createPartial(
-                4,
-                'media 4',
-                TwitterMediaType::photo()
-            ),
-        ];
-        $this->mediaRepository = new InmemoryTwitterMediaRepository($medias);
-
-        $this->tweetRepository = new InmemoryTweetRepository(
-            $this->user,
-            [],
-            $this->mediaRepository
-        );
+        $this->persistTweetCommand = new InmemoryPersistTweet;
     }
 
     /** @test */
@@ -64,19 +37,25 @@ class PostTweetInteractorTest extends TestCase
         $now = Carbon::now();
         Carbon::setTestNow($now);
 
-        $tweet = (new PostTweetInteractor($this->tweetRepository))->interact('test tweet', []);
+        $persistTweetCommand = new InmemoryPersistTweet;
 
-        $this->assertEquals(PartialTweet::createPartial(
-            1,
-            'test tweet',
-            $this->user,
-            [],
-            $now
-        ), $tweet);
+        $response = (new PostTweetInteractor($persistTweetCommand))->interact(
+            new PostTweetRequest('test tweet', [])
+        );
+
+        $this->assertEquals(
+            PartialTweet::createPartial(
+                1,
+                'test tweet',
+                [],
+                $now
+            ),
+            $response->getTweet()
+        );
 
         $this->assertEquals([
-            1 => $tweet
-        ], $this->tweetRepository->listTweet());
+            1 => $response->getTweet()
+        ], $persistTweetCommand->getTweets());
     }
 
     /** @test */
@@ -85,41 +64,24 @@ class PostTweetInteractorTest extends TestCase
         $now = Carbon::now();
         Carbon::setTestNow($now);
 
-        $tweet = (new PostTweetInteractor($this->tweetRepository))->interact('test tweet', [1, 2, 3, 4]);
-        $medias = [
-            PartialTwitterMedia::createPartial(
-                1,
-                'media 1',
-                TwitterMediaType::photo()
-            ),
-            PartialTwitterMedia::createPartial(
-                2,
-                'media 2',
-                TwitterMediaType::photo()
-            ),
-            PartialTwitterMedia::createPartial(
-                3,
-                'media 3',
-                TwitterMediaType::photo()
-            ),
-            PartialTwitterMedia::createPartial(
-                4,
-                'media 4',
-                TwitterMediaType::photo()
-            ),
-        ];
+        $persistTweetCommand = new InmemoryPersistTweet;
 
-        $this->assertEquals(PartialTweet::createPartial(
-            1,
-            'test tweet',
-            $this->user,
-            $medias,
-            $now
-        ), $tweet);
+        $response = (new PostTweetInteractor($persistTweetCommand))->interact(
+            new PostTweetRequest('test tweet', [1, 2, 3, 4])
+        );
+
+        $this->assertEquals(
+            PartialTweet::createPartial(
+                1,
+                'test tweet',
+                [1, 2, 3, 4],
+                $now
+            ),
+            $response->getTweet()
+        );
 
         $this->assertEquals([
-            1 => $tweet
-        ], $this->tweetRepository->listTweet());
+            1 => $response->getTweet()
+        ], $persistTweetCommand->getTweets());
     }
-
 }

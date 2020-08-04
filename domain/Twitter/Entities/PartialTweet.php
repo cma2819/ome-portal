@@ -9,11 +9,10 @@ class PartialTweet extends Tweet
     public static function createPartial(
         int $id,
         string $text,
-        TwitterUser $user,
         array $medias,
         DateTimeInterface $createdAt
     ): self
     {
-        return new self($id, $text, $user, $medias, $createdAt);
+        return new self($id, $text, $medias, $createdAt);
     }
 }
