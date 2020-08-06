@@ -2,8 +2,6 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\PostTweet;
 
-use Ome\Exceptions\UnmatchedRequestException;
-
 class PostTweetRequest
 {
     private string $content;

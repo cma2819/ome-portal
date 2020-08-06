@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class PostTweetInteractorTest extends TestCase
 {
-    protected TwitterUser $user;
-
-    protected TwitterMediaRepository $mediaRepository;
 
     protected function setUp(): void
     {
