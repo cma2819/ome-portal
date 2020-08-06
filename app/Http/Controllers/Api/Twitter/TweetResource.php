@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api\Twitter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Twitter\TweetStoreRequest;
 use Illuminate\Http\Request;
-use Ome\Twitter\Interfaces\UseCases\GetTimelineUseCase;
-use Ome\Twitter\Interfaces\UseCases\PostTweetUseCase;
+use Ome\Twitter\Interfaces\UseCases\DeleteTweet\DeleteTweetRequest;
+use Ome\Twitter\Interfaces\UseCases\DeleteTweet\DeleteTweetUseCase;
+use Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineUseCase;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetRequest;
+use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetUseCase;
 
 class TweetResource extends Controller
 {
@@ -23,15 +26,17 @@ class TweetResource extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PostTweetUseCase $postTweetUseCase
+     * @param TweetStoreRequest $request
+     * @return void
      */
     public function store(
         PostTweetUseCase $postTweetUseCase,
         TweetStoreRequest $request
-    )
-    {
-        return $postTweetUseCase->interact($request->text, $request->mediaIds);
+    ) {
+        return $postTweetUseCase->interact(
+            new PostTweetRequest($request->text, $request->mediaIds)
+        );
     }
 
     /**
@@ -40,8 +45,17 @@ class TweetResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(
+        int $id,
+        DeleteTweetUseCase $deleteTweetUseCase
+    ) {
+        $result = $deleteTweetUseCase->interact(
+            new DeleteTweetRequest($id)
+        );
+        if ($result) {
+            return response()->noContent();
+        } else {
+            abort(404);
+        }
     }
 }
