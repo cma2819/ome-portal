@@ -14,7 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 class GetTimelineInteractorTest extends TestCase
 {
-    protected TimelineQuery $timelineQuery;
 
     protected function setUp(): void
     {

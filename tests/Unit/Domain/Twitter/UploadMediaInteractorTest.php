@@ -15,9 +15,8 @@ use PHPUnit\Framework\TestCase;
 
 class UploadMediaInteractorTest extends TestCase
 {
-    protected vfsStreamDirectory $root;
 
-    protected TwitterMediaRepository $twitterMediaRepository;
+    protected vfsStreamDirectory $root;
 
     protected function setUp(): void
     {
