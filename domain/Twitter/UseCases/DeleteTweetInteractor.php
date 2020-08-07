@@ -9,7 +9,6 @@ use Ome\Twitter\Interfaces\UseCases\DeleteTweet\DeleteTweetUseCase;
 
 class DeleteTweetInteractor implements DeleteTweetUseCase
 {
-
     protected DeleteTweetCommand $deleteTweetCommand;
 
     public function __construct(

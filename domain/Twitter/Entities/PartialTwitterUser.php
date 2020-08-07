@@ -8,8 +8,7 @@ class PartialTwitterUser extends TwitterUser
         int $id,
         string $name,
         string $screenName
-    ): TwitterUser
-    {
+    ): TwitterUser {
         return new self($id, $name, $screenName);
     }
 }

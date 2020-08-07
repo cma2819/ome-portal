@@ -2,7 +2,8 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\GetTimeline;
 
-interface GetTimelineUseCase {
+interface GetTimelineUseCase
+{
 
     /**
      * Get user's timeline.

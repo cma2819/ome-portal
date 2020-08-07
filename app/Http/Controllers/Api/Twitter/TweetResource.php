@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Twitter;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Twitter\TweetStoreRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Ome\Twitter\Interfaces\UseCases\DeleteTweet\DeleteTweetRequest;
 use Ome\Twitter\Interfaces\UseCases\DeleteTweet\DeleteTweetUseCase;
@@ -20,7 +21,29 @@ class TweetResource extends Controller
      */
     public function index(GetTimelineUseCase $getTimelineUseCase)
     {
-        return $getTimelineUseCase->interact();
+        $timeline = $getTimelineUseCase->interact()->getTimeline();
+        $response = [];
+        foreach ($timeline as $tweetDto) {
+            $tweet = $tweetDto->getTweet();
+            $medias = $tweetDto->getMedias();
+            $mediasJson = [];
+            foreach ($medias as $media) {
+                $mediasJson[] = [
+                    'id' => $media->getId(),
+                    'mediaUrl' => $media->getMediaUrl(),
+                    'type' => $media->getType()->value()
+                ];
+            }
+
+            $response[] = [
+                'id' => $tweet->getId(),
+                'text' => $tweet->getText(),
+                'medias' => $mediasJson,
+                'createdAt' => Carbon::make($tweet->getCreatedAt())->toISOString()
+            ];
+        }
+
+        return $response;
     }
 
     /**

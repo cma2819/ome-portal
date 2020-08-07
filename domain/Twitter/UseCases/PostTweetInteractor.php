@@ -10,13 +10,11 @@ use Ome\Twitter\Interfaces\UseCases\PostTweet\PostTweetUseCase;
 
 class PostTweetInteractor implements PostTweetUseCase
 {
-
     protected PersistTweetCommand $tweetCommand;
 
     public function __construct(
         PersistTweetCommand $tweetCommand
-    )
-    {
+    ) {
         $this->tweetCommand = $tweetCommand;
     }
 

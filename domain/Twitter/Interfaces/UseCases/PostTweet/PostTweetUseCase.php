@@ -2,7 +2,8 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\PostTweet;
 
-interface PostTweetUseCase {
+interface PostTweetUseCase
+{
     /**
      * Post Tweet to repository.
      *

@@ -2,7 +2,7 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\GetTimeline;
 
-use Ome\Twitter\Interfaces\Queries\Timeline\TweetDto;
+use Ome\Twitter\Interfaces\Dto\TweetDto;
 
 class GetTimelineResponse
 {

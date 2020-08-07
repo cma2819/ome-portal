@@ -14,38 +14,28 @@ use PHPUnit\Framework\TestCase;
 
 class GetTimelineInteractorTest extends TestCase
 {
-
     protected function setUp(): void
     {
         $now = CarbonImmutable::create(2020, 1, 1);
         $initialTweets = [
-            new TweetDto(
                 PartialTweet::createPartial(
                     1,
                     'test tweet 1st',
                     [],
                     $now
                 ),
-                []
-            ),
-            new TweetDto(
                 PartialTweet::createPartial(
                     2,
                     'test tweet 2nd',
                     [],
                     $now->addDay(1)
                 ),
-                []
-            ),
-            new TweetDto(
                 PartialTweet::createPartial(
                     3,
                     'test tweet 3rd',
                     [],
                     $now->addMonth(1)
-                ),
-                []
-            )
+                )
         ];
         $this->timelineQuery = new InmemoryTimelineQuery(
             $initialTweets

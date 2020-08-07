@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Ome\Twitter\Commands\InmemoryDeleteTweet;
+use Ome\Twitter\Entities\PartialTweet;
+use Ome\Twitter\Entities\PartialTwitterMedia;
+use Ome\Twitter\Values\TwitterMediaType;
 
 class DomainServiceProvider extends ServiceProvider
 {
@@ -31,10 +36,56 @@ class DomainServiceProvider extends ServiceProvider
         // Commands
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class,
-            \App\Domain\Twitter\Commands\DeleteTweet::class
+            \App\Domain\Twitter\Commands\TwitterDeleteTweetCommand::class
         );
 
         // Queries
+        $this->app->bind(
+            \Ome\Twitter\Interfaces\Queries\TimelineQuery::class,
+            \App\Domain\Twitter\Queries\TwitterTimelineQuery::class
+        );
+
+        if (config('app.env') === 'testing') {
+            // Register Store
+            $this->app->bind('TweetStore', function (Application $app) {
+                return [
+                    PartialTweet::createPartial(
+                        1,
+                        'this is test tweet',
+                        [1],
+                        Carbon::now()
+                    )
+                ];
+            });
+            $this->app->bind('TwitterMediaStore', function (Application $app) {
+                return [
+                    PartialTwitterMedia::createPartial(
+                        1,
+                        'https://example.com',
+                        TwitterMediaType::photo()
+                    )
+                ];
+            });
+
+            // Commands
+            $this->app->bind(
+                \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class, function (Application $app) {
+                    return new \Ome\Twitter\Commands\InmemoryDeleteTweet(
+                        $app->make('TweetStore')
+                    );
+                }
+            );
+
+            // Queries
+            $this->app->bind(
+                \Ome\Twitter\Interfaces\Queries\TimelineQuery::class, function (Application $app) {
+                    return new \Ome\Twitter\Queries\InmemoryTimelineQuery(
+                        $app->make('TweetStore'),
+                        $app->make('TwitterMediaStore')
+                    );
+                }
+            );
+        }
     }
 
     /**

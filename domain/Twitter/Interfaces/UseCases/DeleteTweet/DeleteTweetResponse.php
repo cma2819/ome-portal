@@ -11,8 +11,7 @@ class DeleteTweetResponse
 
     public function __construct(
         bool $result
-    )
-    {
+    ) {
         $this->result = $result;
     }
 

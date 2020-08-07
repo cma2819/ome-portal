@@ -10,8 +10,7 @@ class UploadMediaRequest
 
     public function __construct(
         UploadedFileInterface $file
-    )
-    {
+    ) {
         $this->file = $file;
     }
 

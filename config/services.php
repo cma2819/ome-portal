@@ -31,6 +31,7 @@ return [
     ],
 
     'twitter' => [
+        'screen_name' => env('TWITTER_SCREEN_NAME'),
         'consumer' => [
             'key' => env('TWITTER_CONSUMER_KEY'),
             'secret' => env('TWITTER_CONSUMER_SECRET')
