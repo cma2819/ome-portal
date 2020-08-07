@@ -15,8 +15,7 @@ class TwitterMediaType implements ValueObject
 
     protected function __construct(
         string $mediaType
-    )
-    {
+    ) {
         $this->mediaType = $mediaType;
     }
 

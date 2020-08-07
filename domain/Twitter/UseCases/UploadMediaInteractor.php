@@ -10,13 +10,11 @@ use Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaUseCase;
 
 class UploadMediaInteractor implements UploadMediaUseCase
 {
-
     protected PersistTwitterMediaCommand $persistTwitterMediaCommand;
 
     public function __construct(
         PersistTwitterMediaCommand $persistTwitterMediaCommand
-    )
-    {
+    ) {
         $this->persistTwitterMediaCommand = $persistTwitterMediaCommand;
     }
 

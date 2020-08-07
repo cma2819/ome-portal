@@ -12,8 +12,7 @@ class PostTweetRequest
     public function __construct(
         string $content,
         array $mediaIds
-    )
-    {
+    ) {
         $this->content = $content;
         $this->mediaIds = $mediaIds;
     }

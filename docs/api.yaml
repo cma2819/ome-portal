@@ -102,18 +102,6 @@ components:
     Error:
       type: string
       example: The message about error.
-    TwitterUser:
-      type: object
-      properties:
-        id:
-          type: number
-          example: 6253282
-        name:
-          type: string
-          example: Twitter API
-        screenName:
-          type: string
-          example: twitterapi
     TwitterUploadMedia:
       type: object
       properties:
@@ -133,8 +121,6 @@ components:
         text:
           type: string
           example: To make room for more expression, we will now count all emojis as equal—including those with gender‍‍‍ ‍‍and skin t… https://t.co/MkGjXf9aXm
-        user:
-          $ref: '#/components/schemas/TwitterUser'
         medias:
           type: array
           items:

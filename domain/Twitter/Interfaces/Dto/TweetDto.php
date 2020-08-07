@@ -3,6 +3,7 @@
 namespace Ome\Twitter\Interfaces\Dto;
 
 use Ome\Twitter\Entities\Tweet;
+use Ome\Twitter\Entities\TwitterMedia;
 
 class TweetDto
 {
@@ -18,8 +19,7 @@ class TweetDto
     public function __construct(
         Tweet $tweet,
         array $medias
-    )
-    {
+    ) {
         $this->tweet = $tweet;
         $this->medias = $medias;
     }
@@ -39,5 +39,4 @@ class TweetDto
     {
         return $this->medias;
     }
-
 }

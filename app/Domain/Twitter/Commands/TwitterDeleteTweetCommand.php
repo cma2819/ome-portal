@@ -8,7 +8,7 @@ use mpyw\Cowitter\Client;
 use mpyw\Cowitter\HttpException;
 use Ome\Twitter\Interfaces\Commands\DeleteTweetCommand;
 
-class DeleteTweet implements DeleteTweetCommand
+class TwitterDeleteTweetCommand implements DeleteTweetCommand
 {
     protected Client $client;
 

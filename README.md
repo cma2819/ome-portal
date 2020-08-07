@@ -29,8 +29,9 @@ And build assets with parcel.
 ``` sh
 npm run dev
 ```
+Make `.env` in root from `.env.example` in repository.
 
-Generate application key for Laravel framework.
+then, generate application key for Laravel framework.
 
 ``` sh
 php artisan key:generate

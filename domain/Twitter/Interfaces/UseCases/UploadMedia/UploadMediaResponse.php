@@ -10,8 +10,7 @@ class UploadMediaResponse
 
     public function __construct(
         TwitterMedia $twitterMedia
-    )
-    {
+    ) {
         $this->twitterMedia = $twitterMedia;
     }
 

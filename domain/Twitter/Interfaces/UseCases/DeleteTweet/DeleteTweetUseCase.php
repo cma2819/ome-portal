@@ -7,8 +7,8 @@ namespace Ome\Twitter\Interfaces\UseCases\DeleteTweet;
  */
 interface DeleteTweetUseCase
 {
-	/**
-	 * Delete Tweet.
-	 */
-	function interact(DeleteTweetRequest $request): DeleteTweetResponse;
+    /**
+     * Delete Tweet.
+     */
+    public function interact(DeleteTweetRequest $request): DeleteTweetResponse;
 }

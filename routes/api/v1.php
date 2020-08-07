@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 // API routes (version 1.x)
 
-Route::prefix('twitter')->namespace('Twitter')->group(function () {
-    Route::apiResource('tweets', 'TweetResource')->only([
-        'index',
-        'store',
-        'destroy'
-    ]);
+Route::name('api.v1.')->group(function () {
+    Route::prefix('twitter')->namespace('Twitter')->name('twitter.')->group(function () {
+        Route::apiResource('tweets', 'TweetResource')->only([
+            'index',
+            'store',
+            'destroy'
+        ]);
+    });
 });

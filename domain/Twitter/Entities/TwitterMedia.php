@@ -9,7 +9,6 @@ use Psr\Http\Message\UploadedFileInterface;
 
 class TwitterMedia implements JsonSerializable
 {
-
     protected ?int $id;
 
     /**
@@ -23,8 +22,7 @@ class TwitterMedia implements JsonSerializable
         ?int $id,
         string $mediaUrl,
         TwitterMediaType $type
-    )
-    {
+    ) {
         $this->id = $id;
         $this->mediaUrl = $mediaUrl;
         $this->type = $type;
@@ -33,7 +31,6 @@ class TwitterMedia implements JsonSerializable
     public static function createNewMediaFromUploadedFile(
         UploadedFileInterface $file
     ) {
-
         switch ($file->getClientMediaType()) {
             case 'image/jpeg':
             case 'image/png':
@@ -42,6 +39,7 @@ class TwitterMedia implements JsonSerializable
                 break;
             case 'video/mp4':
                 $type = TwitterMediaType::video();
+                // no break
             default:
                 throw new UnmatchedContextException(
                     self::class,
@@ -63,6 +61,25 @@ class TwitterMedia implements JsonSerializable
             $json['media_url_https'],
             TwitterMediaType::create($json['type'])
         );
+    }
+
+    /**
+     * Create medias from tweet api response.
+     *
+     * @param array $json
+     * @return self[]
+     */
+    public static function createMediasFromTweetApiJson(array $json): array
+    {
+        if (!array_key_exists('extended_entities', $json)) {
+            return [];
+        }
+        $mediaArrayJson = $json['extended_entities']['media'];
+        $medias = [];
+        foreach ($mediaArrayJson as $mediaJson) {
+            $medias[] = self::createFromApiJson($mediaJson);
+        }
+        return $medias;
     }
 
     public function jsonSerialize(): array

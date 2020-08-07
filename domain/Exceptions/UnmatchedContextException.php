@@ -9,12 +9,10 @@ use RuntimeException;
  */
 class UnmatchedContextException extends RuntimeException
 {
-
     public function __construct(
         string $className,
         string $message
-    )
-    {
+    ) {
         parent::__construct(
             $className . ': ' . $message
         );

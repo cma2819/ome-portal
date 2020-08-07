@@ -51,11 +51,13 @@ class Tweet implements JsonSerializable
 
     public static function createFromApiJson(array $json): self
     {
-        $mediaArrayJson = $json['extended_entities']['media'];
         $mediaIds = [];
+        if (array_key_exists('extended_entities', $json)) {
+            $mediaArrayJson = $json['extended_entities']['media'];
 
-        foreach ($mediaArrayJson as $mediaJson) {
-            $medias[] = $mediaJson['id'];
+            foreach ($mediaArrayJson as $mediaJson) {
+                $medias[] = $mediaJson['id'];
+            }
         }
         return new self(
             $json['id'],

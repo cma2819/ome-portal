@@ -4,8 +4,8 @@ namespace Ome\Twitter\Entities;
 
 use JsonSerializable;
 
-class TwitterUser implements JsonSerializable {
-
+class TwitterUser implements JsonSerializable
+{
     protected int $id;
 
     protected string $name;
@@ -16,8 +16,7 @@ class TwitterUser implements JsonSerializable {
         int $id,
         string $name,
         string $screenName
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->screenName = $screenName;
