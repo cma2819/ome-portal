@@ -27,7 +27,7 @@ class GenerateDomainUseCase
 
         $namespace = "Ome\\{$domainNamespace}\\Interfaces\\UseCases\\{$useCaseName}";
         $requestName = "{$namespace}\\{$useCaseName}Request";
-        $responseName = "{$namespace}\\{$useCaseName}Request";
+        $responseName = "{$namespace}\\{$useCaseName}Response";
 
         $useCaseFile = new PhpFile;
         $useCaseInterface = $useCaseFile->addNamespace($namespace);
@@ -59,6 +59,7 @@ class GenerateDomainUseCase
         $comment = implode(' ',  preg_split('/(?=[A-Z])/', $useCaseName, -1, PREG_SPLIT_NO_EMPTY)) . '.';
         $interface->addComment($comment);
         $interact = $interface->addMethod('interact')
+            ->setPublic()
             ->addComment($comment)
             ->setReturnType($responseName);
         $interact->addParameter('request')->setType($requestName);

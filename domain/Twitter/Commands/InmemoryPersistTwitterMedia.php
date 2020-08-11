@@ -13,8 +13,7 @@ class InmemoryPersistTwitterMedia implements PersistTwitterMediaCommand
 
     public function __construct(
         array $twitterMedias = []
-    )
-    {
+    ) {
         $this->twitterMedias = $twitterMedias;
     }
 

@@ -2,6 +2,12 @@ import { LocaleMessages } from 'vue-i18n';
 
 export const messages: LocaleMessages = {
     ja: {
+      layout: {
+        actions: {
+          login: 'ログイン',
+          menu: 'メニュー',
+        }
+      },
       twitter: {
         labels: {
           list: 'ツイート一覧',
@@ -11,7 +17,7 @@ export const messages: LocaleMessages = {
         actions: {
           post: '投稿',
           update: '更新',
-          delete: '削除'
+          delete: '削除',
         }
       }
     }

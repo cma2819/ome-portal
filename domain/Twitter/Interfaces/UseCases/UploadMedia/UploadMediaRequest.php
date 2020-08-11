@@ -6,7 +6,6 @@ use Psr\Http\Message\UploadedFileInterface;
 
 class UploadMediaRequest
 {
-
     private string $url;
 
     private string $mimeType;

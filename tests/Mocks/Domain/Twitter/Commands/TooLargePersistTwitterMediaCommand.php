@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Mocks\Domain\Commands\Twitter;
+namespace Tests\Mocks\Domain\Twitter\Commands;
 
 use App\Exceptions\Twitter\TooLargeUploadedFileException;
 use Ome\Twitter\Entities\TwitterMedia;
