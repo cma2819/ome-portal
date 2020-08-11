@@ -12,6 +12,9 @@ const run = () => {
         execSync('npm install --production', {
             cwd: outputDir
         });
+        execSync('npm install cors', {
+          cwd: outputDir
+        });
 
         console.log('Copy alternative index.js to output');
         copyFileSync(join(__dirname, 'node_index.js'), join(outputDir, 'index.js'));
