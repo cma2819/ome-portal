@@ -11,16 +11,19 @@ class InmemoryPersistTwitterMedia implements PersistTwitterMediaCommand
     /** @var TwitterMedia[] */
     private array $twitterMedias = [];
 
-    public function execute(TwitterMedia $input): TwitterMedia
+    public function __construct(
+        array $twitterMedias = []
+    )
+    {
+        $this->twitterMedias = $twitterMedias;
+    }
+
+    public function execute(TwitterMedia $input): string
     {
         $nextId = $this->nextId();
         $this->twitterMedia[$nextId] = $input;
 
-        return PartialTwitterMedia::createPartial(
-            $nextId,
-            $input->getMediaUrl(),
-            $input->getType(),
-        );
+        return $nextId;
     }
 
     public function nextId(): int

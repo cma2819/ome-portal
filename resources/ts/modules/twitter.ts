@@ -18,7 +18,7 @@ class Twitter extends VuexModule {
   }
 
   @Mutation
-  private _removeTweetFromTimeline(id: number): void {
+  private _removeTweetFromTimeline(id: string): void {
     this.timeline = this.timeline.filter((tweet) => {
       return tweet.id !== id;
     });
@@ -36,7 +36,7 @@ class Twitter extends VuexModule {
   }
 
   @Action
-  public removeTweetFromTimeline(id: number): void {
+  public removeTweetFromTimeline(id: string): void {
     this._removeTweetFromTimeline(id);
   }
 }

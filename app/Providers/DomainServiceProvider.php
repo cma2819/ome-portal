@@ -32,11 +32,23 @@ class DomainServiceProvider extends ServiceProvider
             \Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaUseCase::class,
             \Ome\Twitter\UseCases\UploadMediaInteractor::class
         );
+        $this->app->bind(
+            \Ome\Twitter\Interfaces\UseCases\DeleteTweet\DeleteTweetUseCase::class,
+            \Ome\Twitter\UseCases\DeleteTweetInteractor::class
+        );
 
         // Commands
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class,
             \App\Domain\Twitter\Commands\TwitterDeleteTweetCommand::class
+        );
+        $this->app->bind(
+            \Ome\Twitter\Interfaces\Commands\PersistTweetCommand::class,
+            \App\Domain\Twitter\Commands\TwitterPersistTweetCommand::class
+        );
+        $this->app->bind(
+            \Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand::class,
+            \App\Domain\Twitter\Commands\TwitterPersistTwitterMediaCommand::class
         );
 
         // Queries
@@ -47,41 +59,46 @@ class DomainServiceProvider extends ServiceProvider
 
         if (config('app.env') === 'testing') {
             // Register Store
-            $this->app->bind('TweetStore', function (Application $app) {
-                return [
-                    PartialTweet::createPartial(
-                        1,
-                        'this is test tweet',
-                        [1],
-                        Carbon::now()
-                    )
-                ];
+            $this->app->singleton('InmemoryTweetStore', function (Application $app) {
+                return [];
             });
-            $this->app->bind('TwitterMediaStore', function (Application $app) {
-                return [
-                    PartialTwitterMedia::createPartial(
-                        1,
-                        'https://example.com',
-                        TwitterMediaType::photo()
-                    )
-                ];
+            $this->app->singleton('InmemoryTwitterMediaStore', function (Application $app) {
+                return [];
             });
 
             // Commands
             $this->app->bind(
-                \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class, function (Application $app) {
+                \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class,
+                function (Application $app) {
                     return new \Ome\Twitter\Commands\InmemoryDeleteTweet(
-                        $app->make('TweetStore')
+                        $app->make('InmemoryTweetStore')
+                    );
+                }
+            );
+            $this->app->bind(
+                \Ome\Twitter\Interfaces\Commands\PersistTweetCommand::class,
+                function (Application $app) {
+                    return new \Ome\Twitter\Commands\InmemoryPersistTweet(
+                        $app->make('InmemoryTwitterMediaStore')
+                    );
+                }
+            );
+            $this->app->bind(
+                \Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand::class,
+                function (Application $app) {
+                    return new \Ome\Twitter\Commands\InmemoryPersistTwitterMedia(
+                        $app->make('InmemoryTwitterMediaStore')
                     );
                 }
             );
 
             // Queries
             $this->app->bind(
-                \Ome\Twitter\Interfaces\Queries\TimelineQuery::class, function (Application $app) {
+                \Ome\Twitter\Interfaces\Queries\TimelineQuery::class,
+                function (Application $app) {
                     return new \Ome\Twitter\Queries\InmemoryTimelineQuery(
-                        $app->make('TweetStore'),
-                        $app->make('TwitterMediaStore')
+                        $app->make('InmemoryTweetStore'),
+                        $app->make('InmemoryTwitterMediaStore')
                     );
                 }
             );

@@ -9,23 +9,23 @@ use Ome\Exceptions\UnmatchedContextException;
 
 class Tweet implements JsonSerializable
 {
-    protected ?int $id;
+    protected ?string $id;
 
     protected string $text;
 
-    /** @var int[] */
+    /** @var string[] */
     protected array $mediaIds;
 
     protected ?DateTimeInterface $createdAt;
 
     /**
-     * @param integer $id
+     * @param string $id
      * @param string $text Not validate in application because tweet character counting is complex. Twitter will validate this.
-     * @param int[] $mediaIds
+     * @param string[] $mediaIds
      * @param DateTimeInterface $createdAt
      */
     protected function __construct(
-        ?int $id,
+        ?string $id,
         string $text,
         array $mediaIds,
         ?DateTimeInterface $createdAt

@@ -229,4 +229,6 @@ return [
 
     ],
 
+    'api_url' => env('API_HOST', 'http://localhost:8080'),
+
 ];

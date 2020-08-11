@@ -15,7 +15,7 @@ class InmemoryDeleteTweet implements DeleteTweetCommand
         $this->tweets = $tweets;
     }
 
-    public function execute(int $id): bool
+    public function execute(string $id): bool
     {
         foreach ($this->tweets as $index => $tweet) {
             if ($tweet->getId() === $id) {

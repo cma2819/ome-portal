@@ -5,7 +5,7 @@ namespace Ome\Twitter\Entities;
 class PartialTwitterUser extends TwitterUser
 {
     public static function createPartial(
-        int $id,
+        string $id,
         string $name,
         string $screenName
     ): TwitterUser {

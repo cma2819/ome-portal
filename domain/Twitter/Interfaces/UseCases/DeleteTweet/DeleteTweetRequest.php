@@ -7,10 +7,10 @@ namespace Ome\Twitter\Interfaces\UseCases\DeleteTweet;
  */
 class DeleteTweetRequest
 {
-    private int $id;
+    private string $id;
 
     public function __construct(
-        int $id
+        string $id
     ) {
         $this->id = $id;
     }

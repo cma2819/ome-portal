@@ -6,14 +6,14 @@ use JsonSerializable;
 
 class TwitterUser implements JsonSerializable
 {
-    protected int $id;
+    protected string $id;
 
     protected string $name;
 
     protected string $screenName;
 
     protected function __construct(
-        int $id,
+        string $id,
         string $name,
         string $screenName
     ) {

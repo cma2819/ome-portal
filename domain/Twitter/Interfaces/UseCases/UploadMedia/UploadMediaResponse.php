@@ -3,22 +3,23 @@
 namespace Ome\Twitter\Interfaces\UseCases\UploadMedia;
 
 use Ome\Twitter\Entities\TwitterMedia;
+use Ome\Twitter\Interfaces\Dto\UploadedMediaDto;
 
 class UploadMediaResponse
 {
-    private TwitterMedia $twitterMedia;
+    private UploadedMediaDto $uploadedMedia;
 
     public function __construct(
-        TwitterMedia $twitterMedia
+        UploadedMediaDto $uploadedMedia
     ) {
-        $this->twitterMedia = $twitterMedia;
+        $this->uploadedMedia = $uploadedMedia;
     }
 
     /**
-     * Get the value of twitterMedia
+     * Get the value of uploadedMedia
      */
-    public function getTwitterMedia()
+    public function getUploadedMedia()
     {
-        return $this->twitterMedia;
+        return $this->uploadedMedia;
     }
 }

@@ -28,6 +28,7 @@
           >
             <v-btn
               color="info"
+              :loading="updating"
               @click="updateTimeline"
             >
               {{ $t('twitter.actions.update') }}
@@ -80,14 +81,17 @@ import { twitterModule } from '../modules/twitter';
 })
 export default class TwitterApp extends Vue {
   twitter = twitterModule;
+  updating = false;
 
   async mounted(): Promise<void> {
     await twitterModule.updateTimeline();
   }
 
   @Emit()
-  updateTimeline(): void {
-    twitterModule.updateTimeline();
+  async updateTimeline(): Promise<void> {
+    this.updating = true;
+    await twitterModule.updateTimeline();
+    this.updating = false;
   }
 }
 </script>

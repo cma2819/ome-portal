@@ -64,6 +64,7 @@ export class ApiClient extends VuexModule {
   }
 
   @Action
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async delete(payload: { endpoint: string, id: string}): Promise<any> {
     const headers = this.bearer ? {
       Authorization: `Bearer ${this.bearer}`
