@@ -89,7 +89,7 @@ class TweetStoreTest extends TestCase
     {
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\PersistTweetCommand::class,
-            \Tests\Mocks\Domain\Commands\Twitter\ValidationErrorPersistTweetCommand::class
+            \Tests\Mocks\Domain\Twitter\Commands\ValidationErrorPersistTweetCommand::class
         );
 
         $postData = [

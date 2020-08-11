@@ -22,7 +22,7 @@ class MediaStoreTest extends TestCase
     {
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand::class,
-            \Tests\Mocks\Domain\Commands\Twitter\TooLargePersistTwitterMediaCommand::class
+            \Tests\Mocks\Domain\Twitter\Commands\TooLargePersistTwitterMediaCommand::class
         );
 
         $file = UploadedFile::fake()->image('test.jpg')->mimeType('image/jpg');

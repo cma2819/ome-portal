@@ -11,8 +11,7 @@ class TwitterMediaResponse implements JsonSerializable
 
     public function __construct(
         TwitterMedia $media
-    )
-    {
+    ) {
         $this->media = $media;
     }
 

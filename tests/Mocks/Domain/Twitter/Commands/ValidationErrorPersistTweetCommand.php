@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Mocks\Domain\Commands\Twitter;
+namespace Tests\Mocks\Domain\Twitter\Commands;
 
 use App\Exceptions\Twitter\TwitterValidationException;
 use Ome\Twitter\Entities\Tweet;

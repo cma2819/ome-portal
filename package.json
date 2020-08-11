@@ -2,6 +2,7 @@
     "private": true,
     "scripts": {
         "autofix": "eslint --fix --ext .ts,.vue resources/ts",
+        "clean": "trash .cache",
         "db:up": "docker-compose -f ./deploy/docker-compose.yaml up -d --build",
         "db:down": "docker-compose -f ./deploy/docker-compose.yaml down",
         "dev": "npm run development",
@@ -28,6 +29,7 @@
         "node-wget": "^0.4.3",
         "parcel-bundler": "^1.12.4",
         "sass": "^1.26.10",
+        "trash-cli": "^3.1.0",
         "typescript": "^3.9.7",
         "vue-template-compiler": "^2.6.11"
     },

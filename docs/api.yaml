@@ -12,11 +12,18 @@ servers:
   - url: https://dev.marathon.online/api/v1
     description: Development server
 paths:
-  /test:
+  /authorization/me:
     get:
+      summary: Get authorized user
+      tags:
+        - auth
       responses:
         '200':
-          description: OK
+          description: Authorized user JSON.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
   /twitter/tweets:
     get:
       summary: Get tweets
@@ -103,6 +110,29 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        username:
+          type: string
+          example: 'ユーザー'
+        discord:
+          $ref: '#/components/schemas/DiscordUser'
+    DiscordUser:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '80351110224678912'
+        username:
+          type: string
+          example: 'Nelly'
+        discriminator:
+          type: string
+          example: '1337'
     Error:
       type: string
       example: The message about error.
