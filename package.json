@@ -33,6 +33,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
+        "cors": "^2.8.5",
         "twitter-text": "^3.1.0",
         "vue": "^2.6.11",
         "vue-class-component": "^7.2.5",

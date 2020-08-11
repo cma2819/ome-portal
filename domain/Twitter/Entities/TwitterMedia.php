@@ -9,7 +9,7 @@ use Psr\Http\Message\UploadedFileInterface;
 
 class TwitterMedia implements JsonSerializable
 {
-    protected ?int $id;
+    protected ?string $id;
 
     /**
      * Local file path when ID is null, Uploaded URL when ID is not null (it means already uploaded twitter).
@@ -19,7 +19,7 @@ class TwitterMedia implements JsonSerializable
     protected TwitterMediaType $type;
 
     protected function __construct(
-        ?int $id,
+        ?string $id,
         string $mediaUrl,
         TwitterMediaType $type
     ) {
@@ -28,28 +28,27 @@ class TwitterMedia implements JsonSerializable
         $this->type = $type;
     }
 
-    public static function createNewMediaFromUploadedFile(
-        UploadedFileInterface $file
-    ) {
-        switch ($file->getClientMediaType()) {
-            case 'image/jpeg':
-            case 'image/png':
-            case 'image/gif':
-                $type = TwitterMediaType::photo();
-                break;
-            case 'video/mp4':
-                $type = TwitterMediaType::video();
-                // no break
-            default:
-                throw new UnmatchedContextException(
-                    self::class,
-                    'Client media type not match. Received type is ' . $file->getClientMediaType() . '.'
-                );
+    public static function createUploadMedia(string $mediaUrl, string $mime): self
+    {
+        switch ($mime) {
+        case 'image/jpeg':
+        case 'image/png':
+        case 'image/gif':
+            $type = TwitterMediaType::photo();
+            break;
+        case 'video/mp4':
+            $type = TwitterMediaType::video();
+            // no break
+        default:
+            throw new UnmatchedContextException(
+                self::class,
+                'Client media type not match. Received type is ' . $mime . '.'
+            );
         }
 
         return new self(
             null,
-            $file->getStream()->getMetadata()['uri'],
+            $mediaUrl,
             $type
         );
     }

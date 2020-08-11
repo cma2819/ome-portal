@@ -1,15 +1,15 @@
 export type TwitterUser = {
-  id: number;
+  id: string;
   name: string;
   screenName: string;
 }
 
 export type TwitterUploadMedia = {
-  mediaId: number;
+  id: string;
 }
 
 export type TwitterMedia = {
-  id: number;
+  id: string;
   mediaUrl: string;
   type: 'photo'|'video'|'animated_gif'
 }
@@ -17,7 +17,7 @@ export type TwitterMedia = {
 export type Timeline = Array<Tweet>;
 
 export type Tweet = {
-  id: number;
+  id: string;
   text: string;
   user: TwitterUser;
   createdAt: string;

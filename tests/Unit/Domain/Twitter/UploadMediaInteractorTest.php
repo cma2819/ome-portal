@@ -30,12 +30,9 @@ class UploadMediaInteractorTest extends TestCase
         $response = (new UploadMediaInteractor(
             new InmemoryPersistTwitterMedia
         ))->interact(
-            new UploadMediaRequest(
-                new UploadedFile($file->url(), $file->size(), UPLOAD_ERR_OK, $file->getName(), 'image/jpeg')
-            )
+            new UploadMediaRequest($file->url(), 'image/jpeg')
         );
 
-        $this->assertEquals(1, $response->getTwitterMedia()->getId());
-        $this->assertEquals(TwitterMediaType::photo(), $response->getTwitterMedia()->getType());
+        $this->assertEquals(1, $response->getUploadedMedia()->getId());
     }
 }

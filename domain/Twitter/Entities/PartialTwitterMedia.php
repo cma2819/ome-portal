@@ -7,7 +7,7 @@ use Ome\Twitter\Values\TwitterMediaType;
 class PartialTwitterMedia extends TwitterMedia
 {
     public static function createPartial(
-        int $id,
+        string $id,
         string $mediaUrl,
         TwitterMediaType $type
     ) {

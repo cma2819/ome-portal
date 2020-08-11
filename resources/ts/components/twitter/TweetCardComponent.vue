@@ -63,8 +63,12 @@ export default class TweetCardComponent extends Vue {
 
   get formattedCreatedAt(): string {
     const createdAtDate = new Date(Date.parse(this.tweet.createdAt));
-    return `${createdAtDate.getFullYear()}/${createdAtDate.getMonth() + 1}/${createdAtDate.getDate()}`
-      + ` ${createdAtDate.getHours()}:${createdAtDate.getMinutes()}:${createdAtDate.getSeconds()}`;
+    const month = (createdAtDate.getMonth() + 1).toString().padStart(2, '0');
+    const date = createdAtDate.getDate().toString().padStart(2, '0');
+    const hours = createdAtDate.getHours().toString().padStart(2, '0');
+    const minutes = createdAtDate.getMinutes().toString().padStart(2, '0');
+    const seconds = createdAtDate.getSeconds().toString().padStart(2, '0');
+    return `${createdAtDate.getFullYear()}/${month}/${date} ${hours}:${minutes}:${seconds}`;
   }
 
   @Emit()

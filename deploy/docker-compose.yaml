@@ -5,9 +5,13 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-    volumes: 
+    volumes:
       - ome-db:/var/lib/mysql
     ports:
       - "3307:3306"
+  cache:
+    image: redis:6
+    ports:
+      - "6380:6379"
 volumes:
   ome-db:

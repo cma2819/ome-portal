@@ -28,12 +28,10 @@ class Api extends ApiClient {
   }
 
   @Action
-  public async postTweet(text: string, mediaIds: Array<number>): Promise<Tweet> {
+  public async postTweet(payload: { text: string; mediaIds: Array<string> }): Promise<Tweet> {
     const response = await this.post({
       endpoint: 'twitter/tweets',
-      params: {
-        text, mediaIds
-      }
+      params: payload
     });
     return response;
   }
@@ -50,10 +48,10 @@ class Api extends ApiClient {
   }
 
   @Action
-  public async deleteTweet(id: number): Promise<boolean> {
+  public async deleteTweet(id: string): Promise<boolean> {
     await this.delete({
       endpoint: 'twitter/tweets',
-      id: id.toString()
+      id: id
     });
     return true;
   }

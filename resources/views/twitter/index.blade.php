@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <ome-app api-host="{{ env('APP_HOST', 'http://localhost:8080') }}">
+    <ome-app api-host="{{ config('app.api_url') }}">
         <twitter-app></twitter-app>
     </ome-app>
 @endsection

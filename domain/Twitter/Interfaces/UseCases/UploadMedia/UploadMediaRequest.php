@@ -6,19 +6,33 @@ use Psr\Http\Message\UploadedFileInterface;
 
 class UploadMediaRequest
 {
-    private UploadedFileInterface $file;
+
+    private string $url;
+
+    private string $mimeType;
 
     public function __construct(
-        UploadedFileInterface $file
+        string $url,
+        string $mimeType
     ) {
-        $this->file = $file;
+        $this->url = $url;
+        $this->mimeType = $mimeType;
+    }
+
+
+    /**
+     * Get the value of url
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 
     /**
-     * Get the value of file
+     * Get the value of mimeType
      */
-    public function getFile()
+    public function getMimeType()
     {
-        return $this->file;
+        return $this->mimeType;
     }
 }

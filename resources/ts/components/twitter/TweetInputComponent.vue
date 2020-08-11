@@ -20,7 +20,7 @@
           :label="$t('twitter.labels.media')"
           :loading="loadingMedia"
           :disabled="loadingMedia || medias.length > 3"
-          accept=".jpg,.jpeg,.png,.gif"
+          accept=".jpg,.jpeg,.png"
           @change="postMedia"
         ></v-file-input>
         <div>
@@ -68,7 +68,7 @@ export default class TweetInputComponent extends Vue {
   file: File|null = null;
   medias: Array<{
     file: File,
-    mediaId: number
+    mediaId: string
   }> = [];
 
   loading = false;
@@ -94,7 +94,7 @@ export default class TweetInputComponent extends Vue {
       const mediaIds = this.medias.map((media) => {
         return media.mediaId;
       });
-      const result = await apiModule.postTweet(this.content, mediaIds);
+      const result = await apiModule.postTweet({text: this.content, mediaIds});
       twitterModule.addTweetToTimeline(result);
       this.defaultInput();
       this.loading = false;
@@ -113,7 +113,7 @@ export default class TweetInputComponent extends Vue {
         const result = await apiModule.postMedia(this.file);
         this.medias.push({
           file: this.file,
-          mediaId: result.mediaId,
+          mediaId: result.id,
         });
         this.file = null;
         this.loadingMedia = false;
@@ -126,7 +126,7 @@ export default class TweetInputComponent extends Vue {
   }
 
   @Emit()
-  removeMedia(mediaId: number): void {
+  removeMedia(mediaId: string): void {
     this.medias = this.medias.filter((media) => {
       return media.mediaId !== mediaId;
     });

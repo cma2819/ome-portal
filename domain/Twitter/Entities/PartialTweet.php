@@ -7,7 +7,7 @@ use DateTimeInterface;
 class PartialTweet extends Tweet
 {
     public static function createPartial(
-        int $id,
+        string $id,
         string $text,
         array $medias,
         DateTimeInterface $createdAt

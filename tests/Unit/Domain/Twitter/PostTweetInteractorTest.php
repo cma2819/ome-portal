@@ -37,7 +37,7 @@ class PostTweetInteractorTest extends TestCase
         $this->assertEquals(
             new TweetDto(
                 PartialTweet::createPartial(
-                    1,
+                    '1',
                     'test tweet',
                     [],
                     $now
@@ -49,7 +49,7 @@ class PostTweetInteractorTest extends TestCase
 
         $this->assertEquals([
             1 => PartialTweet::createPartial(
-                1,
+                '1',
                 'test tweet',
                 [],
                 $now
@@ -65,44 +65,44 @@ class PostTweetInteractorTest extends TestCase
 
         $initialMedias = [
             1 => PartialTwitterMedia::createPartial(
-                1, 'test1.png', TwitterMediaType::photo()
+                '1', 'test1.png', TwitterMediaType::photo()
             ),
             2 => PartialTwitterMedia::createPartial(
-                2, 'test1.png', TwitterMediaType::photo()
+                '2', 'test1.png', TwitterMediaType::photo()
             ),
             3 => PartialTwitterMedia::createPartial(
-                3, 'test1.png', TwitterMediaType::photo()
+                '3', 'test1.png', TwitterMediaType::photo()
             ),
             4 => PartialTwitterMedia::createPartial(
-                4, 'test1.png', TwitterMediaType::photo()
+                '4', 'test1.png', TwitterMediaType::photo()
             ),
         ];
         $persistTweetCommand = new InmemoryPersistTweet($initialMedias);
 
         $response = (new PostTweetInteractor($persistTweetCommand))->interact(
-            new PostTweetRequest('test tweet', [1, 2, 3, 4])
+            new PostTweetRequest('test tweet', ['1', '2', '3', '4'])
         );
 
         $this->assertEquals(
             new TweetDto(
                 PartialTweet::createPartial(
-                    1,
+                    '1',
                     'test tweet',
-                    [1, 2, 3, 4],
+                    ['1', '2', '3', '4'],
                     $now
                 ),
                 [
                     PartialTwitterMedia::createPartial(
-                        1, 'test1.png', TwitterMediaType::photo()
+                        '1', 'test1.png', TwitterMediaType::photo()
                     ),
                     PartialTwitterMedia::createPartial(
-                        2, 'test1.png', TwitterMediaType::photo()
+                        '2', 'test1.png', TwitterMediaType::photo()
                     ),
                     PartialTwitterMedia::createPartial(
-                        3, 'test1.png', TwitterMediaType::photo()
+                        '3', 'test1.png', TwitterMediaType::photo()
                     ),
                     PartialTwitterMedia::createPartial(
-                        4, 'test1.png', TwitterMediaType::photo()
+                        '4', 'test1.png', TwitterMediaType::photo()
                     ),
                 ]
             ),
@@ -111,9 +111,9 @@ class PostTweetInteractorTest extends TestCase
 
         $this->assertEquals([
             1 => PartialTweet::createPartial(
-                1,
+                '1',
                 'test tweet',
-                [1, 2, 3, 4],
+                ['1', '2', '3', '4'],
                 $now
             )
         ], $persistTweetCommand->getTweets());
