@@ -1,5 +1,8 @@
 <template>
-  <v-btn outlined>
+  <v-btn
+    :href="loginUrl"
+    outlined
+  >
     {{ $t('layout.actions.login') }}
   </v-btn>
 </template>
@@ -9,5 +12,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class AuthLoginButtonComponent extends Vue {
+  @Prop(String)
+  loginUrl!: string;
 }
 </script>

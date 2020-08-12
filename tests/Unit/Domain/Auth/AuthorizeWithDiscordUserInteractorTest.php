@@ -5,9 +5,9 @@ namespace Tests\Unit\Domain\Auth;
 use Ome\Auth\Commands\InmemoryPersistUserCommand;
 use Ome\Auth\Entities\PartialDiscordUser;
 use Ome\Auth\Entities\User;
-use Ome\Auth\Interfaces\UseCases\AuthorizeWithDiscordUser\AuthorizeWithDiscordUserRequest;
+use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserRequest;
 use Ome\Auth\Queries\InmemoryFindUserByDiscordQuery;
-use Ome\Auth\UseCases\AuthorizeWithDiscordUserInteractor;
+use Ome\Auth\UseCases\AuthenticateWithDiscordUserInteractor;
 use PHPUnit\Framework\TestCase;
 
 class AuthorizeWithDiscordUserInteractorTest extends TestCase
@@ -29,14 +29,14 @@ class AuthorizeWithDiscordUserInteractorTest extends TestCase
 
 
     /** @test */
-    public function testAuthorizeExistsUser()
+    public function testAuthenticateExistsUser()
     {
-        $authorizeInteractor = new AuthorizeWithDiscordUserInteractor(
+        $authorizeInteractor = new AuthenticateWithDiscordUserInteractor(
             $this->findUserByDiscordQuery,
             $this->persistUserCommand
         );
 
-        $result = $authorizeInteractor->interact(new AuthorizeWithDiscordUserRequest(
+        $result = $authorizeInteractor->interact(new AuthenticateWithDiscordUserRequest(
             PartialDiscordUser::createPartial('0000001', 'user1', '1234')
         ));
 
@@ -46,12 +46,12 @@ class AuthorizeWithDiscordUserInteractorTest extends TestCase
     /** @test */
     public function testAuthorizeNotExistsUser()
     {
-        $authorizeInteractor = new AuthorizeWithDiscordUserInteractor(
+        $authorizeInteractor = new AuthenticateWithDiscordUserInteractor(
             $this->findUserByDiscordQuery,
             $this->persistUserCommand
         );
 
-        $result = $authorizeInteractor->interact(new AuthorizeWithDiscordUserRequest(
+        $result = $authorizeInteractor->interact(new AuthenticateWithDiscordUserRequest(
             PartialDiscordUser::createPartial('1000001', 'user2', '9785')
         ));
 

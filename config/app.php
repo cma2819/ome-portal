@@ -172,9 +172,14 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\DomainServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Domain Service
+         */
+        App\Providers\Domain\AuthServiceProvider::class,
+        App\Providers\Domain\TwitterServiceProvider::class,
     ],
 
     /*

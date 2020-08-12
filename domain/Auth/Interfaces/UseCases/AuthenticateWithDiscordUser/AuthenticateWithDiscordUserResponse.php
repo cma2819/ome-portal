@@ -1,13 +1,13 @@
 <?php
 
-namespace Ome\Auth\Interfaces\UseCases\AuthorizeWithDiscordUser;
+namespace Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser;
 
 use Ome\Auth\Entities\User;
 
 /**
- * Response object for AuthorizeWithDiscordUser.
+ * Response object for AuthenticateWithDiscordUser.
  */
-class AuthorizeWithDiscordUserResponse
+class AuthenticateWithDiscordUserResponse
 {
     private User $user;
 

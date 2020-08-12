@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/twitter');
-});
+Route::get('/', 'Pages\Top')->name('index');
 
-Route::get('/twitter', 'Pages\Twitter');
+Route::get('/twitter', 'Pages\Twitter')->name('twitter');
+
+Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');

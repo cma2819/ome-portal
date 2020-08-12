@@ -5,11 +5,11 @@ namespace Ome\Auth\UseCases;
 use Ome\Auth\Entities\User;
 use Ome\Auth\Interfaces\Commands\PersistUserCommand;
 use Ome\Auth\Interfaces\Queries\FindUserByDiscordQuery;
-use Ome\Auth\Interfaces\UseCases\AuthorizeWithDiscordUser\AuthorizeWithDiscordUserRequest;
-use Ome\Auth\Interfaces\UseCases\AuthorizeWithDiscordUser\AuthorizeWithDiscordUserResponse;
-use Ome\Auth\Interfaces\UseCases\AuthorizeWithDiscordUser\AuthorizeWithDiscordUserUseCase;
+use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserRequest;
+use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserResponse;
+use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserUseCase;
 
-class AuthorizeWithDiscordUserInteractor implements AuthorizeWithDiscordUserUseCase
+class AuthenticateWithDiscordUserInteractor implements AuthenticateWithDiscordUserUseCase
 {
     protected FindUserByDiscordQuery $userByDiscordQuery;
 
@@ -23,13 +23,13 @@ class AuthorizeWithDiscordUserInteractor implements AuthorizeWithDiscordUserUseC
         $this->persistUserCommand = $persistUserCommand;
     }
 
-    public function interact(AuthorizeWithDiscordUserRequest $request): AuthorizeWithDiscordUserResponse
+    public function interact(AuthenticateWithDiscordUserRequest $request): AuthenticateWithDiscordUserResponse
     {
         $discord = $request->getDiscordUser();
         $user = $this->userByDiscordQuery->fetch($discord);
         if (is_null($user)) {
             $user = $this->persistUserCommand->execute(User::createFromDiscordUser($discord));
         }
-        return new AuthorizeWithDiscordUserResponse($user);
+        return new AuthenticateWithDiscordUserResponse($user);
     }
 }

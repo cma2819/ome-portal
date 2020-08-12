@@ -9,8 +9,7 @@
 @endsection
 
 @section('content')
-    <ome-app api-host="{{ config('app.api_url') }}">
-    </ome-app>
+    <ome-app api-host="{{ config('app.api_url') }}" bearer="{{ $bearer }}" login-url="{{ $discord_oauth_url }}"></ome-app>
 @endsection
 
 @section('scripts')

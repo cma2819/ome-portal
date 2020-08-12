@@ -15,7 +15,10 @@
         </div>
         <authorized-menu></authorized-menu>
       </template>
-      <auth-login-button v-else></auth-login-button>
+      <auth-login-button
+        v-else
+        :login-url="loginUrl"
+      ></auth-login-button>
     </v-app-bar>
 
     <v-main>
@@ -47,7 +50,9 @@ export default class TwitterApp extends Vue {
   @Prop(String)
   readonly apiHost!: string;
   @Prop(String)
-  readonly bearer: string|undefined;
+  readonly bearer!: string;
+  @Prop(String)
+  readonly loginUrl!: string;
 
   created(): void {
     apiModule.updateHost(this.apiHost);

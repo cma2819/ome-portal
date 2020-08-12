@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Providers;
+namespace App\Providers\Domain;
 
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Ome\Twitter\Commands\InmemoryDeleteTweet;
-use Ome\Twitter\Entities\PartialTweet;
-use Ome\Twitter\Entities\PartialTwitterMedia;
-use Ome\Twitter\Values\TwitterMediaType;
 
-class DomainServiceProvider extends ServiceProvider
+class TwitterServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -19,7 +14,10 @@ class DomainServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // UseCases
+        //////////////
+        // UseCases //
+        //////////////
+
         $this->app->bind(
             \Ome\Twitter\Interfaces\UseCases\GetTimeline\GetTimelineUseCase::class,
             \Ome\Twitter\UseCases\GetTimelineInteractor::class
@@ -37,7 +35,10 @@ class DomainServiceProvider extends ServiceProvider
             \Ome\Twitter\UseCases\DeleteTweetInteractor::class
         );
 
-        // Commands
+        //////////////
+        // Commands //
+        //////////////
+
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class,
             \App\Domain\Twitter\Commands\TwitterDeleteTweetCommand::class
@@ -51,12 +52,18 @@ class DomainServiceProvider extends ServiceProvider
             \App\Domain\Twitter\Commands\TwitterPersistTwitterMediaCommand::class
         );
 
-        // Queries
+        //////////////
+        // Queries  //
+        //////////////
+
         $this->app->bind(
             \Ome\Twitter\Interfaces\Queries\TimelineQuery::class,
             \App\Domain\Twitter\Queries\TwitterTimelineQuery::class
         );
 
+        //////////////////////////
+        // Test dependencies    //
+        //////////////////////////
         if (config('app.env') === 'testing') {
             // Register Store
             $this->app->singleton('InmemoryTweetStore', function (Application $app) {
