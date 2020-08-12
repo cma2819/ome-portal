@@ -39,6 +39,11 @@ class AuthServiceProvider extends ServiceProvider
         // Commands //
         //////////////
 
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Commands\PersistUserCommand::class,
+            \App\Domain\Auth\Commands\PersistUserEloquentCommand::class
+        );
+
         //////////////
         // Queries  //
         //////////////
@@ -46,6 +51,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\AuthenticateTokenQuery::class,
             \App\Domain\Auth\Queries\DiscordAuthenticateTokenQuery::class
+        );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\CurrentDiscordUserQuery::class,
+            \App\Domain\Auth\Queries\DiscordCurrentUserQuery::class
+        );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\FindUserByDiscordQuery::class,
+            \App\Domain\Auth\Queries\FindUserByDiscordQuery::class
         );
 
         //////////
@@ -63,19 +76,9 @@ class AuthServiceProvider extends ServiceProvider
         if (config('app.env') === 'testing') {
 
             // Stores
-            $this->app->bind('InmemoryUserStore', function (Application $app) {
+            $this->app->singleton('InmemoryUserStore', function (Application $app) {
                 return [];
             });
-
-            // Commands
-            $this->app->bind(
-                \Ome\Auth\Interfaces\Commands\PersistUserCommand::class,
-                function (Application $app) {
-                    return new \Ome\Auth\Commands\InmemoryPersistUserCommand(
-                        $app->make('InmemoryUserStore')
-                    );
-                }
-            );
 
             // Queries
             $this->app->bind(
@@ -85,10 +88,6 @@ class AuthServiceProvider extends ServiceProvider
             $this->app->bind(
                 \Ome\Auth\Interfaces\Queries\CurrentDiscordUserQuery::class,
                 \Tests\Mocks\Domain\Auth\Queries\MockCurrentDiscordUserQuery::class
-            );
-            $this->app->bind(
-                \Ome\Auth\Interfaces\Queries\FindUserByDiscordQuery::class,
-                \Ome\Auth\Queries\InmemoryFindUserByDiscordQuery::class
             );
         }
     }

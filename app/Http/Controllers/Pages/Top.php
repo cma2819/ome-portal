@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Eloquents\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,11 @@ class Top extends Controller
             $request->session()->put('discord_state', $buildResult->getState());
             $viewData['discord_oauth_url'] = $buildResult->getOauthUrl();
         } else {
-            $viewData['bearer'] = 'bearer-token';
+            /** @var User */
+            $user = Auth::user();
+            $bearer = $user->createToken('bearer');
+
+            $viewData['bearer'] = $bearer->plainTextToken;
         }
 
         return view('index', $viewData);

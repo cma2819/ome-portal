@@ -7,7 +7,7 @@ use Ome\Auth\Interfaces\Commands\PersistUserCommand;
 
 class InmemoryPersistUserCommand implements PersistUserCommand
 {
-    private array $users;
+    private array $users = [];
 
     /**
      * @param User[] $users

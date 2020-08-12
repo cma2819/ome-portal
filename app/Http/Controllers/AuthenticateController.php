@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Api\Auth\DiscordAuthenticateRequest;
+use Illuminate\Support\Facades\Auth;
 use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserRequest;
 use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserUseCase;
 use Ome\Auth\Interfaces\UseCases\ExchangeAuthenticateCode\ExchangeAuthenticateCodeRequest;
@@ -31,9 +32,10 @@ class AuthenticateController extends Controller
             new GetCurrentDiscordUserRequest($accessToken)
         )->getUser();
 
-        $authenticateWithDiscordUser->interact(
+        $user = $authenticateWithDiscordUser->interact(
             new AuthenticateWithDiscordUserRequest($discordUser)
-        );
+        )->getUser();
+        Auth::loginUsingId($user->getId());
 
         return redirect(route('index'));
     }

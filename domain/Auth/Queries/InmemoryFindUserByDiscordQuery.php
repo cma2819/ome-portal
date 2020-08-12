@@ -9,7 +9,7 @@ use Ome\Auth\Interfaces\Queries\FindUserByDiscordQuery;
 class InmemoryFindUserByDiscordQuery implements FindUserByDiscordQuery
 {
     /** @var User[] */
-    private array $users;
+    private array $users = [];
 
     /**
      * @param User[] $users

@@ -9,7 +9,7 @@ use Ome\Auth\Interfaces\Queries\AuthenticateTokenQuery;
 
 class DiscordAuthenticateTokenQuery implements AuthenticateTokenQuery
 {
-    private const DISCORD_TOKEN_API_URL = 'https://discord.com/api/oauth2/token';
+    private const DISCORD_TOKEN_API_ENDPOINT = '/oauth2/token';
 
     public function fetch(string $clientId, string $clientSecret, string $code, string $redirectUrl, array $scopes): string
     {
@@ -22,7 +22,8 @@ class DiscordAuthenticateTokenQuery implements AuthenticateTokenQuery
             'scope' => implode(' ', $scopes),
         ];
 
-        $response = Http::asForm()->post(self::DISCORD_TOKEN_API_URL, $parameters);
+        $url = config('services.discord.api_url') . self::DISCORD_TOKEN_API_ENDPOINT;
+        $response = Http::asForm()->post($url, $parameters);
 
         if ($response->failed()) {
             Log::error('Failed Authentication with discord.');
