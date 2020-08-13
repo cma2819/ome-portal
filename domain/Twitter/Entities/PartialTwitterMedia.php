@@ -10,7 +10,7 @@ class PartialTwitterMedia extends TwitterMedia
         string $id,
         string $mediaUrl,
         TwitterMediaType $type
-    ) {
-        return new self($id, $mediaUrl, $type);
+    ): TwitterMedia {
+        return new parent($id, $mediaUrl, $type);
     }
 }

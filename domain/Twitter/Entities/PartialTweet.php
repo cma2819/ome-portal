@@ -11,7 +11,7 @@ class PartialTweet extends Tweet
         string $text,
         array $medias,
         DateTimeInterface $createdAt
-    ): self {
-        return new self($id, $text, $medias, $createdAt);
+    ): Tweet {
+        return new parent($id, $text, $medias, $createdAt);
     }
 }

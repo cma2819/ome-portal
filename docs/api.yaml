@@ -16,7 +16,7 @@ paths:
     get:
       summary: Get authenticated user
       tags:
-        - auth
+        - Authentication
       responses:
         '200':
           description: Authenticated user JSON.
@@ -24,11 +24,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+  /roles:
+    get:
+      summary: Get list of roles and permissions
+      tags:
+        - Role and Permission
+      responses:
+        '200':
+          description: List of roles and permissions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        '403':
+          description: Not has sufficient authorization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /roles/{id}:
+    put:
+      summary: Update permission for role.
+      tags:
+        - Role and Permission
+      parameters:
+        - name: id
+          in: path
+          description: Role ID you want to update
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Permission information/
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permissions'
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Role not found
   /twitter/tweets:
     get:
       summary: Get tweets
       tags:
-        - twitter
+        - Twitter
       responses:
         '200':
           description: Get recently tweets
@@ -39,7 +82,7 @@ paths:
     post:
       summary: Post new tweet
       tags:
-        - twitter
+        - Twitter
       requestBody:
         description: Tweet content
         content:
@@ -63,7 +106,7 @@ paths:
     delete:
       summary: Delete tweet
       tags:
-        - twitter
+        - Twitter
       parameters:
         - name: id
           in: path
@@ -80,7 +123,7 @@ paths:
     post:
       summary: Upload media
       tags:
-        - twitter
+        - Twitter
       requestBody:
         description: Upload media data
         content:
@@ -121,15 +164,21 @@ components:
           example: 'ユーザー'
         discord:
           $ref: '#/components/schemas/DiscordUser'
+        permissions:
+          $ref: '#/components/schemas/Permissions'
     DiscordUser:
       type: object
       properties:
         id:
           type: string
           example: '80351110224678912'
-    Error:
-      type: string
-      example: The message about error.
+    Permissions:
+      type: array
+      items:
+        type: string
+        enum:
+          - 'twitter'
+          - 'admin'
     TwitterUploadMedia:
       type: object
       properties:
@@ -185,3 +234,17 @@ components:
             example: '114080493040967680'
       required:
         - text
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '41771983423143936'
+        name:
+          type: string
+          example: 'WE DEM BOYZZ!!!!!!'
+        permissions:
+          $ref: '#/components/schemas/Permissions'
+    Error:
+      type: string
+      example: The message about error.

@@ -19,7 +19,7 @@ class AuthorizeUserTest extends TestCase
         $userDiscord->user()->associate($user);
         $userDiscord->save();
 
-        $response = $this->actingAs($user)->getJson(route('api.v1.auth.me'));
+        $response = $this->actingAs($user, 'api')->getJson(route('api.v1.auth.me'));
 
         $response->assertSuccessful();
     }

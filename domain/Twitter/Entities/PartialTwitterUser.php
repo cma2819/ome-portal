@@ -9,6 +9,6 @@ class PartialTwitterUser extends TwitterUser
         string $name,
         string $screenName
     ): TwitterUser {
-        return new self($id, $name, $screenName);
+        return new parent($id, $name, $screenName);
     }
 }
