@@ -2,14 +2,13 @@
 
 namespace App\Eloquents;
 
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiToken;
     use Notifiable;
 
     /**
@@ -27,6 +26,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'remember_token','api_token'
     ];
+
+    public function discord()
+    {
+        return $this->hasOne(UserDiscord::class);
+    }
 }

@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 // API routes (version 1.x)
 
 Route::name('api.v1.')->group(function () {
-    Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function () {
-
+    Route::middleware(['auth:api'])->prefix('auth')->namespace('Auth')->name('auth.')->group(function () {
+        Route::get('me', 'AuthenticateUser')->name('me');
     });
 
     Route::prefix('twitter')->namespace('Twitter')->name('twitter.')->group(function () {

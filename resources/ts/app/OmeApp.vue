@@ -10,9 +10,7 @@
       <v-spacer></v-spacer>
 
       <template v-if="bearer">
-        <div class="mr-2">
-          ようこそ, ユーザーさん
-        </div>
+        <auth-user-label></auth-user-label>
         <authorized-menu></authorized-menu>
       </template>
       <auth-login-button
@@ -37,13 +35,15 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import AuthLoginButton from '../components/auth/AuthLoginButtonComponent.vue';
 import AuthorizedMenu from '../components/auth/AuthorizedMenuComponent.vue';
+import AuthUserLabel from '../components/auth/AuthUserLabelComponent.vue';
 
 import { apiModule } from '../modules/api';
 
 @Component({
   components: {
     AuthorizedMenu,
-    AuthLoginButton
+    AuthLoginButton,
+    AuthUserLabel,
   }
 })
 export default class TwitterApp extends Vue {

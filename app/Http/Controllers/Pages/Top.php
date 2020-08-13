@@ -46,9 +46,9 @@ class Top extends Controller
         } else {
             /** @var User */
             $user = Auth::user();
-            $bearer = $user->createToken('bearer');
+            $bearer = $user->api_token;
 
-            $viewData['bearer'] = $bearer->plainTextToken;
+            $viewData['bearer'] = $bearer;
         }
 
         return view('index', $viewData);

@@ -6,6 +6,7 @@ export const messages: LocaleMessages = {
         actions: {
           login: 'ログイン',
           menu: 'メニュー',
+          logout: 'ログアウト'
         }
       },
       twitter: {

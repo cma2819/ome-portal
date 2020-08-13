@@ -15,6 +15,7 @@ class PersistUserEloquentCommand implements PersistUserCommand
         /** @var User */
         $persistUser = DB::transaction(function () use ($user) {
             $userEloquent = new EloquentsUser(['name' => $user->getUsername()]);
+            $userEloquent->refreshToken();
             $userEloquent->save();
 
             $userDiscord = new UserDiscord(['discord_id' => $user->getDiscordId()]);

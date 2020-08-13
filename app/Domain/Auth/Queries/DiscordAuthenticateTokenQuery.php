@@ -2,7 +2,7 @@
 
 namespace App\Domain\Auth\Queries;
 
-use App\Exceptions\Discord\AuthenticationFailedException;
+use App\Exceptions\Auth\AuthenticationFailedException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Ome\Auth\Interfaces\Queries\AuthenticateTokenQuery;

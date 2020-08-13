@@ -12,14 +12,14 @@ servers:
   - url: https://dev.marathon.online/api/v1
     description: Development server
 paths:
-  /authorization/me:
+  /auth/me:
     get:
-      summary: Get authorized user
+      summary: Get authenticated user
       tags:
         - auth
       responses:
         '200':
-          description: Authorized user JSON.
+          description: Authenticated user JSON.
           content:
             application/json:
               schema:
@@ -127,12 +127,6 @@ components:
         id:
           type: string
           example: '80351110224678912'
-        username:
-          type: string
-          example: 'Nelly'
-        discriminator:
-          type: string
-          example: '1337'
     Error:
       type: string
       example: The message about error.

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions\Discord;
+namespace App\Exceptions\Auth;
 
 use App\Exceptions\HttpStatusThrowable;
 use RuntimeException;

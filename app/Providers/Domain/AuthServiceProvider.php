@@ -31,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
             \Ome\Auth\UseCases\ExchangeAuthenticateCodeInteractor::class
         );
         $this->app->bind(
+            \Ome\Auth\Interfaces\UseCases\GetAuthenticatedUser\GetAuthenticatedUserUseCase::class,
+            \Ome\Auth\UseCases\GetAuthenticatedUserInteractor::class
+        );
+        $this->app->bind(
             \Ome\Auth\Interfaces\UseCases\GetCurrentDiscordUser\GetCurrentDiscordUserUseCase::class,
             \Ome\Auth\UseCases\GetCurrentDiscordUserInteractor::class
         );
@@ -48,6 +52,10 @@ class AuthServiceProvider extends ServiceProvider
         // Queries  //
         //////////////
 
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\AuthenticatedUserQuery::class,
+            \App\Domain\Auth\Queries\AppAuthenticatedUserQuery::class
+        );
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\AuthenticateTokenQuery::class,
             \App\Domain\Auth\Queries\DiscordAuthenticateTokenQuery::class

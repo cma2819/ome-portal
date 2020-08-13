@@ -8,7 +8,6 @@ use Ome\Auth\Interfaces\Queries\CurrentDiscordUserQuery;
 
 class DiscordCurrentUserQuery implements CurrentDiscordUserQuery
 {
-
     private const DISCORD_USER_ME_ENDPOINT = '/users/@me';
 
     public function fetch(string $token): DiscordUser

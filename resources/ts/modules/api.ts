@@ -2,6 +2,7 @@ import { getModule, Module, Action } from 'vuex-module-decorators';
 import store from '../plugins/store';
 import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
+import { User } from '../lib/models/auth';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -54,6 +55,12 @@ class Api extends ApiClient {
       id: id
     });
     return true;
+  }
+
+  @Action
+  public async getAuthMe(): Promise<User> {
+    const response = await this.get('auth/me');
+    return response;
   }
 }
 

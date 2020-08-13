@@ -17,4 +17,5 @@ Route::get('/', 'Pages\Top')->name('index');
 
 Route::get('/twitter', 'Pages\Twitter')->name('twitter');
 
+Route::get('/logout', 'AuthenticateController@logout')->name('auth.logout');
 Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');

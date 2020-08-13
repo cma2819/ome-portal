@@ -35,7 +35,16 @@ class AuthenticateController extends Controller
         $user = $authenticateWithDiscordUser->interact(
             new AuthenticateWithDiscordUserRequest($discordUser)
         )->getUser();
-        Auth::loginUsingId($user->getId());
+
+        $userEloquent = Auth::loginUsingId($user->getId());
+        $userEloquent->refreshToken();
+
+        return redirect(route('index'));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
 
         return redirect(route('index'));
     }
