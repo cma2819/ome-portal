@@ -44,7 +44,6 @@ class Top extends Controller
             $request->session()->put('discord_state', $buildResult->getState());
             $viewData['discord_oauth_url'] = $buildResult->getOauthUrl();
         } else {
-            /** @var User */
             $user = Auth::user();
             $bearer = $user->api_token;
 

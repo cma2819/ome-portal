@@ -7,20 +7,23 @@ use Ome\Twitter\Entities\TwitterMedia;
 
 class TwitterMediaResponse implements JsonSerializable
 {
+    private array $json;
+
     private TwitterMedia $media;
 
     public function __construct(
         TwitterMedia $media
     ) {
-        $this->media = $media;
+        $this->json = [
+            'id' => $media->getId(),
+            'mediaUrl' => $media->getMediaUrl(),
+            'type' => $media->getType()->value()
+        ];
+        ;
     }
 
     public function jsonSerialize()
     {
-        return [
-            'id' => $this->media->getId(),
-            'mediaUrl' => $this->media->getMediaUrl(),
-            'type' => $this->media->getType()->value()
-        ];
+        return $this->json;
     }
 }

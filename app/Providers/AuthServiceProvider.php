@@ -25,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('access-to-admin', 'App\Policies\DomainPermissionPolicy@hasPermissionToAdmin');
+        Gate::define('access-to-twitter', 'App\Policies\DomainPermissionPolicy@hasPermissionToTwitter');
     }
 }

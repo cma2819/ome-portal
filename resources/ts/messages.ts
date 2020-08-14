@@ -4,9 +4,14 @@ export const messages: LocaleMessages = {
     ja: {
       layout: {
         actions: {
+          top: 'トップ',
+
           login: 'ログイン',
           menu: 'メニュー',
-          logout: 'ログアウト'
+          logout: 'ログアウト',
+
+          admin: '管理画面',
+          twitter: 'Twitterクライアント',
         }
       },
       twitter: {

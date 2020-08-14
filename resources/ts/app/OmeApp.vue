@@ -5,13 +5,15 @@
       color="primary"
       dark
     >
-      <v-toolbar-title>OME Portal</v-toolbar-title>
+      <v-toolbar-title>
+        OME Portal
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <template v-if="bearer">
-        <auth-user-label></auth-user-label>
-        <authorized-menu></authorized-menu>
+        <auth-user-label :user="user"></auth-user-label>
+        <authorized-menu :permissions="user.permissions"></authorized-menu>
       </template>
       <auth-login-button
         v-else
@@ -38,6 +40,7 @@ import AuthorizedMenu from '../components/auth/AuthorizedMenuComponent.vue';
 import AuthUserLabel from '../components/auth/AuthUserLabelComponent.vue';
 
 import { apiModule } from '../modules/api';
+import { User } from '../lib/models/auth';
 
 @Component({
   components: {
@@ -54,10 +57,18 @@ export default class TwitterApp extends Vue {
   @Prop(String)
   readonly loginUrl!: string;
 
-  created(): void {
+  user: User|null = null;
+
+  async created(): Promise<void> {
     apiModule.updateHost(this.apiHost);
     if (this.bearer) {
       apiModule.updateBearerToken(this.bearer);
+
+      try {
+        this.user = await apiModule.getAuthMe();
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 }

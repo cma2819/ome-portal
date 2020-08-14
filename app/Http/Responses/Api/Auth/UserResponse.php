@@ -4,25 +4,37 @@ namespace App\Http\Responses\Api\Auth;
 
 use JsonSerializable;
 use Ome\Auth\Entities\User;
+use Ome\Permission\Entities\RolePermission;
 
 class UserResponse implements JsonSerializable
 {
-    private User $user;
+    private array $json;
 
     public function __construct(
-        User $user
+        User $user,
+        array $rolePermissions
     ) {
-        $this->user = $user;
+        $allowed = [];
+        foreach ($rolePermissions as $rolePermission) {
+            foreach ($rolePermission->getAllowed() as $allowedDomain) {
+                $allowed[] = $allowedDomain->value();
+            }
+        }
+
+        array_unique($allowed);
+
+        $this->json = [
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'discord' => [
+                'id' => $user->getDiscordId()
+            ],
+            'permissions' => $allowed
+        ];
     }
 
     public function jsonSerialize(): array
     {
-        return [
-            'id' => $this->user->getId(),
-            'username' => $this->user->getUsername(),
-            'discord' => [
-                'id' => $this->user->getDiscordId()
-            ]
-        ];
+        return $this->json;
     }
 }

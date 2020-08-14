@@ -7,8 +7,8 @@ namespace Ome\Permission\Interfaces\UseCases\ListRolePermission;
  */
 interface ListRolePermissionUseCase
 {
-	/**
-	 * List Role Permission.
-	 */
-	public function interact(): ListRolePermissionResponse;
+    /**
+     * List Role Permission.
+     */
+    public function interact(): ListRolePermissionResponse;
 }

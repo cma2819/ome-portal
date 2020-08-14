@@ -8,27 +8,27 @@ use Ome\Twitter\Interfaces\Dto\TweetDto;
 
 class TweetResponse implements JsonSerializable
 {
-    private TweetDto $tweetDto;
+    private array $json;
 
     public function __construct(TweetDto $tweetDto)
     {
-        $this->tweetDto = $tweetDto;
-    }
-
-    public function jsonSerialize()
-    {
-        $tweet = $this->tweetDto->getTweet();
-        $medias = $this->tweetDto->getMedias();
+        $tweet = $tweetDto->getTweet();
+        $medias = $tweetDto->getMedias();
         $mediasJson = [];
         foreach ($medias as $media) {
             $mediasJson[] = (new TwitterMediaResponse($media))->jsonSerialize();
         }
 
-        return [
+        $this->json = [
             'id' => $tweet->getId(),
             'text' => $tweet->getText(),
             'medias' => $mediasJson,
             'createdAt' => Carbon::make($tweet->getCreatedAt())->toISOString()
         ];
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->json;
     }
 }

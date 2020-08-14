@@ -17,8 +17,6 @@ class AppAuthenticatedUserQuery implements AuthenticatedUserQuery
             throw new AuthenticationFailedException('Not authenticated.');
         }
 
-        $user->refreshToken();
-        $user->save();
         return User::createRegisteredUser($user->id, $user->name, $user->discord->discord_id);
     }
 }

@@ -16,5 +16,9 @@ class DiscordRolePermissionSeeder extends Seeder
             'discord_role_id' => '665123492915707914',
             'allowed_domain' => 'admin'
         ]);
+        DB::table('discord_role_permissions')->insert([
+            'discord_role_id' => '665123492915707914',
+            'allowed_domain' => 'twitter'
+        ]);
     }
 }

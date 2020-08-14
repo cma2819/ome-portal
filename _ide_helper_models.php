@@ -12,6 +12,27 @@
 
 namespace App\Eloquents{
 /**
+ * App\Eloquents\DiscordRolePermission
+ *
+ * @property int $id
+ * @property string $discord_role_id
+ * @property string $allowed_domain
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission whereAllowedDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission whereDiscordRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscordRolePermission whereUpdatedAt($value)
+ */
+	class DiscordRolePermission extends \Eloquent {}
+}
+
+namespace App\Eloquents{
+/**
  * App\Eloquents\User
  *
  * @property int $id

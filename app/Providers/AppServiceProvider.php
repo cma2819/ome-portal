@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Api\DiscordApiClient;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use mpyw\Cowitter\Client;
@@ -22,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
                 config('services.twitter.access.token'),
                 config('services.twitter.access.secret')
             ]);
+        });
+        $this->app->bind(DiscordApiClient::class, function (Application $app) {
+            return new DiscordApiClient(
+                config('services.discord.api_url'),
+                config('services.discord.bot_token')
+            );
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Twitter extends Controller
 {
@@ -15,6 +16,11 @@ class Twitter extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('twitter.index');
+        /** @var User */
+        $user = Auth::user();
+        $bearer = $user->api_token;
+
+        $viewData['bearer'] = $bearer;
+        return view('twitter.index', $viewData);
     }
 }

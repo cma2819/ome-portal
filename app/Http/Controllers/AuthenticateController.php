@@ -38,6 +38,7 @@ class AuthenticateController extends Controller
 
         $userEloquent = Auth::loginUsingId($user->getId());
         $userEloquent->refreshToken();
+        $userEloquent->save();
 
         return redirect(route('index'));
     }

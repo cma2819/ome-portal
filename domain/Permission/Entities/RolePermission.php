@@ -16,13 +16,26 @@ class RolePermission
         string $id,
         array $allowed
     ) {
+        $allowedDomain = [];
         foreach ($allowed as $domain) {
-            if (!($domain instanceof Domain)) {
-                throw new UnmatchedContextException(self::class, 'allowed domain name is not matched.');
+            if ($domain instanceof Domain) {
+                $allowedDomain[] = $domain;
+                continue;
+            }
+
+            switch ($domain) {
+                case Domain::twitter()->value():
+                    $allowedDomain[] = Domain::twitter();
+                    break;
+                case Domain::admin()->value():
+                    $allowedDomain[] = Domain::admin();
+                    break;
+                default:
+                    throw new UnmatchedContextException(self::class, 'allowed domain name is not matched.');
             }
         }
         $this->id = $id;
-        $this->allowed = $allowed;
+        $this->allowed = $allowedDomain;
     }
 
     /**

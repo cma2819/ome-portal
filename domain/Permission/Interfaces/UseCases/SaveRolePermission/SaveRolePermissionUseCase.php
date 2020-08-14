@@ -7,8 +7,8 @@ namespace Ome\Permission\Interfaces\UseCases\SaveRolePermission;
  */
 interface SaveRolePermissionUseCase
 {
-	/**
-	 * Save Role Permission.
-	 */
-	public function interact(SaveRolePermissionRequest $request): SaveRolePermissionResponse;
+    /**
+     * Save Role Permission.
+     */
+    public function interact(SaveRolePermissionRequest $request): SaveRolePermissionResponse;
 }
