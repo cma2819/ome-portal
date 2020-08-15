@@ -5,6 +5,7 @@ namespace App\Domain\Auth\Commands;
 use App\Eloquents\User as EloquentsUser;
 use App\Eloquents\UserDiscord;
 use Illuminate\Support\Facades\DB;
+use Log;
 use Ome\Auth\Entities\User;
 use Ome\Auth\Interfaces\Commands\PersistUserCommand;
 
@@ -28,6 +29,7 @@ class PersistUserEloquentCommand implements PersistUserCommand
                 $userDiscord->discord_id
             );
         });
+        Log::debug('Persist user has ID:' . $persistUser->getId());
 
         return $persistUser;
     }

@@ -25,6 +25,19 @@ export const messages: LocaleMessages = {
           update: '更新',
           delete: '削除',
         }
+      },
+      admin: {
+        tabs: {
+          role: '権限管理',
+        },
+        labels: {
+          twitter: 'Twitter運用',
+          admin: '管理者',
+        },
+        descriptions: {
+          twitter: 'OMEアカウントからのTwitter投稿を担当します。',
+          admin: 'OME Portalの操作権限を管理を担当します。'
+        }
       }
     }
 }

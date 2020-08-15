@@ -51,12 +51,12 @@ export class ApiClient extends VuexModule {
 
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected async put(payload: { endpoint: string, params: any }): Promise<any> {
+  protected async put(payload: { endpoint: string, id: string, params: any }): Promise<any> {
     const headers = this.bearer ? {
       Authorization: `Bearer ${this.bearer}`
     } : null;
     try {
-      const response = await axios.put(`${this.host}/${payload.endpoint}`, payload.params, { headers });
+      const response = await axios.put(`${this.host}/${payload.endpoint}/${payload.id}`, payload.params, { headers });
       return response.data;
     } catch (e) {
       throw this.handleError(e);

@@ -1,23 +1,22 @@
 @extends('layout')
 
 @section('head')
-<link href="{{ asset('index.css') }}" rel="stylesheet">
+<link href="{{ asset('admin.css') }}" rel="stylesheet">
 @endsection
 
 @section('title')
-    Top
+    Admin
 @endsection
 
 @section('content')
     <ome-app
         api-host="{{ config('app.api_url') }}"
         bearer="{{ $bearer }}"
-        login-url="{{ $discord_oauth_url }}"
     >
-        <top-app></top-app>
+        <admin-app></admin-app>
     </ome-app>
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('index.js') }}"></script>
+    <script src="{{ asset('admin.js') }}"></script>
 @endsection

@@ -11,14 +11,19 @@
 
       <v-spacer></v-spacer>
 
-      <template v-if="bearer">
+      <template v-if="bearer && user">
         <auth-user-label :user="user"></auth-user-label>
         <authorized-menu :permissions="user.permissions"></authorized-menu>
       </template>
       <auth-login-button
-        v-else
+        v-else-if="!bearer"
         :login-url="loginUrl"
       ></auth-login-button>
+      <v-progress-circular
+        v-else
+        indeterminate
+        color="white"
+      ></v-progress-circular>
     </v-app-bar>
 
     <v-main>
@@ -29,6 +34,31 @@
       app
     >
       <span class="white--text">&copy; {{ new Date().getFullYear() }} Online Marathon Eventers</span>
+      <v-spacer></v-spacer>
+      <v-btn
+        icon
+        color="white"
+        target="_blank"
+        href="https://github.com/cma2819/ome-portal"
+      >
+        <v-icon>fab fa-github</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        color="white"
+        target="_blank"
+        href="https://twitter.com/ome_speedrun"
+      >
+        <v-icon>fab fa-twitter</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        color="white"
+        target="_blank"
+        href="https://twitch.tv/ome_speedrun"
+      >
+        <v-icon>fab fa-twitch</v-icon>
+      </v-btn>
     </v-footer>
   </v-app>
 </template>
@@ -49,7 +79,7 @@ import { User } from '../lib/models/auth';
     AuthUserLabel,
   }
 })
-export default class TwitterApp extends Vue {
+export default class OmeApp extends Vue {
   @Prop(String)
   readonly apiHost!: string;
   @Prop(String)

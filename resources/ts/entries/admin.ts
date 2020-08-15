@@ -6,14 +6,13 @@ import store from '../plugins/store';
 import router from '../plugins/router';
 import i18n from '../plugins/i18n';
 import App from '../app/OmeApp.vue';
-import TopApp from '../app/TopApp.vue';
+import AdminApp from '../app/AdminApp.vue';
 
 import 'vuetify/dist/vuetify.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-
 Vue.component('ome-app', App);
-Vue.component('top-app', TopApp);
+Vue.component('admin-app', AdminApp);
 
 new Vue({
   vuetify,

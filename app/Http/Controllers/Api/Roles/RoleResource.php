@@ -54,7 +54,7 @@ class RoleResource extends Controller
     ) {
         try {
             $saveRolePermission->interact(new SaveRolePermissionRequest($id, $request->permissions));
-        } catch(HttpStatusThrowable $e) {
+        } catch (HttpStatusThrowable $e) {
             abort($e->getStatusCode());
         }
 

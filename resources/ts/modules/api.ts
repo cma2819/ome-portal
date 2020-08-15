@@ -3,6 +3,7 @@ import store from '../plugins/store';
 import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
 import { User } from '../lib/models/auth';
+import { Role } from 'lib/models/role';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -61,6 +62,24 @@ class Api extends ApiClient {
   public async getAuthMe(): Promise<User> {
     const response = await this.get('auth/me');
     return response;
+  }
+
+  @Action
+  public async getRoles(): Promise<Array<Role>> {
+    const response = await this.get('roles');
+    return response;
+  }
+
+  @Action
+  public async putRole(payload: {id: string; permissions: Array<string>}): Promise<boolean> {
+    await this.put({
+      endpoint: 'roles',
+      id: payload.id,
+      params: {
+        permissions: payload.permissions
+      }
+    });
+    return true;
   }
 }
 
