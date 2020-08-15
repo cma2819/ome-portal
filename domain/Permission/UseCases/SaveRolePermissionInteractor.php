@@ -7,7 +7,6 @@ use Ome\Permission\Interfaces\Commands\PersistRolePermissionCommand;
 use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionRequest;
 use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionResponse;
 use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionUseCase;
-use Ome\Permission\Values\Domain;
 
 class SaveRolePermissionInteractor implements SaveRolePermissionUseCase
 {
@@ -21,23 +20,9 @@ class SaveRolePermissionInteractor implements SaveRolePermissionUseCase
 
     public function interact(SaveRolePermissionRequest $request): SaveRolePermissionResponse
     {
-        $allowedDomain = [];
-        foreach ($request->getAllowed() as $allowed) {
-            switch ($allowed) {
-                case 'twitter':
-                    $allowedDomain[] = Domain::twitter();
-                    break;
-                case 'admin':
-                    $allowedDomain[] = Domain::admin();
-                    break;
-                default:
-                    // Do Nothing
-            }
-        }
-
         $rolePermission = RolePermission::create(
             $request->getId(),
-            $allowedDomain
+            $request->getAllowed()
         );
 
         return new SaveRolePermissionResponse($this->persistRolePermission->execute($rolePermission));

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Api\Roles;
 
+use App\Exceptions\HttpStatusThrowable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Roles\RoleUpdateRequest;
 use App\Http\Responses\Api\Roles\RoleResponse;
 use Illuminate\Http\Request;
 use Ome\Permission\Interfaces\UseCases\ListRolePermission\ListRolePermissionUseCase;
+use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionRequest;
+use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionUseCase;
 
 class RoleResource extends Controller
 {
@@ -20,7 +24,7 @@ class RoleResource extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return RoleResponse[]
      */
     public function index()
     {
@@ -37,37 +41,24 @@ class RoleResource extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  RoleUpdateRequest $request
+     * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(
+        RoleUpdateRequest $request,
+        string $id,
+        SaveRolePermissionUseCase $saveRolePermission
+    ) {
+        try {
+            $saveRolePermission->interact(new SaveRolePermissionRequest($id, $request->permissions));
+        } catch(HttpStatusThrowable $e) {
+            abort($e->getStatusCode());
+        }
+
+        return response()->noContent();
     }
 
     /**

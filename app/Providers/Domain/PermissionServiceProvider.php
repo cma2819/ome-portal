@@ -34,6 +34,10 @@ class PermissionServiceProvider extends ServiceProvider
         //////////////
         // Commands //
         //////////////
+        $this->app->bind(
+            \Ome\Permission\Interfaces\Commands\PersistRolePermissionCommand::class,
+            \App\Domain\Permission\Commands\PersistRolePermission::class
+        );
 
         //////////////
         // Queries  //
@@ -65,26 +69,12 @@ class PermissionServiceProvider extends ServiceProvider
             });
 
             $this->app->bind(
-                \Ome\Permission\Interfaces\Commands\PersistRolePermissionCommand::class,
-                \Ome\Permission\Commands\InmemoryPersistRolePermission::class
-            );
-            $this->app->bind(
-                \Ome\Permission\Interfaces\Queries\ListPermissionsQuery::class,
-                \Ome\Permission\Queries\InmemoryListPermissions::class
-            );
-            $this->app->bind(
                 \Ome\Permission\Interfaces\Queries\ListRolesQuery::class,
                 \Tests\Mocks\Domain\Permission\Queries\MockListRolesQuery::class
             );
             $this->app->bind(
-                \Ome\Permission\Interfaces\Queries\GetPermissionForRoleQuery::class,
-                function (Application $app) {
-                    return new \Ome\Permission\Queries\InmemoryGetPermissionForRole($app->make('InmemoryPermissionStore'));
-                }
-            );
-            $this->app->bind(
                 \Ome\Permission\Interfaces\Queries\GetRolesForUserQuery::class,
-                \Tests\Mocks\DOmain\Permission\Queries\MockGetRolesForUserQuery::class
+                \Tests\Mocks\Domain\Permission\Queries\MockGetRolesForUserQuery::class
             );
         }
     }

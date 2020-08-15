@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api\Twitter\Tweets;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Ome\Twitter\Entities\PartialTweet;
 use Ome\Twitter\Entities\PartialTwitterMedia;
 use Ome\Twitter\Values\TwitterMediaType;
@@ -10,9 +11,13 @@ use Tests\TestCase;
 
 class TweetIndexTest extends TestCase
 {
+    use RefreshDatabase;
+    use AuthTwitterUser;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setUpTwitterUser();
 
         // Tweets
         $this->app->bind('InmemoryTweetStore', function ($app) {
@@ -58,7 +63,7 @@ class TweetIndexTest extends TestCase
     /** @test */
     public function testRequestSuccess()
     {
-        $response = $this->getJson(route('api.v1.twitter.tweets.index'));
+        $response = $this->actingAs($this->twitterUser(), 'api')->getJson(route('api.v1.twitter.tweets.index'));
 
         $response->assertSuccessful();
         $response->assertJson([

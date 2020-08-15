@@ -18,6 +18,8 @@ class CreateDiscordRolePermissionsTable extends Migration
             $table->string('discord_role_id', 64);
             $table->string('allowed_domain');
             $table->timestamps();
+
+            $table->unique(['discord_role_id', 'allowed_domain']);
         });
     }
 

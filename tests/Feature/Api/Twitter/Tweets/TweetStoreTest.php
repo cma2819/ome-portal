@@ -11,9 +11,13 @@ use Tests\TestCase;
 
 class TweetStoreTest extends TestCase
 {
+    use RefreshDatabase;
+    use AuthTwitterUser;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->setUpTwitterUser();
 
         $this->app->bind('InmemoryTwitterMediaStore', function ($app) {
             return [
@@ -41,7 +45,7 @@ class TweetStoreTest extends TestCase
             'text' => 'This is test tweet!',
             'mediaIds' => []
         ];
-        $response = $this->postJson(route('api.v1.twitter.tweets.store'), $postData);
+        $response = $this->actingAs($this->twitterUser(), 'api')->postJson(route('api.v1.twitter.tweets.store'), $postData);
 
         $response->assertSuccessful();
         $response->assertJson([
@@ -62,7 +66,7 @@ class TweetStoreTest extends TestCase
             'text' => 'This is test tweet!',
             'mediaIds' => ['1', '2']
         ];
-        $response = $this->postJson(route('api.v1.twitter.tweets.store'), $postData);
+        $response = $this->actingAs($this->twitterUser(), 'api')->postJson(route('api.v1.twitter.tweets.store'), $postData);
 
         $response->assertSuccessful();
         $response->assertJson([
@@ -96,7 +100,7 @@ class TweetStoreTest extends TestCase
             'text' => 'This is test tweet!',
             'mediaIds' => ['1', '2']
         ];
-        $response = $this->postJson(route('api.v1.twitter.tweets.store'), $postData);
+        $response = $this->actingAs($this->twitterUser(), 'api')->postJson(route('api.v1.twitter.tweets.store'), $postData);
         $response->assertStatus(422);
     }
 
@@ -107,7 +111,7 @@ class TweetStoreTest extends TestCase
             'text' => '',
             'mediaIds' => []
         ];
-        $response = $this->postJson(route('api.v1.twitter.tweets.store'), $postData);
+        $response = $this->actingAs($this->twitterUser(), 'api')->postJson(route('api.v1.twitter.tweets.store'), $postData);
         $response->assertStatus(422);
     }
 }

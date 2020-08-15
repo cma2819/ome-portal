@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api\Auth;
 
+use App\Eloquents\DiscordRolePermission;
 use App\Eloquents\User;
 use App\Eloquents\UserDiscord;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,6 +30,14 @@ class AuthorizeUserTest extends TestCase
         $userDiscord = new UserDiscord(['discord_id' => '123456789']);
         $userDiscord->user()->associate($user);
         $userDiscord->save();
+        DiscordRolePermission::create([
+            'discord_role_id' => '41771983423143936',
+            'allowed_domain' => 'twitter'
+        ]);
+        DiscordRolePermission::create([
+            'discord_role_id' => '41771983423143936',
+            'allowed_domain' => 'admin'
+        ]);
 
         $response = $this->actingAs($user, 'api')->getJson(route('api.v1.auth.me'));
 
