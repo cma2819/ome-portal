@@ -62,6 +62,11 @@ return [
             'level' => 'critical',
         ],
 
+        'heroku' => [
+            'driver' => 'errorlog',
+            'level' => 'debug'
+        ],
+
         'papertrail' => [
             'driver' => 'monolog',
             'level' => 'debug',
