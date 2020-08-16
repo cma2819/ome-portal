@@ -2,6 +2,7 @@
     "private": true,
     "scripts": {
         "autofix": "eslint --fix --ext .ts,.vue resources/ts",
+        "build": "npm run production",
         "clean": "trash .cache",
         "db:up": "docker-compose -f ./deploy/docker-compose.yaml up -d --build",
         "db:down": "docker-compose -f ./deploy/docker-compose.yaml down",
