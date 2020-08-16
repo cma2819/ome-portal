@@ -16,7 +16,7 @@ class CreateDiscordRolePermissionsTable extends Migration
         Schema::create('discord_role_permissions', function (Blueprint $table) {
             $table->id();
             $table->string('discord_role_id', 64);
-            $table->string('allowed_domain');
+            $table->string('allowed_domain', 32);
             $table->timestamps();
 
             $table->unique(['discord_role_id', 'allowed_domain'], 'roles_unique');
