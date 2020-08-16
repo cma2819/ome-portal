@@ -26,7 +26,7 @@
             font-family: 'Kosugi', sans-serif;
         }
     </style>
-    <title>{{ config('APP_NAME') }} - @yield('title')</title>
+    <title>{{ config('name') }} - @yield('title')</title>
 </head>
 <body>
     <div id="app" class="container">
