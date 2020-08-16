@@ -7,7 +7,6 @@ use App\Exceptions\Twitter\TooLargeUploadedFileException;
 use CURLFile;
 use mpyw\Cowitter\Client;
 use mpyw\Cowitter\HttpException;
-use mpyw\Cowitter\Response;
 use Ome\Twitter\Entities\TwitterMedia;
 use Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand;
 
@@ -36,6 +35,7 @@ class TwitterPersistTwitterMediaCommand implements PersistTwitterMediaCommand
             if ($e->getStatusCode() === 413) {
                 throw new TooLargeUploadedFileException($e->getMessage());
             }
+            throw $e;
         }
         return $response->media_id_string;
     }
