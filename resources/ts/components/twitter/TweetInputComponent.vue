@@ -63,7 +63,7 @@ import { ApiError } from '../../lib/models/errors';
 
 @Component
 export default class TweetInputComponent extends Vue {
-  hashtag = 'PGRF'
+  hashtag = 'OME'
   content = '';
   file: File|null = null;
   medias: Array<{
