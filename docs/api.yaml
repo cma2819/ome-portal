@@ -7,9 +7,9 @@ servers:
     description: Local mock server
   - url: http://localhost:8000/api/v1
     description: Local development server
-  - url: https://marathon.online/api/v1
+  - url: https://portal.rtamarathon.online/api/v1
     description: Production server
-  - url: https://dev.marathon.online/api/v1
+  - url: https://dev.porta.rtamarathon.online/api/v1
     description: Development server
 paths:
   /auth/me:
