@@ -154,6 +154,120 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /events:
+    get:
+      summary: Get events related to us
+      tags:
+        - Events
+      responses:
+        '200':
+          description: Events data related to us
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+    post:
+      summary: Import event from Oengus
+      tags:
+        - Events
+      requestBody:
+        description: Oengus marathon ID
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 'rtamarathon1'
+                relateType:
+                  $ref: '#/components/schemas/RelateType'
+      responses:
+        '200':
+          description: Imported event data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+  /events/{id}:
+    get:
+      summary: Get event related to us
+      tags:
+        - Events
+      parameters:
+        - name: 'id'
+          in: path
+          description: Event ID want to get
+          schema:
+            type: string
+            example: 'rtamarathon1'
+          required: true
+      responses:
+        '200':
+          description: Event data has received ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: Event was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update related type
+      tags:
+        - Events
+      parameters:
+        - name: 'id'
+          in: path
+          description: Event ID want to update
+          schema:
+            type: string
+            example: 'rtamarathon1'
+          required: true
+      requestBody:
+        description: Related type
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                relateType:
+                  $ref: '#/components/schemas/RelateType'
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Event was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Detach related event from us
+      tags:
+        - Events
+      parameters:
+        - name: 'id'
+          in: path
+          description: Event ID want to detach
+          schema:
+            type: string
+            example: 'rtamarathon1'
+          required: true
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Event was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     User:
@@ -248,6 +362,33 @@ components:
           example: 'WE DEM BOYZZ!!!!!!'
         permissions:
           $ref: '#/components/schemas/Permissions'
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'rtamarathon1'
+        name:
+          type: string
+          example: 'RTA marathon First'
+        startDate:
+          type: string
+          format: date-time
+          example: '2020-08-27T10:00:00Z'
+        endDate:
+          type: string
+          format: date-time
+          example: '2020-08-28T22:00:00Z'
+        relateType:
+          $ref: '#/components/schemas/RelateType'
+        slug:
+          type: string
+          example: 'RM1'
+    RelateType:
+      type: string
+      enum:
+        - 'moderate'
+        - 'assist'
     Error:
       type: string
       example: The message about error.
