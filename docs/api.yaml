@@ -9,7 +9,7 @@ servers:
     description: Local development server
   - url: https://portal.rtamarathon.online/api/v1
     description: Production server
-  - url: https://dev.porta.rtamarathon.online/api/v1
+  - url: https://dev.portal.rtamarathon.online/api/v1
     description: Development server
 paths:
   /auth/me:
