@@ -8,11 +8,13 @@ use App\Eloquents\UserDiscord;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Values\Domain;
+use Tests\AssertJsonArray;
 use Tests\TestCase;
 
 class AuthorizeUserTest extends TestCase
 {
     use RefreshDatabase;
+    use AssertJsonArray;
 
     /** @test */
     public function testAuthenticateUser()
@@ -48,10 +50,8 @@ class AuthorizeUserTest extends TestCase
             'discord' => [
                 'id' => $userDiscord->discord_id,
             ],
-            'permissions' => [
-                'twitter', 'admin'
-            ],
         ]);
+        $this->assertJsonArray($response->json(), 'permissions', ['twitter', 'admin']);
     }
 
 }

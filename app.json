@@ -1,0 +1,34 @@
+{
+    "buildpacks": [
+        {"url": "heroku/php"}
+    ],
+    "environments": {
+        "test": {
+            "scripts": {
+                "test-setup": "composer install",
+                "test": "composer test"
+            },
+            "addons": [
+                "heroku-postgresql:in-dyno",
+                "heroku-redis:in-dyno"
+            ],
+            "env": {
+                "APP_ENV": "testing",
+                "APP_KEY": "base64:TiSVW8pYGtNbxPxt2OfyrPG62trJX57PstEmThWoHBY=",
+                "APP_DEBUG": "true",
+                "DB_CONNECTION": "pgsql",
+                "TWITTER_SCREEN_NAME": "twitter integration will be mocked",
+                "TWITTER_CONSUMER_KEY": "twitter integration will be mocked",
+                "TWITTER_CONSUMER_SECRET": "twitter integration will be mocked",
+                "TWITTER_ACCESS_TOKEN": "twitter integration will be mocked",
+                "TWITTER_ACCCESS_SECRET": "twitter integration will be mocked",
+                "DISCORD_API_URL": "discord integration will be mocked",
+                "DISCORD_CLIENT_ID": "discord integration will be mocked",
+                "DISCORD_CLIENT_SECRET": "discord integration will be mocked",
+                "DISCORD_REDIRECT_URL": "discord integration will be mocked",
+                "CACHE_DRIVER": "redis",
+                "SESSION_DRIVER": "redis"
+            }
+        }
+    }
+}
