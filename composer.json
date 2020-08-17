@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4",
         "ext-redis": "*",
+        "ext-gd": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.0",
