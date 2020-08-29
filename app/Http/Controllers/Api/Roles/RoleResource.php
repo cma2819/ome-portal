@@ -60,15 +60,4 @@ class RoleResource extends Controller
 
         return response()->noContent();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
