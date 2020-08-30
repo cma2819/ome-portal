@@ -184,6 +184,9 @@ paths:
                   example: 'rtamarathon1'
                 relateType:
                   $ref: '#/components/schemas/RelateType'
+                slug:
+                  type: string
+                  example: 'RM1'
       responses:
         '200':
           description: Imported event data
@@ -238,6 +241,9 @@ paths:
               properties:
                 relateType:
                   $ref: '#/components/schemas/RelateType'
+                slug:
+                  type: string
+                  example: 'RM1'
       responses:
         '204':
           description: Success
@@ -371,11 +377,11 @@ components:
         name:
           type: string
           example: 'RTA marathon First'
-        startDate:
+        startAt:
           type: string
           format: date-time
           example: '2020-08-27T10:00:00Z'
-        endDate:
+        endAt:
           type: string
           format: date-time
           example: '2020-08-28T22:00:00Z'
@@ -388,7 +394,7 @@ components:
       type: string
       enum:
         - 'moderate'
-        - 'assist'
+        - 'support'
     Error:
       type: string
       example: The message about error.
