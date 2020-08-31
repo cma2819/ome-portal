@@ -4,7 +4,7 @@ namespace Ome\Event\Queries;
 
 use Ome\Event\Interfaces\Queries\ListEventQuery;
 
-class InmemoryListEventQuery implements ListEventQuery
+class InmemoryListEvent implements ListEventQuery
 {
     /** @var OmeEventDto[] */
     private array $omeEvents;

@@ -3,9 +3,8 @@
 namespace Tests\Unit\Domain\Event;
 
 use Carbon\Carbon;
-use Ome\Event\Commands\InmemoryPersistEventCommand;
+use Ome\Event\Commands\InmemoryPersistEvent;
 use Ome\Event\Entities\Event;
-use Ome\Event\Entities\OengusMarathon;
 use Ome\Event\Entities\PartialOengusMarathon;
 use Ome\Event\Interfaces\UseCases\SaveOengusEvent\SaveOengusEventRequest;
 use Ome\Event\UseCases\SaveOengusEventInteractor;
@@ -18,7 +17,7 @@ class SaveOengusEventInteractorTest extends TestCase
     /** @test */
     public function testSaveOengusEvent()
     {
-        $inmemoryPersistEvent = new InmemoryPersistEventCommand;
+        $inmemoryPersistEvent = new InmemoryPersistEvent;
 
         $marathon = PartialOengusMarathon::createPartial(
             'rtamarathon',

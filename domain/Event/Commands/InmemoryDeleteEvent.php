@@ -5,7 +5,7 @@ namespace Ome\Event\Commands;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Commands\DeleteEventCommand;
 
-class InmemoryDeleteEventCommand implements DeleteEventCommand
+class InmemoryDeleteEvent implements DeleteEventCommand
 {
     /** @var Event[] */
     private array $events;

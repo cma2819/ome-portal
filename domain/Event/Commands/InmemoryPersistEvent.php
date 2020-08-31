@@ -5,7 +5,7 @@ namespace Ome\Event\Commands;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Commands\PersistEventCommand;
 
-class InmemoryPersistEventCommand implements PersistEventCommand
+class InmemoryPersistEvent implements PersistEventCommand
 {
     /** @var Event[] */
     private array $events = [];
