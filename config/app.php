@@ -179,6 +179,7 @@ return [
          * Domain Service
          */
         App\Providers\Domain\AuthServiceProvider::class,
+        App\Providers\Domain\EventServiceProvider::class,
         App\Providers\Domain\PermissionServiceProvider::class,
         App\Providers\Domain\TwitterServiceProvider::class,
     ],

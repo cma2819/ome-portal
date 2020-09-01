@@ -19,7 +19,6 @@ class TwitterMediaResponse implements JsonSerializable
             'mediaUrl' => $media->getMediaUrl(),
             'type' => $media->getType()->value()
         ];
-        ;
     }
 
     public function jsonSerialize()

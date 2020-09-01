@@ -2,7 +2,7 @@
 
 namespace App\Domain\Permission\Queries;
 
-use App\Api\DiscordApiClient;
+use App\Api\Discord\DiscordApiClient;
 use App\Eloquents\User;
 use Ome\Permission\Entities\Role;
 use Ome\Permission\Interfaces\Queries\GetRolesForUserQuery;
@@ -14,6 +14,7 @@ class GetDiscordRolesForUser implements GetRolesForUserQuery
     private const DISCORD_GET_ROLES_URL = '/guilds/{guild.id}/roles';
 
     protected DiscordApiClient $discordApiClient;
+
     public function __construct(
         DiscordApiClient $discordApiClient
     ) {

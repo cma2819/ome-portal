@@ -8,6 +8,7 @@ use Ome\Event\Interfaces\Queries\OengusMarathonQuery;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventRequest;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventResponse;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventUseCase;
+use Ome\Exceptions\EntityNotFoundException;
 
 class ExtractOengusEventInteractor implements ExtractOengusEventUseCase
 {
@@ -26,6 +27,10 @@ class ExtractOengusEventInteractor implements ExtractOengusEventUseCase
     public function interact(ExtractOengusEventRequest $request): ExtractOengusEventResponse
     {
         $omeEvent = $this->findEventQuery->fetch($request->getId());
+        if (is_null($omeEvent)) {
+            throw new EntityNotFoundException(Event::class, ['id' => $request->getId()]);
+        }
+
         $marathon = $this->oengusMarathonQuery->fetch($request->getId());
 
         return new ExtractOengusEventResponse(

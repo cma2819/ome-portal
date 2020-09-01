@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Api;
+namespace App\Api\Discord;
 
-use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -13,12 +12,16 @@ class DiscordApiClient
 
     private string $botToken;
 
+    private int $cacheExpire;
+
     public function __construct(
         string $apiUrl,
-        string $botToken
+        string $botToken,
+        int $cacheExpire
     ) {
         $this->apiUrl = $apiUrl;
         $this->botToken = $botToken;
+        $this->cacheExpire = $cacheExpire;
 
         if (substr($this->apiUrl, -1, 1) === '/') {
             $this->apiUrl = substr($this->apiUrl, 0, -1);
@@ -41,7 +44,7 @@ class DiscordApiClient
         }
 
         $data = json_decode($response->body(), true);
-        Cache::set($cacheKey, $data, 30);
+        Cache::set($cacheKey, $data, $this->cacheExpire);
 
         return $data;
     }

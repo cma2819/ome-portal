@@ -2,7 +2,7 @@
 
 namespace App\Domain\Permission\Queries;
 
-use App\Api\DiscordApiClient;
+use App\Api\Discord\DiscordApiClient;
 use Ome\Permission\Entities\Role;
 use Ome\Permission\Interfaces\Queries\ListRolesQuery;
 

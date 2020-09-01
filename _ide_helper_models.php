@@ -12,6 +12,27 @@
 
 namespace App\Eloquents{
 /**
+ * App\Eloquents\AssociateEvent
+ *
+ * @property string $id
+ * @property string $relate_type
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent whereRelateType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssociateEvent whereUpdatedAt($value)
+ */
+	class AssociateEvent extends \Eloquent {}
+}
+
+namespace App\Eloquents{
+/**
  * App\Eloquents\DiscordRolePermission
  *
  * @property int $id
