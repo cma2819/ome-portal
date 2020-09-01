@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import RoleAdmin from '../components/admin/RoleAdminComponent.vue';
+import RoleAdmin from '../components/admin/role/RoleAdminComponent.vue';
 
 @Component({
   components: {

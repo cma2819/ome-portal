@@ -54,8 +54,8 @@
 
 <script lang="ts">
 import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
-import { Role } from '../../lib/models/role';
-import { apiModule } from '../../modules/api';
+import { Role } from '../../../lib/models/role';
+import { apiModule } from '../../../modules/api';
 
 @Component
 export default class RoleAdminListRowComponent extends Vue {

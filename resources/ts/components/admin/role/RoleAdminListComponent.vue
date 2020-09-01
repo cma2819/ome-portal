@@ -18,8 +18,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import RoleAdminListRow from './RoleAdminListRowComponent.vue';
-import { Role } from '../../lib/models/role';
-import { apiModule } from '../../modules/api';
+import { Role } from '../../../lib/models/role';
+import { apiModule } from '../../../modules/api';
 
 @Component({
   components: {
