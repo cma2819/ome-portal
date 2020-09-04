@@ -33,6 +33,11 @@ class EventUpdateTest extends TestCase
         ]);
 
         $response->assertNoContent();
+        $this->assertDatabaseHas('associate_events', [
+            'id' => 'rtamarathon',
+            'relate_type' => 'support',
+            'slug' => 'RTAM'
+        ]);
     }
 
     /** @test */

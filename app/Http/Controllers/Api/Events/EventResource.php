@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Events\EventCreateRequest;
 use App\Http\Requests\Api\Events\EventUpdateRequest;
 use App\Http\Responses\Api\Events\EventResponse;
+use Carbon\Carbon;
+use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\UseCases\DetachOengusMarathon\DetachOengusMarathonRequest;
 use Ome\Event\Interfaces\UseCases\DetachOengusMarathon\DetachOengusMarathonUseCase;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventRequest;
@@ -28,6 +30,12 @@ class EventResource extends Controller
         ListOengusEventUseCase $listOengusEvent
     ) {
         $events = $listOengusEvent->interact()->getEvents();
+        usort($events, function (Event $a, Event $b) {
+            return Carbon::make($a->getOengusMarathon()->getStartAt())->diffInSeconds(
+                Carbon::make($b->getOengusMarathon()->getStartAt()),
+                false
+            );
+        });
 
         $response = [];
         foreach ($events as $event) {

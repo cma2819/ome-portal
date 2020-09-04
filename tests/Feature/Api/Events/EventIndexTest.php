@@ -37,7 +37,7 @@ class EventIndexTest extends TestCase
             ],
             [
                 'id' => 'rtamarathon2',
-                'relateType' => 'moderate',
+                'relateType' => 'support',
                 'slug' => 'RM2'
             ]
         ]);

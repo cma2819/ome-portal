@@ -4,6 +4,7 @@ import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
 import { User } from '../lib/models/auth';
 import { Role } from 'lib/models/role';
+import { RelateType, Event } from 'lib/models/event';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -78,6 +79,63 @@ class Api extends ApiClient {
       params: {
         permissions: payload.permissions
       }
+    });
+    return true;
+  }
+
+  @Action
+  public async getEvents(): Promise<Array<Event>> {
+    const response = await this.get('events');
+    return response;
+  }
+
+  @Action
+  public async postEvent(payload: {id: string, relateType: RelateType, slug: string}): Promise<Event> {
+    const response = await this.post({
+      endpoint: 'events',
+      params: {
+        id: payload.id,
+        relateType: payload.relateType,
+        slug: payload.slug
+      }
+    });
+
+    return {
+      id: response.id,
+      name: response.name,
+      startAt: new Date(Date.parse(response.startAt)),
+      endAt: new Date(Date.parse(response.endAt)),
+      relateType: response.relateType,
+      slug: response.slug
+    };
+  }
+
+  @Action
+  public async putEvent(payload: {id: string, relateType: RelateType, slug: string}): Promise<Event> {
+    const response = await this.put({
+      endpoint: 'events',
+      id: payload.id,
+      params: {
+        relateType: payload.relateType,
+        slug: payload.slug
+      }
+    });
+
+    return {
+      id: response.id,
+      name: response.name,
+      startAt: new Date(Date.parse(response.startAt)),
+      endAt: new Date(Date.parse(response.endAt)),
+      relateType: response.relateType,
+      slug: response.slug
+    };
+  }
+
+  @Action
+  public async deleteEvent(id: string): Promise<boolean> {
+    await this.delete({
+      endpoint: 'events',
+      id
     });
     return true;
   }

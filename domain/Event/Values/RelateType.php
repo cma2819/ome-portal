@@ -31,7 +31,7 @@ class RelateType implements ValueObject
             case self::moderate()->value():
                 return self::moderate();
             case self::support()->value():
-                return self::moderate();
+                return self::support();
             default:
                 throw new UnmatchedContextException(self::class, 'Relate type is not matched.');
         }
