@@ -58,9 +58,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "compile": [
-            "php artisan migrate"
-        ],
         "fix": [
             "php-cs-fixer fix"
         ],
