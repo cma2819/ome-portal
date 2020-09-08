@@ -139,4 +139,27 @@ class EventResource extends Controller
         }
         return response()->noContent();
     }
+
+    public function showLatest(
+        ListOengusEventUseCase $listOengusEvent
+    ) {
+        $events = $listOengusEvent->interact()->getEvents();
+
+        /** @var Event */
+        $latest = null;
+        foreach ($events as $event) {
+            if (
+                is_null($latest)
+                || $event->getOengusMarathon()->getStartAt() > $latest->getOengusMarathon()->getStartAt()
+            ) {
+                $latest = $event;
+            }
+        }
+
+        if (is_null($latest)) {
+            abort(404);
+        }
+
+        return new EventResponse($latest);
+    }
 }

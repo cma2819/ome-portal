@@ -274,6 +274,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /events/latest:
+    get:
+      summary: Get latest event
+      tags:
+        - Events
+      responses:
+        '200':
+          description: Latest event data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: Event was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     User:

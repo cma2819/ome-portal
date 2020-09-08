@@ -4,7 +4,7 @@ import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
 import { User } from '../lib/models/auth';
 import { Role } from 'lib/models/role';
-import { RelateType, Event } from 'lib/models/event';
+import { RelateType, Event, Status } from 'lib/models/event';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -86,7 +86,28 @@ class Api extends ApiClient {
   @Action
   public async getEvents(): Promise<Array<Event>> {
     const response = await this.get('events');
-    return response;
+    return response.map((event: {
+      id: string;
+      name: string;
+      startAt: string;
+      endAt: string;
+      relateType: RelateType;
+      slug: string;
+      submitsOpen: boolean;
+      status: Status
+    }) => {
+
+    return {
+      id: event.id,
+      name: event.name,
+      startAt: new Date(Date.parse(event.startAt)),
+      endAt: new Date(Date.parse(event.endAt)),
+      relateType: event.relateType,
+      slug: event.slug,
+      submitsOpen: event.submitsOpen,
+      status: event.status,
+    };
+    });
   }
 
   @Action
@@ -106,7 +127,9 @@ class Api extends ApiClient {
       startAt: new Date(Date.parse(response.startAt)),
       endAt: new Date(Date.parse(response.endAt)),
       relateType: response.relateType,
-      slug: response.slug
+      slug: response.slug,
+      submitsOpen: response.submitsOpen,
+      status: response.status,
     };
   }
 
@@ -127,7 +150,9 @@ class Api extends ApiClient {
       startAt: new Date(Date.parse(response.startAt)),
       endAt: new Date(Date.parse(response.endAt)),
       relateType: response.relateType,
-      slug: response.slug
+      slug: response.slug,
+      submitsOpen: response.submitsOpen,
+      status: response.status,
     };
   }
 
@@ -138,6 +163,21 @@ class Api extends ApiClient {
       id
     });
     return true;
+  }
+
+  @Action
+  public async getLatestEvent(): Promise<Event> {
+    const response = await this.get('events/latest');
+    return {
+      id: response.id,
+      name: response.name,
+      startAt: new Date(Date.parse(response.startAt)),
+      endAt: new Date(Date.parse(response.endAt)),
+      relateType: response.relateType,
+      slug: response.slug,
+      submitsOpen: response.submitsOpen,
+      status: response.status,
+    };
   }
 }
 
