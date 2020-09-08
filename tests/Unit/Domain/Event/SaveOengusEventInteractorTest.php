@@ -8,6 +8,7 @@ use Ome\Event\Entities\Event;
 use Ome\Event\Entities\PartialOengusMarathon;
 use Ome\Event\Interfaces\UseCases\SaveOengusEvent\SaveOengusEventRequest;
 use Ome\Event\UseCases\SaveOengusEventInteractor;
+use Ome\Event\Values\MarathonStatus;
 use Ome\Event\Values\RelateType;
 use Ome\Event\Values\Slug;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +24,9 @@ class SaveOengusEventInteractorTest extends TestCase
             'rtamarathon',
             'RTA Marathon',
             Carbon::create(2020, 1, 1),
-            Carbon::create(2020, 1, 2, 12, 34)
+            Carbon::create(2020, 1, 2, 12, 34),
+            false,
+            MarathonStatus::freshed()
         );
 
         $result = (new SaveOengusEventInteractor($inmemoryPersistEvent))

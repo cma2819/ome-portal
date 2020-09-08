@@ -20,6 +20,8 @@ class EventResponse implements JsonSerializable
             'startAt' => Carbon::make($event->getOengusMarathon()->getStartAt())->toISOString(),
             'endAt' => Carbon::make($event->getOengusMarathon()->getEndAt())->toISOString(),
             'slug' => $event->getSlug()->value(),
+            'submitsOpen' => $event->getOengusMarathon()->getSubmitsOpen(),
+            'status' => $event->getOengusMarathon()->getStatus()->value()
         ];
     }
 

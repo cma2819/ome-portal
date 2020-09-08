@@ -68,6 +68,23 @@ export const messages: LocaleMessages = {
           twitter: 'OMEアカウントからのTwitter投稿を担当します。',
           admin: 'OME Portalの操作権限を管理を担当します。'
         }
+      },
+      top: {
+        event: {
+          statuses: {
+            submission: {
+              open: '走者申請受付中'
+            },
+            selection: {
+              confirmed: '作品選考済み',
+              progress: '作品選考未完了'
+            },
+            schedule: {
+              confirmed: 'スケジュール確定済み',
+              progress: 'スケジュール未設定'
+            }
+          }
+        }
       }
     }
 }

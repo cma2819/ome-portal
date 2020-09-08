@@ -3,7 +3,9 @@
 namespace Tests\Feature\Api\Events;
 
 use App\Eloquents\AssociateEvent;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Ome\Event\Values\MarathonStatus;
 use Tests\AssertJsonArray;
 use Tests\TestCase;
 
@@ -32,13 +34,23 @@ class EventIndexTest extends TestCase
         $response->assertJson([
             [
                 'id' => 'rtamarathon',
+                'name' => 'RTA 1n Kagawa Online',
                 'relateType' => 'moderate',
-                'slug' => 'RM1'
+                'slug' => 'RM1',
+                'startAt' => Carbon::make('2020-03-07T01:00:07Z')->toISOString(),
+                'endAt' => Carbon::make('2020-03-08T13:48:07Z')->toISOString(),
+                'submitsOpen' => false,
+                'status' => MarathonStatus::closed()->value()
             ],
             [
                 'id' => 'rtamarathon2',
+                'name' => 'RTA 1n Kagawa Online',
                 'relateType' => 'support',
-                'slug' => 'RM2'
+                'slug' => 'RM2',
+                'startAt' => Carbon::make('2020-03-07T01:00:07Z')->toISOString(),
+                'endAt' => Carbon::make('2020-03-08T13:48:07Z')->toISOString(),
+                'submitsOpen' => false,
+                'status' => MarathonStatus::closed()->value()
             ]
         ]);
     }

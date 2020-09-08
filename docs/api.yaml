@@ -390,6 +390,15 @@ components:
         slug:
           type: string
           example: 'RM1'
+        submitsOpen:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - 'freshed'
+            - 'selected'
+            - 'scheduled'
+            - 'closed'
     RelateType:
       type: string
       enum:

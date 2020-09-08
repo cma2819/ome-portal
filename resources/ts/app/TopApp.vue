@@ -1,4 +1,6 @@
 <template>
+<div>
+  <recently-event></recently-event>
   <v-card>
     <v-card-title>
       OME Portalへようこそ！
@@ -33,11 +35,18 @@
       本サイトに関わる要望やバグ報告については、<a href="https://github.com/cma2819/ome-portal/issues">GitHubのissue</a>にてご連絡ください。
     </v-card-text>
   </v-card>
+</div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+import RecentlyEvent from '../components/top/RecentlyEventComponent.vue';
+
+@Component({
+  components: {
+    RecentlyEvent
+  }
+})
 export default class TopApp extends Vue {}
 </script>
