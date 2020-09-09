@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Eloquents\AssociateEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,6 @@ class Schedule extends Controller
         $viewData = [
             'discord_oauth_url' => null,
             'bearer' => null,
-            'eventId' => $id,
         ];
 
         if (!Auth::check()) {
@@ -50,6 +50,11 @@ class Schedule extends Controller
             $viewData['bearer'] = $bearer;
         }
 
-        return view('schedule.index', $viewData);
+        if (is_null(AssociateEvent::find($id))) {
+            return abort(404);
+        }
+
+        $viewData['eventId'] = $id;
+        return view('schedule.detail', $viewData);
     }
 }
