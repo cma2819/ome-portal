@@ -10,6 +10,9 @@
       </v-toolbar-title>
 
       <div class="mx-2">
+        <v-btn text href="/">
+          {{ $t('layout.actions.top') }}
+        </v-btn>
         <v-btn text href="/schedules">
           {{ $t('layout.actions.schedule') }}
         </v-btn>
