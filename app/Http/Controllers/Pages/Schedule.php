@@ -26,7 +26,7 @@ class Schedule extends Controller
      * @param string $id
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, ?string $id = null)
     {
         $viewData = [
             'discord_oauth_url' => null,
@@ -54,7 +54,6 @@ class Schedule extends Controller
             return abort(404);
         }
 
-        $viewData['eventId'] = $id;
         return view('schedule.detail', $viewData);
     }
 }

@@ -26,7 +26,6 @@ class ShowScheduleTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertViewIs('schedule.detail');
-        $response->assertViewHas('eventId', 'rtamarathon');
     }
 
     /** @test */

@@ -9,6 +9,12 @@
         OME Portal
       </v-toolbar-title>
 
+      <div class="mx-2">
+        <v-btn text href="/schedules">
+          {{ $t('layout.actions.schedule') }}
+        </v-btn>
+      </div>
+
       <v-spacer></v-spacer>
 
       <template v-if="bearer && user">

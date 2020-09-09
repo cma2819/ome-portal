@@ -17,7 +17,7 @@ Route::get('/', 'Pages\Top')->name('index');
 
 Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');
 
-Route::get('/schedules/{id}', 'Pages\Schedule')->name('schedules.show');
+Route::get('/schedules/{id?}', 'Pages\Schedule')->name('schedules.show')->where('id', '.*');
 
 Route::middleware('auth')->group(function () {
 

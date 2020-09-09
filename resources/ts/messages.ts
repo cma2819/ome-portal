@@ -5,6 +5,7 @@ export const messages: LocaleMessages = {
       layout: {
         actions: {
           top: 'トップ',
+          schedule: 'スケジュール',
 
           login: 'ログイン',
           menu: 'メニュー',

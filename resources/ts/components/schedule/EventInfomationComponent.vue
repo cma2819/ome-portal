@@ -23,6 +23,7 @@
       <v-btn
         :disabled="!scheduleConfirmed"
         text
+        :to="{ name: 'detail', params: { id: event.id}}"
         :href="`/schedules/${event.id}`"
       >
         <v-icon left>

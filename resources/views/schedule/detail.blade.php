@@ -14,7 +14,7 @@
         bearer="{{ $bearer }}"
         login-url="{{ $discord_oauth_url }}"
     >
-        <schedule-app event-id="{{ $eventId }}"></schedule-app>
+        <schedule-app></schedule-app>
     </ome-app>
 @endsection
 

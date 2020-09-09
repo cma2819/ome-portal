@@ -14,6 +14,10 @@
         {{ $t('layout.actions.top') }}
       </v-list-item>
 
+      <v-list-item href="/schedules">
+        {{ $t('layout.actions.schedule') }}
+      </v-list-item>
+
       <v-divider></v-divider>
 
       <v-list-item
