@@ -17,11 +17,12 @@ Route::get('/', 'Pages\Top')->name('index');
 
 Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');
 
+Route::get('/schedules/{id}', 'Pages\Schedule')->name('schedules');
 
 Route::middleware('auth')->group(function () {
 
     Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');
-    Route::get('/admin', 'Pages\Admin')->name('twitter')->middleware('can:access-to-admin');
+    Route::get('/admin', 'Pages\Admin')->name('admin')->middleware('can:access-to-admin');
     Route::get('/logout', 'AuthenticateController@logout')->name('auth.logout');
 
 });

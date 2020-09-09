@@ -14,6 +14,34 @@ export const messages: LocaleMessages = {
           twitter: 'Twitterクライアント',
         }
       },
+      event: {
+        labels: {
+          oengus: 'イベントページ（Oengus）',
+          schedule: 'スケジュール'
+        }
+      },
+      schedule: {
+        labels: {
+          loading: 'スケジュールを読み込んでいます。',
+          date: '日付',
+          time: '時間',
+          runner: '走者',
+          game: 'ゲーム',
+          category: 'カテゴリー',
+          type: '種別',
+          console: '機種',
+          estimate: '予定時間',
+        },
+        line: {
+          type: {
+            single: '単走',
+            race: 'レース',
+            coop: '協力',
+            coop_race: '協力レース',
+            other: 'その他'
+          }
+        }
+      },
       twitter: {
         labels: {
           list: 'ツイート一覧',
@@ -82,7 +110,8 @@ export const messages: LocaleMessages = {
             schedule: {
               confirmed: 'スケジュール確定済み',
               progress: 'スケジュール未設定'
-            }
+            },
+            closed: 'イベント終了'
           }
         }
       }

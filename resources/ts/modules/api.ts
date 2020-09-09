@@ -111,6 +111,21 @@ class Api extends ApiClient {
   }
 
   @Action
+  public async getEvent(id: string): Promise<Event> {
+    const response = await this.get(`events/${id}`);
+    return {
+      id: response.id,
+      name: response.name,
+      startAt: new Date(Date.parse(response.startAt)),
+      endAt: new Date(Date.parse(response.endAt)),
+      relateType: response.relateType,
+      slug: response.slug,
+      submitsOpen: response.submitsOpen,
+      status: response.status,
+    };
+  }
+
+  @Action
   public async postEvent(payload: {id: string, relateType: RelateType, slug: string}): Promise<Event> {
     const response = await this.post({
       endpoint: 'events',
