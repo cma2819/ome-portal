@@ -50,7 +50,7 @@ class Schedule extends Controller
             $viewData['bearer'] = $bearer;
         }
 
-        if (is_null(AssociateEvent::find($id))) {
+        if (!is_null($id) && is_null(AssociateEvent::find($id))) {
             return abort(404);
         }
 
