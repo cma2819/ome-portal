@@ -58,7 +58,7 @@
         </v-btn>
         <v-btn
           class="mx-2"
-          color="warning"
+          color="error"
           :disabled="!isPostable || updating"
           :loading="deleting"
           @click="deleteEvent"

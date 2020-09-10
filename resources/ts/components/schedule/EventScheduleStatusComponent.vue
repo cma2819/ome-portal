@@ -17,7 +17,8 @@
     >
       fas fa-minus
     </v-icon>
-    {{ confirmed ? $t('top.event.statuses.schedule.confirmed') : $t('top.event.statuses.schedule.progress') }}
+    <span v-if="isMobile">{{ $t('top.event.statuses.schedule.mobile') }}</span>
+    <span v-else>{{ confirmed ? $t('top.event.statuses.schedule.confirmed') : $t('top.event.statuses.schedule.progress') }}</span>
   </v-chip>
 </template>
 
@@ -28,5 +29,8 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 export default class EventScheduleStatusComponent extends Vue {
   @Prop(Boolean)
   readonly confirmed!: boolean;
+
+  @Prop(Boolean)
+  readonly isMobile!: boolean;
 }
 </script>

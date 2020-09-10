@@ -9,13 +9,7 @@
 @endsection
 
 @section('content')
-    <ome-app
-        api-host="{{ config('app.api_url') }}"
-        bearer="{{ $bearer }}"
-        login-url="{{ $discord_oauth_url }}"
-    >
-        <top-app></top-app>
-    </ome-app>
+    <top-app></top-app>
 @endsection
 
 @section('scripts')

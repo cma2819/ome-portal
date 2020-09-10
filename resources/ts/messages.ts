@@ -106,11 +106,13 @@ export const messages: LocaleMessages = {
             },
             selection: {
               confirmed: '作品選考済み',
-              progress: '作品選考未完了'
+              progress: '作品選考未完了',
+              mobile: '選考'
             },
             schedule: {
               confirmed: 'スケジュール確定済み',
-              progress: 'スケジュール未設定'
+              progress: 'スケジュール未設定',
+              mobile: 'スケジュール',
             },
             closed: 'イベント終了'
           }

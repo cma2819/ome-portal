@@ -6,15 +6,22 @@
       <event-closed-status v-if="eventClosed"></event-closed-status>
       <template v-else>
         <event-submission-status v-if="event.submitsOpen"></event-submission-status>
-        <event-selection-status :confirmed="selectionConfirmed"></event-selection-status>
-        <event-schedule-status :confirmed="scheduleConfirmed"></event-schedule-status>
+        <event-selection-status
+          :confirmed="selectionConfirmed"
+          :is-mobile="$vuetify.breakpoint.mobile"
+        ></event-selection-status>
+        <event-schedule-status
+          :confirmed="scheduleConfirmed"
+          :is-mobile="$vuetify.breakpoint.mobile"
+        ></event-schedule-status>
       </template>
     </v-card-actions>
-    <v-card-actions>
+    <v-card-text>
       <v-btn
         text
         :href="`https://oengus.io/marathon/${event.id}`"
         target="_blank"
+        :block="$vuetify.breakpoint.mobile"
       >
         <v-icon left>
           fas fa-external-link-alt
@@ -25,12 +32,13 @@
         text
         :to="{ name: 'detail', params: { id: event.id}}"
         :href="`/schedules/${event.id}`"
+        :block="$vuetify.breakpoint.mobile"
       >
         <v-icon left>
           fas fa-clock
         </v-icon>{{ $t('event.labels.schedule') }}
       </v-btn>
-    </v-card-actions>
+    </v-card-text>
   </div>
 </template>
 

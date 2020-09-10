@@ -9,12 +9,7 @@
 @endsection
 
 @section('content')
-    <ome-app
-        api-host="{{ config('app.api_url') }}"
-        bearer="{{ $bearer }}"
-    >
-        <twitter-app></twitter-app>
-    </ome-app>
+    <twitter-app></twitter-app>
 @endsection
 
 @section('scripts')

@@ -9,12 +9,7 @@
 @endsection
 
 @section('content')
-    <ome-app
-        api-host="{{ config('app.api_url') }}"
-        bearer="{{ $bearer }}"
-    >
-        <admin-app></admin-app>
-    </ome-app>
+    <admin-app></admin-app>
 @endsection
 
 @section('scripts')

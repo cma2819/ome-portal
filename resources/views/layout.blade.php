@@ -30,7 +30,16 @@
 </head>
 <body>
     <div id="app" class="container">
-        @yield('content')
+        <ome-app
+            api-host="{{ config('app.api_url') }}"
+            bearer="{{ $bearer }}"
+            @isset($discord_oauth_url)
+            login-url="{{ $discord_oauth_url }}"
+            @endisset
+            discord-invite="{{ config('services.discord.invite_code') }}"
+        >
+            @yield('content')
+        </ome-app>
     </div>
 
     @yield('scripts')

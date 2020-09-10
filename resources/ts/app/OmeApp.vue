@@ -9,11 +9,17 @@
         OME Portal
       </v-toolbar-title>
 
-      <div class="mx-2">
-        <v-btn text href="/">
+      <div class="mx-2 d-none d-md-block">
+        <v-btn
+          text
+          href="/"
+        >
           {{ $t('layout.actions.top') }}
         </v-btn>
-        <v-btn text href="/schedules">
+        <v-btn
+          text
+          href="/schedules"
+        >
           {{ $t('layout.actions.schedule') }}
         </v-btn>
       </div>
@@ -39,35 +45,56 @@
       <slot />
     </v-main>
     <v-footer
-      color="primary"
       app
+      padless
     >
-      <span class="white--text">&copy; {{ new Date().getFullYear() }} Online Marathon Eventers</span>
+      <v-card
+        color="primary"
+        flat
+        tile
+        width="100%"
+        class="text-center"
+      >
+        <v-card-text class="py-1">
+          <v-btn
+            icon
+            color="white"
+            target="_blank"
+            href="https://github.com/cma2819/ome-portal"
+          >
+            <v-icon>fab fa-github</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            color="white"
+            target="_blank"
+            href="https://twitter.com/ome_speedrun"
+          >
+            <v-icon>fab fa-twitter</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            color="white"
+            target="_blank"
+            href="https://twitch.tv/ome_speedrun"
+          >
+            <v-icon>fab fa-twitch</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            color="white"
+            target="_blank"
+            :href="`https://discord.gg/${discordInvite}`"
+          >
+            <v-icon>fab fa-discord</v-icon>
+          </v-btn>
+        </v-card-text>
+        <v-card-text class="py-1">
+          <span class="white--text">&copy; {{ new Date().getFullYear() }} Online Marathon Eventers</span>
+        </v-card-text>
+      </v-card>
+
       <v-spacer></v-spacer>
-      <v-btn
-        icon
-        color="white"
-        target="_blank"
-        href="https://github.com/cma2819/ome-portal"
-      >
-        <v-icon>fab fa-github</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        color="white"
-        target="_blank"
-        href="https://twitter.com/ome_speedrun"
-      >
-        <v-icon>fab fa-twitter</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        color="white"
-        target="_blank"
-        href="https://twitch.tv/ome_speedrun"
-      >
-        <v-icon>fab fa-twitch</v-icon>
-      </v-btn>
     </v-footer>
   </v-app>
 </template>
@@ -95,6 +122,8 @@ export default class OmeApp extends Vue {
   readonly bearer!: string;
   @Prop(String)
   readonly loginUrl!: string;
+  @Prop(String)
+  readonly discordInvite!: string;
 
   user: User|null = null;
 
