@@ -28,6 +28,7 @@
             v-else
             key="loaded"
             :event="event"
+            :in-spa="true"
           >
           </event-information>
         </transition>

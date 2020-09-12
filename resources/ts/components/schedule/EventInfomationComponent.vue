@@ -28,9 +28,20 @@
         </v-icon>{{ $t('event.labels.oengus') }}
       </v-btn>
       <v-btn
+        v-if="inSpa"
         :disabled="!scheduleConfirmed"
         text
         :to="{ name: 'detail', params: { id: event.id}}"
+        :block="$vuetify.breakpoint.mobile"
+      >
+        <v-icon left>
+          fas fa-clock
+        </v-icon>{{ $t('event.labels.schedule') }}
+      </v-btn>
+      <v-btn
+        v-else
+        :disabled="!scheduleConfirmed"
+        text
         :href="`/schedules/${event.id}`"
         :block="$vuetify.breakpoint.mobile"
       >
@@ -62,6 +73,9 @@ import { Event } from '../../lib/models/event';
 export default class RecentlyEventComponent extends Vue {
   @Prop(Object)
   readonly event!: Event | null;
+
+  @Prop(Boolean)
+  readonly inSpa!: boolean;
 
   get startDateString(): string {
     if (!this.event?.startAt) {
