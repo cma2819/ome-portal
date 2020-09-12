@@ -92,7 +92,9 @@ export default class ScheduleTableComponent extends Vue {
     }).map((line) => {
 
         const lineDate = new Date(Date.parse(line.date));
-        const splitTime = lineDate.toLocaleTimeString().split(':')
+        const splitTime = lineDate.toLocaleTimeString([], {
+          hour12: false
+        }).split(':')
 
         return {
           date: lineDate.toLocaleDateString(),

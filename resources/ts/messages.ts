@@ -25,7 +25,7 @@ export const messages: LocaleMessages = {
         labels: {
           loading: 'スケジュールを読み込んでいます。',
           date: '日付',
-          time: '時間',
+          time: '開始時間',
           runner: '走者',
           game: 'ゲーム',
           category: 'カテゴリー',
