@@ -20,6 +20,8 @@ Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.di
 Route::get('/schedules', 'Pages\Schedule')->name('schedules.index');
 Route::get('/schedules/{id?}', 'Pages\Schedule')->name('schedules.show')->where('id', '.*');
 
+Route::get('/streams/internal/{id}', 'Pages\StreamInternal')->name('streams.internal');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');

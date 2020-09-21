@@ -37,6 +37,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
         "cors": "^2.8.5",
+        "flv.js": "^1.5.0",
         "iso8601-duration": "^1.2.0",
         "modules": "^0.4.0",
         "oengus-api": "^0.9.11",
