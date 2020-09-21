@@ -1,21 +1,34 @@
 <template>
   <div>
-    <v-row>
-      <v-col>
-        <video id="stream" muted="muted" />
+    <h3>{{ streamId }}の配信視聴ページ</h3>
+    <v-row justify="center">
+      <v-col cols="12" md="8" lg="6">
+        <video
+          id="stream"
+          muted="muted"
+          controls
+        >Your browser does not support HTML5 video.</video>
       </v-col>
     </v-row>
   </div>
 </template>
 
+<style>
+video {
+  width: 100%;
+}
+</style>
+
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-
 import flvJs from 'flv.js';
-import Axios from 'axios';
 
 @Component
 export default class ScheduleStreamInternalApp extends Vue {
+
+  @Prop(String)
+  readonly streamId!: string;
+
   @Prop(String)
   readonly streamUri!: string;
 

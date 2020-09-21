@@ -30,6 +30,7 @@ class StreamInternal extends Controller
             $streamHost = substr($streamHost, 0, -1);
         }
 
+        $viewData['streamId'] = $id;
         $viewData['streamUri'] = $streamHost . '/' . $id . '.flv';
 
         return view('stream.internal', $viewData);
