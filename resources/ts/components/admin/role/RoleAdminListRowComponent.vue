@@ -24,6 +24,23 @@
       >
         <v-checkbox
           v-model="allowed"
+          :label="$t('admin.labels.internalStream')"
+          value="internal-stream"
+          dense
+          hide-details
+        ></v-checkbox>
+      </v-col>
+      <v-col cols="auto">
+        {{ $t('admin.descriptions.internalStream') }}
+      </v-col>
+    </v-row>
+    <v-row align="end">
+      <v-col
+        cols="4"
+        lg="2"
+      >
+        <v-checkbox
+          v-model="allowed"
           :label="$t('admin.labels.admin')"
           value="admin"
           dense

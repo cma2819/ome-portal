@@ -1,13 +1,17 @@
 <template>
   <div>
-    <h3>{{ streamId }}の配信視聴ページ</h3>
+    <h3>{{ $t('stream.internal.title', {name: streamId}) }}</h3>
     <v-row justify="center">
-      <v-col cols="12" md="8" lg="6">
+      <v-col
+        cols="12"
+        md="8"
+        lg="6"
+      >
         <video
           id="stream"
           muted="muted"
           controls
-        >Your browser does not support HTML5 video.</video>
+        >{{ $t('stream.errors.html5') }}</video>
       </v-col>
     </v-row>
   </div>

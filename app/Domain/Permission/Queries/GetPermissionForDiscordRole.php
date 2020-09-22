@@ -3,7 +3,6 @@
 namespace App\Domain\Permission\Queries;
 
 use App\Eloquents\DiscordRolePermission;
-use Illuminate\Support\Facades\Log;
 use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Interfaces\Queries\GetPermissionForRoleQuery;
 use Ome\Permission\Values\Domain;
@@ -19,16 +18,7 @@ class GetPermissionForDiscordRole implements GetPermissionForRoleQuery
 
         $allowed = [];
         foreach ($discordRolePermissions->pluck('allowed_domain') as $allowedDomain) {
-            switch ($allowedDomain) {
-                case Domain::twitter()->value():
-                    $allowed[] = Domain::twitter();
-                    break;
-                case Domain::admin()->value():
-                    $allowed[] = Domain::admin();
-                    break;
-                default:
-                    Log::error('Unexpected domain name received: ' . $allowedDomain);
-            }
+            $allowed[] = Domain::createFromValue($allowedDomain);
         }
 
         return RolePermission::create($id, $allowed);

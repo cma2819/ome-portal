@@ -55,6 +55,14 @@ export const messages: LocaleMessages = {
           delete: '削除',
         }
       },
+      stream: {
+        internal: {
+          title: '{name} の配信視聴ページ（OME用）'
+        },
+        errors: {
+          html5: 'お使いのブラウザはHTML5のプレイヤーに対応していないため、再生できません。'
+        }
+      },
       admin: {
         tabs: {
           role: '権限管理',
@@ -63,6 +71,7 @@ export const messages: LocaleMessages = {
         labels: {
           twitter: 'Twitter運用',
           admin: '管理者',
+          internalStream: 'イベント用配信視聴',
           event: {
             import: 'イベントインポート'
           }
@@ -95,7 +104,8 @@ export const messages: LocaleMessages = {
         },
         descriptions: {
           twitter: 'OMEアカウントからのTwitter投稿を担当します。',
-          admin: 'OME Portalの操作権限を管理を担当します。'
+          admin: 'OME Portalの操作権限を管理を担当します。',
+          internalStream: 'OMEで利用するイベント用の配信が確認できます。'
         }
       },
       top: {
