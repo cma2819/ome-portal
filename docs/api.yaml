@@ -320,6 +320,7 @@ components:
         enum:
           - 'twitter'
           - 'admin'
+          - 'internal-stream'
     TwitterUploadMedia:
       type: object
       properties:

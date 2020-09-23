@@ -3,7 +3,10 @@
     <div key="loaded">
       <div v-for="event in events" :key="event.id" class="pa-2 mb-2 event-list-item">
         <v-card color="primary" dark>
-          <event-information :event="event"></event-information>
+          <event-information
+            :event="event"
+            :in-spa="true"
+          ></event-information>
         </v-card>
       </div>
     </div>

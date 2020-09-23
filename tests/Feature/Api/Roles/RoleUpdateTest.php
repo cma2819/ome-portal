@@ -22,7 +22,7 @@ class RoleUpdateTest extends TestCase
     public function testRoleUpdate()
     {
         $response = $this->actingAs($this->authUser(), 'api')->putJson(route('api.v1.roles.update', ['role' => '123456789']), [
-            'permissions' => ['twitter', 'admin']
+            'permissions' => ['twitter', 'admin', 'internal-stream']
         ]);
 
         $response->assertNoContent();
@@ -33,6 +33,10 @@ class RoleUpdateTest extends TestCase
         $this->assertDatabaseHas('discord_role_permissions', [
             'discord_role_id' => '123456789',
             'allowed_domain' => 'admin'
+        ]);
+        $this->assertDatabaseHas('discord_role_permissions', [
+            'discord_role_id' => '123456789',
+            'allowed_domain' => 'internal-stream'
         ]);
     }
 

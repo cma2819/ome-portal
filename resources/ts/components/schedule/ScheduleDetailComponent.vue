@@ -1,7 +1,11 @@
 <template>
   <div>
     <div>
-      <v-btn color="primary" dark :to="{ name: 'index' }">
+      <v-btn
+        color="primary"
+        dark
+        :to="{ name: 'index' }"
+      >
         <v-icon>fas fa-caret-left</v-icon>
       </v-btn>
     </div>
@@ -28,6 +32,7 @@
             v-else
             key="loaded"
             :event="event"
+            :in-spa="true"
           >
           </event-information>
         </transition>
@@ -52,7 +57,7 @@
 
 <script lang="ts">
 import { getSchedule, OengusRunLine, OengusSchedule, OengusSetupLine } from 'oengus-api';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 
 import EventInformation from './EventInfomationComponent.vue';
 import ScheduleTable from './ScheduleTableComponent.vue';

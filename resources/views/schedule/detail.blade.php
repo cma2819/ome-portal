@@ -2,6 +2,7 @@
 
 @section('head')
 <link href="{{ asset('index.css') }}" rel="stylesheet">
+<link href="{{ asset('schedule.css') }}" rel="stylesheet">
 @endsection
 
 @section('title')

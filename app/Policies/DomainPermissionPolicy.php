@@ -31,6 +31,11 @@ class DomainPermissionPolicy
         return $this->hasPermissionToDomain(Auth::user(), 'twitter');
     }
 
+    public function hasPermissionToInternalStream()
+    {
+        return $this->hasPermissionToDomain(Auth::user(), 'internal-stream');
+    }
+
     public function hasPermissionToAdmin()
     {
         return $this->hasPermissionToDomain(Auth::user(), 'admin');

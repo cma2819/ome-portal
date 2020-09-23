@@ -27,5 +27,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('access-to-admin', 'App\Policies\DomainPermissionPolicy@hasPermissionToAdmin');
         Gate::define('access-to-twitter', 'App\Policies\DomainPermissionPolicy@hasPermissionToTwitter');
+        Gate::define('access-to-internal-stream', 'App\Policies\DomainPermissionPolicy@hasPermissionToInternalStream');
     }
 }

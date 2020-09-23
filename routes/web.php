@@ -23,6 +23,7 @@ Route::get('/schedules/{id?}', 'Pages\Schedule')->name('schedules.show')->where(
 Route::middleware('auth')->group(function () {
 
     Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');
+    Route::get('/streams/internal/{id}', 'Pages\StreamInternal')->name('streams.internal')->middleware('can:access-to-internal-stream');
     Route::get('/admin', 'Pages\Admin')->name('admin')->middleware('can:access-to-admin');
     Route::get('/logout', 'AuthenticateController@logout')->name('auth.logout');
 

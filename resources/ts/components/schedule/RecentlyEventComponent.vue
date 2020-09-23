@@ -24,6 +24,7 @@
             v-else
             key="loaded"
             :event="event"
+            :is-spa="false"
           ></event-information>
         </transition>
       </v-card>
