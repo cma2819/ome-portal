@@ -31,13 +31,14 @@ class ListRolePermissionInteractor implements ListRolePermissionUseCase
 
         $rolePermissions = [];
         foreach ($roles as $role) {
+            $dtoPermission = RolePermission::create($role->getId(), []);
             foreach ($permissions as $permission) {
                 if ($role->getId() === $permission->getId()) {
-                    $rolePermissions[] = new RoleDto($role, $permission);
-                    continue;
+                    $dtoPermission = $permission;
+                    break;
                 }
             }
-            $rolePermissions[] = new RoleDto($role, RolePermission::create($role->getId(), []));
+            $rolePermissions[] = new RoleDto($role, $dtoPermission);
         }
 
         return new ListRolePermissionResponse($rolePermissions);
