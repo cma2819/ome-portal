@@ -36,8 +36,8 @@ class ListRolePermissionInteractor implements ListRolePermissionUseCase
                     $rolePermissions[] = new RoleDto($role, $permission);
                     continue;
                 }
-                $rolePermissions[] = new RoleDto($role, RolePermission::create($role->getId(), []));
             }
+            $rolePermissions[] = new RoleDto($role, RolePermission::create($role->getId(), []));
         }
 
         return new ListRolePermissionResponse($rolePermissions);
