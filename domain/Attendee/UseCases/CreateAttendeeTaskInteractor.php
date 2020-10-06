@@ -16,6 +16,12 @@ class CreateAttendeeTaskInteractor implements CreateAttendeeTaskUseCase
 {
     protected PersistTaskCommand $persistTaskCommand;
 
+    public function __construct(
+        PersistTaskCommand $persistTaskCommand
+    ) {
+        $this->persistTaskCommand = $persistTaskCommand;
+    }
+
     public function interact(CreateAttendeeTaskRequest $request): CreateAttendeeTaskResponse
     {
         if ($request->getScope()->equalsTo(TaskScope::runner())) {

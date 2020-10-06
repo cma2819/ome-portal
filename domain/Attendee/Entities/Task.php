@@ -5,7 +5,7 @@ namespace Ome\Attendee\Entities;
 abstract class Task
 {
 
-    protected string $scope = '';
+    protected string $scope;
 
     private ?int $id;
 
@@ -13,24 +13,17 @@ abstract class Task
 
     protected function __construct(
         ?int $id,
-        string $content
+        string $content,
+        string $scope
     ) {
         $this->id = $id;
         $this->content = $content;
+        $this->scope = $scope;
     }
 
-    public static function createNewTask(
-        string $content
-    ): self {
-        return new self(null, $content);
-    }
+    abstract public static function createNewTask(string $content): self;
 
-    public static function createRegistered(
-        int $id,
-        string $content
-    ): self {
-        return new self($id, $content);
-    }
+    abstract public static function createRegistered(int $id, string $content): self;
 
     /**
      * Get the value of id
