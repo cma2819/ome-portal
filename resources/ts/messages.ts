@@ -48,6 +48,7 @@ export const messages: LocaleMessages = {
           list: 'ツイート一覧',
           input: 'ツイート投稿',
           media: '画像を追加（4ファイルまで）',
+          hashtag: 'ハッシュタグを選択',
         },
         actions: {
           post: '投稿',

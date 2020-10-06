@@ -1,11 +1,24 @@
 <template>
-  <div>
+  <v-sheet
+    elevation="2"
+    class="pa-4"
+  >
     <v-row dense>
       <v-col
         cols="12"
         md="8"
         lg="6"
       >
+        <v-select
+          v-model="hashtag"
+          :items="slugs"
+          :label="$t('twitter.labels.hashtag')"
+          chips
+          multiple
+          clearable
+          :loading="!initSlugs"
+          :disabled="!initSlugs"
+        ></v-select>
         <v-textarea
           v-model="content"
           outlined
@@ -42,7 +55,7 @@
       >
         <v-btn
           color="primary"
-          :disabled="!tweetParseResult.valid"
+          :disabled="!tweetParseResult.valid || !initSlugs"
           :loading="loading"
           @click="postTweet"
         >
@@ -50,7 +63,7 @@
         </v-btn>
       </v-col>
     </v-row>
-  </div>
+  </v-sheet>
 </template>
 
 <script lang="ts">
@@ -63,38 +76,65 @@ import { ApiError } from '../../lib/models/errors';
 
 @Component
 export default class TweetInputComponent extends Vue {
-  hashtag = 'OME'
+  hashtag = []
   content = '';
   file: File|null = null;
   medias: Array<{
     file: File,
     mediaId: string
   }> = [];
+  slugs: Array<string> = [];
 
   loading = false;
   loadingMedia = false;
+  initSlugs = false;
 
-  get tweetParseResult(): ParsedTweet {
-    return twitterText.parseTweet(`${this.content} #${this.hashtag}`);
+  get tweetContent(): string {
+    if (this.hashtag.length === 0) {
+      return this.content;
+    }
+
+    const hashtagText = this.hashtag.map((tag) => {
+      return `#${tag}`;
+    }).join('\n');
+
+    return `${this.content}\n${hashtagText}`;
   }
 
-  mounted(): void {
+  get tweetParseResult(): ParsedTweet {
+    return twitterText.parseTweet(this.tweetContent);
+  }
+
+  async created(): Promise<void> {
     this.defaultInput();
+
+    const events = await apiModule.getEvents();
+    this.slugs = events.map((event) => {
+      return event.slug;
+    });
+    this.slugs.splice(0, 0, 'OME');
+
+    this.initSlugs = true;
   }
 
   defaultInput(): void {
-    this.content = `#${this.hashtag}`;
+    this.content = '';
     this.medias = [];
+    this.hashtag = [];
   }
 
   @Emit()
   async postTweet(): Promise<void> {
+    if (!this.tweetParseResult) {
+      return;
+    }
+
     this.loading = true;
     try {
       const mediaIds = this.medias.map((media) => {
         return media.mediaId;
       });
-      const result = await apiModule.postTweet({text: this.content, mediaIds});
+      const result = await apiModule.postTweet({text: this.tweetContent, mediaIds});
       twitterModule.addTweetToTimeline(result);
       this.defaultInput();
       this.loading = false;
