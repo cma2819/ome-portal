@@ -111,6 +111,33 @@ class Api extends ApiClient {
   }
 
   @Action
+  public async getActiveEvents(): Promise<Array<Event>> {
+    const response = await this.get('events/active');
+    return response.map((event: {
+      id: string;
+      name: string;
+      startAt: string;
+      endAt: string;
+      relateType: RelateType;
+      slug: string;
+      submitsOpen: boolean;
+      status: Status
+    }) => {
+
+    return {
+      id: event.id,
+      name: event.name,
+      startAt: new Date(Date.parse(event.startAt)),
+      endAt: new Date(Date.parse(event.endAt)),
+      relateType: event.relateType,
+      slug: event.slug,
+      submitsOpen: event.submitsOpen,
+      status: event.status,
+    };
+    });
+  }
+
+  @Action
   public async getEvent(id: string): Promise<Event> {
     const response = await this.get(`events/${id}`);
     return {

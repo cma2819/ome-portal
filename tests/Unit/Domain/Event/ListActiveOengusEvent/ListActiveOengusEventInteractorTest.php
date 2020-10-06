@@ -34,7 +34,7 @@ class ListActiveOengusEventInteractorTest extends TestCase
 
         $this->assertEquals([
             Event::createWithMarathon(
-                $mockOengusMarathonQuery->fetch('rta1'),
+                $mockOengusMarathonQuery->fetch('rta1', Carbon::create(2020, 3, 8)),
                 RelateType::moderate(),
                 Slug::create('r1')
             ),

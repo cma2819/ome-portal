@@ -14,6 +14,9 @@ use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventRequest;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventUseCase;
 use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusRequest;
 use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusUseCase;
+use Ome\Event\Interfaces\UseCases\ListActiveOengusEvent\ListActiveOengusEventRequest;
+use Ome\Event\Interfaces\UseCases\ListActiveOengusEvent\ListActiveOengusEventUseCase;
+use Ome\Event\Interfaces\UseCases\ListOengusEvent\ListOengusEventRequest;
 use Ome\Event\Interfaces\UseCases\ListOengusEvent\ListOengusEventUseCase;
 use Ome\Event\Interfaces\UseCases\SaveOengusEvent\SaveOengusEventRequest;
 use Ome\Event\Interfaces\UseCases\SaveOengusEvent\SaveOengusEventUseCase;
@@ -29,7 +32,9 @@ class EventResource extends Controller
     public function index(
         ListOengusEventUseCase $listOengusEvent
     ) {
-        $events = $listOengusEvent->interact()->getEvents();
+        $events = $listOengusEvent->interact(
+            new ListOengusEventRequest(Carbon::now())
+        )->getEvents();
         usort($events, function (Event $a, Event $b) {
             return Carbon::make($a->getOengusMarathon()->getStartAt())->diffInSeconds(
                 Carbon::make($b->getOengusMarathon()->getStartAt()),
@@ -143,7 +148,9 @@ class EventResource extends Controller
     public function showLatest(
         ListOengusEventUseCase $listOengusEvent
     ) {
-        $events = $listOengusEvent->interact()->getEvents();
+        $events = $listOengusEvent->interact(
+            new ListOengusEventRequest(Carbon::now())
+        )->getEvents();
 
         /** @var Event */
         $latest = null;
@@ -161,5 +168,27 @@ class EventResource extends Controller
         }
 
         return new EventResponse($latest);
+    }
+
+    public function active(
+        ListActiveOengusEventUseCase $listActiveOengusEvent
+    ) {
+        $events = $listActiveOengusEvent->interact(
+            new ListActiveOengusEventRequest(Carbon::now())
+        )->getEvents();
+        usort($events, function (Event $a, Event $b) {
+            return Carbon::make($a->getOengusMarathon()->getStartAt())->diffInSeconds(
+                Carbon::make($b->getOengusMarathon()->getStartAt()),
+                false
+            );
+        });
+
+        $response = [];
+        foreach ($events as $event) {
+            $response[] = new EventResponse($event);
+        }
+
+        return $response;
+
     }
 }

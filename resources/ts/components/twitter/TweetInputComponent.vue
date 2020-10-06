@@ -76,7 +76,7 @@ import { ApiError } from '../../lib/models/errors';
 
 @Component
 export default class TweetInputComponent extends Vue {
-  hashtag = []
+  hashtag: Array<string> = []
   content = '';
   file: File|null = null;
   medias: Array<{
@@ -106,21 +106,21 @@ export default class TweetInputComponent extends Vue {
   }
 
   async created(): Promise<void> {
-    this.defaultInput();
 
-    const events = await apiModule.getEvents();
+    const events = await apiModule.getActiveEvents();
     this.slugs = events.map((event) => {
       return event.slug;
     });
-    this.slugs.splice(0, 0, 'OME');
+    this.slugs.push('OME');
 
+    this.defaultInput();
     this.initSlugs = true;
   }
 
   defaultInput(): void {
     this.content = '';
     this.medias = [];
-    this.hashtag = [];
+    this.hashtag = this.slugs.length > 0 ? [this.slugs[0]] : [];
   }
 
   @Emit()

@@ -25,6 +25,7 @@ Route::name('api.v1.')->group(function () {
     Route::middleware(['auth:api', 'can:access-to-admin'])->apiResource('roles', 'Roles\RoleResource');
 
     Route::get('events/latest', 'Events\EventResource@showLatest')->name('events.latest');
+    Route::get('events/active', 'Events\EventResource@active')->name('events.index.active');
     Route::apiResource('events', 'Events\EventResource')->only(['index', 'show']);
     Route::middleware(['auth:api', 'can:access-to-admin'])->apiResource('events', 'Events\EventResource')->only(['store', 'update', 'destroy']);
 

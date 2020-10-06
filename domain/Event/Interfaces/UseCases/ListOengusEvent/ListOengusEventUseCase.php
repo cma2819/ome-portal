@@ -10,5 +10,5 @@ interface ListOengusEventUseCase
 	/**
 	 * List Oengus Event.
 	 */
-	public function interact(): ListOengusEventResponse;
+	public function interact(ListOengusEventRequest $request): ListOengusEventResponse;
 }

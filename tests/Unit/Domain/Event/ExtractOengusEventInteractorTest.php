@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Domain\Event;
 
+use Carbon\Carbon;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Dto\OmeEventDto;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventRequest;
@@ -31,7 +32,7 @@ class ExtractOengusEventInteractorTest extends TestCase
 
         $this->assertEquals(
             Event::createWithMarathon(
-                $mockOengusMarathon->fetch('rtamarathon'),
+                $mockOengusMarathon->fetch('rtamarathon', Carbon::now()),
                 RelateType::moderate(),
                 Slug::create('rm1')
             ), $result->getEvent()

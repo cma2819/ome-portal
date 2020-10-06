@@ -2,8 +2,10 @@
 
 namespace Tests\Unit\Domain\Event;
 
+use Carbon\Carbon;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Dto\OmeEventDto;
+use Ome\Event\Interfaces\UseCases\ListOengusEvent\ListOengusEventRequest;
 use Ome\Event\Queries\InmemoryListEvent;
 use Ome\Event\UseCases\ListOengusEventInteractor;
 use Ome\Event\Values\RelateType;
@@ -28,21 +30,24 @@ class ListOengusEventInteractorTest extends TestCase
             $mockOengusMarathonQuery
         );
 
-        $result = $listOengusEvent->interact();
+        $result = $listOengusEvent->interact(
+            new ListOengusEventRequest(Carbon::now())
+        );
 
+        $now = Carbon::now();
         $this->assertEquals([
             Event::createWithMarathon(
-                $mockOengusMarathonQuery->fetch('rta1'),
+                $mockOengusMarathonQuery->fetch('rta1', $now),
                 RelateType::moderate(),
                 Slug::create('r1')
             ),
             Event::createWithMarathon(
-                $mockOengusMarathonQuery->fetch('rta2'),
+                $mockOengusMarathonQuery->fetch('rta2', $now),
                 RelateType::moderate(),
                 Slug::create('r2')
             ),
             Event::createWithMarathon(
-                $mockOengusMarathonQuery->fetch('rta3'),
+                $mockOengusMarathonQuery->fetch('rta3', $now),
                 RelateType::moderate(),
                 Slug::create('r3')
             ),

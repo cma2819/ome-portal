@@ -5,6 +5,7 @@ namespace Ome\Event\UseCases;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Queries\ListEventQuery;
 use Ome\Event\Interfaces\Queries\OengusMarathonQuery;
+use Ome\Event\Interfaces\UseCases\ListOengusEvent\ListOengusEventRequest;
 use Ome\Event\Interfaces\UseCases\ListOengusEvent\ListOengusEventResponse;
 use Ome\Event\Interfaces\UseCases\ListOengusEvent\ListOengusEventUseCase;
 
@@ -22,14 +23,14 @@ class ListOengusEventInteractor implements ListOengusEventUseCase
         $this->oengusMarathonQuery = $oengusMarathonQuery;
     }
 
-    public function interact(): ListOengusEventResponse
+    public function interact(ListOengusEventRequest $request): ListOengusEventResponse
     {
         $omeEvents = $this->listEventQuery->fetch();
 
         $events = [];
         foreach ($omeEvents as $omeEvent) {
             $events[] = Event::createWithMarathon(
-                $this->oengusMarathonQuery->fetch($omeEvent->getId()),
+                $this->oengusMarathonQuery->fetch($omeEvent->getId(), $request->getNow()),
                 $omeEvent->getRelateType(),
                 $omeEvent->getSlug()
             );

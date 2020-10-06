@@ -31,7 +31,7 @@ class ExtractOengusEventInteractor implements ExtractOengusEventUseCase
             throw new EntityNotFoundException(Event::class, ['id' => $request->getId()]);
         }
 
-        $marathon = $this->oengusMarathonQuery->fetch($request->getId());
+        $marathon = $this->oengusMarathonQuery->fetch($request->getId(), $request->getNow());
 
         return new ExtractOengusEventResponse(
             Event::createWithMarathon($marathon, $omeEvent->getRelateType(), $omeEvent->getSlug())

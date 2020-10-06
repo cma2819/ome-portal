@@ -8,6 +8,7 @@ use Ome\Event\Values\MarathonStatus;
 
 class OengusMarathon
 {
+    const MARATHON_DONE_BUFFER_HOUR = 2;
 
     private string $id;
 
@@ -55,8 +56,14 @@ class OengusMarathon
         );
     }
 
-    public static function createFromApiJson(array $json): self
+    public static function createFromApiJson(array $json, ?DateTimeInterface $now = null): self
     {
+        if (is_null($now)) {
+            $now = Carbon::now();
+        } else {
+            $now = Carbon::make($now);
+        }
+
         return new self(
             $json['id'],
             $json['name'],
@@ -66,15 +73,14 @@ class OengusMarathon
             MarathonStatus::createFromCondition(
                 $json['selectionDone'],
                 $json['scheduleDone'],
-                (Carbon::make($json['endDate']) < Carbon::now())
+                (Carbon::make($json['endDate']) < $now->addHours(self::MARATHON_DONE_BUFFER_HOUR))
             )
         );
     }
 
-    public function isActiveAt(DateTimeInterface $date): bool
+    public function isActive(): bool
     {
-        $archivedAt = Carbon::make($this->endAt)->addDay(1)->startOfDay();
-        return $archivedAt->isAfter($date);
+        return !$this->status->equalsTo(MarathonStatus::closed());
     }
 
     /**

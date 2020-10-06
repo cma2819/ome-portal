@@ -31,12 +31,12 @@ class ListActiveOengusEventInteractor implements ListActiveOengusEventUseCase
         $events = [];
         foreach ($omeEvents as $omeEvent) {
             $event = Event::createWithMarathon(
-                $this->oengusMarathonQuery->fetch($omeEvent->getId()),
+                $this->oengusMarathonQuery->fetch($omeEvent->getId(), $request->getNow()),
                 $omeEvent->getRelateType(),
                 $omeEvent->getSlug()
             );
 
-            if ($event->getOengusMarathon()->isActiveAt($request->getNow())) {
+            if ($event->getOengusMarathon()->isActive()) {
                 $events[] = $event;
             }
         }

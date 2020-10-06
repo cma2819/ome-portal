@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Domain\Event;
 
+use Carbon\Carbon;
 use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusRequest;
 use Ome\Event\UseCases\GetMarathonFromOengusInteractor;
 use PHPUnit\Framework\TestCase;
@@ -17,6 +18,6 @@ class GetMarathonFromOengusInteractorTest extends TestCase
             new GetMarathonFromOengusRequest('id')
         );
 
-        $this->assertEquals($mockOengusMarathonQuery->fetch('id'), $result->getOengusMarathon());
+        $this->assertEquals($mockOengusMarathonQuery->fetch('id', Carbon::now()), $result->getOengusMarathon());
     }
 }

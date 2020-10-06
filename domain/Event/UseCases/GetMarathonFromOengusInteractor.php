@@ -20,6 +20,6 @@ class GetMarathonFromOengusInteractor implements GetMarathonFromOengusUseCase
 
     public function interact(GetMarathonFromOengusRequest $request): GetMarathonFromOengusResponse
     {
-        return new GetMarathonFromOengusResponse($this->oengusMarathonQuery->fetch($request->getId()));
+        return new GetMarathonFromOengusResponse($this->oengusMarathonQuery->fetch($request->getId(), $request->getNow()));
     }
 }

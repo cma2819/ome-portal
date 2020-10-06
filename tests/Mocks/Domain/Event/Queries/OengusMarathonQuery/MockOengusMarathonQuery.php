@@ -2,6 +2,7 @@
 
 namespace Tests\Mocks\Domain\Event\Queries\OengusMarathonQuery;
 
+use DateTimeInterface;
 use Ome\Event\Entities\OengusMarathon;
 use Ome\Event\Interfaces\Queries\OengusMarathonQuery;
 
@@ -17,8 +18,8 @@ class MockOengusMarathonQuery implements OengusMarathonQuery
         $this->json = json_decode(file_get_contents($jsonFile), true);
     }
 
-    public function fetch(string $id): OengusMarathon
+    public function fetch(string $id, DateTimeInterface $now): OengusMarathon
     {
-        return OengusMarathon::createFromApiJson(array_replace($this->json, ['id' => $id]));
+        return OengusMarathon::createFromApiJson(array_replace($this->json, ['id' => $id]), $now);
     }
 }

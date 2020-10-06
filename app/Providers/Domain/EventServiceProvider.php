@@ -37,6 +37,10 @@ class EventServiceProvider extends ServiceProvider
             \Ome\Event\Interfaces\UseCases\SaveOengusEvent\SaveOengusEventUseCase::class,
             \Ome\Event\UseCases\SaveOengusEventInteractor::class
         );
+        $this->app->bind(
+            \Ome\Event\Interfaces\UseCases\ListActiveOengusEvent\ListActiveOengusEventUseCase::class,
+            \Ome\Event\UseCases\ListActiveOengusEventInteractor::class
+        );
 
         //////////////
         // Commands //
