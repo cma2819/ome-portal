@@ -10,7 +10,7 @@ use Ome\Event\UseCases\ExtractOengusEventInteractor;
 use Ome\Event\Values\RelateType;
 use Ome\Event\Values\Slug;
 use PHPUnit\Framework\TestCase;
-use Tests\Mocks\Domain\Event\Queries\MockOengusMarathonQuery;
+use Tests\Mocks\Domain\Event\Queries\OengusMarathonQuery\MockOengusMarathonQuery;
 
 class ExtractOengusEventInteractorTest extends TestCase
 {

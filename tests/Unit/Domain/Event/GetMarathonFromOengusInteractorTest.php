@@ -5,7 +5,7 @@ namespace Tests\Unit\Domain\Event;
 use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusRequest;
 use Ome\Event\UseCases\GetMarathonFromOengusInteractor;
 use PHPUnit\Framework\TestCase;
-use Tests\Mocks\Domain\Event\Queries\MockOengusMarathonQuery;
+use Tests\Mocks\Domain\Event\Queries\OengusMarathonQuery\MockOengusMarathonQuery;
 
 class GetMarathonFromOengusInteractorTest extends TestCase
 {

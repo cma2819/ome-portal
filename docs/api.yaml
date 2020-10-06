@@ -168,6 +168,20 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
+  /events/active:
+    get:
+      summary: Get events related to us only active now
+      tags:
+        - Events
+      responses:
+        '200':
+          description: Active events data related to us
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
     post:
       summary: Import event from Oengus
       tags:

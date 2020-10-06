@@ -75,7 +75,7 @@ class EventServiceProvider extends ServiceProvider
 
             $this->app->bind(
                 \Ome\Event\Interfaces\Queries\OengusMarathonQuery::class,
-                \Tests\Mocks\DOmain\Event\Queries\MockOengusMarathonQuery::class
+                \Tests\Mocks\DOmain\Event\Queries\OengusMarathonQuery\MockOengusMarathonQuery::class
             );
         }
     }

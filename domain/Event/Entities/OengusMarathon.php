@@ -71,6 +71,12 @@ class OengusMarathon
         );
     }
 
+    public function isActiveAt(DateTimeInterface $date): bool
+    {
+        $archivedAt = Carbon::make($this->endAt)->addDay(1)->startOfDay();
+        return $archivedAt->isAfter($date);
+    }
+
     /**
      * Get the value of id
      */
