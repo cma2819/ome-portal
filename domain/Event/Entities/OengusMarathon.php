@@ -73,7 +73,7 @@ class OengusMarathon
             MarathonStatus::createFromCondition(
                 $json['selectionDone'],
                 $json['scheduleDone'],
-                (Carbon::make($json['endDate']) < $now->addHours(self::MARATHON_DONE_BUFFER_HOUR))
+                (Carbon::make($json['endDate'])->addHours(self::MARATHON_DONE_BUFFER_HOUR) < $now)
             )
         );
     }
