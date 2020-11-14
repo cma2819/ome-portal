@@ -2,12 +2,12 @@
 
 namespace Ome\Exceptions;
 
-use RuntimeException;
+use Exception;
 
 /**
  * Runtime Exception in case of that not found entity.
  */
-class EntityNotFoundException extends RuntimeException
+class EntityNotFoundException extends Exception
 {
     public function __construct(
         string $className,

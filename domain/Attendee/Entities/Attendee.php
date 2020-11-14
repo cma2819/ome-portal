@@ -2,12 +2,9 @@
 
 namespace Ome\Attendee\Entities;
 
-use Ome\Auth\Entities\User;
-use Ome\Event\Entities\Event;
-
 class Attendee
 {
-    private int $id;
+    private int $userId;
 
     private string $eventId;
 
@@ -21,13 +18,13 @@ class Attendee
     private array $volunteerTaskProgresses;
 
     protected function __construct(
-        int $id,
+        int $userId,
         string $eventId,
         array $runnerTaskProgresses = [],
         array $commentatorTaskProgresses = [],
         array $volunteerTaskProgresses = []
     ) {
-        $this->id = $id;
+        $this->userId = $userId;
         $this->eventId = $eventId;
         $this->runnerTaskProgresses = $runnerTaskProgresses;
         $this->commentatorTaskProgresses = $commentatorTaskProgresses;
@@ -35,8 +32,8 @@ class Attendee
     }
 
     public static function create(
-        User $user,
-        Event $event,
+        int $userId,
+        string $eventId,
         array $taskProgresses
     ): self {
         $runnerProgresses = [];
@@ -58,8 +55,8 @@ class Attendee
         }
 
         return new self(
-            $user->getId(),
-            $event->getId(),
+            $userId,
+            $eventId,
             $runnerProgresses,
             $commentatorProgresses,
             $volunteerProgresses
@@ -67,11 +64,11 @@ class Attendee
     }
 
     /**
-     * Get the value of id
+     * Get the value of userId
      */
-    public function getId()
+    public function getUserId()
     {
-        return $this->id;
+        return $this->userId;
     }
 
     /**
@@ -105,4 +102,5 @@ class Attendee
     {
         return $this->volunteerTaskProgresses;
     }
+
 }

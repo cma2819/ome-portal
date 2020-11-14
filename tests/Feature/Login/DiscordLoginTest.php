@@ -3,8 +3,6 @@
 namespace Tests\Feature\Login;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Ome\Auth\Entities\User;
 use Tests\Mocks\Domain\Auth\Queries\MockCurrentDiscordUserQuery;
 use Tests\TestCase;
 

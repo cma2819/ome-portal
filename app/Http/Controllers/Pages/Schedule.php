@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
-use App\Eloquents\AssociateEvent;
+use App\Infrastructure\Eloquents\AssociateEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

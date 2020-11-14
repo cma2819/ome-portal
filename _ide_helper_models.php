@@ -10,9 +10,9 @@
  */
 
 
-namespace App\Eloquents{
+namespace App\Infrastructure\Eloquents{
 /**
- * App\Eloquents\AssociateEvent
+ * App\Infrastructure\Eloquents\AssociateEvent
  *
  * @property string $id
  * @property string $relate_type
@@ -31,9 +31,57 @@ namespace App\Eloquents{
 	class AssociateEvent extends \Eloquent {}
 }
 
-namespace App\Eloquents{
+namespace App\Infrastructure\Eloquents{
 /**
- * App\Eloquents\DiscordRolePermission
+ * App\Infrastructure\Eloquents\AttendeeTask
+ *
+ * @property int $id
+ * @property string $event_id
+ * @property string $attendee_scope
+ * @property string $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask whereAttendeeScope($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask whereEventId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTask whereUpdatedAt($value)
+ */
+	class AttendeeTask extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
+ * App\Infrastructure\Eloquents\AttendeeTaskProgress
+ *
+ * @property int $id
+ * @property int $task_id
+ * @property int $event_attendee_id
+ * @property string $progress_status
+ * @property string $note
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereEventAttendeeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereProgressStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendeeTaskProgress whereUpdatedAt($value)
+ */
+	class AttendeeTaskProgress extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
+ * App\Infrastructure\Eloquents\DiscordRolePermission
  *
  * @property int $id
  * @property string $discord_role_id
@@ -52,9 +100,9 @@ namespace App\Eloquents{
 	class DiscordRolePermission extends \Eloquent {}
 }
 
-namespace App\Eloquents{
+namespace App\Infrastructure\Eloquents{
 /**
- * App\Eloquents\User
+ * App\Infrastructure\Eloquents\User
  *
  * @property int $id
  * @property string $name
@@ -62,7 +110,7 @@ namespace App\Eloquents{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Eloquents\UserDiscord|null $discord
+ * @property-read \App\Infrastructure\Eloquents\UserDiscord|null $discord
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -78,16 +126,16 @@ namespace App\Eloquents{
 	class User extends \Eloquent {}
 }
 
-namespace App\Eloquents{
+namespace App\Infrastructure\Eloquents{
 /**
- * App\Eloquents\UserDiscord
+ * App\Infrastructure\Eloquents\UserDiscord
  *
  * @property int $id
  * @property string $discord_id
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Eloquents\User $user
+ * @property-read \App\Infrastructure\Eloquents\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserDiscord newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserDiscord newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserDiscord query()

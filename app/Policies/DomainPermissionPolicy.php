@@ -2,10 +2,9 @@
 
 namespace App\Policies;
 
-use App\Eloquents\User;
+use App\Infrastructure\Eloquents\User;
 use Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Log;
 use Ome\Permission\Interfaces\UseCases\GetRolePermissionByUser\GetRolePermissionByUserRequest;
 use Ome\Permission\Interfaces\UseCases\GetRolePermissionByUser\GetRolePermissionByUserUseCase;
 

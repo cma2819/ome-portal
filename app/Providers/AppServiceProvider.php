@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Api\Discord\DiscordApiClient;
 use App\Api\Oengus\OengusApiClient;
+use Clogger\Logger;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Log\Logger as IlluminateLogger;
 use Illuminate\Support\ServiceProvider;
 use mpyw\Cowitter\Client;
 
@@ -37,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
                 config('services.oengus.api_url'),
                 config('services.oengus.cache_expire')
             );
+        });
+        $this->app->singleton(Logger::class, function (Application $app) {
+            return new Logger($app->make(IlluminateLogger::class));
         });
     }
 

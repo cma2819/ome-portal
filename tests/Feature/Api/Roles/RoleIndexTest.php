@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\Roles;
 
-use App\Eloquents\DiscordRolePermission;
+use App\Infrastructure\Eloquents\DiscordRolePermission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Api\AuthAdminUser;
 use Tests\TestCase;

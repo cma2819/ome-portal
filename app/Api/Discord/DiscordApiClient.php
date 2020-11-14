@@ -2,9 +2,9 @@
 
 namespace App\Api\Discord;
 
+use App\Facades\Logger;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class DiscordApiClient
 {
@@ -36,10 +36,10 @@ class DiscordApiClient
         };
 
         $url = $this->apiUrl . $endpoint;
-        Log::debug('Get request with Discord API Client to [' . $url . '].');
+        Logger::debug('string', 'Api.Discord', 'Get request with Discord API Client to [{url}].', ['url' => $url]);
         $response = Http::withToken($this->botToken, 'Bot')->get($url);
         if ($response->failed()) {
-            Log::debug('Failed to get request to discord api with status:' . $response->status());
+            Logger::debug('string', 'Api.Discord', 'Failed to get request to discord api with status:' . $response->status());
             throw new DiscordHttpException($response->status(), 'Failed to get request to endpoint[' . $endpoint . '].');
         }
 

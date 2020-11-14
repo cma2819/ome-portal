@@ -7,4 +7,19 @@ namespace Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent;
  */
 class DetachAttendeeFromEventResponse
 {
+    private bool $result;
+
+    public function __construct(
+        bool $result
+    ) {
+        $this->result = $result;
+    }
+
+    /**
+     * Get the value of result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
 }

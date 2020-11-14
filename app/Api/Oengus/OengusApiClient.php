@@ -2,9 +2,9 @@
 
 namespace App\Api\Oengus;
 
+use App\Facades\Logger;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class OengusApiClient
 {
@@ -34,11 +34,11 @@ class OengusApiClient
         };
 
         $url = $this->apiUrl . $endpoint;
-        Log::debug('Get request with Oengus API Client to [' . $url . '].');
+        Logger::debug('string', 'Api.Oengus', 'Get request with Oengus API Client to [{url}].', ['url' => $url]);
 
         $response = Http::get($url);
         if ($response->failed()) {
-            Log::debug('Failed to get request to oengus api with status:' . $response->status());
+            Logger::debug('string', 'Api.Oengus', 'Failed to get request to oengus api with status:' . $response->status());
             throw new OengusHttpException($response->status(), 'Failed to get request to endpoint[' . $endpoint . '].');
         }
 

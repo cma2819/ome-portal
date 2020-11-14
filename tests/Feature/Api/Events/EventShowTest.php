@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Api\Events;
 
-use App\Eloquents\AssociateEvent;
+use App\Infrastructure\Eloquents\AssociateEvent;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Ome\Event\Values\MarathonStatus;
-use Tests\Feature\Api\AuthAdminUser;
 use Tests\TestCase;
 
 class EventShowTest extends TestCase

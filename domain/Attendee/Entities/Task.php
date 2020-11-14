@@ -13,17 +13,23 @@ abstract class Task
 
     protected function __construct(
         ?int $id,
-        string $content,
-        string $scope
+        string $content
     ) {
         $this->id = $id;
         $this->content = $content;
-        $this->scope = $scope;
     }
 
     abstract public static function createNewTask(string $content): self;
 
     abstract public static function createRegistered(int $id, string $content): self;
+
+    public function hasSameIdentityWith(Task $opponent): bool
+    {
+        return (
+            $this->scope === $opponent->getScope()
+            && $this->id === $opponent->getId()
+        );
+    }
 
     /**
      * Get the value of id
@@ -50,14 +56,13 @@ abstract class Task
     }
 
     /**
-     * Set the value of content
+     * Edit Task.
      *
-     * @return  self
+     * @return self
      */
-    public function setContent($content)
+    public function edit(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 }

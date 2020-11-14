@@ -21,19 +21,20 @@ class InmemoryPersistTaskCommand implements PersistTaskCommand
 
     public function execute(Task $task): Task
     {
-        switch ($task->getScope()) {
-            case TaskScope::runner()->value():
-                $taskClass = RunnerTask::class;
-                break;
-            case TaskScope::commentator()->value():
-                $taskClass = CommentatorTask::class;
-                break;
-            case TaskScope::volunteer()->value():
-                $taskClass = VolunteerTask::class;
-                break;
-        }
 
         if (is_null($task->getId())) {
+
+            switch ($task->getScope()) {
+                case TaskScope::runner()->value():
+                    $taskClass = RunnerTask::class;
+                    break;
+                case TaskScope::commentator()->value():
+                    $taskClass = CommentatorTask::class;
+                    break;
+                case TaskScope::volunteer()->value():
+                    $taskClass = VolunteerTask::class;
+                    break;
+            }
 
             $newTask = call_user_func($taskClass . '::createRegistered', $this->nextId(), $task->getContent());
             $this->tasks[$newTask->getId()] = $newTask;

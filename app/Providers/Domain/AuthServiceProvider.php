@@ -45,7 +45,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Auth\Interfaces\Commands\PersistUserCommand::class,
-            \App\Domain\Auth\Commands\PersistUserEloquentCommand::class
+            \App\Infrastructure\Commands\Auth\PersistUserEloquentCommand::class
         );
 
         //////////////
@@ -54,19 +54,19 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\AuthenticatedUserQuery::class,
-            \App\Domain\Auth\Queries\AppAuthenticatedUserQuery::class
+            \App\Infrastructure\Queries\Auth\AppAuthenticatedUserQuery::class
         );
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\AuthenticateTokenQuery::class,
-            \App\Domain\Auth\Queries\DiscordAuthenticateTokenQuery::class
+            \App\Infrastructure\Queries\Auth\DiscordAuthenticateTokenQuery::class
         );
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\CurrentDiscordUserQuery::class,
-            \App\Domain\Auth\Queries\DiscordCurrentUserQuery::class
+            \App\Infrastructure\Queries\Auth\DiscordCurrentUserQuery::class
         );
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\FindUserByDiscordQuery::class,
-            \App\Domain\Auth\Queries\FindUserByDiscordQuery::class
+            \App\Infrastructure\Queries\Auth\FindUserByDiscordQuery::class
         );
 
         //////////

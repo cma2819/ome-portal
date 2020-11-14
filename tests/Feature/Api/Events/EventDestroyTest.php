@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\Events;
 
-use App\Eloquents\AssociateEvent;
+use App\Infrastructure\Eloquents\AssociateEvent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Api\AuthAdminUser;
 use Tests\TestCase;

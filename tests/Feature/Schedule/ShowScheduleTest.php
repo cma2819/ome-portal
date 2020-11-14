@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Schedule;
 
-use App\Eloquents\AssociateEvent;
+use App\Infrastructure\Eloquents\AssociateEvent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;

@@ -8,11 +8,11 @@ class CommentatorTask extends Task
 
     public static function createNewTask(string $content): self
     {
-        return new self(null, $content, 'commentator');
+        return new self(null, $content);
     }
 
     public static function createRegistered(int $id, string $content): self
     {
-        return new self($id, $content, 'commentator');
+        return new self($id, $content);
     }
 }

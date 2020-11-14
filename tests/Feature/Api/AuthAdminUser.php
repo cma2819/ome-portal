@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Api;
 
-use App\Eloquents\DiscordRolePermission;
-use App\Eloquents\User;
-use App\Eloquents\UserDiscord;
+use App\Infrastructure\Eloquents\DiscordRolePermission;
+use App\Infrastructure\Eloquents\User;
+use App\Infrastructure\Eloquents\UserDiscord;
 
 trait AuthAdminUser
 {

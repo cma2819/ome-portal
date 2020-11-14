@@ -8,11 +8,11 @@ class VolunteerTask extends Task
 
     public static function createNewTask(string $content): Task
     {
-        return new self(null, $content, 'volunteer');
+        return new self(null, $content);
     }
 
     public static function createRegistered(int $id, string $content): Task
     {
-        return new self($id, $content, 'volunteer');
+        return new self($id, $content);
     }
 }

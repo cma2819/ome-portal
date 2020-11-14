@@ -37,21 +37,6 @@ class Event
         );
     }
 
-    public static function createRegisteredEvent(
-        string $id,
-        string $name,
-        DateTimeInterface $startAt,
-        DateTimeInterface $endAt,
-        string $relateType,
-        string $slug
-    ) {
-        return new self(
-            OengusMarathon::createRegistered($id, $name, $startAt, $endAt),
-            RelateType::createFromValue($relateType),
-            Slug::create($slug)
-        );
-    }
-
     public function getId(): string
     {
         return $this->oengusMarathon->getId();

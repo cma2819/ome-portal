@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Api\Auth;
 
-use App\Eloquents\DiscordRolePermission;
-use App\Eloquents\User;
-use App\Eloquents\UserDiscord;
+use App\Infrastructure\Eloquents\DiscordRolePermission;
+use App\Infrastructure\Eloquents\User;
+use App\Infrastructure\Eloquents\UserDiscord;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Values\Domain;

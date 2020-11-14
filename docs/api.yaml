@@ -168,20 +168,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
-  /events/active:
-    get:
-      summary: Get events related to us only active now
-      tags:
-        - Events
-      responses:
-        '200':
-          description: Active events data related to us
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Event'
     post:
       summary: Import event from Oengus
       tags:
@@ -208,6 +194,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Event'
+  /events/active:
+    get:
+      summary: Get events related to us only active now
+      tags:
+        - Events
+      responses:
+        '200':
+          description: Active events data related to us
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
   /events/{id}:
     get:
       summary: Get event related to us
@@ -263,10 +263,6 @@ paths:
           description: Success
         '404':
           description: Event was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
     delete:
       summary: Detach related event from us
       tags:
@@ -284,10 +280,6 @@ paths:
           description: Success
         '404':
           description: Event was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /events/latest:
     get:
       summary: Get latest event
@@ -306,6 +298,184 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /events/{id}/attendees:
+    get:
+      summary: Get attendees in specific event with some condition
+      tags:
+        - Events
+        - Attendees
+      parameters:
+        - in: path
+          name: 'id'
+          description: Event ID extracted attendee
+          schema:
+            type: string
+            example: 'rtamarathon1'
+          required: true
+        - in: query
+          name: user
+          schema:
+            type: string
+          description: User's id list to extract attendee
+        - in: query
+          name: scope
+          schema:
+            type: string
+            enum:
+              - runner
+              - commentator
+              - volunteer
+      responses:
+        '200':
+          description: Extract attendees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attendee'
+    post:
+      summary: Register attendee to specific event
+      tags:
+        - Events
+        - Attendees
+      parameters:
+        - in: path
+          name: 'id'
+          description: Event ID registered attendee
+          schema:
+            type: string
+            example: 'rtamarathon1'
+          required: true
+      requestBody:
+        description: Attendee user data
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                scopes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AttendeeScope'
+              required:
+                - id
+                - scopes
+      responses:
+        '200':
+          description: 'Registered attendee data'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+        '404':
+          description: 'Register user is not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /events/{eventId}/attendees/{userId}:
+    get:
+      summary: Get attendee has specific user ID
+      tags:
+        - Events
+        - Attendees
+      parameters:
+        - in: path
+          name: eventId
+          description: Event's ID found attendee
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: userId
+          description: User's ID found from event
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Attendee data in eventId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+        '401':
+          description: User has not authorization to get attendee
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Attendee has specific user ID is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update attendee's scope
+      tags:
+        - Events
+        - Attendees
+      parameters:
+        - in: path
+          name: eventId
+          description: Event's ID found attendee
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: userId
+          description: User's ID found from event
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Update scope for attendee
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scopes:
+                  type: array
+                  items:
+                    '$ref': '#/components/schemas/AttendeeScope'
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: User has not authorization to update attendee
+        '404':
+          description: Attendee has specific user ID is not found
+    delete:
+      summary: Detach user from event attendees
+      tags:
+        - Events
+        - Attendees
+      parameters:
+        - in: path
+          name: eventId
+          description: Event's ID attendee in
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: userId
+          description: User's ID detach from event
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: User has not authorization to update attendee
+        '404':
+          description: Detach attendee is not found
 components:
   schemas:
     User:
@@ -432,11 +602,67 @@ components:
             - 'selected'
             - 'scheduled'
             - 'closed'
+    Attendee:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttendeeScope'
+        taskProgresses:
+          type: object
+          properties:
+            runner:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskProgress'
+            commentator:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskProgress'
+            volunteer:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskProgress'
+    Task:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        scope:
+          $ref: '#/components/schemas/AttendeeScope'
+        content:
+          type: string
     RelateType:
       type: string
       enum:
         - 'moderate'
         - 'support'
+    AttendeeScope:
+      type: string
+      enum:
+        - 'runner'
+        - 'commentator'
+        - 'volunteer'
+    TaskProgress:
+      type: object
+      properties:
+        taskId:
+          type: number
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        note:
+          type: string
+    ProgressStatus:
+      type: string
+      enum:
+        - 'apply'
+        - 'approval'
+        - 'deny'
     Error:
       type: string
       example: The message about error.

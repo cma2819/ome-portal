@@ -41,15 +41,15 @@ class TwitterServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\DeleteTweetCommand::class,
-            \App\Domain\Twitter\Commands\TwitterDeleteTweetCommand::class
+            \App\Infrastructure\Commands\Twitter\TwitterDeleteTweetCommand::class
         );
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\PersistTweetCommand::class,
-            \App\Domain\Twitter\Commands\TwitterPersistTweetCommand::class
+            \App\Infrastructure\Commands\Twitter\TwitterPersistTweetCommand::class
         );
         $this->app->bind(
             \Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand::class,
-            \App\Domain\Twitter\Commands\TwitterPersistTwitterMediaCommand::class
+            \App\Infrastructure\Commands\Twitter\TwitterPersistTwitterMediaCommand::class
         );
 
         //////////////
@@ -58,7 +58,7 @@ class TwitterServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Twitter\Interfaces\Queries\TimelineQuery::class,
-            \App\Domain\Twitter\Queries\TwitterTimelineQuery::class
+            \App\Infrastructure\Queries\Twitter\TwitterTimelineQuery::class
         );
 
         //////////////////////////
