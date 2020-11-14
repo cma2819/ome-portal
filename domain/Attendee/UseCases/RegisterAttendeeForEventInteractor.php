@@ -24,6 +24,7 @@ class RegisterAttendeeForEventInteractor implements RegisterAttendeeForEventUseC
         $attendee = Attendee::create(
             $request->getUserId(),
             $request->getEventId(),
+            $request->getScopes(),
             []
         );
 

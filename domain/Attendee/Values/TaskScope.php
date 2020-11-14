@@ -15,6 +15,13 @@ class TaskScope implements ValueObject
         $this->scope = $scope;
     }
 
+    /**
+     * Create TaskScope from value.
+     *
+     * @param string $scope
+     * @return self
+     * @throws UnmatchedContextException
+     */
     public static function createFromValue(string $scope): self
     {
         switch ($scope) {

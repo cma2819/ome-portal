@@ -6,6 +6,7 @@ use Ome\Attendee\Commands\InmemoryDeleteAttendeeCommand;
 use Ome\Attendee\Entities\Attendee;
 use Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent\DetachAttendeeFromEventRequest;
 use Ome\Attendee\UseCases\DetachAttendeeFromEventInteractor;
+use Ome\Attendee\Values\TaskScope;
 use PHPUnit\Framework\TestCase;
 
 class DetachAttendeeFromEventInteractorTest extends TestCase
@@ -14,7 +15,7 @@ class DetachAttendeeFromEventInteractorTest extends TestCase
     public function testDetachAttendeeFromEvent()
     {
         $inmemoryDeleteAttendee = new InmemoryDeleteAttendeeCommand([
-            Attendee::create(1, 1, [])
+            Attendee::create(1, 1, [TaskScope::runner()], [])
         ]);
 
         $detachAttendeeInteractor = new DetachAttendeeFromEventInteractor($inmemoryDeleteAttendee);

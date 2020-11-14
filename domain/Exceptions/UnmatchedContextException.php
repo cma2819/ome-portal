@@ -2,12 +2,12 @@
 
 namespace Ome\Exceptions;
 
-use RuntimeException;
+use Exception;
 
 /**
  * Runtime Exception when Entity about to be created unmatched on domain context.
  */
-class UnmatchedContextException extends RuntimeException
+class UnmatchedContextException extends Exception
 {
     public function __construct(
         string $className,
