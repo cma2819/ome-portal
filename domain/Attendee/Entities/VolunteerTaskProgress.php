@@ -15,8 +15,8 @@ class VolunteerTaskProgress extends TaskProgress
         string $note = ''
     ): self {
         return new self(
-            $task->getId(),
             $userId,
+            $task->getId(),
             $status,
             $note
         );

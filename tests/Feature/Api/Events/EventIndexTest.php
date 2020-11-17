@@ -6,13 +6,11 @@ use App\Infrastructure\Eloquents\AssociateEvent;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Ome\Event\Values\MarathonStatus;
-use Tests\AssertJsonArray;
 use Tests\TestCase;
 
 class EventIndexTest extends TestCase
 {
     use RefreshDatabase;
-    use AssertJsonArray;
 
     /** @test */
     public function testEventIndex()

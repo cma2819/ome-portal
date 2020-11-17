@@ -34,6 +34,8 @@ class ListAttendeesInEventRequest
                     // DO nothing, invalid parameter is ignored.
                 }
             }
+        } else {
+            $this->scopes = $scopes;
         }
     }
 

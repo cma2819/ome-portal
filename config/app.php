@@ -178,6 +178,7 @@ return [
         /*
          * Domain Service
          */
+        App\Providers\Domain\AttendeeServiceProvider::class,
         App\Providers\Domain\AuthServiceProvider::class,
         App\Providers\Domain\EventServiceProvider::class,
         App\Providers\Domain\PermissionServiceProvider::class,

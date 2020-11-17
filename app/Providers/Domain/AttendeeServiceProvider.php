@@ -57,6 +57,14 @@ class AttendeeServiceProvider extends ServiceProvider
         //////////////
         // Queries  //
         //////////////
+        $this->app->bind(
+            \Ome\Attendee\Interfaces\Queries\ExtractAttendeesQuery::class,
+            \App\Infrastructure\Queries\Attendee\DbExtractAttendeesQuery::class
+        );
+        $this->app->bind(
+            \Ome\Attendee\Interfaces\Queries\ExtractUsersByIdQuery::class,
+            \App\Infrastructure\Queries\Attendee\DbExtractUsersByIdQuery::class
+        );
 
         //////////////////////////
         // Test dependencies    //

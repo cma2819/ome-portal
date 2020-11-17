@@ -7,13 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Ome\Event\Values\MarathonStatus;
-use Tests\AssertJsonArray;
 use Tests\TestCase;
 
 class EventShowLatestTest extends TestCase
 {
     use RefreshDatabase;
-    use AssertJsonArray;
 
     /** @test */
     public function testEventShowLatest()

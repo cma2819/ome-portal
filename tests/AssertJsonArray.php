@@ -6,7 +6,11 @@ trait AssertJsonArray
 {
     public function assertJsonArray(array $json, string $key, array $expected)
     {
-        $test = $json[$key];
+        $keys = explode('.', $key);
+        $test = $json;
+        foreach ($keys as $k) {
+            $test = $test[$k];
+        }
 
         foreach ($expected as $exp) {
             $this->assertContains($exp, $test);

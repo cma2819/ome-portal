@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\Events;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Events\AttendeeIndexRequest;
+use App\Http\Responses\Api\Events\AttendeeResponse;
 use Illuminate\Http\Request;
+use Ome\Attendee\Interfaces\Dto\AttendeeDto;
 use Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent\ListAttendeesInEventRequest;
 use Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent\ListAttendeesInEventUseCase;
 
@@ -18,7 +20,7 @@ class AttendeeResource extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(
-        int $id,
+        string $id,
         AttendeeIndexRequest $request,
         ListAttendeesInEventUseCase $listAttendeesInEvent
     ) {
@@ -27,7 +29,17 @@ class AttendeeResource extends Controller
                 $id,
                 $request->scope
             )
-        );
+        )->getAttendees();
+        usort($attendees, function (AttendeeDto $a, AttendeeDto $b) {
+            return $a->getUser()->getId() - $b->getUser()->getId();
+        });
+
+        $response = [];
+        foreach ($attendees as $attendeeDto) {
+            $response[] = new AttendeeResponse($attendeeDto);
+        }
+
+        return $response;
     }
 
     /**

@@ -7,14 +7,12 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Ome\Event\Interfaces\Queries\OengusMarathonQuery;
 use Ome\Event\Values\MarathonStatus;
-use Tests\AssertJsonArray;
 use Tests\Mocks\Domain\Event\Queries\OengusMarathonQuery\MockOengusMarathonQuery;
 use Tests\TestCase;
 
 class EventActiveTest extends TestCase
 {
     use RefreshDatabase;
-    use AssertJsonArray;
 
     /** @test */
     public function testEventWhenActive()
