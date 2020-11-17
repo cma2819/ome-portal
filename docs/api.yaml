@@ -313,18 +313,11 @@ paths:
             example: 'rtamarathon1'
           required: true
         - in: query
-          name: user
-          schema:
-            type: string
-          description: User's id list to extract attendee
-        - in: query
           name: scope
           schema:
-            type: string
-            enum:
-              - runner
-              - commentator
-              - volunteer
+            type: array
+            items:
+              $ref: '#/components/schemas/AttendeeScope'
       responses:
         '200':
           description: Extract attendees

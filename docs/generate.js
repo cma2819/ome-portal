@@ -13,7 +13,7 @@ module.exports.generate = async (input, lang) => {
     mkdirSync(outputDir, {
         recursive: true
     });
-    writeFileSync(join(outputDir, '.swagger-codegen-ignore'));
+    writeFileSync(join(outputDir, '.swagger-codegen-ignore'), '');
     console.log(`Code-generate to ${outputDir}`);
     execSync(`java -jar ${jarPath} generate -i ${input} -l ${lang} -o ${outputDir}`);
 

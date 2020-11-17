@@ -2,6 +2,9 @@
 
 namespace Ome\Attendee\Interfaces\Queries;
 
+use Ome\Attendee\Entities\Attendee;
+use Ome\Attendee\Values\TaskScope;
+
 interface ExtractAttendeesQuery
 {
     /**

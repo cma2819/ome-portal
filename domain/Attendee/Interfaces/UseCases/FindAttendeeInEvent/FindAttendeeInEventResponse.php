@@ -2,17 +2,17 @@
 
 namespace Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent;
 
-use Ome\Attendee\Entities\Attendee;
+use Ome\Attendee\Interfaces\Dto\AttendeeDto;
 
 /**
  * Response object for FindAttendeeInEvent.
  */
 class FindAttendeeInEventResponse
 {
-    private ?Attendee $attendee;
+    private ?AttendeeDto $attendee;
 
     public function __construct(
-        ?Attendee $attendee
+        ?AttendeeDto $attendee
     ) {
         $this->attendee = $attendee;
     }

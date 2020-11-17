@@ -2,16 +2,19 @@
 
 namespace Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent;
 
-use Ome\Attendee\Entities\Attendee;
+use Ome\Attendee\Interfaces\Dto\AttendeeDto;
 
 /**
  * Response object for ListAttendeesInEvent.
  */
 class ListAttendeesInEventResponse
 {
-    /** @var Attendee[] */
+    /** @var AttendeeDto[] */
     private array $attendees;
 
+    /**
+     * @param AttendeeDto[] $attendees
+     */
     public function __construct(
         array $attendees
     ) {
