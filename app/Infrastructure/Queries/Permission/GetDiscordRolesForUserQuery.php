@@ -7,7 +7,7 @@ use App\Infrastructure\Eloquents\User;
 use Ome\Permission\Entities\Role;
 use Ome\Permission\Interfaces\Queries\GetRolesForUserQuery;
 
-class GetDiscordRolesForUser implements GetRolesForUserQuery
+class GetDiscordRolesForUserQuery implements GetRolesForUserQuery
 {
     private const DISCORD_GET_MEMBER_URL = '/guilds/{guild.id}/members/{user.id}';
 

@@ -36,7 +36,7 @@ class PermissionServiceProvider extends ServiceProvider
         //////////////
         $this->app->bind(
             \Ome\Permission\Interfaces\Commands\PersistRolePermissionCommand::class,
-            \App\Infrastructure\Commands\Permission\PersistRolePermission::class
+            \App\Infrastructure\Commands\Permission\DbPersistRolePermissionCommand::class
         );
 
         //////////////
@@ -44,19 +44,19 @@ class PermissionServiceProvider extends ServiceProvider
         //////////////
         $this->app->bind(
             \Ome\Permission\Interfaces\Queries\GetRolesForUserQuery::class,
-            \App\Infrastructure\Queries\Permission\GetDiscordRolesForUser::class
+            \App\Infrastructure\Queries\Permission\GetDiscordRolesForUserQuery::class
         );
         $this->app->bind(
             \Ome\Permission\Interfaces\Queries\GetPermissionForRoleQuery::class,
-            \App\Infrastructure\Queries\Permission\GetPermissionForDiscordRole::class
+            \App\Infrastructure\Queries\Permission\GetPermissionForDiscordRoleQuery::class
         );
         $this->app->bind(
             \Ome\Permission\Interfaces\Queries\ListPermissionsQuery::class,
-            \App\Infrastructure\Queries\Permission\ListPermissions::class
+            \App\Infrastructure\Queries\Permission\DbListPermissionsQuery::class
         );
         $this->app->bind(
             \Ome\Permission\Interfaces\Queries\ListRolesQuery::class,
-            \App\Infrastructure\Queries\Permission\ListDiscordRole::class
+            \App\Infrastructure\Queries\Permission\DbListDiscordRoleQuery::class
         );
         ;
 

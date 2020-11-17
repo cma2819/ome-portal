@@ -6,7 +6,7 @@ use App\Facades\Logger;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Commands\PersistEventCommand;
 
-class PersistEvent implements PersistEventCommand
+class DbPersistEventCommand implements PersistEventCommand
 {
     public function execute(Event $event): Event
     {

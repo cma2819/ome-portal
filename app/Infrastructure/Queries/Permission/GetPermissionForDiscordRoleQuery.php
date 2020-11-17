@@ -7,7 +7,7 @@ use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Interfaces\Queries\GetPermissionForRoleQuery;
 use Ome\Permission\Values\Domain;
 
-class GetPermissionForDiscordRole implements GetPermissionForRoleQuery
+class GetPermissionForDiscordRoleQuery implements GetPermissionForRoleQuery
 {
     public function fetch(string $id): RolePermission
     {

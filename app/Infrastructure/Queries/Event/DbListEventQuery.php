@@ -8,7 +8,7 @@ use Ome\Event\Interfaces\Queries\ListEventQuery;
 use Ome\Event\Values\RelateType;
 use Ome\Event\Values\Slug;
 
-class ListEvent implements ListEventQuery
+class DbListEventQuery implements ListEventQuery
 {
     public function fetch(): array
     {

@@ -48,11 +48,11 @@ class EventServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Event\Interfaces\Commands\PersistEventCommand::class,
-            \App\Infrastructure\Commands\Event\PersistEvent::class
+            \App\Infrastructure\Commands\Event\DbPersistEventCommand::class
         );
         $this->app->bind(
             \Ome\Event\Interfaces\Commands\DeleteEventCommand::class,
-            \App\Infrastructure\Commands\Event\DeleteEvent::class
+            \App\Infrastructure\Commands\Event\DbDeleteEventCommand::class
         );
 
         //////////////
@@ -61,7 +61,7 @@ class EventServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Event\Interfaces\Queries\FindEventQuery::class,
-            \App\Infrastructure\Queries\Event\FindEvent::class
+            \App\Infrastructure\Queries\Event\DbFindEventQuery::class
         );
         $this->app->bind(
             \Ome\Event\Interfaces\Queries\OengusMarathonQuery::class,
@@ -69,7 +69,7 @@ class EventServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             \Ome\Event\Interfaces\Queries\ListEventQuery::class,
-            \App\Infrastructure\Queries\Event\ListEvent::class
+            \App\Infrastructure\Queries\Event\DbListEventQuery::class
         );
 
         //////////////////////////

@@ -5,7 +5,7 @@ namespace App\Infrastructure\Commands\Event;
 use App\Infrastructure\Eloquents\AssociateEvent;
 use Ome\Event\Interfaces\Commands\DeleteEventCommand;
 
-class DeleteEvent implements DeleteEventCommand
+class DbDeleteEventCommand implements DeleteEventCommand
 {
     public function execute(string $id): bool
     {

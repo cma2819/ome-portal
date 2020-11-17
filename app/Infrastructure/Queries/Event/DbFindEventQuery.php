@@ -8,7 +8,7 @@ use Ome\Event\Interfaces\Queries\FindEventQuery;
 use Ome\Event\Values\RelateType;
 use Ome\Event\Values\Slug;
 
-class FindEvent implements FindEventQuery
+class DbFindEventQuery implements FindEventQuery
 {
     public function fetch(string $id): ?OmeEventDto
     {

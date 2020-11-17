@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Interfaces\Commands\PersistRolePermissionCommand;
 
-class PersistRolePermission implements PersistRolePermissionCommand
+class DbPersistRolePermissionCommand implements PersistRolePermissionCommand
 {
     public function execute(RolePermission $permission): RolePermission
     {

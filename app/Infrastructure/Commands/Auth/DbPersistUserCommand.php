@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Ome\Auth\Entities\User;
 use Ome\Auth\Interfaces\Commands\PersistUserCommand;
 
-class PersistUserEloquentCommand implements PersistUserCommand
+class DbPersistUserCommand implements PersistUserCommand
 {
     public function execute(User $user): User
     {

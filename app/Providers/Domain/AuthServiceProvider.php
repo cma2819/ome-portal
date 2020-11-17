@@ -45,7 +45,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app->bind(
             \Ome\Auth\Interfaces\Commands\PersistUserCommand::class,
-            \App\Infrastructure\Commands\Auth\PersistUserEloquentCommand::class
+            \App\Infrastructure\Commands\Auth\DbPersistUserCommand::class
         );
 
         //////////////

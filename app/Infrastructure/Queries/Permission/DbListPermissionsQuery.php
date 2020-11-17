@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Interfaces\Queries\ListPermissionsQuery;
 
-class ListPermissions implements ListPermissionsQuery
+class DbListPermissionsQuery implements ListPermissionsQuery
 {
     public function fetch(): array
     {

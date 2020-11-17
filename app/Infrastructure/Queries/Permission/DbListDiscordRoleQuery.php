@@ -6,7 +6,7 @@ use App\Api\Discord\DiscordApiClient;
 use Ome\Permission\Entities\Role;
 use Ome\Permission\Interfaces\Queries\ListRolesQuery;
 
-class ListDiscordRole implements ListRolesQuery
+class DbListDiscordRoleQuery implements ListRolesQuery
 {
     protected DiscordApiClient $discordApiClient;
 
