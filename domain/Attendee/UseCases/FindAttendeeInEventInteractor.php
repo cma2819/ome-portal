@@ -8,6 +8,7 @@ use Ome\Attendee\Interfaces\Queries\FindUserByIdQuery;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventRequest;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventResponse;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventUseCase;
+use Ome\Exceptions\EntityNotFoundException;
 
 class FindAttendeeInEventInteractor implements FindAttendeeInEventUseCase
 {
@@ -25,11 +26,17 @@ class FindAttendeeInEventInteractor implements FindAttendeeInEventUseCase
 
     public function interact(FindAttendeeInEventRequest $request): FindAttendeeInEventResponse
     {
+        $user = $this->findUserByIdQuery->fetch($request->getUserId());
+        if (is_null($user)) {
+            throw new EntityNotFoundException(self::class, [
+                'userId' => $request->getUserId(),
+            ]);
+        }
+
         $attendee = $this->findAttendeeQuery->fetch(
             $request->getEventId(),
             $request->getUserId()
         );
-        $user = $this->findUserByIdQuery->fetch($attendee->getUserId());
 
         return new FindAttendeeInEventResponse(
             new AttendeeDto($attendee, $user)

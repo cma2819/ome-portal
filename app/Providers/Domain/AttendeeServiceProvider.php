@@ -53,6 +53,10 @@ class AttendeeServiceProvider extends ServiceProvider
         //////////////
         // Commands //
         //////////////
+        $this->app->bind(
+            \Ome\Attendee\Interfaces\Commands\PersistAttendeeCommand::class,
+            \App\Infrastructure\Commands\Attendee\DbPersistAttendeeCommand::class
+        );
 
         //////////////
         // Queries  //
@@ -64,6 +68,14 @@ class AttendeeServiceProvider extends ServiceProvider
         $this->app->bind(
             \Ome\Attendee\Interfaces\Queries\ExtractUsersByIdQuery::class,
             \App\Infrastructure\Queries\Attendee\DbExtractUsersByIdQuery::class
+        );
+        $this->app->bind(
+            \Ome\Attendee\Interfaces\Queries\FindAttendeeQuery::class,
+            \App\Infrastructure\Queries\Attendee\DbFindAttendeeQuery::class
+        );
+        $this->app->bind(
+            \Ome\Attendee\Interfaces\Queries\FindUserByIdQuery::class,
+            \App\Infrastructure\Queries\Attendee\DbFindUserByIdQuery::class
         );
 
         //////////////////////////

@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Api\Events;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Events\AttendeeCreateRequest;
 use App\Http\Requests\Api\Events\AttendeeIndexRequest;
 use App\Http\Responses\Api\Events\AttendeeResponse;
+use App\Infrastructure\Eloquents\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Ome\Attendee\Interfaces\Dto\AttendeeDto;
+use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventRequest;
+use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventUseCase;
 use Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent\ListAttendeesInEventRequest;
 use Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent\ListAttendeesInEventUseCase;
+use Ome\Attendee\Interfaces\UseCases\RegisterAttendeeForEvent\RegisterAttendeeForEventRequest;
+use Ome\Attendee\Interfaces\UseCases\RegisterAttendeeForEvent\RegisterAttendeeForEventUseCase;
+use Ome\Exceptions\EntityNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AttendeeResource extends Controller
 {
@@ -45,23 +55,52 @@ class AttendeeResource extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param string $event
+     * @param  AttendeeCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(
+        string $event,
+        AttendeeCreateRequest $request,
+        RegisterAttendeeForEventUseCase $registerAttendeeForEvent
+    ) {
+        try {
+            $attendee = $registerAttendeeForEvent->interact(
+                new RegisterAttendeeForEventRequest(
+                    $event,
+                    $request->id,
+                    $request->scopes
+                )
+            )->getAttendee();
+        } catch (EntityNotFoundException $e) {
+            throw new NotFoundHttpException($e->getMessage());
+        }
+
+        return new AttendeeResponse($attendee);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(
+        string $eventId,
+        int $userId,
+        FindAttendeeInEventUseCase $findAttendeeInEvent
+    ) {
+        /** @var User */
+        $loginUser = Auth::user();
+        if (!($loginUser->can('access-to-admin')) && ($loginUser->id !== $userId)) {
+            throw new AuthorizationException();
+        }
+
+        $attendee = $findAttendeeInEvent->interact(
+            new FindAttendeeInEventRequest($eventId, $userId)
+        )->getAttendee();
+
+        return new AttendeeResponse($attendee);
     }
 
     /**

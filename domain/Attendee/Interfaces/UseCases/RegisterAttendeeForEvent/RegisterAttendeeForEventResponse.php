@@ -2,17 +2,17 @@
 
 namespace Ome\Attendee\Interfaces\UseCases\RegisterAttendeeForEvent;
 
-use Ome\Attendee\Entities\Attendee;
+use Ome\Attendee\Interfaces\Dto\AttendeeDto;
 
 /**
  * Response object for RegisterAttendeeForEvent.
  */
 class RegisterAttendeeForEventResponse
 {
-    private Attendee $attendee;
+    private AttendeeDto $attendee;
 
     public function __construct(
-        Attendee $attendee
+        AttendeeDto $attendee
     ) {
         $this->attendee = $attendee;
     }
