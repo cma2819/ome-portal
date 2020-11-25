@@ -2,7 +2,6 @@
 
 namespace Ome\Event\Entities;
 
-use DateTimeInterface;
 use Ome\Event\Values\RelateType;
 use Ome\Event\Values\Slug;
 use Ome\Exceptions\UnmatchedContextException;
