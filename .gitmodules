@@ -4,3 +4,4 @@
 	url = https://github.com/cma2819/clogger.git
 [submodule "clogger"]
 	url = https://github.com/cma2819/clogger.git
+	path = clogger
