@@ -9,15 +9,17 @@ use App\Infrastructure\Eloquents\EventAttendee;
 use App\Infrastructure\Eloquents\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\AssertJsonArray;
+use Ome\Permission\Interfaces\Queries\GetPermissionForRoleQuery;
 use Tests\Feature\Api\AuthAdminUser;
+use Tests\Feature\Api\UseNoRoleUser;
 use Tests\TestCase;
 
-class AttendeeShowTest extends TestCase
+class AttendeeDestroyTest extends TestCase
 {
+
     use RefreshDatabase;
     use AuthAdminUser;
-    use AssertJsonArray;
+    use UseNoRoleUser;
 
     protected function setUp(): void
     {
@@ -26,7 +28,7 @@ class AttendeeShowTest extends TestCase
     }
 
     /** @test */
-    public function testAttendeeShow()
+    public function testAttendeeDestroy()
     {
         AssociateEvent::create([
             'id' => 'rtamarathon',
@@ -69,61 +71,46 @@ class AttendeeShowTest extends TestCase
             'note' => 'It is fine!'
         ]);
 
-        $response = $this->actingAs($this->authUser(), 'api')->getJson(route('api.v1.attendees.show', [
+        $response = $this->actingAs($this->authUser(), 'api')->deleteJson(route('api.v1.attendees.destroy', [
             'event' => 'rtamarathon',
             'attendee' => $user->id,
         ]));
 
-        $response->assertSuccessful();
-        $this->assertJsonArray($response->json(), 'scopes', ['runner', 'commentator']);
-        $response->assertJson([
-            'id' => $user->id,
-            'username' => $user->name,
-            'taskProgresses' => [
-                'runner' => [
-                    [
-                        'taskId' => $runnerTask->id,
-                        'status' => 'apply',
-                        'note' => 'Checked.',
-                    ],
-                ],
-                'commentator' => [
-                    [
-                        'taskId' => $commentatorTask->id,
-                        'status' => 'approval',
-                        'note' => 'It is fine!',
-                    ],
-                ],
-            ],
+        $response->assertNoContent();
+
+        $this->assertDatabaseMissing('event_attendees', [
+            'user_id' => $user->id,
+            'event_id' => 'rtamarathon',
         ]);
     }
 
     /** @test */
     public function testNoAuthorization()
     {
-        /** @var User */
-        $user = factory(User::class)->create();
-        /** @var User */
-        $showUser = factory(User::class)->create();
+        $this->useNoRoleUser();
 
-        $response = $this->actingAs($user)->getJson(route('api.v1.attendees.show', [
+        AssociateEvent::create([
+            'id' => 'rtamarathon',
+            'relate_type' => 'moderate',
+            'slug' => 'RM1'
+        ]);
+        /** @var User */
+        $user = factory(User::class)->create([
+            'id' => $this->authUser()->id + 1,
+        ]);
+        EventAttendee::create([
+            'user_id' => $user->id,
+            'attend_scope' => 'runner',
+            'event_id' => 'rtamarathon',
+        ]);
+
+        $response = $this->actingAs($user, 'api')->deleteJson(route('api.v1.attendees.destroy', [
             'event' => 'rtamarathon',
-            'attendee' => $showUser->id,
+            'attendee' => $user->id,
         ]));
 
-        $response->assertStatus(401);
-
+        $response->assertForbidden();
     }
 
-    /** @test */
-    public function testNotFound()
-    {
-        $response = $this->actingAs($this->authUser(), 'api')->getJson(route('api.v1.attendees.show', [
-            'event' => 'rtamarathon',
-            'attendee' => 1,
-        ]));
-
-        $response->assertNotFound();
-    }
 
 }

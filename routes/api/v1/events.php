@@ -8,5 +8,5 @@ Route::apiResource('events', 'Events\EventResource')->only(['index', 'show']);
 Route::middleware(['auth:api', 'can:access-to-admin'])->apiResource('events', 'Events\EventResource')->only(['store', 'update', 'destroy']);
 
 Route::apiResource('events/{event}/attendees', 'Events\AttendeeResource')->only(['index']);
-Route::middleware('auth:api')->apiResource('events/{event}/attendees', 'Events\AttendeeResource')->only(['show']);
 Route::middleware(['auth:api', 'can:access-to-admin'])->apiResource('events/{event}/attendees', 'Events\AttendeeResource')->only(['store', 'update', 'destroy']);
+Route::middleware('auth:api')->apiResource('events/{event}/attendees', 'Events\AttendeeResource')->only(['show']);

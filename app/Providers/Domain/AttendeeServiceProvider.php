@@ -57,6 +57,10 @@ class AttendeeServiceProvider extends ServiceProvider
             \Ome\Attendee\Interfaces\Commands\PersistAttendeeCommand::class,
             \App\Infrastructure\Commands\Attendee\DbPersistAttendeeCommand::class
         );
+        $this->app->bind(
+            \Ome\Attendee\Interfaces\Commands\DeleteAttendeeCommand::class,
+            \App\Infrastructure\Commands\Attendee\DbDeleteAttendeeCommand::class
+        );
 
         //////////////
         // Queries  //

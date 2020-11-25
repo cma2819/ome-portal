@@ -28,15 +28,17 @@ class FindAttendeeInEventInteractor implements FindAttendeeInEventUseCase
     {
         $user = $this->findUserByIdQuery->fetch($request->getUserId());
         if (is_null($user)) {
-            throw new EntityNotFoundException(self::class, [
-                'userId' => $request->getUserId(),
-            ]);
+            return new FindAttendeeInEventResponse(null);
         }
 
         $attendee = $this->findAttendeeQuery->fetch(
             $request->getEventId(),
             $request->getUserId()
         );
+
+        if (is_null($attendee)) {
+            return new FindAttendeeInEventResponse(null);
+        }
 
         return new FindAttendeeInEventResponse(
             new AttendeeDto($attendee, $user)

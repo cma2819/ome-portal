@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api\Events;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Events\AttendeeCreateRequest;
 use App\Http\Requests\Api\Events\AttendeeIndexRequest;
+use App\Http\Requests\Api\Events\AttendeeUpdateRequest;
 use App\Http\Responses\Api\Events\AttendeeResponse;
 use App\Infrastructure\Eloquents\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Ome\Attendee\Interfaces\Dto\AttendeeDto;
+use Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent\DetachAttendeeFromEventRequest;
+use Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent\DetachAttendeeFromEventUseCase;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventRequest;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventUseCase;
 use Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent\ListAttendeesInEventRequest;
@@ -100,19 +103,45 @@ class AttendeeResource extends Controller
             new FindAttendeeInEventRequest($eventId, $userId)
         )->getAttendee();
 
+        if (is_null($attendee)) {
+            abort(404);
+        }
+
         return new AttendeeResponse($attendee);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param AttendeeUpdateRequest $request
+     * @param string $eventId
+     * @param integer $userId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(
+        AttendeeUpdateRequest $request,
+        string $eventId,
+        int $userId,
+        FindAttendeeInEventUseCase $findAttendeeInEvent,
+        RegisterAttendeeForEventUseCase $registerAttendeeForEvent
+    ) {
+        $attendee = $findAttendeeInEvent->interact(
+            new FindAttendeeInEventRequest($eventId, $userId)
+        )->getAttendee();
+
+        if (is_null($attendee)) {
+            abort(404);
+        }
+
+        $registerAttendeeForEvent->interact(
+            new RegisterAttendeeForEventRequest(
+                $attendee->getAttendee()->getEventId(),
+                $attendee->getAttendee()->getUserId(),
+                $request->scopes
+            )
+        );
+
+        return response()->noContent();
     }
 
     /**
@@ -121,8 +150,19 @@ class AttendeeResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(
+        string $eventId,
+        int $userId,
+        DetachAttendeeFromEventUseCase $detachAttendeeFromEvent
+    ) {
+        $result = $detachAttendeeFromEvent->interact(
+            new DetachAttendeeFromEventRequest($userId, $eventId)
+        )->getResult();
+
+        if (!$result) {
+            abort(404);
+        }
+
+        return response()->noContent();
     }
 }

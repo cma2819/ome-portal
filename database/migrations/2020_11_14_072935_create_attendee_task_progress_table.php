@@ -15,8 +15,8 @@ class CreateAttendeeTaskProgressTable extends Migration
     {
         Schema::create('attendee_task_progress', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_id')->constrained('attendee_tasks');
-            $table->foreignId('event_attendee_id')->constrained();
+            $table->foreignId('task_id')->constrained('attendee_tasks')->onDelete('cascade');
+            $table->foreignId('event_attendee_id')->constrained()->onDelete('cascade');
             $table->string('progress_status', 32);
             $table->string('note');
             $table->timestamps();

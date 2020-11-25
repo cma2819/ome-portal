@@ -396,7 +396,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Attendee'
-        '401':
+        '403':
           description: User has not authorization to get attendee
           content:
             application/json:
@@ -440,7 +440,7 @@ paths:
       responses:
         '204':
           description: Success
-        '401':
+        '403':
           description: User has not authorization to update attendee
         '404':
           description: Attendee has specific user ID is not found
@@ -465,7 +465,7 @@ paths:
       responses:
         '204':
           description: Success
-        '401':
+        '403':
           description: User has not authorization to update attendee
         '404':
           description: Detach attendee is not found
