@@ -239,6 +239,5 @@ return [
 
     'api_url' => env('API_HOST', 'http://localhost:8080'),
     'internal_stream_url' => env('INTERNAL_STREAM_HOST', 'http://localhost:8000'),
-    'heroku_pipeline' => env('HEROKU_PIPELINE', false),
 
 ];

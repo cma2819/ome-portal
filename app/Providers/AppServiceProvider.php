@@ -40,11 +40,9 @@ class AppServiceProvider extends ServiceProvider
                 config('services.oengus.cache_expire')
             );
         });
-        if (!config('app.heroku_pipeline')) {
-            $this->app->singleton(Logger::class, function (Application $app) {
-                return new Logger($app->make(IlluminateLogger::class));
-            });
-        }
+        $this->app->singleton(Logger::class, function (Application $app) {
+            return new Logger($app->make(IlluminateLogger::class));
+        });
     }
 
     /**

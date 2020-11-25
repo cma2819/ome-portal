@@ -16,7 +16,6 @@
                 "APP_ENV": "testing",
                 "APP_KEY": "base64:TiSVW8pYGtNbxPxt2OfyrPG62trJX57PstEmThWoHBY=",
                 "APP_DEBUG": "true",
-                "HEROKU_PIPELINE": "true",
                 "DB_CONNECTION": "pgsql",
                 "TWITTER_SCREEN_NAME": "twitter integration will be mocked",
                 "TWITTER_CONSUMER_KEY": "twitter integration will be mocked",
