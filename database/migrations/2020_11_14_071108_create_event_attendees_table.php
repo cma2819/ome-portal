@@ -15,7 +15,7 @@ class CreateEventAttendeesTable extends Migration
     {
         Schema::create('event_attendees', function (Blueprint $table) {
             $table->id();
-            $table->string('event_id');
+            $table->string('event_id', 64);
             $table->foreignId('user_id')->constrained('users');
             $table->string('attend_scope', 32);
             $table->timestamps();
