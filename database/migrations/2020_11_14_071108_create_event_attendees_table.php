@@ -20,8 +20,8 @@ class CreateEventAttendeesTable extends Migration
             $table->string('attend_scope', 32);
             $table->timestamps();
 
-            $table->foreign('event_id')->references('id')->on('associate_events');
             $table->unique(['event_id', 'user_id', 'attend_scope']);
+            $table->foreign('event_id')->references('id')->on('associate_events');
         });
     }
 
