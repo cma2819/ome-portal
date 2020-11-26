@@ -15,11 +15,12 @@ class CreateAttendeeTasksTable extends Migration
     {
         Schema::create('attendee_tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('event_id');
+            $table->string('event_id', 64);
             $table->string('attendee_scope', 32);
             $table->string('content');
             $table->timestamps();
 
+            $table->unique(['event_id', 'attendee_scope']);
             $table->foreign('event_id')->references('id')->on('associate_events');
         });
     }
