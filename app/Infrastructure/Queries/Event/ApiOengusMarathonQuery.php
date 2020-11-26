@@ -7,7 +7,7 @@ use DateTimeInterface;
 use Ome\Event\Entities\OengusMarathon as OengusMarathonEntity;
 use Ome\Event\Interfaces\Queries\OengusMarathonQuery;
 
-class DbOengusMarathonQuery implements OengusMarathonQuery
+class ApiOengusMarathonQuery implements OengusMarathonQuery
 {
     protected OengusApiClient $oengusApiClient;
 

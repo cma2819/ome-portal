@@ -65,7 +65,7 @@ class EventServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             \Ome\Event\Interfaces\Queries\OengusMarathonQuery::class,
-            \App\Infrastructure\Queries\Event\OengusMarathon::class
+            \App\Infrastructure\Queries\Event\ApiOengusMarathonQuery::class
         );
         $this->app->bind(
             \Ome\Event\Interfaces\Queries\ListEventQuery::class,
