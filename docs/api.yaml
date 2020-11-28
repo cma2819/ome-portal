@@ -469,6 +469,167 @@ paths:
           description: User has not authorization to update attendee
         '404':
           description: Detach attendee is not found
+  /schemes:
+    get:
+      summary: Get list of event schemes.
+      tags:
+        - Schemes
+      parameters:
+        - in: query
+          name: plannerId
+          description: User's ID plans scheme
+          schema:
+            type: string
+        - in: query
+          name: status
+          description: Scheme's status list
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: startAt
+          description: Date time scheme start after
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: endAt
+          description: Date time scheme end before
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Success to get schemes. If requested from not admin, get only from authenticated user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventScheme'
+        '403':
+          description: User has not authorization to get schemes.
+    post:
+      summary: Create new event scheme.
+      tags:
+        - Schemes
+      requestBody:
+        description: Scheme content
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSchemeRequest'
+      responses:
+        '200':
+          description: Success to create scheme.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventScheme'
+  /schemes/{id}:
+    get:
+      summary: Find scheme has the ID.
+      tags:
+        - Schemes
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Scheme data has the ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventScheme'
+        '403':
+          description: User not admin or planner.
+        '404':
+          description: Scheme is not found.
+    put:
+      summary: Update scheme in applied.
+      tags:
+        - Schemes
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated scheme data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSchemeRequest'
+      responses:
+        '204':
+          description: Success to update.
+        '403':
+          description: User not admin or planner.
+        '404':
+          description: Scheme is not found.
+  /schemes/{id}/status:
+    put:
+      summary: Update scheme status.
+      tags:
+        - Schemes
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Update status
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  $ref: '#/components/schemas/SchemeStatus'
+      responses:
+        '204':
+          description: Success to update.
+        '403':
+          description: User not admin.
+        '404':
+          description: Scheme is not found.
+  /schemes/{id}/details:
+    post:
+      summary: Make detail for approved scheme.
+      tags:
+        - Schemes
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Scheme detail data
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: string
+      responses:
+        '200':
+          description: Success to make detail scheme.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventScheme'
+        '403':
+          description: User not admin.
+        '404':
+          description: Scheme is not found.
 components:
   schemas:
     User:
@@ -659,6 +820,57 @@ components:
         - 'apply'
         - 'approval'
         - 'deny'
+    EventScheme:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: 'Upcoming Event!'
+        planner:
+          $ref: '#/components/schemas/User'
+        status:
+          type: string
+          example: 'applied'
+        startAt:
+          type: string
+          format: date-time
+          example: 2020-1-1T10:00:00Z
+        endAt:
+          type: string
+          format: date-time
+          example: 2020-1-2T23:00:00Z
+        explanation:
+          type: string
+          example: 'This event is some explanation.'
+        detail:
+          type: string
+          example: 'Event detail for users.'
+    EventSchemeRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        startAt:
+          type: string
+          format: date-time
+          example: 2020-1-1T10:00:00Z
+        endAt:
+          type: string
+          format: date-time
+          example: 2020-1-2T23:00:00Z
+        explanation:
+          type: string
+          example: 'This event is some explanation.'
+    SchemeStatus:
+      type: string
+      enum:
+        - applied
+        - approved
+        - denied
+        - confirmed
     Error:
       type: string
       example: The message about error.
