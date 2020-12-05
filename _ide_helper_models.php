@@ -125,6 +125,38 @@ namespace App\Infrastructure\Eloquents{
 
 namespace App\Infrastructure\Eloquents{
 /**
+ * App\Infrastructure\Eloquents\EventScheme
+ *
+ * @property int $id
+ * @property int $planner_id
+ * @property string $name
+ * @property string $status
+ * @property \Illuminate\Support\Carbon $start_at
+ * @property \Illuminate\Support\Carbon $end_at
+ * @property string $explanation
+ * @property mixed $detail
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Infrastructure\Eloquents\User $planner
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereDetail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereEndAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereExplanation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme wherePlannerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereStartAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereUpdatedAt($value)
+ */
+	class EventScheme extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
  * App\Infrastructure\Eloquents\User
  *
  * @property int $id

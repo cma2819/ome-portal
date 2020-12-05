@@ -20,6 +20,9 @@ Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.di
 Route::get('/schedules', 'Pages\Schedule')->name('schedules.index');
 Route::get('/schedules/{id?}', 'Pages\Schedule')->name('schedules.show')->where('id', '.*');
 
+Route::get('/schemes', 'Pages\Scheme')->name('scheme');
+Route::get('/schemes/{any}', 'Pages\Scheme')->name('scheme.any')->where('any', '.*');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');

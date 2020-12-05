@@ -76,10 +76,10 @@
             "phpunit"
         ],
         "test:unit": [
-            "phpunit --testsuite=Unit"
+            "phpunit --testdox --testsuite=Unit"
         ],
         "test:feature": [
-            "phpunit --testsuite=Feature"
+            "phpunit --testdox --testsuite=Feature"
         ]
     }
 }

@@ -182,6 +182,7 @@ return [
         App\Providers\Domain\AuthServiceProvider::class,
         App\Providers\Domain\EventServiceProvider::class,
         App\Providers\Domain\PermissionServiceProvider::class,
+        App\Providers\Domain\SchemeServiceProvider::class,
         App\Providers\Domain\TwitterServiceProvider::class,
     ],
 

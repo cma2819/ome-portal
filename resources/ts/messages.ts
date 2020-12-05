@@ -6,6 +6,7 @@ export const messages: LocaleMessages = {
         actions: {
           top: 'トップ',
           schedule: 'スケジュール',
+          scheme: 'イベント応募',
 
           login: 'ログイン',
           menu: 'メニュー',
@@ -14,6 +15,10 @@ export const messages: LocaleMessages = {
           admin: '管理画面',
           twitter: 'Twitterクライアント',
         }
+      },
+      generals: {
+        required: '* 必須',
+        back: '戻る',
       },
       event: {
         labels: {
@@ -58,11 +63,50 @@ export const messages: LocaleMessages = {
       },
       stream: {
         internal: {
-          title: '{name} の配信視聴ページ（OME用）'
+          title: '{name} の配信視聴ページ（OME用）',
         },
         errors: {
-          html5: 'お使いのブラウザはHTML5のプレイヤーに対応していないため、再生できません。'
+          html5: 'お使いのブラウザはHTML5のプレイヤーに対応していないため、再生できません。',
         }
+      },
+      scheme: {
+        labels: {
+          start: {
+            date: 'イベント開始日',
+            time: 'イベント開始時刻',
+          },
+          end: {
+            date: 'イベント終了日',
+            time: 'イベント終了時刻',
+          },
+          name: 'イベント名',
+          explanation: 'イベント説明',
+          apply: '応募',
+        },
+        links: {
+          apply: '応募する',
+        },
+        details: {
+          time: 'hhmm形式で入力してください。',
+          name: 'イベント名を記入してください。仮のものでも構いません。',
+          explanation: '応募するイベントについての説明を具体的に記入してください。'
+        },
+        errors: {
+          time: {
+            format: 'hhmm形式で入力してください。',
+            hour: '時は0～23の値で入力してください。',
+            minute: '分は0～59の値で入力してください。',
+          }
+        },
+        status: {
+          applied: '応募済',
+          approved: '承認',
+          confirmed: '確定',
+          denied: '否認',
+        },
+        messages: {
+          auth: 'イベント応募するにはログインしてください。',
+        },
       },
       admin: {
         tabs: {

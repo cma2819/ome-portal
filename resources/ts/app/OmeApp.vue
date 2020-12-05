@@ -22,6 +22,12 @@
         >
           {{ $t('layout.actions.schedule') }}
         </v-btn>
+        <v-btn
+          text
+          href="/schemes"
+        >
+          {{ $t('layout.actions.scheme') }}
+        </v-btn>
       </div>
 
       <v-spacer></v-spacer>

@@ -10,4 +10,5 @@ $path = base_path('routes/api/v1');
 Route::name($name)->group($path . '/auth.php');
 Route::name($name)->group($path . '/events.php');
 Route::name($name)->group($path . '/roles.php');
+Route::name($name)->group($path . '/schemes.php');
 Route::name($name)->group($path . '/twitter.php');

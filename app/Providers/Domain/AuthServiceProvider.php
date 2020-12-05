@@ -38,6 +38,10 @@ class AuthServiceProvider extends ServiceProvider
             \Ome\Auth\Interfaces\UseCases\GetCurrentDiscordUser\GetCurrentDiscordUserUseCase::class,
             \Ome\Auth\UseCases\GetCurrentDiscordUserInteractor::class
         );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\UseCases\GetUserProfile\GetUserProfileUseCase::class,
+            \Ome\Auth\UseCases\GetUserProfileInteractor::class
+        );
 
         //////////////
         // Commands //
@@ -68,6 +72,14 @@ class AuthServiceProvider extends ServiceProvider
             \Ome\Auth\Interfaces\Queries\FindUserByDiscordQuery::class,
             \App\Infrastructure\Queries\Auth\FindUserByDiscordQuery::class
         );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\FindDiscordByIdQuery::class,
+            \App\Infrastructure\Queries\Auth\ApiFindDiscordByIdQuery::class
+        );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\FindUserByIdQuery::class,
+            \App\Infrastructure\Queries\Auth\DbFindUserByIdQuery::class
+        );
 
         //////////
         // misc //
@@ -96,6 +108,11 @@ class AuthServiceProvider extends ServiceProvider
             $this->app->bind(
                 \Ome\Auth\Interfaces\Queries\CurrentDiscordUserQuery::class,
                 \Tests\Mocks\Domain\Auth\Queries\MockCurrentDiscordUserQuery::class
+            );
+
+            $this->app->bind(
+                \Ome\Auth\Interfaces\Queries\FindDiscordByIdQuery::class,
+                \Tests\Mocks\Domain\Auth\Queries\MockFindDiscordByIdQuery::class
             );
         }
     }

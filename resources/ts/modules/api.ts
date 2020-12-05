@@ -2,12 +2,16 @@ import { getModule, Module, Action } from 'vuex-module-decorators';
 import store from '../plugins/store';
 import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
-import { User } from '../lib/models/auth';
+import { DiscordProfile, User, UserProfile } from '../lib/models/auth';
 import { Role } from 'lib/models/role';
-import { RelateType, Event, Status } from 'lib/models/event';
+import { RelateType, Event, Status, EventScheme } from 'lib/models/event';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
+
+  get isAuthenticated(): boolean {
+    return this.bearer ? true : false;
+  }
 
   @Action
   public updateBearerToken(token: string): void {
@@ -123,17 +127,16 @@ class Api extends ApiClient {
       submitsOpen: boolean;
       status: Status
     }) => {
-
-    return {
-      id: event.id,
-      name: event.name,
-      startAt: new Date(Date.parse(event.startAt)),
-      endAt: new Date(Date.parse(event.endAt)),
-      relateType: event.relateType,
-      slug: event.slug,
-      submitsOpen: event.submitsOpen,
-      status: event.status,
-    };
+      return {
+        id: event.id,
+        name: event.name,
+        startAt: new Date(Date.parse(event.startAt)),
+        endAt: new Date(Date.parse(event.endAt)),
+        relateType: event.relateType,
+        slug: event.slug,
+        submitsOpen: event.submitsOpen,
+        status: event.status,
+      };
     });
   }
 
@@ -219,6 +222,66 @@ class Api extends ApiClient {
       slug: response.slug,
       submitsOpen: response.submitsOpen,
       status: response.status,
+    };
+  }
+
+  @Action
+  public async getSchemes(payload: {planner?: number, status?: Array<string>, startAt?: Date, endAt?: Date}): Promise<Array<EventScheme>> {
+    const query = new URLSearchParams();
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value) {
+        if (value instanceof Array) {
+          value.forEach((v) => {
+            query.append(key, v);
+          })
+        }
+        query.append(key, value.toString());
+      }
+    })
+    const response = await this.get('schemes?' + query.toString());
+    return response.map((scheme: {
+      id: number,
+      name: string,
+      planner: UserProfile,
+      startAt: string,
+      status: string,
+      endAt: string,
+      explanation: string,
+      detail: string,
+    }) => {
+      return {
+        id: scheme.id,
+        name: scheme.name,
+        planner: scheme.planner,
+        status: scheme.status,
+        startAt: scheme.startAt && new Date(Date.parse(scheme.startAt)),
+        endAt: scheme.endAt && new Date(Date.parse(scheme.endAt)),
+        explanation: scheme.explanation,
+        detail: scheme.detail,
+      }
+    });
+  }
+
+  @Action
+  public async postScheme(payload: {name: string, startAt: Date|null, endAt: Date|null, explanation: string}): Promise<EventScheme> {
+    const response = await this.post({
+      endpoint: 'schemes',
+      params: {
+        name: payload.name,
+        startAt: payload.startAt && payload.startAt.toISOString(),
+        endAt: payload.endAt && payload.endAt.toISOString(),
+        explanation: payload.explanation,
+      }
+    });
+    return {
+      id: response.id,
+      name: response.name,
+      planner: response.planner,
+      status: response.status,
+      startAt: new Date(Date.parse(response.startAt)),
+      endAt: new Date(Date.parse(response.endAt)),
+      explanation: response.explanation,
+      detail: response.detail,
     };
   }
 }

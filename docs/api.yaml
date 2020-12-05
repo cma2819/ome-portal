@@ -476,7 +476,7 @@ paths:
         - Schemes
       parameters:
         - in: query
-          name: plannerId
+          name: planner
           description: User's ID plans scheme
           schema:
             type: string
@@ -645,12 +645,35 @@ components:
           $ref: '#/components/schemas/DiscordUser'
         permissions:
           $ref: '#/components/schemas/Permissions'
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        username:
+          type: string
+          example: 'ユーザー'
+        discord:
+          $ref: '#/components/schemas/DiscordProfile'
     DiscordUser:
       type: object
       properties:
         id:
           type: string
           example: '80351110224678912'
+    DiscordProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '80351110224678912'
+        username:
+          type: string
+          example: 'Nelly'
+        discriminator:
+          type: string
+          example: '1337'
     Permissions:
       type: array
       items:
@@ -830,7 +853,7 @@ components:
           type: string
           example: 'Upcoming Event!'
         planner:
-          $ref: '#/components/schemas/User'
+          $ref: '#/components/schemas/UserProfile'
         status:
           type: string
           example: 'applied'
