@@ -16,8 +16,13 @@ use Ome\Auth\Interfaces\UseCases\GetUserProfile\GetUserProfileRequest;
 use Ome\Auth\Interfaces\UseCases\GetUserProfile\GetUserProfileUseCase;
 use Ome\Event\Interfaces\UseCases\ApplyEventScheme\ApplyEventSchemeRequest;
 use Ome\Event\Interfaces\UseCases\ApplyEventScheme\ApplyEventSchemeUseCase;
+use Ome\Event\Interfaces\UseCases\EditEventScheme\EditEventSchemeRequest;
+use Ome\Event\Interfaces\UseCases\EditEventScheme\EditEventSchemeUseCase;
 use Ome\Event\Interfaces\UseCases\ExtractEventScheme\ExtractEventSchemeRequest;
 use Ome\Event\Interfaces\UseCases\ExtractEventScheme\ExtractEventSchemeUseCase;
+use Ome\Event\Interfaces\UseCases\FindEventScheme\FindEventSchemeRequest;
+use Ome\Event\Interfaces\UseCases\FindEventScheme\FindEventSchemeUseCase;
+use Ome\Exceptions\EntityNotFoundException;
 
 class SchemeResource extends Controller
 {
@@ -102,21 +107,52 @@ class SchemeResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(
+        int $id,
+        FindEventSchemeUseCase $findEventScheme,
+        GetUserProfileUseCase $getUserProfile
+    ) {
+        $scheme = $findEventScheme->interact(
+            new FindEventSchemeRequest($id)
+        )->getEventScheme();
+
+        $profile = $getUserProfile->interact(
+            new GetUserProfileRequest($scheme->getPlannerId())
+        )->getProfile();
+
+        return new SchemeResponse(
+            $profile,
+            $scheme
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param SchemeCreateRequest $request
+     * @param integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(
+        SchemeCreateRequest $request,
+        int $id,
+        EditEventSchemeUseCase $editEventScheme
+    ) {
+        try {
+            $editEventScheme->interact(
+                new EditEventSchemeRequest(
+                    $id,
+                    $request->name,
+                    Carbon::make($request->startAt),
+                    Carbon::make($request->endAt),
+                    $request->explanation
+                )
+            );
+        } catch (EntityNotFoundException $e) {
+            abort(404);
+        }
+
+        return response()->noContent();
     }
 
     /**

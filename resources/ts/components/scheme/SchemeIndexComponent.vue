@@ -96,7 +96,14 @@ export default class SchemeIndexComponent extends Vue {
   }
 
   async mounted():Promise<void> {
-    this.schemes = await apiModule.getSchemes({});
+    try {
+      const user = await apiModule.getAuthMe();
+      this.schemes = await apiModule.getSchemes({
+        planner: user.id,
+      });
+    } catch (e) {
+      // do nothing
+    }
   }
 }
 </script>

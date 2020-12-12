@@ -82,6 +82,10 @@ export const messages: LocaleMessages = {
           name: 'イベント名',
           explanation: 'イベント説明',
           apply: '応募',
+          edit: {
+            label: '編集',
+            rule: '「応募済」状態の応募内容のみ編集が可能です。',
+          },
         },
         links: {
           apply: '応募する',

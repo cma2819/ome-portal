@@ -2,7 +2,7 @@ import { getModule, Module, Action } from 'vuex-module-decorators';
 import store from '../plugins/store';
 import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
-import { DiscordProfile, User, UserProfile } from '../lib/models/auth';
+import { User, UserProfile } from '../lib/models/auth';
 import { Role } from 'lib/models/role';
 import { RelateType, Event, Status, EventScheme } from 'lib/models/event';
 
@@ -263,6 +263,21 @@ class Api extends ApiClient {
   }
 
   @Action
+  public async getScheme(id: number): Promise<EventScheme> {
+    const response = await this.get(`schemes/${id}`);
+    return {
+      id: response.id,
+      name: response.name,
+      planner: response.planner,
+      status: response.status,
+      startAt: response.startAt && new Date(Date.parse(response.startAt)),
+      endAt: response.endAt && new Date(Date.parse(response.endAt)),
+      explanation: response.explanation,
+      detail: response.detail,
+    }
+  }
+
+  @Action
   public async postScheme(payload: {name: string, startAt: Date|null, endAt: Date|null, explanation: string}): Promise<EventScheme> {
     const response = await this.post({
       endpoint: 'schemes',
@@ -283,6 +298,22 @@ class Api extends ApiClient {
       explanation: response.explanation,
       detail: response.detail,
     };
+  }
+
+  @Action
+  public async putScheme(payload: {id: number, name: string, startAt: Date|null, endAt: Date|null, explanation: string}): Promise<boolean> {
+    await this.put({
+      endpoint: 'schemes',
+      id: payload.id.toString(),
+      params: {
+        name: payload.name,
+        startAt: payload.startAt,
+        endAt: payload.endAt,
+        explanation: payload.explanation
+      }
+    });
+
+    return true;
   }
 }
 

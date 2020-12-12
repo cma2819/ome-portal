@@ -23,6 +23,31 @@
     <v-card-text>
       {{ scheme.explanation }}
     </v-card-text>
+    <v-card-actions>
+      <v-tooltip top>
+        <template v-slot:activator="{ on, attrs }">
+          <span
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-btn
+              text
+              :disabled="scheme.status !== 'applied'"
+              :to="{
+                name: 'edit',
+                params: {
+                  schemeId: scheme.id
+                }
+              }"
+            >
+              <v-icon>fas fa-edit</v-icon>
+              {{ $t('scheme.labels.edit.label') }}
+            </v-btn>
+          </span>
+        </template>
+        <span>{{ $t('scheme.labels.edit.rule') }}</span>
+      </v-tooltip>
+    </v-card-actions>
   </v-card>
 </template>
 

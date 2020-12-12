@@ -46,7 +46,7 @@ class EditEventSchemeInteractorTest extends TestCase
             )
         )->getEventScheme();
 
-        $this->assertEquals(EventScheme::createRegistered(
+        $expectScheme = EventScheme::createRegistered(
             1,
             'Super Upcoming',
             1,
@@ -55,7 +55,9 @@ class EditEventSchemeInteractorTest extends TestCase
             Carbon::create(2020, 1, 2, 23, 0),
             'Updated explanation!',
             ''
-        ), $result);
+        );
+        $this->assertEquals($expectScheme, $result);
+        $this->assertContainsEquals($expectScheme, $inmemoryPersistEventScheme->getSchemes());
     }
 
     /** @test */

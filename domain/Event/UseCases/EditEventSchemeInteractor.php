@@ -41,6 +41,7 @@ class EditEventSchemeInteractor implements EditEventSchemeUseCase
             $request->getEndAt(),
             $request->getExplanation()
         );
+        $this->persistEventScheme->execute($result);
 
         return new EditEventSchemeResponse($result);
     }

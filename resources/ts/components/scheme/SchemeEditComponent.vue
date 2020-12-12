@@ -28,9 +28,10 @@
             <scheme-confirm></scheme-confirm>
           </v-sheet>
           <scheme-input
-            v-else
+            v-else-if="scheme !== null"
             key="apply"
-            :callback="applyScheme"
+            :callback="editScheme"
+            :scheme="scheme"
           ></scheme-input>
         </transition>
       </div>
@@ -49,10 +50,11 @@
 </style>
 
 <script lang="ts">
-import { Vue, Component, Emit } from 'vue-property-decorator';
+import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
 import { apiModule } from '../../modules/api';
 import SchemeInput from './SchemeInputComponent.vue';
 import SchemeConfirm from './SchemeConfirmComponent.vue';
+import { SchemeInputData } from '../../lib/models/event';
 
 @Component({
   components: {
@@ -60,19 +62,27 @@ import SchemeConfirm from './SchemeConfirmComponent.vue';
     SchemeConfirm,
   }
 })
-export default class SchemeApplyComponent extends Vue {
+export default class SchemeEditComponent extends Vue {
 
+  scheme: SchemeInputData|null = null;
+  schemeId = 0;
   confirmed = false;
 
-  @Emit()
-  async applyScheme(scheme: {
-    name: string,
-    startAt: Date|null,
-    endAt: Date|null,
-    explanation: string,
-  }): Promise<void> {
+  async created(): Promise<void> {
+    const scheme = await apiModule.getScheme(parseInt(this.$route.params.schemeId));
+    this.scheme = {
+      name: scheme.name,
+      startAt: scheme.startAt,
+      endAt: scheme.endAt,
+      explanation: scheme.explanation
+    };
+    this.schemeId = scheme.id;
+  }
 
-    await apiModule.postScheme(scheme);
+  @Emit()
+  async editScheme(scheme: SchemeInputData): Promise<void> {
+
+    await apiModule.putScheme(Object.assign({}, scheme, {id: this.schemeId}));
     this.confirmed = true;
 
   }

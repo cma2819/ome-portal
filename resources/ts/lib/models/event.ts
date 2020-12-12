@@ -16,6 +16,13 @@ export type Event = {
 };
 
 export type SchemeStatus = 'applied' | 'approved' | 'denied' | 'confirmed';
+export type SchemeInputData = {
+  name: string;
+  startAt: Date|null;
+  endAt: Date|null;
+  explanation: string;
+};
+
 export type EventScheme = {
   id: number;
   name: string;

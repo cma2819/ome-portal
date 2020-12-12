@@ -1,5 +1,6 @@
 <template>
   <v-sheet
+    key="input"
     class="pa-4"
   >
     <v-row
@@ -111,32 +112,31 @@
   </v-sheet>
 </template>
 
-<style scoped>
-.event-list-enter-active, .event-list-leave-active, .event-list-item {
-  transition: all .5s;
-}
-
-.event-list-enter, .event-list-leave-to {
-  opacity: 0;
-}
-</style>
-
 <script lang="ts">
 import { ApiError } from '../../lib/models/errors';
-import { apiModule } from '../../modules/api';
-import { Vue, Component, Emit } from 'vue-property-decorator';
+import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
 
 import SchemeInputDatePicker from './SchemeInputDatePickerComponent.vue';
-import SchemeInputTime from './SchemeInputTimeComponent.vue'
+import SchemeInputTime from './SchemeInputTimeComponent.vue';
+import SchemeConfirm from './SchemeConfirmComponent.vue';
+import { SchemeInputData } from '../../lib/models/event';
 
 @Component({
   components: {
     SchemeInputDatePicker,
     SchemeInputTime,
+    SchemeConfirm,
   }
 })
 export default class SchemeInputComponent extends Vue {
+  @Prop(Function)
+  readonly callback?: (scheme: SchemeInputData) => Promise<void>;
+
+  @Prop(Object)
+  readonly scheme?: SchemeInputData;
+
   loading = false;
+  confirmed = false;
 
   name = '';
   startAt: {
@@ -154,6 +154,23 @@ export default class SchemeInputComponent extends Vue {
     time: ''
   }
   explanation = '';
+
+  created(): void {
+    if (!this.scheme) {
+      return;
+    }
+
+    this.name = this.scheme.name;
+    this.startAt = {
+      date: this.scheme.startAt ? this.scheme.startAt.toLocaleDateString() : '',
+      time: this.scheme.startAt ? `${this.scheme.startAt.getHours()}:${this.scheme.startAt.getMinutes()}` : '',
+    };
+    this.endAt = {
+      date: this.scheme.endAt ? this.scheme.endAt.toLocaleDateString() : '',
+      time: this.scheme.endAt ? `${this.scheme.endAt.getHours()}:${this.scheme.endAt.getMinutes()}` : '',
+    };
+    this.explanation = this.scheme.explanation;
+  }
 
   get validated(): boolean {
     if (!this.name || !this.explanation) {
@@ -179,6 +196,10 @@ export default class SchemeInputComponent extends Vue {
 
   @Emit()
   async submitScheme(): Promise<void> {
+    if (!this.callback) {
+      return;
+    }
+
     if (!this.validated) {
       return;
     }
@@ -192,11 +213,13 @@ export default class SchemeInputComponent extends Vue {
 
     this.loading = true;
     try {
-      await apiModule.postScheme(params);
-      this.$router.push({name: 'index'});
+      await this.callback(params);
+      // await apiModule.postScheme(params);
+      // this.confirmed = true;
     } catch (e) {
       alert((e as ApiError).message);
       console.error(e);
+    } finally {
       this.loading = false;
     }
   }
