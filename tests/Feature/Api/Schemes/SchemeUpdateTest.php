@@ -56,8 +56,8 @@ class SchemeUpdateTest extends TestCase
             'id' => $eventScheme->id,
             'name' => 'Edit Event',
             'status' => 'applied',
-            'start_at' => Carbon::create(2020, 1, 2, 10, 0),
-            'end_at' => Carbon::create(2020, 1, 3, 21, 0),
+            'start_at' => Carbon::create(2020, 1, 2, 10, 0)->toISOString(),
+            'end_at' => Carbon::create(2020, 1, 3, 21, 0)->toISOString(),
             'explanation' => 'Edit explanation',
             'detail' => 'Detail for event.'
         ]);
