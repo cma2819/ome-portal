@@ -48,7 +48,7 @@ class SchemeUpdateTest extends TestCase
             'name' => 'Edit Event',
             'startAt' => Carbon::create(2020, 1, 2, 10, 0)->toISOString(),
             'endAt' => Carbon::create(2020, 1, 3, 21, 0)->toISOString(),
-            'explanation' => 'Edit Explanation',
+            'explanation' => 'Edit explanation',
         ]);
 
         $response->assertSuccessful();
