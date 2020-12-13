@@ -34,8 +34,8 @@ class SchemeUpdateTest extends TestCase
         $eventScheme = new EventSchemeEloquent([
             'name' => 'Upcoming Event',
             'status' => 'applied',
-            'start_at' => Carbon::create(2020, 1, 1, 10, 0),
-            'end_at' => Carbon::create(2020, 1, 2, 23, 0),
+            'start_at' => null,
+            'end_at' => null,
             'explanation' => 'Event explanation',
             'detail' => 'Detail for event.'
         ]);
@@ -48,7 +48,7 @@ class SchemeUpdateTest extends TestCase
             'name' => 'Edit Event',
             'startAt' => Carbon::create(2020, 1, 2, 10, 0)->toISOString(),
             'endAt' => Carbon::create(2020, 1, 3, 21, 0)->toISOString(),
-            'explanation' => 'Edit Explanation',
+            'explanation' => 'Edit explanation',
         ]);
 
         $response->assertSuccessful();
