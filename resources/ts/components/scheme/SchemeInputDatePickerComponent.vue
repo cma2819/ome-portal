@@ -20,10 +20,11 @@
       ></v-text-field>
     </template>
     <v-date-picker
-      v-model="date"
+      :value="value"
       no-title
       scrollable
       :min="min"
+      @change="onChangeDate"
     >
       <v-spacer></v-spacer>
       <v-btn
@@ -56,11 +57,18 @@ export default class SchemeInputDatePickerComponent extends Vue {
   @Prop(String)
   min!: string;
 
+  @Prop(String)
+  value!: string;
+
   date = '';
   menu = false;
 
-  @Watch('date')
+  created():void {
+    this.date = this.value;
+  }
+
   onChangeDate(val: string): void {
+    this.date = val;
     this.$emit('input', val);
   }
 }

@@ -162,12 +162,12 @@ export default class SchemeInputComponent extends Vue {
 
     this.name = this.scheme.name;
     this.startAt = {
-      date: this.scheme.startAt ? this.scheme.startAt.toLocaleDateString() : '',
-      time: this.scheme.startAt ? `${this.scheme.startAt.getHours()}:${this.scheme.startAt.getMinutes()}` : '',
+      date: this.scheme.startAt ? this.scheme.startAt.toISOString().split('T')[0] : '',
+      time: this.scheme.startAt ? `${this.scheme.startAt.getHours().toString().padStart(2, '0')}:${this.scheme.startAt.getMinutes().toString().padStart(2, '0')}` : '',
     };
     this.endAt = {
-      date: this.scheme.endAt ? this.scheme.endAt.toLocaleDateString() : '',
-      time: this.scheme.endAt ? `${this.scheme.endAt.getHours()}:${this.scheme.endAt.getMinutes()}` : '',
+      date: this.scheme.endAt ? this.scheme.endAt.toISOString().split('T')[0] : '',
+      time: this.scheme.endAt ? `${this.scheme.endAt.getHours().toString().padStart(2, '0')}:${this.scheme.endAt.getMinutes().toString().padStart(2, '0')}` : '',
     };
     this.explanation = this.scheme.explanation;
   }
@@ -214,8 +214,6 @@ export default class SchemeInputComponent extends Vue {
     this.loading = true;
     try {
       await this.callback(params);
-      // await apiModule.postScheme(params);
-      // this.confirmed = true;
     } catch (e) {
       alert((e as ApiError).message);
       console.error(e);

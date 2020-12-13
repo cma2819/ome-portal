@@ -91,10 +91,6 @@ export default class SchemeIndexComponent extends Vue {
     return apiModule.isAuthenticated;
   }
 
-  created(): void {
-    console.log(this.schemes);
-  }
-
   async mounted():Promise<void> {
     try {
       const user = await apiModule.getAuthMe();

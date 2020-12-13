@@ -20,10 +20,17 @@ export default class SchemeInputTimeComponent extends Vue {
   @Prop(String)
   label!: string;
 
+  @Prop(String)
+  value!: string;
+
   time = '';
   timeString = '';
 
   error: string|null = null;
+
+  created():void {
+    this.timeString = this.value;
+  }
 
   @Emit()
   blurTimeInput(e: { target: { value : string; }; }): void {
