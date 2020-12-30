@@ -131,12 +131,14 @@ namespace App\Infrastructure\Eloquents{
  * @property int $planner_id
  * @property string $name
  * @property string $status
- * @property \Illuminate\Support\Carbon $start_at
- * @property \Illuminate\Support\Carbon $end_at
+ * @property \Illuminate\Support\Carbon|null $start_at
+ * @property \Illuminate\Support\Carbon|null $end_at
  * @property string $explanation
  * @property mixed $detail
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Infrastructure\Eloquents\EventSchemeReply[] $adminReplies
+ * @property-read int|null $admin_replies_count
  * @property-read \App\Infrastructure\Eloquents\User $planner
  * @method static \Illuminate\Database\Eloquent\Builder|EventScheme newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EventScheme newQuery()
@@ -153,6 +155,32 @@ namespace App\Infrastructure\Eloquents{
  * @method static \Illuminate\Database\Eloquent\Builder|EventScheme whereUpdatedAt($value)
  */
 	class EventScheme extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
+ * App\Infrastructure\Eloquents\EventSchemeReply
+ *
+ * @property int $id
+ * @property int $scheme_id
+ * @property string $to_status
+ * @property string $admin_reply
+ * @property \Illuminate\Support\Carbon $replied_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Infrastructure\Eloquents\EventScheme $scheme
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereAdminReply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereRepliedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereSchemeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereToStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventSchemeReply whereUpdatedAt($value)
+ */
+	class EventSchemeReply extends \Eloquent {}
 }
 
 namespace App\Infrastructure\Eloquents{

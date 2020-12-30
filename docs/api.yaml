@@ -592,6 +592,9 @@ paths:
               properties:
                 status:
                   $ref: '#/components/schemas/SchemeStatus'
+                reply:
+                  type: string
+                  example: 'approve your event!'
       responses:
         '204':
           description: Success to update.

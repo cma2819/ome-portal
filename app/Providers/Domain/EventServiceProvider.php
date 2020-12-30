@@ -54,6 +54,10 @@ class EventServiceProvider extends ServiceProvider
             \Ome\Event\Interfaces\Commands\DeleteEventCommand::class,
             \App\Infrastructure\Commands\Event\DbDeleteEventCommand::class
         );
+        $this->app->bind(
+            \Ome\Event\Interfaces\Commands\PersistAdminReplyCommand::class,
+            \App\Infrastructure\Commands\Event\DbPersistAdminReplyCommand::class
+        );
 
         //////////////
         // Queries  //

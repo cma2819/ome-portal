@@ -24,4 +24,8 @@ class EventScheme extends Model
     public function planner() {
         return $this->belongsTo(User::class, 'planner_id');
     }
+
+    public function adminReplies() {
+        return $this->hasMany(EventSchemeReply::class, 'scheme_id');
+    }
 }

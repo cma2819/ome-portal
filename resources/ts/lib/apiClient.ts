@@ -24,9 +24,10 @@ export class ApiClient extends VuexModule {
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async get(endpoint: string): Promise<any> {
-    const headers = this.bearer ? {
-      Authorization: `Bearer ${this.bearer}`
-    } : null;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.bearer ? `Bearer ${this.bearer}` : null,
+    };
     try {
       const response = await axios.get(`${this.host}/${endpoint}`, { headers });
       return response.data;
@@ -38,9 +39,10 @@ export class ApiClient extends VuexModule {
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async post(payload: { endpoint: string, params: any }): Promise<any> {
-    const headers = this.bearer ? {
-      Authorization: `Bearer ${this.bearer}`
-    } : null;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.bearer ? `Bearer ${this.bearer}` : null,
+    };
     try {
       const response = await axios.post(`${this.host}/${payload.endpoint}`, payload.params, { headers });
       return response.data;
@@ -51,12 +53,14 @@ export class ApiClient extends VuexModule {
 
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected async put(payload: { endpoint: string, id: string, params: any }): Promise<any> {
-    const headers = this.bearer ? {
-      Authorization: `Bearer ${this.bearer}`
-    } : null;
+  protected async put(payload: { endpoint: string, id?: string, params: any }): Promise<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.bearer ? `Bearer ${this.bearer}` : null,
+    };
     try {
-      const response = await axios.put(`${this.host}/${payload.endpoint}/${payload.id}`, payload.params, { headers });
+      const uri = payload.id ? `${this.host}/${payload.endpoint}/${payload.id}` : `${this.host}/${payload.endpoint}`;
+      const response = await axios.put(uri, payload.params, { headers });
       return response.data;
     } catch (e) {
       throw this.handleError(e);
@@ -66,9 +70,10 @@ export class ApiClient extends VuexModule {
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async delete(payload: { endpoint: string, id: string}): Promise<any> {
-    const headers = this.bearer ? {
-      Authorization: `Bearer ${this.bearer}`
-    } : null;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.bearer ? `Bearer ${this.bearer}` : null,
+    };
     try {
       const response = await axios.delete(`${this.host}/${payload.endpoint}/${payload.id}`, { headers });
       return response.data;

@@ -22,7 +22,6 @@ class CreateEventSchemesTable extends Migration
             $table->dateTime('end_at')->nullable();
             $table->string('explanation');
             $table->string('detail');
-            $table->string('admin_reply')->nullable();
             $table->timestamps();
         });
     }

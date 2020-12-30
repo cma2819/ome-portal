@@ -13,7 +13,7 @@
           <v-card-text>
             <div class="text--primary">
               <p>Online Marathon Eventesにて開催するイベントを応募することができます。</p>
-              <p>応募いただいたイベントについては、<strong>原則Online Marathon EventersのTwitchチャンネルでの配信</strong>を行います。他の配信先をご希望の場合は一度ご相談ください。</p>
+              <p>採用されたイベントについては、<strong>原則Online Marathon EventersのTwitchチャンネルでの配信</strong>を行います。他の配信先をご希望の場合は一度ご相談ください。</p>
               <p>
                 Online Marathon Eventersは、応募いただいたイベントに対してのサポートをさせていただきます。また、企画案のみでご応募いただき、運営を全て一任していただくことも可能です。
                 その場合、イベント開催の際には応募者の方をご紹介させていただきます。
@@ -50,7 +50,7 @@
           class="pa-2"
         >
           <v-alert
-            type="primary"
+            type="info"
           >
             {{ $t('scheme.messages.auth') }}
           </v-alert>

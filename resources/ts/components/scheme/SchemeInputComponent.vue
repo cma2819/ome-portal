@@ -91,7 +91,6 @@
           name="input-7-4"
           :label="$t('scheme.labels.explanation')"
           :messages="$t('scheme.details.explanation')"
-          auto-grow
         ></v-textarea>
       </v-col>
     </v-row>

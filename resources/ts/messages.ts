@@ -116,6 +116,7 @@ export const messages: LocaleMessages = {
         tabs: {
           role: '権限管理',
           event: 'イベント管理',
+          scheme: 'イベント応募',
         },
         labels: {
           twitter: 'Twitter運用',
@@ -123,7 +124,23 @@ export const messages: LocaleMessages = {
           internalStream: 'イベント用配信視聴',
           event: {
             import: 'イベントインポート'
-          }
+          },
+          scheme: {
+            switches: {
+              denied: '否認された応募を表示',
+            },
+            actions: {
+              approve: '承認',
+              deny: '否認',
+              confirm: '確定',
+            },
+            name: 'イベント名',
+            planner: '応募者',
+            start: '予定開始日時',
+            end: '予定終了日時',
+            explanation: 'イベント説明',
+            detail: '詳細',
+          },
         },
         event: {
           headers: {

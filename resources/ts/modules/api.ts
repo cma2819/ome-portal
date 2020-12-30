@@ -4,7 +4,7 @@ import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
 import { User, UserProfile } from '../lib/models/auth';
 import { Role } from 'lib/models/role';
-import { RelateType, Event, Status, EventScheme } from 'lib/models/event';
+import { RelateType, Event, Status, EventScheme, SchemeStatus } from 'lib/models/event';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -314,6 +314,17 @@ class Api extends ApiClient {
     });
 
     return true;
+  }
+
+  @Action
+  public async putSchemeStatus(payload: {id: number, status: SchemeStatus, reply: string}) {
+    await this.put({
+      endpoint: `schemes/${payload.id}/status`,
+      params: {
+        status: payload.status,
+        reply: payload.reply,
+      }
+    });
   }
 }
 

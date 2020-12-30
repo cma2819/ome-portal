@@ -147,7 +147,7 @@ class EventScheme
             throw new UnmatchedContextException(self::class, 'status [' . $this->status->value() . '] can not be approved.');
         }
 
-        $this->status = SchemeStatus::applied();
+        $this->status = SchemeStatus::approved();
         return $this;
     }
 

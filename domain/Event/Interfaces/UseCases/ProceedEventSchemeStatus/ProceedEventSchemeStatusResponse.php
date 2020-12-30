@@ -2,6 +2,7 @@
 
 namespace Ome\Event\Interfaces\UseCases\ProceedEventSchemeStatus;
 
+use Ome\Event\Entities\AdminStatusReply;
 use Ome\Event\Entities\EventScheme;
 
 /**
@@ -11,10 +12,14 @@ class ProceedEventSchemeStatusResponse
 {
     private EventScheme $scheme;
 
+    private AdminStatusReply $reply;
+
     public function __construct(
-        EventScheme $scheme
+        EventScheme $scheme,
+        AdminStatusReply $reply
     ) {
         $this->scheme = $scheme;
+        $this->reply = $reply;
     }
 
     /**
@@ -23,5 +28,13 @@ class ProceedEventSchemeStatusResponse
     public function getScheme()
     {
         return $this->scheme;
+    }
+
+    /**
+     * Get the value of reply
+     */
+    public function getReply()
+    {
+        return $this->reply;
     }
 }

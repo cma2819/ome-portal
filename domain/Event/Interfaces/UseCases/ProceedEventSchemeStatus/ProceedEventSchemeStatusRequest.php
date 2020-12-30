@@ -2,6 +2,8 @@
 
 namespace Ome\Event\Interfaces\UseCases\ProceedEventSchemeStatus;
 
+use DateTimeInterface;
+
 /**
  * Request object for ProceedEventSchemeStatus.
  */
@@ -11,12 +13,20 @@ class ProceedEventSchemeStatusRequest
 
     private string $status;
 
+    private string $proceedReply;
+
+    private DateTimeInterface $now;
+
     public function __construct(
         int $id,
-        string $status
+        string $status,
+        string $proceedReply,
+        DateTimeInterface $now
     ) {
         $this->id = $id;
         $this->status = $status;
+        $this->proceedReply = $proceedReply;
+        $this->now = $now;
     }
 
     /**
@@ -33,5 +43,21 @@ class ProceedEventSchemeStatusRequest
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get the value of proceedReply
+     */
+    public function getProceedReply()
+    {
+        return $this->proceedReply;
+    }
+
+    /**
+     * Get the value of now
+     */
+    public function getNow()
+    {
+        return $this->now;
     }
 }
