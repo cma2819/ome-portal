@@ -17,7 +17,7 @@ class CreateEventSchemeRepliesTable extends Migration
             $table->id();
             $table->foreignId('scheme_id')->constrained('event_schemes');
             $table->string('to_status', 32);
-            $table->string('admin_reply');
+            $table->text('admin_reply');
             $table->dateTime('replied_at');
             $table->timestamps();
         });

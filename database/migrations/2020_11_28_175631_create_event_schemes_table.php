@@ -20,8 +20,8 @@ class CreateEventSchemesTable extends Migration
             $table->string('status', 32);
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
-            $table->string('explanation');
-            $table->string('detail');
+            $table->text('explanation');
+            $table->text('detail');
             $table->timestamps();
         });
     }
