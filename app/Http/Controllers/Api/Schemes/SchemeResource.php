@@ -20,6 +20,8 @@ use Ome\Event\Interfaces\UseCases\ExtractEventScheme\ExtractEventSchemeUseCase;
 use Ome\Event\Interfaces\UseCases\FindEventScheme\FindEventSchemeRequest;
 use Ome\Event\Interfaces\UseCases\FindEventScheme\FindEventSchemeUseCase;
 use Ome\Exceptions\EntityNotFoundException;
+use Ome\Notification\Interfaces\UseCases\SendApplySchemeNotification\SendApplySchemeNotificationRequest;
+use Ome\Notification\Interfaces\UseCases\SendApplySchemeNotification\SendApplySchemeNotificationUseCase;
 
 class SchemeResource extends Controller
 {
@@ -73,7 +75,8 @@ class SchemeResource extends Controller
     public function store(
         SchemeCreateRequest $request,
         ApplyEventSchemeUseCase $applyEventScheme,
-        GetUserProfileUseCase $getUserProfile
+        GetUserProfileUseCase $getUserProfile,
+        SendApplySchemeNotificationUseCase $sendApplySchemeNotification
     ) {
         /** @var User */
         $user = Auth::user();
@@ -91,6 +94,10 @@ class SchemeResource extends Controller
         $profile = $getUserProfile->interact(
             new GetUserProfileRequest($user->id)
         )->getProfile();
+
+        $sendApplySchemeNotification->interact(
+            new SendApplySchemeNotificationRequest($result, $profile)
+        );
 
         return new SchemeResponse(
             $profile,

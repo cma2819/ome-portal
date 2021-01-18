@@ -48,6 +48,7 @@ return [
         'client_secret' => env('DISCORD_CLIENT_SECRET'),
         'redirect_url' => env('DISCORD_REDIRECT_URL'),
         'guild_id' => env('DISCORD_GUILD_ID'),
+        'notify_channel_id' => env('DISCORD_NOTIFY_CHANNEL_ID'),
         'bot_token' => env('DISCORD_BOT_TOKEN'),
         'cache_expire' => 30,
         'invite_code' => env('DISCORD_INVITE_CODE')

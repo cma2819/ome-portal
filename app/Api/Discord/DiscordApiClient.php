@@ -48,4 +48,18 @@ class DiscordApiClient
 
         return $data;
     }
+
+    public function apiPost(string $endpoint, array $parameters): array
+    {
+        $url = $this->apiUrl . $endpoint;
+        Logger::debug('string', 'Api.Discord', 'Post request with Discord API Client to [{url}].', ['url' => $url]);
+        $response = Http::withToken($this->botToken, 'Bot')->post($url, $parameters);
+        if ($response->failed()) {
+            Logger::debug('string', 'Api.Discord', 'Failed to post request to discord api with status:' . $response->status());
+            throw new DiscordHttpException($response->status(), 'Failed to get request to endpoint[' . $endpoint . '].');
+        }
+
+        $data = json_decode($response->body(), true);
+        return $data;
+    }
 }
