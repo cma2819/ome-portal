@@ -17,8 +17,9 @@ Route::get('/', 'Pages\Top')->name('index');
 
 Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');
 
-Route::get('/schedules', 'Pages\Schedule')->name('schedules.index');
-Route::get('/schedules/{id?}', 'Pages\Schedule')->name('schedules.show')->where('id', '.*');
+Route::get('/events', 'Pages\Event')->name('event.index');
+Route::get('/events/{id}/schedules', 'Pages\Event')->name('event.schedules.index')->where('id', '.*');
+Route::get('/events/{id}/submissions', 'Pages\Event')->name('event.submissions.index')->where('id', '.*');
 
 Route::get('/schemes', 'Pages\Scheme')->name('scheme');
 Route::get('/schemes/{any}', 'Pages\Scheme')->name('scheme.any')->where('any', '.*');

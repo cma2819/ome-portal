@@ -16,7 +16,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 import { OengusRunLine, OengusRunType, OengusSetupLine } from 'oengus-api';
-import { parse } from 'iso8601-duration';
+import { isoTimeString } from '../../lib/utils/oengus';
 
 @Component
 export default class ScheduleTableComponent extends Vue {
@@ -106,23 +106,13 @@ export default class ScheduleTableComponent extends Vue {
           category: line.categoryName || '-',
           type: this.getTypeLabel(line.type),
           console: line.console || '-',
-          estimate: this.getTimeString(line.estimate)
+          estimate: isoTimeString(line.estimate)
         }
     });
   }
 
   getTypeLabel(type: OengusRunType): string {
       return this.$t(`schedule.line.type.${type.toLowerCase()}`).toString();
-  }
-
-  getTimeString(isoTime: string): string {
-    const duration = parse(isoTime);
-
-    return [
-      ((duration.days || 0 * 24) + (duration.hours || 0)).toString().padStart(2, '0'),
-      (duration.minutes || 0).toString().padStart(2, '0'),
-      (duration.seconds || 0).toString().padStart(2, '0')
-    ].join(':');
   }
 }
 </script>

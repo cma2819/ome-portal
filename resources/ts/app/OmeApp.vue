@@ -18,9 +18,9 @@
         </v-btn>
         <v-btn
           text
-          href="/schedules"
+          href="/events"
         >
-          {{ $t('layout.actions.schedule') }}
+          {{ $t('layout.actions.event') }}
         </v-btn>
         <v-btn
           text

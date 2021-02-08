@@ -27,28 +27,48 @@
           fas fa-external-link-alt
         </v-icon>{{ $t('event.labels.oengus') }}
       </v-btn>
-      <v-btn
-        v-if="inSpa"
-        :disabled="!scheduleConfirmed"
-        text
-        :to="{ name: 'detail', params: { id: event.id}}"
-        :block="$vuetify.breakpoint.mobile"
-      >
-        <v-icon left>
-          fas fa-clock
-        </v-icon>{{ $t('event.labels.schedule') }}
-      </v-btn>
-      <v-btn
-        v-else
-        :disabled="!scheduleConfirmed"
-        text
-        :href="`/schedules/${event.id}`"
-        :block="$vuetify.breakpoint.mobile"
-      >
-        <v-icon left>
-          fas fa-clock
-        </v-icon>{{ $t('event.labels.schedule') }}
-      </v-btn>
+      <span v-if="inSpa">
+        <v-btn
+          text
+          :to="{ name: 'submission.detail', params: { id: event.id}}"
+          :block="$vuetify.breakpoint.mobile"
+        >
+          <v-icon left>
+            fas fa-users
+          </v-icon>{{ $t('event.labels.submission') }}
+        </v-btn>
+        <v-btn
+          :disabled="!scheduleConfirmed"
+          text
+          :to="{ name: 'schedule.detail', params: { id: event.id}}"
+          :block="$vuetify.breakpoint.mobile"
+        >
+          <v-icon left>
+            fas fa-clock
+          </v-icon>{{ $t('event.labels.schedule') }}
+        </v-btn>
+      </span>
+      <span v-else>
+        <v-btn
+          text
+          :href="`events/${event.id}/submissions`"
+          :block="$vuetify.breakpoint.mobile"
+        >
+          <v-icon left>
+            fas fa-users
+          </v-icon>{{ $t('event.labels.submission') }}
+        </v-btn>
+        <v-btn
+          :disabled="!scheduleConfirmed"
+          text
+          :href="`events/${event.id}/schedules`"
+          :block="$vuetify.breakpoint.mobile"
+        >
+          <v-icon left>
+            fas fa-clock
+          </v-icon>{{ $t('event.labels.schedule') }}
+        </v-btn>
+      </span>
     </v-card-text>
   </div>
 </template>

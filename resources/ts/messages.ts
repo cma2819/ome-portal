@@ -5,7 +5,7 @@ export const messages: LocaleMessages = {
       layout: {
         actions: {
           top: 'トップ',
-          schedule: 'スケジュール',
+          event: 'イベント一覧',
           scheme: 'イベント応募',
 
           login: 'ログイン',
@@ -23,7 +23,8 @@ export const messages: LocaleMessages = {
       event: {
         labels: {
           oengus: 'イベントページ（Oengus）',
-          schedule: 'スケジュール'
+          submission: '応募リスト',
+          schedule: 'スケジュール',
         }
       },
       schedule: {
@@ -37,6 +38,33 @@ export const messages: LocaleMessages = {
           type: '種別',
           console: '機種',
           estimate: '予定時間',
+        },
+        line: {
+          type: {
+            single: '単走',
+            race: 'レース',
+            coop: '協力',
+            coop_race: '協力レース',
+            other: 'その他'
+          }
+        }
+      },
+      submission: {
+        labels: {
+          loading: '募集内容を読み込んでいます。',
+          games: {
+            name: 'ゲーム',
+            runner: '走者',
+            console: '機種',
+            ratio: '画面サイズ',
+            description: 'ゲーム説明'
+          },
+          categories: {
+            name: 'カテゴリー',
+            type: '種別',
+            estimate: '予定時間',
+            description: 'カテゴリ説明'
+          },
         },
         line: {
           type: {

@@ -14,8 +14,8 @@
         {{ $t('layout.actions.top') }}
       </v-list-item>
 
-      <v-list-item href="/schedules">
-        {{ $t('layout.actions.schedule') }}
+      <v-list-item href="/events">
+        {{ $t('layout.actions.event') }}
       </v-list-item>
 
       <v-list-item href="/schemes">

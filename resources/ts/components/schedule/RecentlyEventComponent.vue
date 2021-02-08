@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>直近のイベント</h3>
+    <v-subheader>直近のイベント</v-subheader>
     <div class="pa-2">
       <v-card
         color="primary"
@@ -11,7 +11,7 @@
           mode="out-in"
         >
           <div
-            v-if="event === null"
+            v-if="events.length === 0"
             key="loading"
           >
             <v-progress-circular
@@ -20,12 +20,21 @@
               color="white"
             ></v-progress-circular>
           </div>
-          <event-information
+          <div
             v-else
             key="loaded"
-            :event="event"
-            :is-spa="false"
-          ></event-information>
+          >
+            <div
+              v-for="event in events"
+              :key="event.id"
+            >
+              <event-information
+                :event="event"
+                :is-spa="false"
+              ></event-information>
+              <v-divider></v-divider>
+            </div>
+          </div>
         </transition>
       </v-card>
     </div>
@@ -55,11 +64,14 @@ import { apiModule } from '../../modules/api';
   }
 })
 export default class RecentlyEventComponent extends Vue {
-  event: Event|null = null;
+  events: Event[] = [];
 
   async created(): Promise<void> {
-    const response = await apiModule.getLatestEvent();
-    this.event = response;
+    const response = await apiModule.getActiveEvents();
+    response.sort((l, r) => {
+      return l.startAt.valueOf() - r.startAt.valueOf();
+    })
+    this.events = response;
   }
 
 }

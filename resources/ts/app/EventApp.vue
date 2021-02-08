@@ -23,5 +23,5 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class ScheduleApp extends Vue {}
+export default class EventApp extends Vue {}
 </script>
