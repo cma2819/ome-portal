@@ -79,7 +79,10 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="auto">
+          <v-col
+            cols="12"
+            md="auto"
+          >
             {{ $t('submission.labels.categories.description') }}
           </v-col>
           <v-col>

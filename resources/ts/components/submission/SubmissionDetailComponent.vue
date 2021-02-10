@@ -39,7 +39,12 @@
       </v-card>
     </div>
 
+    <submission-expansions
+      v-if="$vuetify.breakpoint.mobile"
+      :games="submissions"
+    ></submission-expansions>
     <submission-table
+      v-else
       :games="submissions"
     ></submission-table>
   </div>
@@ -60,7 +65,8 @@ import { getGame, OengusGame } from 'oengus-api';
 import { Vue, Component } from 'vue-property-decorator';
 
 import EventInformation from '../schedule/EventInfomationComponent.vue';
-import SubmissionTable from '../submission/SubmissionTableComponent.vue';
+import SubmissionExpansions from './SubmissionExpansionsComponent.vue';
+import SubmissionTable from './SubmissionTableComponent.vue';
 import { Event } from '../../lib/models/event';
 import { apiModule } from '../../modules/api';
 
@@ -68,6 +74,7 @@ import { apiModule } from '../../modules/api';
   components: {
     EventInformation,
     SubmissionTable,
+    SubmissionExpansions,
   }
 })
 export default class SubmissionDetailComponent extends Vue {
