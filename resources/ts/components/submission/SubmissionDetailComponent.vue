@@ -41,11 +41,11 @@
 
     <submission-expansions
       v-if="$vuetify.breakpoint.mobile"
-      :games="submissions"
+      :submissions="submissions"
     ></submission-expansions>
     <submission-table
       v-else
-      :games="submissions"
+      :submissions="submissions"
     ></submission-table>
   </div>
 </template>
@@ -61,7 +61,7 @@
 </style>
 
 <script lang="ts">
-import { getGame, OengusGame } from 'oengus-api';
+import { getSubmissions, OengusSubmission } from 'oengus-api';
 import { Vue, Component } from 'vue-property-decorator';
 
 import EventInformation from '../schedule/EventInfomationComponent.vue';
@@ -81,13 +81,13 @@ export default class SubmissionDetailComponent extends Vue {
   eventId: string = this.$route.params.id;
 
   event: Event|null = null;
-  submissions: OengusGame[] = [];
+  submissions: OengusSubmission[] = [];
 
   async created(): Promise<void> {
     const event = await apiModule.getEvent(this.eventId);
     this.event = event;
 
-    const oengusGames = await getGame(this.event.id);
+    const oengusGames = await getSubmissions(this.event.id);
     this.submissions = oengusGames;
   }
 }

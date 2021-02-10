@@ -23,7 +23,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { OengusGame } from 'oengus-api';
+import { OengusSubmission } from 'oengus-api';
 import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 
 @Component({
@@ -33,7 +33,7 @@ import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 })
 export default class SubmissionTableComponent extends Vue {
   @Prop(Array)
-  games!: Array<OengusGame>
+  submissions!: Array<OengusSubmission>
 
   expanded = [];
   headers = [
@@ -77,16 +77,18 @@ export default class SubmissionTableComponent extends Vue {
     console: string;
     ratio: string;
   }> {
-    return this.games.map((game) => {
-      return {
-        id: game.id,
-        runner: game.user.usernameJapanese || game.user.username,
-        game: game.name,
-        console: game.console,
-        ratio: game.ratio,
-        description: game.description,
-        categories: game.categories,
-      };
+    return this.submissions.flatMap((submission) => {
+      return submission.games.map((game) => {
+        return {
+          id: game.id,
+          runner: submission.user.usernameJapanese || submission.user.username,
+          game: game.name,
+          console: game.console,
+          ratio: game.ratio,
+          description: game.description,
+          categories: game.categories,
+        };
+      });
     });
   }
 }

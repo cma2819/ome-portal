@@ -99,14 +99,10 @@ import { OengusCategory, OengusRunType } from 'oengus-api';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { isoTimeString, isRaceRun, isCoopRun, isCoopRaceRun } from '../../lib/utils/oengus';
 
-import EventInformation from '../schedule/EventInfomationComponent.vue';
-import SubmissionTable from '../submission/SubmissionTableComponent.vue';
 import SubmissionRunType from '../submission/SubmissionRunTypeComponent.vue';
 
 @Component({
   components: {
-    EventInformation,
-    SubmissionTable,
     SubmissionRunType,
   },
   methods: {
