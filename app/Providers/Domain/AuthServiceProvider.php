@@ -42,6 +42,10 @@ class AuthServiceProvider extends ServiceProvider
             \Ome\Auth\Interfaces\UseCases\GetUserProfile\GetUserProfileUseCase::class,
             \Ome\Auth\UseCases\GetUserProfileInteractor::class
         );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\UseCases\ExtractUsers\ExtractUsersUseCase::class,
+            \Ome\Auth\UseCases\ExtractUsersInteractor::class
+        );
 
         //////////////
         // Commands //
@@ -79,6 +83,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\FindUserByIdQuery::class,
             \App\Infrastructure\Queries\Auth\DbFindUserByIdQuery::class
+        );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\CountUsersQuery::class,
+            \App\Infrastructure\Queries\Auth\DbCountUsersQuery::class
+        );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\Queries\ListUsersQuery::class,
+            \App\Infrastructure\Queries\Auth\DbListUsersQuery::class
         );
 
         //////////

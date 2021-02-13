@@ -152,6 +152,7 @@ export const messages: LocaleMessages = {
           role: '権限管理',
           event: 'イベント管理',
           scheme: 'イベント応募',
+          users: 'ユーザー管理',
         },
         labels: {
           twitter: 'Twitter運用',
@@ -207,6 +208,14 @@ export const messages: LocaleMessages = {
           twitter: 'OMEアカウントからのTwitter投稿を担当します。',
           admin: 'OME Portalの操作権限を管理を担当します。',
           internalStream: 'OMEで利用するイベント用の配信が確認できます。'
+        },
+        users: {
+          labels: {
+            id: 'ID',
+            username: 'ユーザー名',
+            discord: 'Discord',
+            actions: '操作',
+          }
         }
       },
       top: {

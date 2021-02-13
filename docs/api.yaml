@@ -23,7 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/AuthUser'
   /roles:
     get:
       summary: Get list of roles and permissions
@@ -633,9 +633,60 @@ paths:
           description: User not admin.
         '404':
           description: Scheme is not found.
+  /users:
+    get:
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: List users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPagination'
 components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 0
   schemas:
     User:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        username:
+          type: string
+          example: 'ユーザー'
+        discord:
+          $ref: '#/components/schemas/DiscordUser'
+    UserPagination:
+      type: object
+      properties:
+        prev:
+          type: integer
+          minimum: 0
+          nullable: true
+        current:
+          type: integer
+          minimum: 0
+        next:
+          type: integer
+          minimum: 0
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    AuthUser:
       type: object
       properties:
         id:

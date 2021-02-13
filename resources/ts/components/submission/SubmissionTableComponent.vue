@@ -8,7 +8,7 @@
     show-group-by
     class="elevation-1"
     :loading="gameRowData.length === 0"
-    :loading-text="$t('schedule.labels.loading')"
+    :loading-text="$t('submission.labels.loading')"
     :expanded.sync="expanded"
     show-expand
   >

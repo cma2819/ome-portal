@@ -2,9 +2,11 @@ import { getModule, Module, Action } from 'vuex-module-decorators';
 import store from '../plugins/store';
 import { ApiClient } from '../lib/apiClient';
 import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
-import { User, UserProfile } from '../lib/models/auth';
+import { User as AuthUser, UserProfile } from '../lib/models/auth';
+import { User } from '../lib/models/user';
 import { Role } from 'lib/models/role';
 import { RelateType, Event, Status, EventScheme, SchemeStatus } from 'lib/models/event';
+import { Paginate } from '../lib/models/page';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
 class Api extends ApiClient {
@@ -64,7 +66,7 @@ class Api extends ApiClient {
   }
 
   @Action
-  public async getAuthMe(): Promise<User> {
+  public async getAuthMe(): Promise<AuthUser> {
     const response = await this.get('auth/me');
     return response;
   }
@@ -325,6 +327,23 @@ class Api extends ApiClient {
         reply: payload.reply,
       }
     });
+  }
+
+  @Action
+  public async getUsers(page?: number): Promise<Paginate<User>> {
+    const query = new URLSearchParams();
+
+    if (page) {
+      query.append('page', `${page}`);
+    }
+    const response = await this.get(`users?${query.toString()}`);
+
+    return {
+      prev: response.prev,
+      current: response.current,
+      next: response.next,
+      data: response.data,
+    };
   }
 }
 
