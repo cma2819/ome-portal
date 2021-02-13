@@ -5,6 +5,7 @@ namespace Tests\Feature\Api\Users;
 use App\Infrastructure\Eloquents\User as UserEloquent;
 use App\Infrastructure\Eloquents\UserDiscord;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\AssertJsonArray;
 use Tests\Feature\Api\AuthAdminUser;
 use Tests\TestCase;
 
@@ -12,6 +13,7 @@ class UserIndexTest extends TestCase
 {
     use RefreshDatabase;
     use AuthAdminUser;
+    use AssertJsonArray;
 
     protected function setUp(): void
     {
@@ -45,8 +47,8 @@ class UserIndexTest extends TestCase
             'prev' => null,
             'current' => 0,
             'next' => null,
-            'data' => $users,
         ]);
+        $this->assertJsonArray($response->json(), 'data', $users);
     }
 
     public function provideUsers(): array
