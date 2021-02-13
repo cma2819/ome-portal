@@ -3,6 +3,7 @@
     :headers="headers"
     :items="users"
     sort-by="id"
+    :items-per-page="Infinity"
     hide-default-footer
     :loading="users.length === 0"
   >
