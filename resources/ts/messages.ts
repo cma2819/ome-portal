@@ -213,7 +213,7 @@ export const messages: LocaleMessages = {
         event: {
           statuses: {
             submission: {
-              open: '走者申請受付中'
+              open: 'ゲーム応募受付中'
             },
             selection: {
               confirmed: '作品選考済み',

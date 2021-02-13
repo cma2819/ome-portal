@@ -32,7 +32,8 @@
         </v-row>
         <submission-table-detail
           :game="game"
-          :selections="selections">
+          :selections="selections"
+        >
         </submission-table-detail>
       </v-expansion-panel-content>
     </v-expansion-panel>
