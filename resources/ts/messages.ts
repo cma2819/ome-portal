@@ -73,6 +73,13 @@ export const messages: LocaleMessages = {
             coop: '協力',
             coop_race: '協力レース',
             other: 'その他'
+          },
+          status: {
+            validated: '当選',
+            todo: '未設定',
+            bonus: 'ボーナス',
+            backup: 'バックアップ',
+            rejected: '落選',
           }
         }
       },

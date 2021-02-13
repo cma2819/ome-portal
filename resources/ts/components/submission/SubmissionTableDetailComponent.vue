@@ -19,6 +19,10 @@
       <v-card-subtitle class="black--text">
         {{ category.name }}
         <submission-run-type :type="category.type"></submission-run-type>
+        <submission-selection-result
+          v-if="getSelectionResult(category.id)"
+          :status="getSelectionResult(category.id).status"
+        ></submission-selection-result>
         <v-btn
           icon
           target="ome-submission-video"
@@ -95,15 +99,17 @@
 </template>
 
 <script lang="ts">
-import { OengusCategory, OengusRunType } from 'oengus-api';
+import { OengusCategory, OengusRunType, OengusSelection } from 'oengus-api';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { isoTimeString, isRaceRun, isCoopRun, isCoopRaceRun } from '../../lib/utils/oengus';
 
-import SubmissionRunType from '../submission/SubmissionRunTypeComponent.vue';
+import SubmissionRunType from './SubmissionRunTypeComponent.vue';
+import SubmissionSelectionResult from './SubmissionSelectionResultComponent.vue';
 
 @Component({
   components: {
     SubmissionRunType,
+    SubmissionSelectionResult,
   },
   methods: {
     isoTimeString,
@@ -119,8 +125,17 @@ export default class SubmissionTableDetailComponent extends Vue {
     categories: OengusCategory[];
   }
 
+  @Prop(Array)
+  readonly selections!: Array<OengusSelection>;
+
   getTypeLabel(type: OengusRunType): string {
       return this.$t(`schedule.line.type.${type.toLowerCase()}`).toString();
+  }
+
+  getSelectionResult(categoryId: number): OengusSelection|null {
+    return this.selections.find((select) => {
+      return select.categoryId === categoryId;
+    }) || null;
   }
 }
 </script>

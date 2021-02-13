@@ -30,7 +30,10 @@
             {{ game.ratio }}
           </v-col>
         </v-row>
-        <submission-table-detail :game="game"></submission-table-detail>
+        <submission-table-detail
+          :game="game"
+          :selections="selections">
+        </submission-table-detail>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
@@ -39,7 +42,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { OengusGame, OengusSubmission, OengusUser } from 'oengus-api';
+import { OengusGame, OengusSelection, OengusSubmission, OengusUser } from 'oengus-api';
 import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 
 @Component({
@@ -50,6 +53,9 @@ import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 export default class SubmissionExpansionsComponent extends Vue {
   @Prop(Array)
   submissions!: Array<OengusSubmission>
+
+  @Prop(Array)
+  selections!: Array<OengusSelection>;
 
   get rows(): {game: OengusGame, user: OengusUser}[] {
     return this.submissions.flatMap((submission) => {

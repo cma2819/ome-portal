@@ -39,14 +39,18 @@
       </v-card>
     </div>
 
-    <submission-expansions
-      v-if="$vuetify.breakpoint.mobile"
-      :submissions="submissions"
-    ></submission-expansions>
-    <submission-table
-      v-else
-      :submissions="submissions"
-    ></submission-table>
+    <div v-if="event">
+      <submission-expansions
+        v-if="$vuetify.breakpoint.mobile"
+        :selections="selections"
+        :submissions="submissions"
+      ></submission-expansions>
+      <submission-table
+        v-else
+        :selections="selections"
+        :submissions="submissions"
+      ></submission-table>
+    </div>
   </div>
 </template>
 
@@ -61,7 +65,7 @@
 </style>
 
 <script lang="ts">
-import { getSubmissions, OengusSubmission } from 'oengus-api';
+import { getSelection, getSubmissions, OengusSelection, OengusSubmission } from 'oengus-api';
 import { Vue, Component } from 'vue-property-decorator';
 
 import EventInformation from '../schedule/EventInfomationComponent.vue';
@@ -81,7 +85,12 @@ export default class SubmissionDetailComponent extends Vue {
   eventId: string = this.$route.params.id;
 
   event: Event|null = null;
-  submissions: OengusSubmission[] = [];
+  submissions: Array<OengusSubmission> = [];
+  selections: Array<OengusSelection> = [];
+
+  get selectionDone(): boolean {
+    return this.event?.status !== 'freshed';
+  }
 
   async created(): Promise<void> {
     const event = await apiModule.getEvent(this.eventId);
@@ -89,6 +98,11 @@ export default class SubmissionDetailComponent extends Vue {
 
     const oengusGames = await getSubmissions(this.event.id);
     this.submissions = oengusGames;
+
+    if (this.event.status !== 'freshed') {
+      const selections = await getSelection(this.event.id);
+      this.selections = Object.values(selections);
+    }
   }
 }
 </script>
