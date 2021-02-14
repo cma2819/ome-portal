@@ -6,7 +6,6 @@ use App\Exceptions\HttpStatusThrowable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Roles\RoleUpdateRequest;
 use App\Http\Responses\Api\Roles\RoleResponse;
-use Illuminate\Http\Request;
 use Ome\Permission\Interfaces\UseCases\ListRolePermission\ListRolePermissionUseCase;
 use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionRequest;
 use Ome\Permission\Interfaces\UseCases\SaveRolePermission\SaveRolePermissionUseCase;

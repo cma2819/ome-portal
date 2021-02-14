@@ -21,9 +21,8 @@ class InmemoryPersistAttendeeCommand implements PersistAttendeeCommand
         foreach ($this->attendees as $index => $exists) {
             if ($exists->getUserId() === $attendee->getUserId()
                 && $exists->getEventId() === $attendee->getEventId()) {
-
-                    $this->attendees[$index] = $attendee;
-                    break;
+                $this->attendees[$index] = $attendee;
+                break;
             }
         }
 

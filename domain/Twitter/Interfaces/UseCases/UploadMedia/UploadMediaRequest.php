@@ -2,8 +2,6 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\UploadMedia;
 
-use Psr\Http\Message\UploadedFileInterface;
-
 class UploadMediaRequest
 {
     private string $url;

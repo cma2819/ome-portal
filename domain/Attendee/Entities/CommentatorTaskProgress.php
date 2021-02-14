@@ -21,5 +21,4 @@ class CommentatorTaskProgress extends TaskProgress
             $note
         );
     }
-
 }

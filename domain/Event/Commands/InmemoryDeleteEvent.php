@@ -9,9 +9,9 @@ class InmemoryDeleteEvent implements DeleteEventCommand
 {
     /** @var Event[] */
     private array $events;
-/**
- * @param Event[] $events
- */
+    /**
+     * @param Event[] $events
+     */
     public function __construct(
         array $events
     ) {

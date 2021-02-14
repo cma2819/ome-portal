@@ -9,7 +9,6 @@ use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusUse
 
 class GetMarathonFromOengusInteractor implements GetMarathonFromOengusUseCase
 {
-
     protected OengusMarathonQuery $oengusMarathonQuery;
 
     public function __construct(

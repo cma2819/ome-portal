@@ -13,7 +13,6 @@ use Ome\Exceptions\EntityNotFoundException;
 
 class RegisterAttendeeForEventInteractor implements RegisterAttendeeForEventUseCase
 {
-
     protected PersistAttendeeCommand $persistAttendee;
 
     protected FindUserByIdQuery $findUserById;

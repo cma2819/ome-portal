@@ -189,6 +189,5 @@ class EventResource extends Controller
         }
 
         return $response;
-
     }
 }

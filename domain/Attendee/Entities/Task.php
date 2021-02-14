@@ -4,7 +4,6 @@ namespace Ome\Attendee\Entities;
 
 abstract class Task
 {
-
     protected string $scope;
 
     private ?int $id;

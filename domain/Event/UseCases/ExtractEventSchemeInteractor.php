@@ -9,7 +9,6 @@ use Ome\Event\Interfaces\UseCases\ExtractEventScheme\ExtractEventSchemeUseCase;
 
 class ExtractEventSchemeInteractor implements ExtractEventSchemeUseCase
 {
-
     protected ListEventSchemeQuery $listEventSchemeQuery;
 
     public function __construct(

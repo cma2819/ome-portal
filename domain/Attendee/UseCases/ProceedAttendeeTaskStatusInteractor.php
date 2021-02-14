@@ -11,12 +11,10 @@ use Ome\Attendee\Interfaces\Queries\FindAttendeeTaskQuery;
 use Ome\Attendee\Interfaces\UseCases\ProceedAttendeeTaskStatus\ProceedAttendeeTaskStatusRequest;
 use Ome\Attendee\Interfaces\UseCases\ProceedAttendeeTaskStatus\ProceedAttendeeTaskStatusResponse;
 use Ome\Attendee\Interfaces\UseCases\ProceedAttendeeTaskStatus\ProceedAttendeeTaskStatusUseCase;
-use Ome\Attendee\Values\ProgressStatus;
 use Ome\Attendee\Values\TaskScope;
 
 class ProceedAttendeeTaskStatusInteractor implements ProceedAttendeeTaskStatusUseCase
 {
-
     protected FindAttendeeTaskQuery $findAttendeeTaskQuery;
 
     protected PersistTaskProgressCommand $persistTaskProgressCommand;
@@ -38,19 +36,28 @@ class ProceedAttendeeTaskStatusInteractor implements ProceedAttendeeTaskStatusUs
 
         if ($scope->equalsTo(TaskScope::runner())) {
             $taskProgress = RunnerTaskProgress::createFromTask(
-                $task, $request->getUserId(), $status, $request->getNote()
+                $task,
+                $request->getUserId(),
+                $status,
+                $request->getNote()
             );
         }
 
         if ($scope->equalsTo(TaskScope::commentator())) {
             $taskProgress = CommentatorTaskProgress::createFromTask(
-                $task, $request->getUserId(), $status, $request->getNote()
+                $task,
+                $request->getUserId(),
+                $status,
+                $request->getNote()
             );
         }
 
         if ($scope->equalsTo(TaskScope::volunteer())) {
             $taskProgress = VolunteerTaskProgress::createFromTask(
-                $task, $request->getUserId(), $status, $request->getNote()
+                $task,
+                $request->getUserId(),
+                $status,
+                $request->getNote()
             );
         }
 

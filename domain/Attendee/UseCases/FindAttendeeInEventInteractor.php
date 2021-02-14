@@ -8,7 +8,6 @@ use Ome\Attendee\Interfaces\Queries\FindUserByIdQuery;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventRequest;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventResponse;
 use Ome\Attendee\Interfaces\UseCases\FindAttendeeInEvent\FindAttendeeInEventUseCase;
-use Ome\Exceptions\EntityNotFoundException;
 
 class FindAttendeeInEventInteractor implements FindAttendeeInEventUseCase
 {

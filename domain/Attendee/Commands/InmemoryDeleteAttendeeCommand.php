@@ -7,7 +7,6 @@ use Ome\Attendee\Interfaces\Commands\DeleteAttendeeCommand;
 
 class InmemoryDeleteAttendeeCommand implements DeleteAttendeeCommand
 {
-
     /** @var Attendee[] */
     private array $attendees = [];
 

@@ -9,7 +9,6 @@ use Ome\Attendee\Interfaces\UseCases\DeleteAttendeeTask\DeleteAttendeeTaskUseCas
 
 class DeleteAttendeeTaskInteractor implements DeleteAttendeeTaskUseCase
 {
-
     protected DeleteTaskCommand $deleteTaskCommand;
 
     public function __construct(

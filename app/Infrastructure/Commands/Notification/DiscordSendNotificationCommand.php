@@ -8,7 +8,6 @@ use Ome\Notification\Interfaces\Commands\SendNotificationCommand;
 
 class DiscordSendNotificationCommand implements SendNotificationCommand
 {
-
     protected DiscordApiClient $discordApi;
 
     public function __construct(

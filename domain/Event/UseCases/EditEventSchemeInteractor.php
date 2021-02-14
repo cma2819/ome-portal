@@ -12,7 +12,6 @@ use Ome\Exceptions\EntityNotFoundException;
 
 class EditEventSchemeInteractor implements EditEventSchemeUseCase
 {
-
     protected FindEventSchemeQuery $findEventScheme;
 
     protected PersistEventSchemeCommand $persistEventScheme;

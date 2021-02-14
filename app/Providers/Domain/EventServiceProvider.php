@@ -80,7 +80,6 @@ class EventServiceProvider extends ServiceProvider
         // Test dependencies    //
         //////////////////////////
         if (config('app.env') === 'testing') {
-
             $this->app->bind(
                 \Ome\Event\Interfaces\Queries\OengusMarathonQuery::class,
                 \Tests\Mocks\Domain\Event\Queries\OengusMarathonQuery\MockOengusMarathonQuery::class

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Infrastructure\Commands\Twitter;
 
 use App\Domain\Twitter\TwitterErrorHandler;

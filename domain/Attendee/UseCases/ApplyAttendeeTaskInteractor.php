@@ -13,7 +13,6 @@ use Ome\Attendee\Interfaces\UseCases\ApplyAttendeeTask\ApplyAttendeeTaskResponse
 use Ome\Attendee\Interfaces\UseCases\ApplyAttendeeTask\ApplyAttendeeTaskUseCase;
 use Ome\Attendee\Values\ProgressStatus;
 use Ome\Attendee\Values\TaskScope;
-use Ome\Exceptions\UnmatchedContextException;
 
 class ApplyAttendeeTaskInteractor implements ApplyAttendeeTaskUseCase
 {
@@ -37,19 +36,28 @@ class ApplyAttendeeTaskInteractor implements ApplyAttendeeTaskUseCase
 
         if ($scope->equalsTo(TaskScope::runner())) {
             $taskProgress = RunnerTaskProgress::createFromTask(
-                $task, $request->getUserId(), ProgressStatus::apply(), $request->getNote()
+                $task,
+                $request->getUserId(),
+                ProgressStatus::apply(),
+                $request->getNote()
             );
         }
 
         if ($scope->equalsTo(TaskScope::commentator())) {
             $taskProgress = CommentatorTaskProgress::createFromTask(
-                $task, $request->getUserId(), ProgressStatus::apply(), $request->getNote()
+                $task,
+                $request->getUserId(),
+                ProgressStatus::apply(),
+                $request->getNote()
             );
         }
 
         if ($scope->equalsTo(TaskScope::volunteer())) {
             $taskProgress = VolunteerTaskProgress::createFromTask(
-                $task, $request->getUserId(), ProgressStatus::apply(), $request->getNote()
+                $task,
+                $request->getUserId(),
+                ProgressStatus::apply(),
+                $request->getNote()
             );
         }
 

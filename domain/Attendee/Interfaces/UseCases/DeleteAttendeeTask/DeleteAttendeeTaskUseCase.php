@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\DeleteAttendeeTask;
  */
 interface DeleteAttendeeTaskUseCase
 {
-	/**
-	 * Delete Attendee Task.
-	 */
-	public function interact(DeleteAttendeeTaskRequest $request): DeleteAttendeeTaskResponse;
+    /**
+     * Delete Attendee Task.
+     */
+    public function interact(DeleteAttendeeTaskRequest $request): DeleteAttendeeTaskResponse;
 }

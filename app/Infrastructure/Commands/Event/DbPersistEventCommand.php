@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Infrastructure\Commands\Event;
 
 use App\Infrastructure\Eloquents\AssociateEvent;

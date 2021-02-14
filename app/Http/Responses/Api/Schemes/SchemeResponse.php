@@ -4,8 +4,6 @@ namespace App\Http\Responses\Api\Schemes;
 
 use App\Http\Responses\Api\Auth\DiscordProfileResponse;
 use App\Http\Responses\Api\Auth\UserProfileResponse;
-use Carbon\Carbon;
-use DateTimeInterface;
 use JsonSerializable;
 use Ome\Auth\Interfaces\Dto\UserProfile;
 use Ome\Event\Entities\EventScheme;

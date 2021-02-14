@@ -7,8 +7,8 @@ namespace Ome\Auth\Interfaces\UseCases\ExtractUsers;
  */
 interface ExtractUsersUseCase
 {
-	/**
-	 * Extract Users.
-	 */
-	public function interact(ExtractUsersRequest $request): ExtractUsersResponse;
+    /**
+     * Extract Users.
+     */
+    public function interact(ExtractUsersRequest $request): ExtractUsersResponse;
 }

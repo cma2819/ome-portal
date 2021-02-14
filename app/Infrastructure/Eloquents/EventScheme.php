@@ -21,11 +21,13 @@ class EventScheme extends Model
         'detail' => 'string,'
     ];
 
-    public function planner() {
+    public function planner()
+    {
         return $this->belongsTo(User::class, 'planner_id');
     }
 
-    public function adminReplies() {
+    public function adminReplies()
+    {
         return $this->hasMany(EventSchemeReply::class, 'scheme_id');
     }
 }

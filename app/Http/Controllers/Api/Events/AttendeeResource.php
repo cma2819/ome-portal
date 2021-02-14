@@ -9,7 +9,6 @@ use App\Http\Requests\Api\Events\AttendeeUpdateRequest;
 use App\Http\Responses\Api\Events\AttendeeResponse;
 use App\Infrastructure\Eloquents\User;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Ome\Attendee\Interfaces\Dto\AttendeeDto;
 use Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent\DetachAttendeeFromEventRequest;

@@ -133,7 +133,8 @@ class Attendee
      * @param TaskScope $scope
      * @return boolean
      */
-    public function isInScope(TaskScope $scope): bool {
+    public function isInScope(TaskScope $scope): bool
+    {
         foreach ($this->scopes as $attendeeScope) {
             if ($attendeeScope->equalsTo($scope)) {
                 return true;

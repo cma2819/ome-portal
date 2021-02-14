@@ -127,7 +127,8 @@ class EventScheme
         return $this;
     }
 
-    public function proceed(SchemeStatus $status): self {
+    public function proceed(SchemeStatus $status): self
+    {
         if ($status->equalsTo(SchemeStatus::approved())) {
             return $this->approve();
         }

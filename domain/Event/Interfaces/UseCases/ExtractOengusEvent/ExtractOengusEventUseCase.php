@@ -9,10 +9,10 @@ use Ome\Exceptions\EntityNotFoundException;
  */
 interface ExtractOengusEventUseCase
 {
-	/**
-	 * Extract Oengus Event.
+    /**
+     * Extract Oengus Event.
      *
      * @throws EntityNotFoundException
-	 */
-	public function interact(ExtractOengusEventRequest $request): ExtractOengusEventResponse;
+     */
+    public function interact(ExtractOengusEventRequest $request): ExtractOengusEventResponse;
 }

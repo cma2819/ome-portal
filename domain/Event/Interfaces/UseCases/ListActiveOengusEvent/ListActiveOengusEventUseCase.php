@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\ListActiveOengusEvent;
  */
 interface ListActiveOengusEventUseCase
 {
-	/**
-	 * List Active Oengus Event.
-	 */
-	public function interact(ListActiveOengusEventRequest $request): ListActiveOengusEventResponse;
+    /**
+     * List Active Oengus Event.
+     */
+    public function interact(ListActiveOengusEventRequest $request): ListActiveOengusEventResponse;
 }

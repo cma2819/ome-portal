@@ -16,7 +16,8 @@ class EventSchemeReply extends Model
         'replied_at' => 'datetime',
     ];
 
-    public function scheme() {
+    public function scheme()
+    {
         return $this->belongsTo(EventScheme::class, 'scheme_id');
     }
 }

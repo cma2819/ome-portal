@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\EditEventScheme;
  */
 interface EditEventSchemeUseCase
 {
-	/**
-	 * Edit Event Scheme.
-	 */
-	public function interact(EditEventSchemeRequest $request): EditEventSchemeResponse;
+    /**
+     * Edit Event Scheme.
+     */
+    public function interact(EditEventSchemeRequest $request): EditEventSchemeResponse;
 }

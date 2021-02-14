@@ -2,7 +2,6 @@
 
 namespace Ome\Permission\Entities;
 
-use Ome\Exceptions\UnmatchedContextException;
 use Ome\Permission\Values\Domain;
 
 class RolePermission
@@ -18,7 +17,6 @@ class RolePermission
     ) {
         $allowedDomain = [];
         foreach ($allowed as $domain) {
-
             if ($domain instanceof Domain) {
                 $allowedDomain[] = $domain;
                 continue;

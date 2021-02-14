@@ -7,7 +7,6 @@ use Ome\Attendee\Interfaces\Commands\PersistTaskProgressCommand;
 
 class InmemoryPersistTaskProgressCommand implements PersistTaskProgressCommand
 {
-
     /** @var TaskProgress[] */
     protected array $taskProgresses = [];
 

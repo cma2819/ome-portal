@@ -7,7 +7,6 @@ use Ome\Permission\Interfaces\Queries\ListPermissionsQuery;
 
 class InmemoryListPermissions implements ListPermissionsQuery
 {
-
     /** @var RolePermission[] */
     private array $permissions;
 

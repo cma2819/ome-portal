@@ -16,7 +16,6 @@ class StreamInternal extends Controller
     public function __invoke(
         string $id
     ) {
-
         $viewData = [];
 
         $streamHost = config('app.internal_stream_url');

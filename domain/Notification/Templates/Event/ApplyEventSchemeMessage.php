@@ -6,7 +6,6 @@ use Ome\Notification\Templates\Template;
 
 class ApplyEventSchemeMessage implements Template
 {
-
     private string $message;
 
     public function __construct(

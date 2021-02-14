@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\EditAttendeeTask;
  */
 interface EditAttendeeTaskUseCase
 {
-	/**
-	 * Edit Attendee Task.
-	 */
-	public function interact(EditAttendeeTaskRequest $request): EditAttendeeTaskResponse;
+    /**
+     * Edit Attendee Task.
+     */
+    public function interact(EditAttendeeTaskRequest $request): EditAttendeeTaskResponse;
 }

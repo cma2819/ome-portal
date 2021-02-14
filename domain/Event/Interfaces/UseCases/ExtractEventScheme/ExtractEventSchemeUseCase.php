@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\ExtractEventScheme;
  */
 interface ExtractEventSchemeUseCase
 {
-	/**
-	 * Extract Event Scheme.
-	 */
-	public function interact(ExtractEventSchemeRequest $request): ExtractEventSchemeResponse;
+    /**
+     * Extract Event Scheme.
+     */
+    public function interact(ExtractEventSchemeRequest $request): ExtractEventSchemeResponse;
 }

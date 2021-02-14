@@ -6,7 +6,6 @@ use Ome\Attendee\Values\ProgressStatus;
 
 abstract class TaskProgress
 {
-
     protected string $scope;
 
     private int $userId;

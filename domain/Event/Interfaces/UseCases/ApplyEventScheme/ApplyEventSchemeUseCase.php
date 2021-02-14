@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\ApplyEventScheme;
  */
 interface ApplyEventSchemeUseCase
 {
-	/**
-	 * Apply Event Scheme.
-	 */
-	public function interact(ApplyEventSchemeRequest $request): ApplyEventSchemeResponse;
+    /**
+     * Apply Event Scheme.
+     */
+    public function interact(ApplyEventSchemeRequest $request): ApplyEventSchemeResponse;
 }

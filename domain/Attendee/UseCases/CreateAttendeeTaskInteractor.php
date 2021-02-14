@@ -4,7 +4,6 @@ namespace Ome\Attendee\UseCases;
 
 use Ome\Attendee\Entities\CommentatorTask;
 use Ome\Attendee\Entities\RunnerTask;
-use Ome\Attendee\Entities\Task;
 use Ome\Attendee\Entities\VolunteerTask;
 use Ome\Attendee\Interfaces\Commands\PersistTaskCommand;
 use Ome\Attendee\Interfaces\UseCases\CreateAttendeeTask\CreateAttendeeTaskRequest;

@@ -7,8 +7,8 @@ namespace Ome\Auth\Interfaces\UseCases\GetUserProfile;
  */
 interface GetUserProfileUseCase
 {
-	/**
-	 * Get User Profile.
-	 */
-	public function interact(GetUserProfileRequest $request): GetUserProfileResponse;
+    /**
+     * Get User Profile.
+     */
+    public function interact(GetUserProfileRequest $request): GetUserProfileResponse;
 }

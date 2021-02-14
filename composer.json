@@ -59,8 +59,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "fix": [
-            "php-cs-fixer fix"
+        "cs-fixer:fix": [
+            "composer run fix --working-dir=tools/php-cs-fixer"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

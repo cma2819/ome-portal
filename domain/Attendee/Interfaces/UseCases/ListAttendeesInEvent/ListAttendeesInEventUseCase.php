@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\ListAttendeesInEvent;
  */
 interface ListAttendeesInEventUseCase
 {
-	/**
-	 * List Attendees In Event.
-	 */
-	public function interact(ListAttendeesInEventRequest $request): ListAttendeesInEventResponse;
+    /**
+     * List Attendees In Event.
+     */
+    public function interact(ListAttendeesInEventRequest $request): ListAttendeesInEventResponse;
 }

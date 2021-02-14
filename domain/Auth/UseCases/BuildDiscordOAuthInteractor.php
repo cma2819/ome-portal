@@ -9,7 +9,7 @@ use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthUseCase;
 
 class BuildDiscordOAuthInteractor implements BuildDiscordOAuthUseCase
 {
-    const DISCORD_OAUTH_URL = 'https://discord.com/api/oauth2/authorize';
+    public const DISCORD_OAUTH_URL = 'https://discord.com/api/oauth2/authorize';
 
     protected OAuthStateGenerator $stateGenerator;
 

@@ -10,7 +10,6 @@ use Ome\Event\Interfaces\UseCases\ApplyEventScheme\ApplyEventSchemeUseCase;
 
 class ApplyEventSchemeInteractor implements ApplyEventSchemeUseCase
 {
-
     protected PersistEventSchemeCommand $persistEventScheme;
 
     public function __construct(

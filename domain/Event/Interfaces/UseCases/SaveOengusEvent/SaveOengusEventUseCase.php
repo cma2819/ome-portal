@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\SaveOengusEvent;
  */
 interface SaveOengusEventUseCase
 {
-	/**
-	 * Save Oengus Event.
-	 */
-	public function interact(SaveOengusEventRequest $request): SaveOengusEventResponse;
+    /**
+     * Save Oengus Event.
+     */
+    public function interact(SaveOengusEventRequest $request): SaveOengusEventResponse;
 }

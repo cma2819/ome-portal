@@ -1,5 +1,10 @@
 {
     "require": {
         "friendsofphp/php-cs-fixer": "^2.18"
+    },
+    "scripts": {
+        "fix": [
+            "php-cs-fixer fix"
+        ]
     }
 }

@@ -16,14 +16,12 @@ class OengusApiClient
         string $apiUrl,
         int $cacheExpire
     ) {
-
         $this->apiUrl = $apiUrl;
         $this->cacheExpire = $cacheExpire;
 
         if (substr($this->apiUrl, -1, 1) === '/') {
             $this->apiUrl = substr($this->apiUrl, 0, -1);
         }
-
     }
 
     public function apiGet(string $endpoint): array

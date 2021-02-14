@@ -7,8 +7,8 @@ namespace Ome\Notification\Interfaces\UseCases\SendApplySchemeNotification;
  */
 interface SendApplySchemeNotificationUseCase
 {
-	/**
-	 * Send Apply Scheme Notification.
-	 */
-	public function interact(SendApplySchemeNotificationRequest $request): SendApplySchemeNotificationResponse;
+    /**
+     * Send Apply Scheme Notification.
+     */
+    public function interact(SendApplySchemeNotificationRequest $request): SendApplySchemeNotificationResponse;
 }

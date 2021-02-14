@@ -9,7 +9,6 @@ use Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent\DetachAttendeeFromE
 
 class DetachAttendeeFromEventInteractor implements DetachAttendeeFromEventUseCase
 {
-
     protected DeleteAttendeeCommand $deleteAttendeeCommand;
 
     public function __construct(

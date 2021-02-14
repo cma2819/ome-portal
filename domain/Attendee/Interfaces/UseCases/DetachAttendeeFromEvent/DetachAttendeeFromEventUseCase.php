@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\DetachAttendeeFromEvent;
  */
 interface DetachAttendeeFromEventUseCase
 {
-	/**
-	 * Detach Attendee From Event.
-	 */
-	public function interact(DetachAttendeeFromEventRequest $request): DetachAttendeeFromEventResponse;
+    /**
+     * Detach Attendee From Event.
+     */
+    public function interact(DetachAttendeeFromEventRequest $request): DetachAttendeeFromEventResponse;
 }

@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\FindEventScheme;
  */
 interface FindEventSchemeUseCase
 {
-	/**
-	 * Find Event Scheme.
-	 */
-	public function interact(FindEventSchemeRequest $request): FindEventSchemeResponse;
+    /**
+     * Find Event Scheme.
+     */
+    public function interact(FindEventSchemeRequest $request): FindEventSchemeResponse;
 }

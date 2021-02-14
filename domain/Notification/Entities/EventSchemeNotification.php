@@ -4,7 +4,6 @@ namespace Ome\Notification\Entities;
 
 use Ome\Auth\Interfaces\Dto\UserProfile;
 use Ome\Event\Entities\EventScheme;
-use Ome\Notification\Entities\Notifiable;
 use Ome\Notification\Templates\Event\ApplyEventSchemeMessage;
 use Ome\Notification\Templates\Event\ApplyEventSchemeSubject;
 use Ome\Notification\Templates\Template;

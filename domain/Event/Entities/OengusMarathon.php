@@ -8,7 +8,7 @@ use Ome\Event\Values\MarathonStatus;
 
 class OengusMarathon
 {
-    const MARATHON_DONE_BUFFER_HOUR = 2;
+    public const MARATHON_DONE_BUFFER_HOUR = 2;
 
     private string $id;
 

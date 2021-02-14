@@ -24,7 +24,7 @@ class DbPersistEventSchemeCommand implements PersistEventSchemeCommand
         $schemeEloquent = EventSchemeEloquent::find($eventScheme->getId());
 
         if (is_null($schemeEloquent)) {
-            $schemeEloquent = new EventSchemeEloquent;
+            $schemeEloquent = new EventSchemeEloquent();
         }
 
         $schemeEloquent->name = $eventScheme->getName();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Exceptions\HttpStatusThrowable;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\Api\Auth\UserResponse;
-use Illuminate\Http\Request;
 use Ome\Auth\Interfaces\UseCases\GetAuthenticatedUser\GetAuthenticatedUserUseCase;
 use Ome\Permission\Interfaces\UseCases\GetRolePermissionByUser\GetRolePermissionByUserRequest;
 use Ome\Permission\Interfaces\UseCases\GetRolePermissionByUser\GetRolePermissionByUserUseCase;

@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\ProceedAttendeeTaskStatus;
  */
 interface ProceedAttendeeTaskStatusUseCase
 {
-	/**
-	 * Proceed Attendee Task Status.
-	 */
-	public function interact(ProceedAttendeeTaskStatusRequest $request): ProceedAttendeeTaskStatusResponse;
+    /**
+     * Proceed Attendee Task Status.
+     */
+    public function interact(ProceedAttendeeTaskStatusRequest $request): ProceedAttendeeTaskStatusResponse;
 }

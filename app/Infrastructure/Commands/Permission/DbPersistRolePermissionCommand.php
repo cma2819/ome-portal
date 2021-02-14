@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Infrastructure\Commands\Permission;
 
 use App\Infrastructure\Eloquents\DiscordRolePermission;

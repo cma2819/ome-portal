@@ -21,5 +21,4 @@ class VolunteerTaskProgress extends TaskProgress
             $note
         );
     }
-
 }

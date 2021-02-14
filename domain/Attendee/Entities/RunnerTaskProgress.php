@@ -21,5 +21,4 @@ class RunnerTaskProgress extends TaskProgress
             $note
         );
     }
-
 }

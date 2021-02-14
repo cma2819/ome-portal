@@ -2,7 +2,6 @@
 
 namespace Ome\Event\UseCases;
 
-use Carbon\Carbon;
 use Ome\Event\Entities\Event;
 use Ome\Event\Interfaces\Queries\ListEventQuery;
 use Ome\Event\Interfaces\Queries\OengusMarathonQuery;

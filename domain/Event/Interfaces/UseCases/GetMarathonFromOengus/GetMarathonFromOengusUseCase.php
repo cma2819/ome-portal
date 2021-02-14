@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\GetMarathonFromOengus;
  */
 interface GetMarathonFromOengusUseCase
 {
-	/**
-	 * Get Marathon From Oengus.
-	 */
-	public function interact(GetMarathonFromOengusRequest $request): GetMarathonFromOengusResponse;
+    /**
+     * Get Marathon From Oengus.
+     */
+    public function interact(GetMarathonFromOengusRequest $request): GetMarathonFromOengusResponse;
 }

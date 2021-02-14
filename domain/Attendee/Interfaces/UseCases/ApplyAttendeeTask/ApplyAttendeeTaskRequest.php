@@ -2,8 +2,6 @@
 
 namespace Ome\Attendee\Interfaces\UseCases\ApplyAttendeeTask;
 
-use Ome\Attendee\Values\TaskScope;
-
 /**
  * Request object for ApplyAttendeeTask.
  */

@@ -66,7 +66,6 @@ class SchemeServiceProvider extends ServiceProvider
         //////////////////////////
         // Test dependencies    //
         if (config('app.env') === 'testing') {
-
         }
     }
 

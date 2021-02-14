@@ -4,7 +4,6 @@ namespace App\Http\Responses\Api\Auth;
 
 use JsonSerializable;
 use Ome\Auth\Entities\User;
-use Ome\Permission\Entities\RolePermission;
 
 class UserResponse implements JsonSerializable
 {

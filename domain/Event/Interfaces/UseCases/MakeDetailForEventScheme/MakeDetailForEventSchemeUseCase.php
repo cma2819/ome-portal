@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\MakeDetailForEventScheme;
  */
 interface MakeDetailForEventSchemeUseCase
 {
-	/**
-	 * Make Detail For Event Scheme.
-	 */
-	public function interact(MakeDetailForEventSchemeRequest $request): MakeDetailForEventSchemeResponse;
+    /**
+     * Make Detail For Event Scheme.
+     */
+    public function interact(MakeDetailForEventSchemeRequest $request): MakeDetailForEventSchemeResponse;
 }

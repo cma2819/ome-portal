@@ -18,7 +18,7 @@ class InmemoryFindUserByIdQuery implements FindUserByIdQuery
 
     public function fetch(int $id): ?User
     {
-        foreach($this->users as $user) {
+        foreach ($this->users as $user) {
             if ($user->getId() === $id) {
                 return $user;
             }

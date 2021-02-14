@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\ProceedEventSchemeStatus;
  */
 interface ProceedEventSchemeStatusUseCase
 {
-	/**
-	 * Proceed Event Scheme Status.
-	 */
-	public function interact(ProceedEventSchemeStatusRequest $request): ProceedEventSchemeStatusResponse;
+    /**
+     * Proceed Event Scheme Status.
+     */
+    public function interact(ProceedEventSchemeStatusRequest $request): ProceedEventSchemeStatusResponse;
 }

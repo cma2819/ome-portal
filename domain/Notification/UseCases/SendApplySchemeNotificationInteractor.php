@@ -10,7 +10,6 @@ use Ome\Notification\Interfaces\UseCases\SendApplySchemeNotification\SendApplySc
 
 class SendApplySchemeNotificationInteractor implements SendApplySchemeNotificationUseCase
 {
-
     protected SendNotificationCommand $sendNotification;
 
     public function __construct(

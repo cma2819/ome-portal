@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\CreateAttendeeTask;
  */
 interface CreateAttendeeTaskUseCase
 {
-	/**
-	 * Create Attendee Task.
-	 */
-	public function interact(CreateAttendeeTaskRequest $request): CreateAttendeeTaskResponse;
+    /**
+     * Create Attendee Task.
+     */
+    public function interact(CreateAttendeeTaskRequest $request): CreateAttendeeTaskResponse;
 }

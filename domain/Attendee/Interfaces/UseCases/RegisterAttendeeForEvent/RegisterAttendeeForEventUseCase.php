@@ -7,8 +7,8 @@ namespace Ome\Attendee\Interfaces\UseCases\RegisterAttendeeForEvent;
  */
 interface RegisterAttendeeForEventUseCase
 {
-	/**
-	 * Register Attendee For Event.
-	 */
-	public function interact(RegisterAttendeeForEventRequest $request): RegisterAttendeeForEventResponse;
+    /**
+     * Register Attendee For Event.
+     */
+    public function interact(RegisterAttendeeForEventRequest $request): RegisterAttendeeForEventResponse;
 }

@@ -2,7 +2,6 @@
 
 namespace Ome\Twitter\Commands;
 
-use Ome\Twitter\Entities\PartialTwitterMedia;
 use Ome\Twitter\Entities\TwitterMedia;
 use Ome\Twitter\Interfaces\Commands\PersistTwitterMediaCommand;
 

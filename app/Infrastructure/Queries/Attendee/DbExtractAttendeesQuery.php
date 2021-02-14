@@ -6,7 +6,6 @@ use App\Infrastructure\Eloquents\AssociateEvent;
 use App\Infrastructure\Eloquents\AttendeeTask;
 use App\Infrastructure\Eloquents\AttendeeTaskProgress;
 use App\Infrastructure\Eloquents\EventAttendee;
-use App\Infrastructure\Eloquents\User;
 use Illuminate\Support\Collection;
 use Ome\Attendee\Entities\Attendee;
 use Ome\Attendee\Entities\CommentatorTask;

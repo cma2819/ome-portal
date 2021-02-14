@@ -5,7 +5,6 @@ namespace Ome\Twitter\Entities;
 use JsonSerializable;
 use Ome\Exceptions\UnmatchedContextException;
 use Ome\Twitter\Values\TwitterMediaType;
-use Psr\Http\Message\UploadedFileInterface;
 
 class TwitterMedia implements JsonSerializable
 {

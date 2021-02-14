@@ -38,8 +38,7 @@ class MarathonStatus implements ValueObject
         bool $selected,
         bool $scheduled,
         bool $endBefore
-    ): self
-    {
+    ): self {
         if ($endBefore) {
             return self::closed();
         }

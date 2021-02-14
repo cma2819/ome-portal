@@ -7,7 +7,6 @@ use Ome\Notification\Interfaces\Commands\SendNotificationCommand;
 
 class InmemorySendNotification implements SendNotificationCommand
 {
-
     private array $notifications = [];
 
     public function execute(Notifiable $notification)

@@ -7,8 +7,8 @@ namespace Ome\Event\Interfaces\UseCases\DetachOengusMarathon;
  */
 interface DetachOengusMarathonUseCase
 {
-	/**
-	 * Detach Oengus Marathon.
-	 */
-	public function interact(DetachOengusMarathonRequest $request): DetachOengusMarathonResponse;
+    /**
+     * Detach Oengus Marathon.
+     */
+    public function interact(DetachOengusMarathonRequest $request): DetachOengusMarathonResponse;
 }

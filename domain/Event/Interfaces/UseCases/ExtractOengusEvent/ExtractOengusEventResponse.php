@@ -3,7 +3,6 @@
 namespace Ome\Event\Interfaces\UseCases\ExtractOengusEvent;
 
 use Ome\Event\Entities\Event;
-use Ome\Event\Interfaces\Dto\OmeEventDto;
 
 /**
  * Response object for ExtractOengusEvent.

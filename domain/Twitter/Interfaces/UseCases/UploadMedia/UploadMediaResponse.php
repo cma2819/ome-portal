@@ -2,7 +2,6 @@
 
 namespace Ome\Twitter\Interfaces\UseCases\UploadMedia;
 
-use Ome\Twitter\Entities\TwitterMedia;
 use Ome\Twitter\Interfaces\Dto\UploadedMediaDto;
 
 class UploadMediaResponse
