@@ -61,6 +61,9 @@
         "cs-fixer:fix": [
             "composer run fix --working-dir=tools/php-cs-fixer"
         ],
+        "post-install-cmd": [
+            "composer install --working-dir=tools/php-cs-fixer"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
