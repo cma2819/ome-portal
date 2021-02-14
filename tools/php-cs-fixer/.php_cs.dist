@@ -1,0 +1,15 @@
+<?php
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
+    ->in(__DIR__ . '/../../app')
+    ->in(__DIR__ . '/../../domain');
+
+$config = new Config();
+return $config->setRules([
+        '@PSR12' => true,
+        'no_unused_imports' => true,
+    ])
+    ->setFinder($finder);
