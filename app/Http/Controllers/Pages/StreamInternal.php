@@ -10,19 +10,14 @@ class StreamInternal extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param string $id
      * @return \Illuminate\Http\Response
      */
     public function __invoke(
-        Request $request,
         string $id
     ) {
 
-        $viewData = [
-            'discord_oauth_url' => null,
-            'bearer' => null,
-        ];
+        $viewData = [];
 
         $streamHost = config('app.internal_stream_url');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Api\Auth\DiscordAuthenticateRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserRequest;
 use Ome\Auth\Interfaces\UseCases\AuthenticateWithDiscordUser\AuthenticateWithDiscordUserUseCase;
@@ -40,7 +41,7 @@ class AuthenticateController extends Controller
         $userEloquent->refreshToken();
         $userEloquent->save();
 
-        return redirect(route('index'));
+        return $this->redirectToView($request);
     }
 
     public function logout()
@@ -48,5 +49,17 @@ class AuthenticateController extends Controller
         Auth::logout();
 
         return redirect(route('index'));
+    }
+
+    private function redirectToView(
+        Request $request
+    ) {
+        if ($request->session()->has('login_redirect')) {
+            $location = url($request->session()->pull('login_redirect'));
+        } else {
+            $location = route('index');
+        }
+
+        return redirect($location);
     }
 }

@@ -39,6 +39,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        'view' => [
+            \App\Http\Middleware\SetCommonViewData::class,
+            \App\Http\Middleware\ForgetAccessToPath::class,
+        ],
+
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

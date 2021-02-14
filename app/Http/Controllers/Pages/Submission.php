@@ -11,14 +11,6 @@ use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthUseCase;
 
 class Submission extends Controller
 {
-    protected BuildDiscordOAuthUseCase $buildDiscordOAuth;
-
-    public function __construct(
-        BuildDiscordOAuthUseCase $buildDiscordOAuth
-    ) {
-        $this->buildDiscordOAuth = $buildDiscordOAuth;
-    }
-
     /**
      * Handle the incoming request.
      *
@@ -28,32 +20,10 @@ class Submission extends Controller
      */
     public function __invoke(Request $request, ?string $id = null)
     {
-        $viewData = [
-            'discord_oauth_url' => null,
-            'bearer' => null,
-        ];
-
-        if (!Auth::check()) {
-            $buildResult = $this->buildDiscordOAuth->interact(
-                new BuildDiscordOAuthRequest(
-                    config('services.discord.client_id'),
-                    config('services.discord.redirect_url')
-                )
-            );
-
-            $request->session()->put('discord_state', $buildResult->getState());
-            $viewData['discord_oauth_url'] = $buildResult->getOauthUrl();
-        } else {
-            $user = Auth::user();
-            $bearer = $user->api_token;
-
-            $viewData['bearer'] = $bearer;
-        }
-
         if (!is_null($id) && is_null(AssociateEvent::find($id))) {
             return abort(404);
         }
 
-        return view('submission.index', $viewData);
+        return view('submission.index');
     }
 }

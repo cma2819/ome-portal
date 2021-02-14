@@ -13,22 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Pages\Top')->name('index');
-
 Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');
 
-Route::get('/events', 'Pages\Event')->name('events.index');
-Route::get('/events/{id}/schedules', 'Pages\Event')->name('events.schedules.index')->where('id', '.*');
-Route::get('/events/{id}/submissions', 'Pages\Event')->name('events.submissions.index')->where('id', '.*');
+Route::middleware('view')->group(function () {
 
-Route::get('/schemes', 'Pages\Scheme')->name('scheme');
-Route::get('/schemes/{any}', 'Pages\Scheme')->name('scheme.any')->where('any', '.*');
+    Route::get('/', 'Pages\Top')->name('index');
+    Route::get('/login', 'Pages\Login')->name('auth.login');
 
-Route::middleware('auth')->group(function () {
+    Route::get('/events', 'Pages\Event')->name('events.index');
+    Route::get('/events/{id}/schedules', 'Pages\Event')->name('events.schedules.index')->where('id', '.*');
+    Route::get('/events/{id}/submissions', 'Pages\Event')->name('events.submissions.index')->where('id', '.*');
 
-    Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');
-    Route::get('/streams/internal/{id}', 'Pages\StreamInternal')->name('streams.internal')->middleware('can:access-to-internal-stream');
-    Route::get('/admin', 'Pages\Admin')->name('admin')->middleware('can:access-to-admin');
-    Route::get('/logout', 'AuthenticateController@logout')->name('auth.logout');
+    Route::get('/schemes', 'Pages\Scheme')->name('scheme');
+    Route::get('/schemes/{any}', 'Pages\Scheme')->name('scheme.any')->where('any', '.*');
+
+    Route::middleware('auth')->group(function () {
+
+        Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');
+        Route::get('/streams/internal/{id}', 'Pages\StreamInternal')->name('streams.internal')->middleware('can:access-to-internal-stream');
+        Route::get('/admin', 'Pages\Admin')->name('admin')->middleware('can:access-to-admin');
+        Route::get('/logout', 'AuthenticateController@logout')->name('auth.logout');
+
+    });
 
 });

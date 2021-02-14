@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Pages;
 
-use App\Infrastructure\Eloquents\AssociateEvent;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\Auth\LoginRedirectRequest;
 use Illuminate\Support\Facades\Auth;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthRequest;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthUseCase;
 
-class Schedule extends Controller
+class Login extends Controller
 {
     protected BuildDiscordOAuthUseCase $buildDiscordOAuth;
 
@@ -22,15 +21,19 @@ class Schedule extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param string $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(?string $id = null)
+    public function __invoke(LoginRedirectRequest $request)
     {
-        if (!is_null($id) && is_null(AssociateEvent::find($id))) {
-            return abort(404);
+        if (Auth::check()) {
+            return redirect(route('index'));
         }
 
-        return view('schedule.detail');
+        if (!is_null($request->access_to)) {
+            $request->session()->put('login_redirect', $request->access_to);
+        }
+
+        return view('login');
     }
 }
