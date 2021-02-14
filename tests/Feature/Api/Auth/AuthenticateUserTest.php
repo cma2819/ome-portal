@@ -11,7 +11,7 @@ use Ome\Permission\Values\Domain;
 use Tests\AssertJsonArray;
 use Tests\TestCase;
 
-class AuthorizeUserTest extends TestCase
+class AuthenticateUserTest extends TestCase
 {
     use RefreshDatabase;
     use AssertJsonArray;
