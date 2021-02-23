@@ -15,7 +15,7 @@ class CreateTwitchConnectionsTable extends Migration
     {
         Schema::create('twitch_connections', function (Blueprint $table) {
             $table->id();
-            $table->string('twitch_user_id')->unique();
+            $table->string('twitch_user_id', 16)->unique();
             $table->timestamps();
         });
     }
