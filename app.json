@@ -21,11 +21,16 @@
                 "TWITTER_CONSUMER_KEY": "twitter integration will be mocked",
                 "TWITTER_CONSUMER_SECRET": "twitter integration will be mocked",
                 "TWITTER_ACCESS_TOKEN": "twitter integration will be mocked",
-                "TWITTER_ACCCESS_SECRET": "twitter integration will be mocked",
+                "TWITTER_ACCESS_SECRET": "twitter integration will be mocked",
                 "DISCORD_API_URL": "discord integration will be mocked",
                 "DISCORD_CLIENT_ID": "discord integration will be mocked",
                 "DISCORD_CLIENT_SECRET": "discord integration will be mocked",
                 "DISCORD_REDIRECT_URL": "discord integration will be mocked",
+                "TWITCH_API_URL": "twitch integration will be mocked",
+                "TWITCH_IDENTIFY_URL": "twitch integration will be mocked",
+                "TWITCH_CLIENT_ID": "twitch integration will be mocked",
+                "TWITCH_CLIENT_SECRET": "twitch integration will be mocked",
+                "TWITCH_REDIRECT_URL": "twitch integration will be mocked",
                 "CACHE_DRIVER": "redis",
                 "SESSION_DRIVER": "redis"
             }

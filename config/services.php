@@ -56,8 +56,8 @@ return [
     ],
 
     'twitch' => [
-        'api_url' => env('TWITCH_API_URL'),
-        'identify_url' => env('TWITCH_IDENTIFY_URL'),
+        'api_url' => env('TWITCH_API_URL', 'https://api.twitch.tv/helix'),
+        'identify_url' => env('TWITCH_IDENTIFY_URL', 'https://id.twitch.tv'),
         'client_id' => env('TWITCH_CLIENT_ID'),
         'client_secret' => env('TWITCH_CLIENT_SECRET'),
         'redirect_url' => env('TWITCH_REDIRECT_URL'),
