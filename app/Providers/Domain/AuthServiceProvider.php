@@ -46,6 +46,10 @@ class AuthServiceProvider extends ServiceProvider
             \Ome\Auth\Interfaces\UseCases\ExtractUsers\ExtractUsersUseCase::class,
             \Ome\Auth\UseCases\ExtractUsersInteractor::class
         );
+        $this->app->bind(
+            \Ome\Auth\Interfaces\UseCases\EditUserProfile\EditUserProfileUseCase::class,
+            \Ome\Auth\UseCases\EditUserProfileInteractor::class
+        );
 
         //////////////
         // Commands //
@@ -91,15 +95,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->app->bind(
             \Ome\Auth\Interfaces\Queries\ListUsersQuery::class,
             \App\Infrastructure\Queries\Auth\DbListUsersQuery::class
-        );
-
-        //////////
-        // misc //
-        //////////
-
-        $this->app->bind(
-            \Ome\Auth\Interfaces\OAuthStateGenerator::class,
-            \Ome\Auth\UseCases\OAuthStateRandomGenerator::class
         );
 
         //////////////////////////

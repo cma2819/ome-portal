@@ -22,6 +22,11 @@ class InmemoryPersistUserCommand implements PersistUserCommand
 
     public function execute(User $user): User
     {
+        if (!is_null($user->getId())) {
+            $this->users[$user->getId()] = $user;
+            return $user;
+        }
+
         $newUser = User::createRegisteredUser(
             $this->nextId(),
             $user->getUsername(),

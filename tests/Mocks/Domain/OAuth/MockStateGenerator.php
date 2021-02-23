@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Mocks\Domain\Auth;
+namespace Tests\Mocks\Domain\OAuth;
 
-use Ome\Auth\Interfaces\OAuthStateGenerator;
+use Ome\OAuth\Interfaces\OAuthStateGenerator;
 
 class MockStateGenerator implements OAuthStateGenerator
 {

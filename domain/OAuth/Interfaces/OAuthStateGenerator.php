@@ -1,6 +1,6 @@
 <?php
 
-namespace Ome\Auth\Interfaces;
+namespace Ome\OAuth\Interfaces;
 
 interface OAuthStateGenerator
 {

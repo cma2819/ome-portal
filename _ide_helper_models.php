@@ -185,6 +185,65 @@ namespace App\Infrastructure\Eloquents{
 
 namespace App\Infrastructure\Eloquents{
 /**
+ * App\Infrastructure\Eloquents\TwitchConnection
+ *
+ * @property int $id
+ * @property string $twitch_user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Infrastructure\Eloquents\TwitchStream[] $streams
+ * @property-read int|null $streams_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Infrastructure\Eloquents\User[] $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection whereTwitchUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchConnection whereUpdatedAt($value)
+ */
+	class TwitchConnection extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
+ * App\Infrastructure\Eloquents\TwitchStream
+ *
+ * @property int $id
+ * @property int $twitch_connection_id
+ * @property string $stream_id
+ * @property string $title
+ * @property string $game
+ * @property int $viewers
+ * @property string $thumbnail_uri
+ * @property string $status
+ * @property \Illuminate\Support\Carbon $started_at
+ * @property \Illuminate\Support\Carbon $finished_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Infrastructure\Eloquents\TwitchConnection|null $connection
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereFinishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereGame($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereStartedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereStreamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereThumbnailUri($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereTwitchConnectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwitchStream whereViewers($value)
+ */
+	class TwitchStream extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
  * App\Infrastructure\Eloquents\User
  *
  * @property int $id
@@ -196,6 +255,8 @@ namespace App\Infrastructure\Eloquents{
  * @property-read \App\Infrastructure\Eloquents\UserDiscord|null $discord
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Infrastructure\Eloquents\TwitchConnection[] $twitch
+ * @property-read int|null $twitch_count
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()

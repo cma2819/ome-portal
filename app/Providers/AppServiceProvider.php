@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Api\Discord\DiscordApiClient;
 use App\Api\Oengus\OengusApiClient;
+use App\Api\Twitch\TwitchApiClient;
 use Clogger\Logger;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Log\Logger as IlluminateLogger;
@@ -32,6 +33,15 @@ class AppServiceProvider extends ServiceProvider
                 config('services.discord.api_url'),
                 config('services.discord.bot_token'),
                 config('services.discord.cache_expire')
+            );
+        });
+        $this->app->bind(TwitchApiClient::class, function (Application $app) {
+            return new TwitchApiClient(
+                config('services.twitch.client_id'),
+                config('services.twitch.client_secret'),
+                config('services.twitch.api_url'),
+                config('services.twitch.identify_url'),
+                config('services.twitch.cache_expire')
             );
         });
         $this->app->bind(OengusApiClient::class, function (Application $app) {

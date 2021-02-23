@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDiscord::class);
     }
+
+    public function twitch()
+    {
+        return $this->belongsToMany(TwitchConnection::class, 'user_twitch_connection');
+    }
 }

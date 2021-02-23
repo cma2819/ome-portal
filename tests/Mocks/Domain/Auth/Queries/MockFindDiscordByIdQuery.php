@@ -13,7 +13,8 @@ class MockFindDiscordByIdQuery implements FindDiscordByIdQuery
         return PartialDiscordUser::createPartial(
             $id,
             'Nelly',
-            '1234'
+            '1234',
+            'avatar_test'
         );
     }
 }

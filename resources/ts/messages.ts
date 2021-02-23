@@ -5,6 +5,7 @@ export const messages: LocaleMessages = {
       layout: {
         actions: {
           top: 'トップ',
+          mypage: 'マイページ',
           event: 'イベント一覧',
           scheme: 'イベント応募',
 
@@ -19,6 +20,23 @@ export const messages: LocaleMessages = {
       generals: {
         required: '* 必須',
         back: '戻る',
+      },
+      mypage:{
+        tabs: {
+          profile: 'プロフィール',
+        },
+        profiles: {
+          labels: {
+            username: 'ユーザー名',
+            login: 'ログイン情報',
+          },
+          actions: {
+            edit: '変更',
+          },
+        },
+        errors: {
+          profile: 'プロフィールの変更に失敗しました。'
+        }
       },
       event: {
         labels: {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Ome\Auth\UseCases;
+namespace Ome\OAuth;
 
-use Ome\Auth\Interfaces\OAuthStateGenerator;
+use Ome\OAuth\Interfaces\OAuthStateGenerator;
 
 class OAuthStateRandomGenerator implements OAuthStateGenerator
 {

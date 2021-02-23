@@ -2,10 +2,10 @@
 
 namespace Ome\Auth\UseCases;
 
-use Ome\Auth\Interfaces\OAuthStateGenerator;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthRequest;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthResponse;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthUseCase;
+use Ome\OAuth\Interfaces\OAuthStateGenerator;
 
 class BuildDiscordOAuthInteractor implements BuildDiscordOAuthUseCase
 {

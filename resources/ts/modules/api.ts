@@ -72,6 +72,16 @@ class Api extends ApiClient {
   }
 
   @Action
+  public async updateAuthMe(payload: { username: string }): Promise<void> {
+    await this.put({
+      endpoint: 'auth/me',
+      params: {
+        username: payload.username,
+      }
+    });
+  }
+
+  @Action
   public async getRoles(): Promise<Array<Role>> {
     const response = await this.get('roles');
     return response;

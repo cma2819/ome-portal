@@ -15,13 +15,20 @@ class DbPersistUserCommand implements PersistUserCommand
     {
         /** @var User */
         $persistUser = DB::transaction(function () use ($user) {
-            $userEloquent = new EloquentsUser(['name' => $user->getUsername()]);
-            $userEloquent->refreshToken();
+            $userEloquent = EloquentsUser::find($user->getId());
+            if (is_null($userEloquent)) {
+                $userEloquent = new EloquentsUser();
+                $userEloquent->refreshToken();
+            }
+            $userEloquent->name = $user->getUsername();
             $userEloquent->save();
 
-            $userDiscord = new UserDiscord(['discord_id' => $user->getDiscordId()]);
-            $userDiscord->user()->associate($userEloquent);
-            $userDiscord->save();
+            $userDiscord = UserDiscord::where('discord_id', '=', $user->getDiscordId())->first(['discord_id']);
+            if (is_null($userDiscord)) {
+                $userDiscord = new UserDiscord(['discord_id' => $user->getDiscordId()]);
+                $userDiscord->user()->associate($userEloquent);
+                $userDiscord->save();
+            }
 
             return User::createRegisteredUser(
                 $userEloquent->id,

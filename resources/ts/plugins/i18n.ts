@@ -7,7 +7,7 @@ Vue.use(VueI18n);
 
 const i18n = new VueI18n({
     locale: 'ja',
-    messages
+    messages,
 });
 
 export default i18n;

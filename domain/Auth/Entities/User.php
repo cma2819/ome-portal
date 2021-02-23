@@ -33,6 +33,13 @@ class User
         return new self(null, $discord->getUsername(), $discord->getId());
     }
 
+    public function edit(
+        string $username
+    ): self {
+        $this->username = $username;
+        return $this;
+    }
+
     /**
      * Get the value of id
      */

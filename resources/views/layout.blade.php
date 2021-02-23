@@ -36,6 +36,9 @@
             @isset($discord_oauth_url)
             login-url="{{ $discord_oauth_url }}"
             @endisset
+            @isset($twitch_oauth_url)
+            twitch-auth-uri={{ $twitch_oauth_url }}
+            @endisset
             discord-invite="{{ config('services.discord.invite_code') }}"
         >
             @yield('content')

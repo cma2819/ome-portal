@@ -1,7 +1,10 @@
+import { UserChannel } from './stream';
+
 export type User = {
   id: number;
   username: string;
-  discord: Discord;
+  discord: DiscordProfile;
+  channels: UserChannel;
   permissions: Permissions;
 }
 

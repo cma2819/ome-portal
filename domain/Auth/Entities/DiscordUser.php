@@ -10,14 +10,18 @@ class DiscordUser
 
     private string $discriminator;
 
+    private ?string $avatar;
+
     protected function __construct(
         string $id,
         string $username,
-        string $discriminator
+        string $discriminator,
+        ?string $avatar
     ) {
         $this->id = $id;
         $this->username = $username;
         $this->discriminator = $discriminator;
+        $this->avatar = $avatar;
     }
 
     public static function createFromApiJson(array $json)
@@ -25,7 +29,8 @@ class DiscordUser
         return new self(
             $json['id'],
             $json['username'],
-            $json['discriminator']
+            $json['discriminator'],
+            $json['avatar']
         );
     }
 
@@ -51,5 +56,25 @@ class DiscordUser
     public function getDiscriminator()
     {
         return $this->discriminator;
+    }
+
+    /**
+     * Get the value of avatar
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function getThumbnail(string $discordCdnUrl): string
+    {
+        $baseUrl = substr($discordCdnUrl, -1) === '/' ? substr($discordCdnUrl, 0, -1) : $discordCdnUrl;
+
+        if (is_null($this->avatar)) {
+            $discriminatorMods = intval($this->discriminator) % 5;
+            return $baseUrl . "/embed/avatars/{$discriminatorMods}.png";
+        }
+
+        return $baseUrl . "/avatars/{$this->id}/{$this->avatar}.png";
     }
 }

@@ -34,7 +34,10 @@
 
       <template v-if="bearer && user">
         <auth-user-label :user="user"></auth-user-label>
-        <authorized-menu :permissions="user.permissions"></authorized-menu>
+        <authorized-menu
+          :user="user"
+          :twitch-auth-uri="twitchAuthUri"
+        ></authorized-menu>
       </template>
       <auth-login-button
         v-else-if="!bearer"
@@ -112,6 +115,7 @@ import AuthorizedMenu from '../components/auth/AuthorizedMenuComponent.vue';
 import AuthUserLabel from '../components/auth/AuthUserLabelComponent.vue';
 
 import { apiModule } from '../modules/api';
+import { authModule } from '../modules/auth';
 import { User } from '../lib/models/auth';
 
 @Component({
@@ -129,9 +133,13 @@ export default class OmeApp extends Vue {
   @Prop(String)
   readonly loginUrl!: string;
   @Prop(String)
+  readonly twitchAuthUri!: string;
+  @Prop(String)
   readonly discordInvite!: string;
 
-  user: User|null = null;
+  get user(): User|null {
+    return authModule.authUser;
+  }
 
   async created(): Promise<void> {
     apiModule.updateHost(this.apiHost);
@@ -139,7 +147,7 @@ export default class OmeApp extends Vue {
       apiModule.updateBearerToken(this.bearer);
 
       try {
-        this.user = await apiModule.getAuthMe();
+        authModule.authMe();
       } catch (e) {
         console.error(e);
       }

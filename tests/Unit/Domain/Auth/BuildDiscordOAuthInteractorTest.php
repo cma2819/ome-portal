@@ -5,7 +5,7 @@ namespace Tests\Unit\Domain\Auth;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthRequest;
 use Ome\Auth\UseCases\BuildDiscordOAuthInteractor;
 use PHPUnit\Framework\TestCase;
-use Tests\Mocks\Domain\Auth\MockStateGenerator;
+use Tests\Mocks\Domain\OAuth\MockStateGenerator;
 
 class BuildDiscordOAuthInteractorTest extends TestCase
 {

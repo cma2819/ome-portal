@@ -8,6 +8,8 @@ use App\Http\Responses\Api\Auth\UserResponse;
 use Ome\Auth\Interfaces\UseCases\GetAuthenticatedUser\GetAuthenticatedUserUseCase;
 use Ome\Permission\Interfaces\UseCases\GetRolePermissionByUser\GetRolePermissionByUserRequest;
 use Ome\Permission\Interfaces\UseCases\GetRolePermissionByUser\GetRolePermissionByUserUseCase;
+use Ome\Stream\Interfaces\UseCases\GetStreamerByUserId\GetStreamerByUserIdRequest;
+use Ome\Stream\Interfaces\UseCases\GetStreamerByUserId\GetStreamerByUserIdUseCase;
 
 class AuthenticateUser extends Controller
 {
@@ -15,12 +17,16 @@ class AuthenticateUser extends Controller
 
     protected GetRolePermissionByUserUseCase $getRolePermissionByUser;
 
+    protected GetStreamerByUserIdUseCase $getStreamerByUserId;
+
     public function __construct(
         GetAuthenticatedUserUseCase $getAuthenticatedUser,
-        GetRolePermissionByUserUseCase $getRolePermissionByUser
+        GetRolePermissionByUserUseCase $getRolePermissionByUser,
+        GetStreamerByUserIdUseCase $getStreamerByUserId
     ) {
         $this->getAuthenticatedUser = $getAuthenticatedUser;
         $this->getRolePermissionByUser = $getRolePermissionByUser;
+        $this->getStreamerByUserId = $getStreamerByUserId;
     }
 
     public function __invoke()
@@ -30,6 +36,9 @@ class AuthenticateUser extends Controller
             $rolePermission = $this->getRolePermissionByUser->interact(
                 new GetRolePermissionByUserRequest($user->getId())
             )->getRolePermissions();
+            $streamer = $this->getStreamerByUserId->interact(
+                new GetStreamerByUserIdRequest($user->getId())
+            )->getStreamer();
         } catch (HttpStatusThrowable $e) {
             abort($e->getStatusCode());
         }
@@ -39,6 +48,6 @@ class AuthenticateUser extends Controller
             $permissions[] = $roleDto->getPermission();
         }
 
-        return new UserResponse($user, $permissions);
+        return new UserResponse($user, $permissions, $streamer->getTwitch());
     }
 }

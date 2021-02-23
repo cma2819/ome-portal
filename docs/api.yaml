@@ -24,6 +24,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthUser'
+    put:
+      summary: Update authenticated user
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses:
+        '204':
+          description: Updated authenticated user.
   /roles:
     get:
       summary: Get list of roles and permissions
@@ -696,7 +711,9 @@ components:
           type: string
           example: 'ユーザー'
         discord:
-          $ref: '#/components/schemas/DiscordUser'
+          $ref: '#/components/schemas/DiscordProfile'
+        channels:
+          $ref: '#/components/schemas/Channel'
         permissions:
           $ref: '#/components/schemas/Permissions'
     UserProfile:
@@ -948,6 +965,20 @@ components:
         - approved
         - denied
         - confirmed
+    TwitchProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+    Channel:
+      type: object
+      properties:
+        twitch:
+          type: array
+          items:
+            $ref: '#/components/schemas/TwitchProfile'
     Error:
       type: string
       example: The message about error.

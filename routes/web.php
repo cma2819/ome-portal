@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/auth/discord', 'AuthenticateController@discordAuth')->name('auth.discord');
+Route::get('/auth/twitch', 'AuthenticateController@twitchAuth')->name('auth.twitch');
 
 Route::middleware('view')->group(function () {
 
@@ -29,6 +30,7 @@ Route::middleware('view')->group(function () {
 
     Route::middleware('auth')->group(function () {
 
+        Route::get('/mypage', 'Pages\Mypage')->name('mypage');
         Route::get('/twitter', 'Pages\Twitter')->name('twitter')->middleware('can:access-to-twitter');
         Route::get('/streams/internal/{id}', 'Pages\StreamInternal')->name('streams.internal')->middleware('can:access-to-internal-stream');
         Route::get('/admin', 'Pages\Admin')->name('admin')->middleware('can:access-to-admin');

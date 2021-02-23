@@ -43,7 +43,7 @@ return [
     ],
 
     'discord' => [
-        'api_url' => env('DISCORD_API_URL'),
+        'api_url' => env('DISCORD_API_URL', 'https://discord.com/api'),
         'client_id' => env('DISCORD_CLIENT_ID'),
         'client_secret' => env('DISCORD_CLIENT_SECRET'),
         'redirect_url' => env('DISCORD_REDIRECT_URL'),
@@ -51,7 +51,17 @@ return [
         'notify_channel_id' => env('DISCORD_NOTIFY_CHANNEL_ID'),
         'bot_token' => env('DISCORD_BOT_TOKEN'),
         'cache_expire' => 30,
-        'invite_code' => env('DISCORD_INVITE_CODE')
+        'invite_code' => env('DISCORD_INVITE_CODE'),
+        'cdn_base_url' => env('DISCORD_CDN_BASE_URL', 'https://cdn.discordapp.com/'),
+    ],
+
+    'twitch' => [
+        'api_url' => env('TWITCH_API_URL'),
+        'identify_url' => env('TWITCH_IDENTIFY_URL'),
+        'client_id' => env('TWITCH_CLIENT_ID'),
+        'client_secret' => env('TWITCH_CLIENT_SECRET'),
+        'redirect_url' => env('TWITCH_REDIRECT_URL'),
+        'cache_expire' => 30,
     ],
 
     'oengus' => [

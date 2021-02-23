@@ -3,16 +3,17 @@
 namespace Ome\Auth\Interfaces\UseCases\GetAuthenticatedUser;
 
 use Ome\Auth\Entities\User;
+use Ome\Auth\Interfaces\Dto\UserProfile;
 
 /**
  * Response object for GetAuthenticatedUser.
  */
 class GetAuthenticatedUserResponse
 {
-    private User $user;
+    private UserProfile $user;
 
     public function __construct(
-        User $user
+        UserProfile $user
     ) {
         $this->user = $user;
     }
