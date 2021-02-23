@@ -12,7 +12,7 @@
       >
         fab fa-twitch
       </v-icon>
-      Twitchチャンネルを追加
+      {{ $t('mypage.streams.actions.authorizations.twitch') }}
     </v-btn>
   </div>
 </template>

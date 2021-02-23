@@ -5,7 +5,7 @@
         {{ $t('mypage.tabs.profile') }}
       </v-tab>
       <v-tab href="#streams">
-        配信
+        {{ $t('mypage.tabs.stream') }}
       </v-tab>
       <v-tab-item value="profile">
         <mypage-profile-edit :user="user"></mypage-profile-edit>

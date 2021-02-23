@@ -4,18 +4,20 @@
       <v-col
         v-for="tw in twitch"
         :key="tw.id"
-        cols="6"
+        cols="12"
+        sm="6"
         md="4"
         lg="3"
       >
         <twitch-user-card :twitch="tw"></twitch-user-card>
       </v-col>
       <v-col
-        cols="6"
+        cols="12"
+        sm="6"
         md="4"
         lg="3"
       >
-        <mypage-streams-authorize :auth-url="authUrl"></mypage-streams-authorize>
+        <mypage-streams-authorize></mypage-streams-authorize>
       </v-col>
     </v-row>
   </v-container>

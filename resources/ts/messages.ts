@@ -24,6 +24,7 @@ export const messages: LocaleMessages = {
       mypage:{
         tabs: {
           profile: 'プロフィール',
+          stream: '配信チャンネル',
         },
         profiles: {
           labels: {
@@ -32,6 +33,13 @@ export const messages: LocaleMessages = {
           },
           actions: {
             edit: '変更',
+          },
+        },
+        streams: {
+          actions: {
+            authorizations: {
+              twitch: 'Twitchチャンネルを追加',
+            },
           },
         },
         errors: {
