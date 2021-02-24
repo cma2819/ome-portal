@@ -1,8 +1,15 @@
 <template>
   <div>
     <div key="loaded">
-      <div v-for="event in events" :key="event.id" class="pa-2 mb-2 event-list-item">
-        <v-card color="primary" dark>
+      <div
+        v-for="event in events"
+        :key="event.id"
+        class="pa-2 mb-2 event-list-item"
+      >
+        <v-card
+          color="primary"
+          dark
+        >
           <event-information
             :event="event"
             :in-spa="true"
@@ -14,7 +21,6 @@
 </template>
 
 <script lang="ts">
-import { getSchedule, OengusRunLine, OengusSchedule, OengusSetupLine } from 'oengus-api';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 import EventInformation from './EventInfomationComponent.vue';

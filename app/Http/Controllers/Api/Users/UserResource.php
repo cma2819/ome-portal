@@ -31,7 +31,8 @@ class UserResource extends Controller
             $responses[] = new UserResponse(
                 $user->getId(),
                 $user->getUsername(),
-                $user->getDiscordId()
+                $user->getDiscordId(),
+                $user->getTwitchIds()
             );
         }
 

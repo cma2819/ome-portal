@@ -9,6 +9,6 @@ class MockAuthenticatedUserQuery implements AuthenticatedUserQuery
 {
     public function fetch(): User
     {
-        return User::createRegisteredUser(1,'test user','123456789');
+        return User::createRegisteredUser(1,'test user','123456789', ['12345678']);
     }
 }

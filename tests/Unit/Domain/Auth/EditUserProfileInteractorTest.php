@@ -18,7 +18,8 @@ class EditUserProfileInteractorTest extends TestCase
             User::createRegisteredUser(
                 1,
                 'old_username',
-                '123456789'
+                '123456789',
+                ['12345678']
             )
         ];
         $findUserQuery = new InmemoryFindUserByIdQuery($users);
@@ -33,7 +34,7 @@ class EditUserProfileInteractorTest extends TestCase
             new EditUserProfileRequest(1, 'new_username')
         );
 
-        $expected = User::createRegisteredUser(1, 'new_username', '123456789');
+        $expected = User::createRegisteredUser(1, 'new_username', '123456789', ['12345678']);
         $this->assertEquals(
             $expected,
             $result->getUser()

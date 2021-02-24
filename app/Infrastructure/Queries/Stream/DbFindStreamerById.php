@@ -27,8 +27,11 @@ class DbFindStreamerById implements FindStreamerByIdQuery
     public function fetch(int $id): ?Streamer
     {
         /** @var UserEloquent|null */
-        $userEloquent = UserEloquent::with(['twitch','twitch.streams'])
-            ->find($id, ['users.id']);
+        $userEloquent = UserEloquent::with([
+            'twitch:twitch_connections.id,twitch_connections.twitch_user_id',
+            'twitch.streams:twitch_streams.id,twitch_streams.game,twitch_streams.title' .
+            ',twitch_streams.viewers,twitch_streams.thumbnail_uri,twitch_streams.started_at,twitch_streams.finished_at'
+        ])->find($id, ['users.id']);
 
         if (is_null($userEloquent)) {
             return null;

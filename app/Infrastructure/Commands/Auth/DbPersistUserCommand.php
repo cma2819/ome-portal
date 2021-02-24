@@ -33,7 +33,8 @@ class DbPersistUserCommand implements PersistUserCommand
             return User::createRegisteredUser(
                 $userEloquent->id,
                 $userEloquent->name,
-                $userDiscord->discord_id
+                $userDiscord->discord_id,
+                $userEloquent->twitch->pluck('twitch_user_id')->all()
             );
         });
         Logger::debug('string', 'Auth.Command', 'Persist user has ID:' . $persistUser->getId());

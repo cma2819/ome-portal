@@ -11,13 +11,21 @@ class UserResponse implements JsonSerializable
     public function __construct(
         int $id,
         string $username,
-        string $discordId
+        string $discordId,
+        array $twitchIds
     ) {
+        $twitchJson = collect($twitchIds)->map(function (string $id) {
+            return ['id' => $id];
+        })->all();
+
         $this->json = [
             'id' => $id,
             'username' => $username,
             'discord' => [
                 'id' => $discordId,
+            ],
+            'channels' => [
+                'twitch' => $twitchJson,
             ],
         ];
     }

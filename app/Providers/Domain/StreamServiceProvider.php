@@ -64,6 +64,24 @@ class StreamServiceProvider extends ServiceProvider
             \Ome\Stream\Interfaces\Queries\FindStreamerByIdQuery::class,
             \App\Infrastructure\Queries\Stream\DbFindStreamerById::class
         );
+
+        //////////////////////////
+        // Test dependencies    //
+        //////////////////////////
+        if (config('app.env') === 'testing') {
+            $this->app->bind(
+                \Ome\Stream\Interfaces\Queries\FindTwitchUserByIdQuery::class,
+                \Tests\Mocks\Domain\Stream\Queries\MockFindTwitchUserById::class
+            );
+            $this->app->bind(
+                \Ome\Stream\Interfaces\Queries\GetAccessTokenByCodeQuery::class,
+                \Tests\Mocks\Domain\Stream\Queries\MockGetAccessTokenByCode::class
+            );
+            $this->app->bind(
+                \Ome\Stream\Interfaces\Queries\GetTwitchUserIdFromAccessTokenQuery::class,
+                \Tests\Mocks\Domain\Stream\Queries\MockGetTwitchUserIdFromAccessToken::class
+            );
+        };
     }
 
     /**

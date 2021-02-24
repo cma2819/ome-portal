@@ -7,6 +7,18 @@
     hide-default-footer
     :loading="users.length === 0"
   >
+    <template v-slot:[`item.channels.twitch`]="{ item }">
+      <v-chip
+        v-for="twitch in item.channels.twitch"
+        :key="twitch.id"
+        class="ma-2"
+        color="twitch"
+        dark
+        label
+      >
+        {{ twitch.id }}
+      </v-chip>
+    </template>
     <template v-slot:[`item.actions`]>
       <v-btn
         color="primary"
@@ -102,6 +114,10 @@ export default class UsersAdminTableComponent extends Vue {
       {
         text: this.$t('admin.users.labels.discord').toString(),
         value: 'discord.id',
+      },
+      {
+        text: 'Twitch',
+        value: 'channels.twitch',
       },
       {
         text: this.$t('admin.users.labels.actions').toString(),

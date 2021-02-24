@@ -12,7 +12,10 @@ class DbListUsersQuery implements ListUsersQuery
     public function fetch(int $page): array
     {
         /** @var Builder */
-        $query = UserEloquent::with('discord:id,discord_id,user_id');
+        $query = UserEloquent::with([
+            'discord:user_discords.id,user_discords.discord_id,user_discords.user_id',
+            'twitch:twitch_connections.id,twitch_connections.twitch_user_id'
+        ]);
 
         $users = $query->offset($page * 100)
             ->limit(100)
@@ -25,7 +28,8 @@ class DbListUsersQuery implements ListUsersQuery
             return User::createRegisteredUser(
                 $user->id,
                 $user->name,
-                $user->discord->discord_id
+                $user->discord->discord_id,
+                $user->twitch->pluck('twitch_user_id')->all()
             );
         })->all();
     }

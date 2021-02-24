@@ -17,10 +17,7 @@
         </v-btn>
       </div>
       <div class="pa-2">
-        <transition
-          name="confirm-fade"
-          mode="out-in"
-        >
+        <fade-transition>
           <v-sheet
             v-if="confirmed"
             key="confirm"
@@ -32,32 +29,24 @@
             key="apply"
             :callback="applyScheme"
           ></scheme-input>
-        </transition>
+        </fade-transition>
       </div>
     </v-col>
   </v-row>
 </template>
-
-<style scoped>
-.confirm-fade-enter-active, .confirm-fade-leave-active {
-  transition: all .5s;
-}
-
-.confirm-fade-enter, .confirm-fade-leave-to {
-  opacity: 0;
-}
-</style>
 
 <script lang="ts">
 import { Vue, Component, Emit } from 'vue-property-decorator';
 import { apiModule } from '../../modules/api';
 import SchemeInput from './SchemeInputComponent.vue';
 import SchemeConfirm from './SchemeConfirmComponent.vue';
+import FadeTransition from '../FadeTransitionComponent.vue';
 
 @Component({
   components: {
     SchemeInput,
     SchemeConfirm,
+    FadeTransition,
   }
 })
 export default class SchemeApplyComponent extends Vue {

@@ -683,6 +683,8 @@ components:
           example: 'ユーザー'
         discord:
           $ref: '#/components/schemas/DiscordUser'
+        channel:
+          $ref: '#/components/schemas/Channel'
     UserPagination:
       type: object
       properties:
@@ -713,7 +715,7 @@ components:
         discord:
           $ref: '#/components/schemas/DiscordProfile'
         channels:
-          $ref: '#/components/schemas/Channel'
+          $ref: '#/components/schemas/ChannelProfile'
         permissions:
           $ref: '#/components/schemas/Permissions'
     UserProfile:
@@ -745,6 +747,35 @@ components:
         discriminator:
           type: string
           example: '1337'
+    TwitchUser:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '141981764'
+    TwitchProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '141981764'
+        username:
+          type: string
+          example: 'twitchdev'
+    Channel:
+      type: object
+      properties:
+        twitch:
+          type: array
+          items:
+            $ref: '#/components/schemas/TwitchUser'
+    ChannelProfile:
+      type: object
+      properties:
+        twitch:
+          type: array
+          items:
+            $ref: '#/components/schemas/TwitchProfile'
     Permissions:
       type: array
       items:
@@ -965,20 +996,6 @@ components:
         - approved
         - denied
         - confirmed
-    TwitchProfile:
-      type: object
-      properties:
-        id:
-          type: string
-        username:
-          type: string
-    Channel:
-      type: object
-      properties:
-        twitch:
-          type: array
-          items:
-            $ref: '#/components/schemas/TwitchProfile'
     Error:
       type: string
       example: The message about error.

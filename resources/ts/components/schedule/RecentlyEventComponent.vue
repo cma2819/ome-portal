@@ -2,28 +2,14 @@
   <div>
     <v-subheader>直近のイベント</v-subheader>
     <div class="pa-2">
-      <v-card
-        color="primary"
-        dark
-      >
-        <transition
-          name="event"
-          mode="out-in"
+      <fade-transition>
+        <linear-loading v-if="events.length === 0"></linear-loading>
+        <v-card
+          v-else
+          color="primary"
+          dark
         >
-          <div
-            v-if="events.length === 0"
-            key="loading"
-          >
-            <v-progress-circular
-              class="ma-2"
-              indeterminate
-              color="white"
-            ></v-progress-circular>
-          </div>
-          <div
-            v-else
-            key="loaded"
-          >
+          <div>
             <div
               v-for="event in events"
               :key="event.id"
@@ -35,32 +21,26 @@
               <v-divider></v-divider>
             </div>
           </div>
-        </transition>
-      </v-card>
+        </v-card>
+      </fade-transition>
     </div>
   </div>
 </template>
-
-<style scoped>
-.event-enter-active, .event-leave-active {
-  transition: all .5s;
-}
-
-.event-enter, .event-leave-to {
-  opacity: 0;
-}
-</style>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
 import EventInformation from './EventInfomationComponent.vue';
+import LinearLoading from '../LinearLoadingComponent.vue';
+import FadeTransition from '../FadeTransitionComponent.vue';
 import { Event } from '../../lib/models/event';
 import { apiModule } from '../../modules/api';
 
 @Component({
   components: {
-    EventInformation
+    EventInformation,
+    LinearLoading,
+    FadeTransition,
   }
 })
 export default class RecentlyEventComponent extends Vue {

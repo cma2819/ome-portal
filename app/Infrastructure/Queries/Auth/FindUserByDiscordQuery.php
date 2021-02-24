@@ -25,7 +25,8 @@ class FindUserByDiscordQuery implements FindUserByDiscordQueryInterface
         return User::createRegisteredUser(
             $userEloquent->id,
             $userEloquent->name,
-            $userDiscordEloquent->discord_id
+            $userDiscordEloquent->discord_id,
+            $userEloquent->twitch->pluck('twitch_user_id')->all()
         );
     }
 }

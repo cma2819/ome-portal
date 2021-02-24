@@ -30,7 +30,8 @@ class InmemoryPersistUserCommand implements PersistUserCommand
         $newUser = User::createRegisteredUser(
             $this->nextId(),
             $user->getUsername(),
-            $user->getDiscordId()
+            $user->getDiscordId(),
+            $user->getTwitchIds()
         );
         $this->users[$newUser->getId()] = $newUser;
         return $newUser;

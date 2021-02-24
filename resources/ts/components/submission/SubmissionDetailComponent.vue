@@ -10,33 +10,20 @@
       </v-btn>
     </div>
     <div class="pa-2 mb-2">
-      <v-card
-        color="primary"
-        dark
-      >
-        <transition
-          name="event"
-          mode="out-in"
+      <fade-transition>
+        <linear-loading v-if="event === null"></linear-loading>
+        <v-card
+          v-else
+          color="primary"
+          dark
         >
-          <div
-            v-if="event === null"
-            key="loading"
-          >
-            <v-progress-circular
-              class="ma-2"
-              indeterminate
-              color="white"
-            ></v-progress-circular>
-          </div>
           <event-information
-            v-else
-            key="loaded"
             :event="event"
             :in-spa="true"
           >
           </event-information>
-        </transition>
-      </v-card>
+        </v-card>
+      </fade-transition>
     </div>
 
     <div v-if="event">
@@ -54,16 +41,6 @@
   </div>
 </template>
 
-<style scoped>
-.event-enter-active, .event-leave-active {
-  transition: all .5s;
-}
-
-.event-enter, .event-leave-to {
-  opacity: 0;
-}
-</style>
-
 <script lang="ts">
 import { getSelection, getSubmissions, OengusSelection, OengusSubmission } from 'oengus-api';
 import { Vue, Component } from 'vue-property-decorator';
@@ -71,6 +48,8 @@ import { Vue, Component } from 'vue-property-decorator';
 import EventInformation from '../schedule/EventInfomationComponent.vue';
 import SubmissionExpansions from './SubmissionExpansionsComponent.vue';
 import SubmissionTable from './SubmissionTableComponent.vue';
+import FadeTransition from '../FadeTransitionComponent.vue';
+import LinearLoading from '../LinearLoadingComponent.vue';
 import { Event } from '../../lib/models/event';
 import { apiModule } from '../../modules/api';
 
@@ -79,6 +58,8 @@ import { apiModule } from '../../modules/api';
     EventInformation,
     SubmissionTable,
     SubmissionExpansions,
+    FadeTransition,
+    LinearLoading
   }
 })
 export default class SubmissionDetailComponent extends Vue {

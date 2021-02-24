@@ -18,27 +18,32 @@ class ExtractUsersInteractorTest extends TestCase
             User::createRegisteredUser(
                 1,
                 'superman',
-                '123456789'
+                '123456789',
+                ['12345678']
             ),
             User::createRegisteredUser(
                 2,
                 'nextman',
-                '222222222'
+                '222222222',
+                ['22345678']
             ),
             User::createRegisteredUser(
                 3,
                 'helloman',
-                '333333333'
+                '333333333',
+                ['32345678']
             ),
             User::createRegisteredUser(
                 4,
                 'cmario',
-                '444444444'
+                '444444444',
+                ['42345678']
             ),
             User::createRegisteredUser(
                 5,
                 'hello',
-                '555555555'
+                '555555555',
+                ['52345678']
             ),
         ];
 

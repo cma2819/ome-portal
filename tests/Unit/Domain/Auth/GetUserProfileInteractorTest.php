@@ -20,7 +20,8 @@ class GetUserProfileInteractorTest extends TestCase
             User::createRegisteredUser(
                 1,
                 'superman',
-                '123456789'
+                '123456789',
+                ['12345678']
             )
         ];
         $discords = [

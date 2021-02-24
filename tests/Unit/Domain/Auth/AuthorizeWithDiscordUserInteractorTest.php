@@ -20,7 +20,7 @@ class AuthorizeWithDiscordUserInteractorTest extends TestCase
     {
         parent::setUp();
         $users = [
-            User::createRegisteredUser(1, 'user1', '0000001')
+            User::createRegisteredUser(1, 'user1', '0000001', ['123456789'])
         ];
 
         $this->findUserByDiscordQuery = new InmemoryFindUserByDiscordQuery($users);
@@ -40,7 +40,7 @@ class AuthorizeWithDiscordUserInteractorTest extends TestCase
             PartialDiscordUser::createPartial('0000001', 'user1', '1234')
         ));
 
-        $this->assertEquals(User::createRegisteredUser(1, 'user1', '0000001'), $result->getUser());
+        $this->assertEquals(User::createRegisteredUser(1, 'user1', '0000001', ['123456789']), $result->getUser());
     }
 
     /** @test */
@@ -55,7 +55,7 @@ class AuthorizeWithDiscordUserInteractorTest extends TestCase
             PartialDiscordUser::createPartial('1000001', 'user2', '9785')
         ));
 
-        $newUser = User::createRegisteredUser(2, 'user2', '1000001');
+        $newUser = User::createRegisteredUser(2, 'user2', '1000001', []);
         $this->assertEquals($newUser, $result->getUser());
         $this->assertContainsEquals($newUser, $this->persistUserCommand->getUsers());
     }

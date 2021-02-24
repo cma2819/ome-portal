@@ -19,7 +19,8 @@ class DbFindUserByIdQuery implements FindUserByIdQuery
         return User::createRegisteredUser(
             $user->id,
             $user->name,
-            $user->discord->discord_id
+            $user->discord->discord_id,
+            $user->twitch->pluck('twitch_user_id')->all()
         );
     }
 }

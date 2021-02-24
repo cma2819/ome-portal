@@ -17,10 +17,7 @@
         </v-btn>
       </div>
       <div class="pa-2">
-        <transition
-          name="confirm-fade"
-          mode="out-in"
-        >
+        <fade-transition>
           <v-sheet
             v-if="confirmed"
             key="confirm"
@@ -33,7 +30,7 @@
             :callback="editScheme"
             :scheme="scheme"
           ></scheme-input>
-        </transition>
+        </fade-transition>
       </div>
     </v-col>
   </v-row>
@@ -54,12 +51,14 @@ import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
 import { apiModule } from '../../modules/api';
 import SchemeInput from './SchemeInputComponent.vue';
 import SchemeConfirm from './SchemeConfirmComponent.vue';
+import FadeTransition from '../FadeTransitionComponent.vue';
 import { SchemeInputData } from '../../lib/models/event';
 
 @Component({
   components: {
     SchemeInput,
     SchemeConfirm,
+    FadeTransition,
   }
 })
 export default class SchemeEditComponent extends Vue {

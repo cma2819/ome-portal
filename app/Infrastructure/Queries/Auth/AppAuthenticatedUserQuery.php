@@ -17,6 +17,6 @@ class AppAuthenticatedUserQuery implements AuthenticatedUserQuery
             throw new AuthenticationFailedException('Not authenticated.');
         }
 
-        return User::createRegisteredUser($user->id, $user->name, $user->discord->discord_id);
+        return User::createRegisteredUser($user->id, $user->name, $user->discord->discord_id, $user->twitch->pluck('twitch_user_id')->all());
     }
 }

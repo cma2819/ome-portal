@@ -10,27 +10,38 @@ class User
 
     private string $discordId;
 
+    private array $twitchIds;
+
+    /**
+     * @param integer|null $id
+     * @param string $username
+     * @param string $discordId
+     * @param string[] $twitchIds
+     */
     protected function __construct(
         ?int $id,
         string $username,
-        string $discordId
+        string $discordId,
+        array $twitchIds
     ) {
         $this->id = $id;
         $this->username = $username;
         $this->discordId = $discordId;
+        $this->twitchIds = $twitchIds;
     }
 
     public static function createRegisteredUser(
         int $id,
         string $username,
-        string $discordId
+        string $discordId,
+        array $twitchIds
     ) {
-        return new self($id, $username, $discordId);
+        return new self($id, $username, $discordId, $twitchIds);
     }
 
     public static function createFromDiscordUser(DiscordUser $discord)
     {
-        return new self(null, $discord->getUsername(), $discord->getId());
+        return new self(null, $discord->getUsername(), $discord->getId(), []);
     }
 
     public function edit(
@@ -62,5 +73,13 @@ class User
     public function getDiscordId()
     {
         return $this->discordId;
+    }
+
+    /**
+     * Get the value of twitchIds
+     */
+    public function getTwitchIds()
+    {
+        return $this->twitchIds;
     }
 }
