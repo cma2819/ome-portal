@@ -41,6 +41,10 @@ class EventServiceProvider extends ServiceProvider
             \Ome\Event\Interfaces\UseCases\ListActiveOengusEvent\ListActiveOengusEventUseCase::class,
             \Ome\Event\UseCases\ListActiveOengusEventInteractor::class
         );
+        $this->app->bind(
+            \Ome\Event\Interfaces\UseCases\FindLatestEvent\FindLatestEventUseCase::class,
+            \Ome\Event\UseCases\FindLatestEventInteractor::class
+        );
 
         //////////////
         // Commands //

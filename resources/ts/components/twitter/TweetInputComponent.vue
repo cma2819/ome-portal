@@ -84,6 +84,7 @@ export default class TweetInputComponent extends Vue {
     mediaId: string
   }> = [];
   slugs: Array<string> = [];
+  latestSlug: string|null = null;
 
   loading = false;
   loadingMedia = false;
@@ -113,6 +114,13 @@ export default class TweetInputComponent extends Vue {
     });
     this.slugs.push('OME');
 
+    try {
+      const latest = await apiModule.getLatestEvent();
+      this.latestSlug = latest.slug;
+    } catch (e) {
+      console.error(e);
+    }
+
     this.defaultInput();
     this.initSlugs = true;
   }
@@ -120,7 +128,7 @@ export default class TweetInputComponent extends Vue {
   defaultInput(): void {
     this.content = '';
     this.medias = [];
-    this.hashtag = this.slugs.length > 0 ? [this.slugs[0]] : [];
+    this.hashtag = this.latestSlug ? [this.latestSlug] : [];
   }
 
   @Emit()

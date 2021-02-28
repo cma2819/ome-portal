@@ -12,6 +12,8 @@ use Ome\Event\Interfaces\UseCases\DetachOengusMarathon\DetachOengusMarathonReque
 use Ome\Event\Interfaces\UseCases\DetachOengusMarathon\DetachOengusMarathonUseCase;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventRequest;
 use Ome\Event\Interfaces\UseCases\ExtractOengusEvent\ExtractOengusEventUseCase;
+use Ome\Event\Interfaces\UseCases\FindLatestEvent\FindLatestEventRequest;
+use Ome\Event\Interfaces\UseCases\FindLatestEvent\FindLatestEventUseCase;
 use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusRequest;
 use Ome\Event\Interfaces\UseCases\GetMarathonFromOengus\GetMarathonFromOengusUseCase;
 use Ome\Event\Interfaces\UseCases\ListActiveOengusEvent\ListActiveOengusEventRequest;
@@ -146,22 +148,11 @@ class EventResource extends Controller
     }
 
     public function showLatest(
-        ListOengusEventUseCase $listOengusEvent
+        FindLatestEventUseCase $findLatestEventUseCase
     ) {
-        $events = $listOengusEvent->interact(
-            new ListOengusEventRequest(Carbon::now())
-        )->getEvents();
-
-        /** @var Event */
-        $latest = null;
-        foreach ($events as $event) {
-            if (
-                is_null($latest)
-                || $event->getOengusMarathon()->getStartAt() > $latest->getOengusMarathon()->getStartAt()
-            ) {
-                $latest = $event;
-            }
-        }
+        $latest = $findLatestEventUseCase->interact(
+            new FindLatestEventRequest(Carbon::now())
+        )->getEvent();
 
         if (is_null($latest)) {
             abort(404);

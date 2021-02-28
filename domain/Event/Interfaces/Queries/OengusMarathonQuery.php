@@ -7,5 +7,5 @@ use Ome\Event\Entities\OengusMarathon;
 
 interface OengusMarathonQuery
 {
-    public function fetch(string $id, DateTimeInterface $now): OengusMarathon;
+    public function fetch(string $id, DateTimeInterface $now): ?OengusMarathon;
 }
