@@ -2,13 +2,21 @@
 
 namespace Tests\Feature\Api\Auth;
 
+use App\Api\Discord\DiscordApiClient;
 use App\Infrastructure\Eloquents\DiscordRolePermission;
 use App\Infrastructure\Eloquents\TwitchConnection;
 use App\Infrastructure\Eloquents\User;
 use App\Infrastructure\Eloquents\UserDiscord;
+use App\Infrastructure\Queries\Permission\GetDiscordRolesForUserQuery;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Ome\Auth\Interfaces\Queries\FindDiscordByIdQuery;
 use Ome\Permission\Entities\RolePermission;
+use Ome\Permission\Interfaces\Queries\GetRolesForUserQuery;
 use Ome\Permission\Values\Domain;
 use Ome\Stream\Entities\Streamer;
 use Ome\Stream\Entities\TwitchUser;
@@ -93,6 +101,57 @@ class AuthenticateUserTest extends TestCase
             'thumbnail' => 'https://cdn.example.com/avatars/' . $userDiscord->discord_id . '/avatar_test.png',
         ]);
         $this->assertJsonArray($response->json(), 'permissions', ['twitter', 'admin']);
+    }
+
+    /** @test */
+    public function testUserNotInHostGuild()
+    {
+        $this->app->bind(
+            FindDiscordByIdQuery::class,
+            MockFindDiscordByIdQuery::class
+        );
+
+        $this->app->bind(
+            GetRolesForUserQuery::class,
+            GetDiscordRolesForUserQuery::class
+        );
+        $discordMock = new MockHandler([
+            new Response(404),
+        ]);
+        $handlerStack = HandlerStack::create($discordMock);
+        $this->app->instance(
+            DiscordApiClient::class,
+            new DiscordApiClient(
+                new Client(['handler' => $handlerStack]),
+                'invalid token',
+                3600
+            )
+        );
+
+        /** @var User */
+        $user = factory(User::class)->create();
+
+        $userDiscord = new UserDiscord(['discord_id' => '123456789']);
+        $userDiscord->user()->associate($user);
+        $userDiscord->save();
+
+        $response = $this->actingAs($user, 'api')->getJson(route('api.v1.auth.me'));
+
+        $response->assertSuccessful();
+        $response->assertJson([
+            'id' => $user->id,
+            'username' => $user->name,
+            'discord' => [
+                'id' => $userDiscord->discord_id,
+                'username' => 'Nelly',
+                'discriminator' => '1234'
+            ],
+            'channels' => [
+                'twitch' => [],
+            ],
+            'thumbnail' => 'https://cdn.example.com/avatars/' . $userDiscord->discord_id . '/avatar_test.png',
+        ]);
+        $this->assertEmpty($response->json()['permissions']);
     }
 
 }

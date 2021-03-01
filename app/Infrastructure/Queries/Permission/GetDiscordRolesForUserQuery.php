@@ -3,6 +3,8 @@
 namespace App\Infrastructure\Queries\Permission;
 
 use App\Api\Discord\DiscordApiClient;
+use App\Api\Discord\DiscordHttpException;
+use App\Facades\Logger;
 use App\Infrastructure\Eloquents\User;
 use Ome\Permission\Entities\Role;
 use Ome\Permission\Interfaces\Queries\GetRolesForUserQuery;
@@ -27,20 +29,27 @@ class GetDiscordRolesForUserQuery implements GetRolesForUserQuery
         $discordId = $userEloquent->discord->discord_id;
         $guildId = config('services.discord.guild_id');
 
-        // Get user as guild member
-        $memberJson = $this->discordApiClient->apiGet(str_replace(
-            ['{guild.id}', '{user.id}'],
-            [$guildId, $discordId],
-            self::DISCORD_GET_MEMBER_URL
-        ));
-        $userRoles = $memberJson['roles'];
+        try {
+            // Get user as guild member
+            $memberJson = $this->discordApiClient->apiGet(str_replace(
+                ['{guild.id}', '{user.id}'],
+                [$guildId, $discordId],
+                self::DISCORD_GET_MEMBER_URL
+            ));
+            $userRoles = $memberJson['roles'];
 
-        // Get roles
-        $rolesJson = $this->discordApiClient->apiGet(str_replace(
-            '{guild.id}',
-            $guildId,
-            self::DISCORD_GET_ROLES_URL
-        ));
+            // Get roles
+            $rolesJson = $this->discordApiClient->apiGet(str_replace(
+                '{guild.id}',
+                $guildId,
+                self::DISCORD_GET_ROLES_URL
+            ));
+        } catch (DiscordHttpException $e) {
+            if ($e->getCode() === 404) {
+                return [];
+            }
+        }
+
         $roles = [];
         foreach ($rolesJson as $json) {
             $role = Role::createFromApiJson($json);

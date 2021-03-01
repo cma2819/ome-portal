@@ -6,6 +6,7 @@ use App\Api\Discord\DiscordApiClient;
 use App\Api\Oengus\OengusApiClient;
 use App\Api\Twitch\TwitchApiClient;
 use Clogger\Logger;
+use GuzzleHttp\Client as GuzzleHttpClient;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Log\Logger as IlluminateLogger;
 use Illuminate\Support\ServiceProvider;
@@ -30,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(DiscordApiClient::class, function (Application $app) {
             return new DiscordApiClient(
-                config('services.discord.api_url'),
+                new GuzzleHttpClient([
+                    'base_uri' => config('services.discord.api_url'),
+                ]),
                 config('services.discord.bot_token'),
                 config('services.discord.cache_expire')
             );
