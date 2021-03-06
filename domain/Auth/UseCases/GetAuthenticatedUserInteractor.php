@@ -2,11 +2,13 @@
 
 namespace Ome\Auth\UseCases;
 
+use Ome\Auth\Entities\DiscordUser;
 use Ome\Auth\Interfaces\Dto\UserProfile;
 use Ome\Auth\Interfaces\Queries\AuthenticatedUserQuery;
 use Ome\Auth\Interfaces\Queries\FindDiscordByIdQuery;
 use Ome\Auth\Interfaces\UseCases\GetAuthenticatedUser\GetAuthenticatedUserResponse;
 use Ome\Auth\Interfaces\UseCases\GetAuthenticatedUser\GetAuthenticatedUserUseCase;
+use Ome\Exceptions\EntityNotFoundException;
 
 class GetAuthenticatedUserInteractor implements GetAuthenticatedUserUseCase
 {
@@ -26,6 +28,9 @@ class GetAuthenticatedUserInteractor implements GetAuthenticatedUserUseCase
     {
         $user = $this->authenticatedUserQuery->fetch();
         $discord = $this->findDiscordByIdQuery->fetch($user->getDiscordId());
+        if (is_null($discord)) {
+            throw new EntityNotFoundException(DiscordUser::class, ['id' => $user->getDiscordId()]);
+        }
         return new GetAuthenticatedUserResponse(
             new UserProfile($user->getId(), $user->getUsername(), $discord)
         );

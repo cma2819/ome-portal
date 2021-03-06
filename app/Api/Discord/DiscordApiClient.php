@@ -30,7 +30,10 @@ class DiscordApiClient
     {
         $cacheKey = "discord.get.${endpoint}";
         if (Cache::has($cacheKey)) {
-            return Cache::get($cacheKey);
+            $data = Cache::get($cacheKey);
+            if (is_array($data)) {
+                return $data;
+            }
         };
 
         Logger::debug('string', 'Api.Discord', 'Get request with Discord API Client to [{url}].', ['endpoint' => $endpoint]);
@@ -41,11 +44,13 @@ class DiscordApiClient
                 ],
             ]);
         } catch (ClientException $e) {
-            Logger::debug('string', 'Api.Discord', 'Failed to get request to discord api with status:' . $e->getCode());
             throw new DiscordHttpException($e->getCode(), 'Failed to get request to endpoint[' . $endpoint . '].');
         }
 
         $data = json_decode($response->getBody(), true);
+        if (is_null($data)) {
+            throw new DiscordHttpException($response->getStatusCode(), 'Cannot parse response body to json.', null, $response->getBody());
+        }
         Cache::set($cacheKey, $data, $this->cacheExpire);
 
         return $data;

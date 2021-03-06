@@ -11,9 +11,9 @@ use Ome\Permission\Interfaces\Queries\GetRolesForUserQuery;
 
 class GetDiscordRolesForUserQuery implements GetRolesForUserQuery
 {
-    private const DISCORD_GET_MEMBER_URL = '/guilds/{guild.id}/members/{user.id}';
+    private const DISCORD_GET_MEMBER_URL = 'guilds/{guild.id}/members/{user.id}';
 
-    private const DISCORD_GET_ROLES_URL = '/guilds/{guild.id}/roles';
+    private const DISCORD_GET_ROLES_URL = 'guilds/{guild.id}/roles';
 
     protected DiscordApiClient $discordApiClient;
 

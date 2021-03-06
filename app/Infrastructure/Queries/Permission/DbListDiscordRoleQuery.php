@@ -19,7 +19,7 @@ class DbListDiscordRoleQuery implements ListRolesQuery
     public function fetch(): array
     {
         $guildId = config('services.discord.guild_id');
-        $endpoint = '/guilds/' . $guildId . '/roles';
+        $endpoint = 'guilds/' . $guildId . '/roles';
 
         $rolesJson = $this->discordApiClient->apiGet($endpoint);
 

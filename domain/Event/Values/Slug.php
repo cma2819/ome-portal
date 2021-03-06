@@ -19,7 +19,7 @@ class Slug implements ValueObject
         if (!ctype_alnum($slug)) {
             throw new UnmatchedContextException(self::class, 'Not match pattern slug.');
         }
-        return new self(strtoupper($slug));
+        return new self($slug);
     }
 
     public function value()
