@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { OengusCategory, OengusSelection, OengusSubmission } from 'oengus-api';
+import { OengusCategory, OengusGame, OengusSelection, OengusSelectionStatus, OengusSubmission } from 'oengus-api';
 import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 import { DataTableHeader } from 'vuetify';
 
@@ -37,10 +37,13 @@ import { DataTableHeader } from 'vuetify';
 })
 export default class SubmissionTableComponent extends Vue {
   @Prop(Array)
-  submissions!: Array<OengusSubmission>
+  readonly submissions!: Array<OengusSubmission>
 
   @Prop(Array)
-  selections!: Array<OengusSelection>;
+  readonly selections!: Array<OengusSelection>;
+
+  @Prop(Array)
+  readonly filteredStatus!: Array<OengusSelectionStatus>;
 
   expanded = [];
 
@@ -81,6 +84,15 @@ export default class SubmissionTableComponent extends Vue {
     ];
   }
 
+  filterGameBySelection(game: OengusGame): boolean {
+    return game.categories.some((category) => {
+      return this.filteredStatus.includes(
+        this.selections.find(selection => selection.categoryId === category.id)?.status
+        || OengusSelectionStatus.todo
+      );
+    })
+  }
+
   get gameRowData(): Array<{
     runner: string;
     game: string;
@@ -89,7 +101,12 @@ export default class SubmissionTableComponent extends Vue {
     categories: Array<OengusCategory>
   }> {
     return this.submissions.flatMap((submission) => {
-      return submission.games.map((game) => {
+      return submission.games.filter((game) => {
+        return (
+          this.filteredStatus.length === 0
+          || this.filterGameBySelection(game)
+        );
+      }).map((game) => {
         return {
           id: game.id,
           runner: submission.user.usernameJapanese || submission.user.username,

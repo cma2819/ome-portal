@@ -27,22 +27,33 @@
     </div>
 
     <div v-if="event">
+      <v-select
+        v-if="selectionDone && filterItems"
+        v-model="filterStatus"
+        :label="$t('submission.labels.filter')"
+        :items="filterItems"
+        multiple
+        chips
+        solo
+      ></v-select>
       <submission-expansions
         v-if="$vuetify.breakpoint.mobile"
         :selections="selections"
         :submissions="submissions"
+        :filtered-status="filterStatus"
       ></submission-expansions>
       <submission-table
         v-else
         :selections="selections"
         :submissions="submissions"
+        :filtered-status="filterStatus"
       ></submission-table>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { getSelection, getSubmissions, OengusSelection, OengusSubmission } from 'oengus-api';
+import { getSelection, getSubmissions, OengusSelection, OengusSelectionStatus, OengusSubmission } from 'oengus-api';
 import { Vue, Component } from 'vue-property-decorator';
 
 import EventInformation from '../schedule/EventInfomationComponent.vue';
@@ -68,9 +79,37 @@ export default class SubmissionDetailComponent extends Vue {
   event: Event|null = null;
   submissions: Array<OengusSubmission> = [];
   selections: Array<OengusSelection> = [];
+  filterStatus: Array<OengusSelectionStatus> = [];
 
   get selectionDone(): boolean {
     return this.event?.status !== 'freshed';
+  }
+
+  get filterItems(): Array<{ text: string; value: OengusSelectionStatus }> {
+    const inSubmissionStatus = this.selections.map((selection) => {
+      return selection.status;
+    });
+
+    return [
+      {
+        text: this.$t('submission.line.status.validated').toString(),
+        value: OengusSelectionStatus.validated,
+      },
+      {
+        text: this.$t('submission.line.status.rejected').toString(),
+        value: OengusSelectionStatus.rejected,
+      },
+      {
+        text: this.$t('submission.line.status.bonus').toString(),
+        value: OengusSelectionStatus.bonus,
+      },
+      {
+        text: this.$t('submission.line.status.todo').toString(),
+        value: OengusSelectionStatus.todo,
+      },
+    ].filter((item) => {
+      return inSubmissionStatus.includes(item.value);
+    });
   }
 
   async created(): Promise<void> {

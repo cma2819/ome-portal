@@ -43,7 +43,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { OengusGame, OengusSelection, OengusSubmission, OengusUser } from 'oengus-api';
+import { OengusGame, OengusSelection, OengusSelectionStatus, OengusSubmission, OengusUser } from 'oengus-api';
 import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 
 @Component({
@@ -53,10 +53,22 @@ import SubmissionTableDetail from './SubmissionTableDetailComponent.vue';
 })
 export default class SubmissionExpansionsComponent extends Vue {
   @Prop(Array)
-  submissions!: Array<OengusSubmission>
+  readonly submissions!: Array<OengusSubmission>
 
   @Prop(Array)
-  selections!: Array<OengusSelection>;
+  readonly selections!: Array<OengusSelection>;
+
+  @Prop(Array)
+  readonly filteredStatus!: Array<OengusSelectionStatus>;
+
+  filterGameBySelection(game: OengusGame): boolean {
+    return game.categories.some((category) => {
+      return this.filteredStatus.includes(
+        this.selections.find(selection => selection.categoryId === category.id)?.status
+        || OengusSelectionStatus.todo
+      );
+    })
+  }
 
   get rows(): {game: OengusGame, user: OengusUser}[] {
     return this.submissions.flatMap((submission) => {
@@ -66,6 +78,11 @@ export default class SubmissionExpansionsComponent extends Vue {
           user: submission.user
         };
       });
+    }).filter((row) => {
+      return (
+        this.filteredStatus.length === 0
+        || this.filterGameBySelection(row.game)
+      );
     });
   }
 }

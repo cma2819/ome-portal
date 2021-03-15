@@ -91,6 +91,7 @@ export const messages: LocaleMessages = {
             estimate: '予定時間',
             description: 'カテゴリ説明'
           },
+          filter: '当選状況で絞り込み',
         },
         line: {
           type: {
