@@ -16,7 +16,7 @@ class Slug implements ValueObject
 
     public static function create(string $slug): self
     {
-        if (!ctype_alnum($slug)) {
+        if (count(explode(' ', $slug)) !== 1) {
             throw new UnmatchedContextException(self::class, 'Not match pattern slug.');
         }
         return new self($slug);

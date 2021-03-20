@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Http\Responses\Api\ErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Ome\Exceptions\UnmatchedContextException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +52,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof UnmatchedContextException) {
+            return response()->json(
+                new ErrorResponse($exception->getMessage()),
+                400
+            );
+        }
         return parent::render($request, $exception);
     }
 }

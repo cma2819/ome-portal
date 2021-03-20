@@ -37,4 +37,27 @@ class SaveOengusEventInteractorTest extends TestCase
         $this->assertEquals($expectEvent, $inmemoryPersistEvent->find('rtamarathon'));
     }
 
+    /** @test */
+    public function testSaveOengusIncludeUnderScore()
+    {
+        $inmemoryPersistEvent = new InmemoryPersistEvent;
+
+        $marathon = PartialOengusMarathon::createPartial(
+            'issi',
+            'INDIES Speedrun Summit I',
+            Carbon::create(2020, 1, 1),
+            Carbon::create(2020, 1, 2, 12, 34),
+            true,
+            MarathonStatus::freshed()
+        );
+
+        $result = (new SaveOengusEventInteractor($inmemoryPersistEvent))
+            ->interact(new SaveOengusEventRequest($marathon, 'moderate', 'ISS_I'));
+
+        $expectEvent = Event::createWithMarathon($marathon, RelateType::moderate(), Slug::create('ISS_I'));
+
+        $this->assertEquals($expectEvent, $result->getEvent());
+        $this->assertEquals($expectEvent, $inmemoryPersistEvent->find('issi'));
+    }
+
 }
