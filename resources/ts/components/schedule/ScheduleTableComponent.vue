@@ -97,7 +97,13 @@ export default class ScheduleTableComponent extends Vue {
         }).split(':')
 
         return {
-          date: lineDate.toLocaleDateString(),
+          date: lineDate.toLocaleDateString(
+            undefined,
+            {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }),
           time: `${splitTime[0]}:${splitTime[1]}`,
           runner: line.runners.map((runner) => {
             return runner.usernameJapanese || runner.username;
