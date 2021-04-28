@@ -5,7 +5,7 @@ import { Timeline, Tweet, TwitterUploadMedia } from '../lib/models/twitter';
 import { User as AuthUser, UserProfile } from '../lib/models/auth';
 import { User } from '../lib/models/user';
 import { Role } from 'lib/models/role';
-import { RelateType, Event, Status, EventScheme, SchemeStatus } from 'lib/models/event';
+import { RelateType, Event, Status, EventScheme, SchemeStatus, EventPlan, PlanStatus } from 'lib/models/event';
 import { Paginate } from '../lib/models/page';
 
 @Module(({ dynamic: true, store, name: 'api', namespaced: true }))
@@ -337,6 +337,56 @@ class Api extends ApiClient {
         reply: payload.reply,
       }
     });
+  }
+
+  @Action
+  public async getPlans(payload: {planner?: number, status?: Array<PlanStatus>}): Promise<Array<EventPlan>> {
+    const query = new URLSearchParams();
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value) {
+        if (value instanceof Array) {
+          value.forEach((v) => {
+            query.append(key, v);
+          })
+        }
+        query.append(key, value.toString());
+      }
+    })
+    const response = await this.get('plans?' + query.toString());
+    return response.map((plan: {
+      id: number,
+      name: string,
+      planner: UserProfile,
+      status: PlanStatus,
+      explanation: string,
+    }) => {
+      return {
+        id: plan.id,
+        name: plan.name,
+        planner: plan.planner,
+        status: plan.status,
+        explanation: plan.explanation,
+      };
+    });
+  }
+
+  @Action
+  public async postPlan(payload: {name: string, explanation: string}): Promise<EventPlan> {
+    const response = await this.post({
+      endpoint: 'plans',
+      params: {
+        name: payload.name,
+        explanation: payload.explanation
+      }
+    });
+
+    return {
+      id: response.id,
+      name: response.id,
+      planner: response.planner,
+      status: response.status,
+      explanation: response.explanation
+    };
   }
 
   @Action

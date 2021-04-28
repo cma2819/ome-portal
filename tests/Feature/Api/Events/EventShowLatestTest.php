@@ -19,7 +19,7 @@ class EventShowLatestTest extends TestCase
     /** @test */
     public function testEventShowLatest()
     {
-        $now = Carbon::create(2020, 1, 5, 10, 0, 0);
+        $now = Carbon::create(2020, 1, 11, 10, 0, 0);
         Carbon::setTestNow($now);
 
         AssociateEvent::create([
@@ -62,12 +62,12 @@ class EventShowLatestTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertJson([
-            'id' => 'rtamarathon',
-            'name' => 'RTA Marathon',
-            'relateType' => 'moderate',
-            'slug' => 'RM1',
-            'startAt' => Carbon::create(2020, 1, 5, 9, 0, 0)->toISOString(),
-            'endAt' => Carbon::create(2020, 1, 6, 22, 0, 0)->toISOString(),
+            'id' => 'rtamarathon2',
+            'name' => '2nd Marathon',
+            'relateType' => 'support',
+            'slug' => 'RM2',
+            'startAt' => Carbon::create(2020, 1, 9, 9, 0, 0)->toISOString(),
+            'endAt' => Carbon::create(2020, 1, 10, 22, 0, 0)->toISOString(),
             'submitsOpen' => false,
             'status' => MarathonStatus::scheduled()->value()
         ]);

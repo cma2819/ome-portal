@@ -50,8 +50,13 @@ export default class RecentlyEventComponent extends Vue {
     const response = await apiModule.getActiveEvents();
     response.sort((l, r) => {
       return l.startAt.valueOf() - r.startAt.valueOf();
-    })
+    });
+
     this.events = response;
+    if (this.events.length === 0) {
+      const latest = await apiModule.getLatestEvent();
+      this.events.push(latest);
+    }
   }
 
 }

@@ -132,6 +132,17 @@ export const messages: LocaleMessages = {
         }
       },
       scheme: {
+        headers: {
+          plan: {
+            list: '応募済み - イベント企画案応募',
+            apply: 'イベント企画案応募',
+          },
+          scheme: {
+            list: '応募済み - イベント運営応募',
+            apply: 'イベント運営応募',
+            edit: 'イベント運営応募編集',
+          }
+        },
         labels: {
           start: {
             date: 'イベント開始日',
@@ -165,13 +176,14 @@ export const messages: LocaleMessages = {
           }
         },
         status: {
-          applied: '応募済',
+          applied: '未承認',
           approved: '承認',
           confirmed: '確定',
           denied: '否認',
         },
         messages: {
           auth: 'イベント応募するにはログインしてください。',
+          empty: '応募が存在しません.'
         },
       },
       admin: {

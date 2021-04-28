@@ -39,7 +39,7 @@ class SchemeResource extends Controller
 
         /** @var User */
         $user = Auth::user();
-        if (!$user->can('access-to-admin')) {
+        if (!$user->canAccessToAdmin()) {
             $planner = $user->id;
         }
         $schemes = $extractEventScheme->interact(

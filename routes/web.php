@@ -27,6 +27,7 @@ Route::middleware('view')->group(function () {
 
     Route::get('/schemes', 'Pages\Scheme')->name('scheme');
     Route::get('/schemes/{any}', 'Pages\Scheme')->name('scheme.any')->where('any', '.*');
+    Route::get('/plans/{any}', 'Pages\Scheme')->name('scheme.any')->where('any', '.*');
 
     Route::middleware('auth')->group(function () {
 

@@ -33,3 +33,12 @@ export type EventScheme = {
   explanation: string;
   detail: string;
 }
+
+export type PlanStatus = 'applied' | 'approved';
+export type EventPlan = {
+  id: number;
+  name :string;
+  planner: UserProfile;
+  status: PlanStatus;
+  explanation: string;
+}

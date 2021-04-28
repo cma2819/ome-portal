@@ -11,6 +11,9 @@ servers:
     description: Production server
   - url: https://dev.portal.rtamarathon.online/api/v1
     description: Development server
+tags:
+  - name: schemes
+    description: 'Event schemes and plans'
 paths:
   /auth/me:
     get:
@@ -488,7 +491,7 @@ paths:
     get:
       summary: Get list of event schemes.
       tags:
-        - Schemes
+        - schemes
       parameters:
         - in: query
           name: planner
@@ -528,7 +531,7 @@ paths:
     post:
       summary: Create new event scheme.
       tags:
-        - Schemes
+        - schemes
       requestBody:
         description: Scheme content
         content:
@@ -546,7 +549,7 @@ paths:
     get:
       summary: Find scheme has the ID.
       tags:
-        - Schemes
+        - schemes
       parameters:
         - in: path
           name: id
@@ -567,7 +570,7 @@ paths:
     put:
       summary: Update scheme in applied.
       tags:
-        - Schemes
+        - schemes
       parameters:
         - in: path
           name: id
@@ -591,7 +594,7 @@ paths:
     put:
       summary: Update scheme status.
       tags:
-        - Schemes
+        - schemes
       parameters:
         - in: path
           name: id
@@ -621,7 +624,7 @@ paths:
     post:
       summary: Make detail for approved scheme.
       tags:
-        - Schemes
+        - schemes
       parameters:
         - in: path
           name: id
@@ -648,6 +651,63 @@ paths:
           description: User not admin.
         '404':
           description: Scheme is not found.
+  /plans:
+    get:
+      tags:
+        - schemes
+      responses:
+        '200':
+          description: Event plan list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventPlan'
+    post:
+      tags:
+        - schemes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventPlanRequest'
+      responses:
+        '200':
+          description: Success to create event plan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPlan'
+  /plans/{id}:
+    get:
+      tags:
+        - schemes
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Event plan detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPlan'
+        '404':
+          description: Plan is not found.
+    put:
+      tags:
+        - schemes
+      responses:
+        '204':
+          description: Success to update.
+        '403':
+          description: User not admin or planner.
+        '404':
+          description: Plan is not found.
   /users:
     get:
       tags:
@@ -989,6 +1049,30 @@ components:
         explanation:
           type: string
           example: 'This event is some explanation.'
+    EventPlan:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: 'Upcoming Event!'
+        planner:
+          $ref: '#/components/schemas/UserProfile'
+        status:
+          type: string
+          example: 'applied'
+        explanation:
+          type: string
+          example: 'This event is some explanation.'
+    EventPlanRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        explanation:
+          type: string
     SchemeStatus:
       type: string
       enum:

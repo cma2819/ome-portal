@@ -6,6 +6,7 @@
     prepend-icon="fas fa-clock"
     :messages="$t('scheme.details.time')"
     :error-messages="error"
+    :readonly="!editable"
     @blur="blurTimeInput"
     @focus="focusTimeInput"
   ></v-text-field>
@@ -18,10 +19,13 @@ import { Vue, Component, Emit, Prop, Watch } from 'vue-property-decorator';
 @Component
 export default class SchemeInputTimeComponent extends Vue {
   @Prop(String)
-  label!: string;
+  readonly label!: string;
 
   @Prop(String)
-  value!: string;
+  readonly value!: string;
+
+  @Prop(Boolean)
+  readonly editable!: boolean
 
   time = '';
   timeString = '';

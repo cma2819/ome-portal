@@ -125,6 +125,32 @@ namespace App\Infrastructure\Eloquents{
 
 namespace App\Infrastructure\Eloquents{
 /**
+ * App\Infrastructure\Eloquents\EventPlan
+ *
+ * @property int $id
+ * @property int $planner_id
+ * @property string $name
+ * @property string $status
+ * @property string $explanation
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Infrastructure\Eloquents\User $planner
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan whereExplanation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan wherePlannerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventPlan whereUpdatedAt($value)
+ */
+	class EventPlan extends \Eloquent {}
+}
+
+namespace App\Infrastructure\Eloquents{
+/**
  * App\Infrastructure\Eloquents\EventScheme
  *
  * @property int $id

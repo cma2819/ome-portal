@@ -16,7 +16,7 @@
         prepend-icon="fas fa-calendar"
         readonly
         v-bind="attrs"
-        v-on="on"
+        v-on="editable && on"
       ></v-text-field>
     </template>
     <v-date-picker
@@ -46,19 +46,22 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 
 @Component
 export default class SchemeInputDatePickerComponent extends Vue {
   @Prop(String)
-  label!: string;
+  readonly label!: string;
 
   @Prop(String)
-  min!: string;
+  readonly min!: string;
 
   @Prop(String)
-  value!: string;
+  readonly value!: string;
+
+  @Prop(Boolean)
+  readonly editable!: boolean
 
   date = '';
   menu = false;

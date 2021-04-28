@@ -17,6 +17,7 @@
         </v-btn>
       </div>
       <div class="pa-2">
+        <v-subheader>{{ $t('scheme.headers.scheme.edit') }}</v-subheader>
         <fade-transition>
           <v-sheet
             v-if="confirmed"
@@ -29,7 +30,9 @@
             key="apply"
             :callback="editScheme"
             :scheme="scheme"
+            :editable="editable"
           ></scheme-input>
+          <linear-loading v-else></linear-loading>
         </fade-transition>
       </div>
     </v-col>
@@ -47,11 +50,12 @@
 </style>
 
 <script lang="ts">
-import { Vue, Component, Emit, Prop } from 'vue-property-decorator';
+import { Vue, Component, Emit } from 'vue-property-decorator';
 import { apiModule } from '../../modules/api';
 import SchemeInput from './SchemeInputComponent.vue';
 import SchemeConfirm from './SchemeConfirmComponent.vue';
 import FadeTransition from '../FadeTransitionComponent.vue';
+import LinearLoading from '../LinearLoadingComponent.vue';
 import { SchemeInputData } from '../../lib/models/event';
 
 @Component({
@@ -59,6 +63,7 @@ import { SchemeInputData } from '../../lib/models/event';
     SchemeInput,
     SchemeConfirm,
     FadeTransition,
+    LinearLoading,
   }
 })
 export default class SchemeEditComponent extends Vue {
@@ -66,6 +71,7 @@ export default class SchemeEditComponent extends Vue {
   scheme: SchemeInputData|null = null;
   schemeId = 0;
   confirmed = false;
+  editable = false;
 
   async created(): Promise<void> {
     const scheme = await apiModule.getScheme(parseInt(this.$route.params.schemeId));
@@ -76,6 +82,7 @@ export default class SchemeEditComponent extends Vue {
       explanation: scheme.explanation
     };
     this.schemeId = scheme.id;
+    this.editable = (scheme.status === 'applied');
   }
 
   @Emit()

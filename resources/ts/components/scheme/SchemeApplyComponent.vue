@@ -17,6 +17,7 @@
         </v-btn>
       </div>
       <div class="pa-2">
+        <v-subheader>{{ $t('scheme.headers.scheme.apply') }}</v-subheader>
         <fade-transition>
           <v-sheet
             v-if="confirmed"

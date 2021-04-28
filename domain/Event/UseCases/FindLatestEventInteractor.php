@@ -59,8 +59,9 @@ class FindLatestEventInteractor implements FindLatestEventUseCase
             }
 
             if (
-                $oengusMarathon->isActive()
-                && ($now->diffInSeconds($latest->getOengusMarathon()->getStartAt()) > ($now->diffInSeconds($oengusMarathon->getStartAt())))
+                $now->diffInSeconds($latest->getOengusMarathon()->getStartAt())
+                    > ($now->diffInSeconds($oengusMarathon->getStartAt())
+                )
             ) {
                 $latest = Event::createWithMarathon(
                     $oengusMarathon,

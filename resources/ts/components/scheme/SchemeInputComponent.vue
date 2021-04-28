@@ -3,6 +3,16 @@
     key="input"
     class="pa-4"
   >
+    <v-row v-if="!editable">
+      <v-col>
+        <v-chip label>
+          <v-icon left>
+            fas fa-book-reader
+          </v-icon>
+          readonly
+        </v-chip>
+      </v-col>
+    </v-row>
     <v-row
       justify="space-around"
       dense
@@ -16,6 +26,7 @@
           solo
           :label="$t('scheme.labels.name')"
           :messages="$t('scheme.details.name')"
+          :readonly="!editable"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -33,6 +44,7 @@
             <scheme-input-date-picker
               v-model="startAt.date"
               :label="$t('scheme.labels.start.date')"
+              :readonly="!editable"
             ></scheme-input-date-picker>
           </v-col>
           <v-col
@@ -43,6 +55,7 @@
             <scheme-input-time
               v-model="startAt.time"
               :label="$t('scheme.labels.start.time')"
+              :readonly="!editable"
             ></scheme-input-time>
           </v-col>
         </v-row>
@@ -63,6 +76,7 @@
               v-model="endAt.date"
               :label="$t('scheme.labels.end.date')"
               :min="startAt.date"
+              :readonly="!editable"
             ></scheme-input-date-picker>
           </v-col>
           <v-col
@@ -73,6 +87,7 @@
             <scheme-input-time
               v-model="endAt.time"
               :label="$t('scheme.labels.end.time')"
+              :readonly="!editable"
             ></scheme-input-time>
           </v-col>
         </v-row>
@@ -91,6 +106,7 @@
           name="input-7-4"
           :label="$t('scheme.labels.explanation')"
           :messages="$t('scheme.details.explanation')"
+          :readonly="!editable"
         ></v-textarea>
       </v-col>
     </v-row>
@@ -101,7 +117,7 @@
         <v-btn
           color="primary"
           :loading="loading"
-          :disabled="!validated"
+          :disabled="!validated || !editable"
           @click="submitScheme"
         >
           {{ $t('scheme.labels.apply') }}
@@ -133,6 +149,8 @@ export default class SchemeInputComponent extends Vue {
 
   @Prop(Object)
   readonly scheme?: SchemeInputData;
+  @Prop(Boolean)
+  readonly editable!: boolean;
 
   loading = false;
   confirmed = false;

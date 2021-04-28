@@ -184,6 +184,7 @@ return [
         App\Providers\Domain\NotificationServiceProvider::class,
         App\Providers\Domain\OAuthServiceProvider::class,
         App\Providers\Domain\PermissionServiceProvider::class,
+        App\Providers\Domain\PlanServiceProvider::class,
         App\Providers\Domain\SchemeServiceProvider::class,
         App\Providers\Domain\StreamServiceProvider::class,
         App\Providers\Domain\TwitterServiceProvider::class,

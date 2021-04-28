@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(TwitchConnection::class, 'user_twitch_connection');
     }
+
+    public function canAccessToAdmin(): bool
+    {
+        return $this->can('access-to-admin');
+    }
 }
