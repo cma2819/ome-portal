@@ -9,6 +9,16 @@
         lg="8"
       >
         <div>
+          <div
+            v-if="!authenticated"
+            class="pa-2"
+          >
+            <v-alert
+              type="info"
+            >
+              {{ $t('scheme.messages.auth') }}
+            </v-alert>
+          </div>
           <v-card>
             <v-card-title>イベント応募について</v-card-title>
             <v-card-text>
@@ -85,24 +95,24 @@
               </v-list-item>
             </v-list>
           </v-card>
+        </div>
+      </v-col>
+    </v-row>
 
-          <div class="py-2">
-            <scheme-list></scheme-list>
-          </div>
-          <div class="py-2">
-            <plan-list></plan-list>
-          </div>
-
-          <div
-            v-if="!authenticated"
-            class="pa-2"
-          >
-            <v-alert
-              type="info"
-            >
-              {{ $t('scheme.messages.auth') }}
-            </v-alert>
-          </div>
+    <v-row
+      v-if="authenticated"
+      justify="space-around"
+    >
+      <v-col
+        cols="12"
+        md="10"
+        lg="8"
+      >
+        <div class="py-2">
+          <scheme-list></scheme-list>
+        </div>
+        <div class="py-2">
+          <plan-list></plan-list>
         </div>
       </v-col>
     </v-row>
