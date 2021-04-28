@@ -20,6 +20,9 @@ use Ome\Event\Interfaces\UseCases\ApplyEventPlan\ApplyEventPlanUseCase;
 use Ome\Event\Interfaces\UseCases\ExtractEventPlan\ExtractEventPlanRequest;
 use Ome\Event\Interfaces\UseCases\ExtractEventPlan\ExtractEventPlanUseCase;
 use Ome\Exceptions\EntityNotFoundException;
+use Ome\Notification\Interfaces\UseCases\SendApplyPlanNotification\SendApplyPlanNotificationRequest;
+use Ome\Notification\Interfaces\UseCases\SendApplyPlanNotification\SendApplyPlanNotificationUseCase;
+use Ome\Notification\Interfaces\UseCases\SendApplySchemeNotification\SendApplySchemeNotificationUseCase;
 
 class PlanResource extends Controller
 {
@@ -83,7 +86,8 @@ class PlanResource extends Controller
     public function store(
         PlanCreateRequest $request,
         GetUserProfileUseCase $getUserProfileUseCase,
-        ApplyEventPlanUseCase $applyEventPlanUseCase
+        ApplyEventPlanUseCase $applyEventPlanUseCase,
+        SendApplyPlanNotificationUseCase $sendApplyPlanNotificationUseCase
     ) {
         $userId = Auth::id();
 
@@ -106,6 +110,10 @@ class PlanResource extends Controller
             )
         );
         $plan = $result->getPlan();
+
+        $sendApplyPlanNotificationUseCase->interact(
+            new SendApplyPlanNotificationRequest($plan, $user)
+        );
 
         return new PlanResponse(
             $plan->getId(),

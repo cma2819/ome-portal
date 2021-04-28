@@ -21,6 +21,10 @@ class NotificationServiceProvider extends ServiceProvider
             \Ome\Notification\Interfaces\UseCases\SendApplySchemeNotification\SendApplySchemeNotificationUseCase::class,
             \Ome\Notification\UseCases\SendApplySchemeNotificationInteractor::class
         );
+        $this->app->bind(
+            \Ome\Notification\Interfaces\UseCases\SendApplyPlanNotification\SendApplyPlanNotificationUseCase::class,
+            \Ome\Notification\UseCases\SendApplyPlanNotificationInteractor::class
+        );
 
         //////////////
         // Commands //
