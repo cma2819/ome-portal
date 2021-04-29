@@ -191,6 +191,7 @@ export const messages: LocaleMessages = {
           role: '権限管理',
           event: 'イベント管理',
           scheme: 'イベント応募',
+          plan: 'イベント企画案応募',
           users: 'ユーザー管理',
         },
         labels: {
@@ -216,6 +217,11 @@ export const messages: LocaleMessages = {
             explanation: 'イベント説明',
             detail: '詳細',
           },
+          plan: {
+            name: 'イベント名',
+            planner: '応募者',
+            explanation: 'イベント説明',
+          }
         },
         event: {
           headers: {

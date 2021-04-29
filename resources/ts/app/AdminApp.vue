@@ -12,6 +12,9 @@
       <v-tab href="#scheme">
         {{ $t('admin.tabs.scheme') }}
       </v-tab>
+      <v-tab href="#plan">
+        {{ $t('admin.tabs.plan') }}
+      </v-tab>
       <v-tab href="#users">
         {{ $t('admin.tabs.users') }}
       </v-tab>
@@ -25,6 +28,9 @@
       <v-tab-item value="scheme">
         <scheme-admin></scheme-admin>
       </v-tab-item>
+      <v-tab-item value="plan">
+        <plan-admin></plan-admin>
+      </v-tab-item>
       <v-tab-item value="users">
         <users-admin></users-admin>
       </v-tab-item>
@@ -37,6 +43,7 @@ import { Vue, Component } from 'vue-property-decorator';
 import RoleAdmin from '../components/admin/role/RoleAdminComponent.vue';
 import EventAdmin from '../components/admin/event/EventAdminComponent.vue';
 import SchemeAdmin from '../components/admin/scheme/SchemeAdminComponent.vue';
+import PlanAdmin from '../components/admin/plan/PlanAdminComponent.vue';
 import UsersAdmin from '../components/admin/users/UsersAdminComponent.vue';
 
 @Component({
@@ -45,6 +52,7 @@ import UsersAdmin from '../components/admin/users/UsersAdminComponent.vue';
     EventAdmin,
     SchemeAdmin,
     UsersAdmin,
+    PlanAdmin,
   }
 })
 export default class AdminApp extends Vue {}
