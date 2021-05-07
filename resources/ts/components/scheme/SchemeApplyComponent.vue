@@ -29,6 +29,7 @@
             v-else
             key="apply"
             :callback="applyScheme"
+            :editable="true"
           ></scheme-input>
         </fade-transition>
       </div>
