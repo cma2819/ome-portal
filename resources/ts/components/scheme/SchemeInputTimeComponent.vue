@@ -38,6 +38,9 @@ export default class SchemeInputTimeComponent extends Vue {
 
   @Emit()
   blurTimeInput(e: { target: { value : string; }; }): void {
+    if (!this.editable) {
+      return;
+    }
     const time = e.target.value;
     if (!time) {
       return;
@@ -73,6 +76,9 @@ export default class SchemeInputTimeComponent extends Vue {
 
   @Emit()
   focusTimeInput(): void {
+    if (!this.editable) {
+      return;
+    }
     this.error = null;
     this.timeString = this.timeString.replace(':', '');
   }

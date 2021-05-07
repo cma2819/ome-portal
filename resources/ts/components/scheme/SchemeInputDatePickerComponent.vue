@@ -14,9 +14,10 @@
         :label="label"
         outlined
         prepend-icon="fas fa-calendar"
+        placeholder="click for picking date."
         readonly
         v-bind="attrs"
-        v-on="editable && on"
+        v-on="on"
       ></v-text-field>
     </template>
     <v-date-picker
@@ -24,10 +25,12 @@
       no-title
       scrollable
       :min="min"
+      :readonly="!editable"
       @change="onChangeDate"
     >
       <v-spacer></v-spacer>
       <v-btn
+        v-if="editable"
         text
         color="primary"
         @click="menu = false"
@@ -35,6 +38,7 @@
         Cancel
       </v-btn>
       <v-btn
+        v-if="editable"
         text
         color="primary"
         @click="$refs.menu.save(date)"

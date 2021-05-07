@@ -44,7 +44,7 @@
             <scheme-input-date-picker
               v-model="startAt.date"
               :label="$t('scheme.labels.start.date')"
-              :readonly="!editable"
+              :editable="editable"
             ></scheme-input-date-picker>
           </v-col>
           <v-col
@@ -55,7 +55,7 @@
             <scheme-input-time
               v-model="startAt.time"
               :label="$t('scheme.labels.start.time')"
-              :readonly="!editable"
+              :editable="editable"
             ></scheme-input-time>
           </v-col>
         </v-row>
@@ -76,7 +76,7 @@
               v-model="endAt.date"
               :label="$t('scheme.labels.end.date')"
               :min="startAt.date"
-              :readonly="!editable"
+              :editable="editable"
             ></scheme-input-date-picker>
           </v-col>
           <v-col
@@ -87,7 +87,7 @@
             <scheme-input-time
               v-model="endAt.time"
               :label="$t('scheme.labels.end.time')"
-              :readonly="!editable"
+              :editable="editable"
             ></scheme-input-time>
           </v-col>
         </v-row>
