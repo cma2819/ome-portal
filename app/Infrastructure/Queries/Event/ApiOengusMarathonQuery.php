@@ -22,7 +22,7 @@ class ApiOengusMarathonQuery implements OengusMarathonQuery
 
     public function fetch(string $id, DateTimeInterface $now): ?OengusMarathonEntity
     {
-        $endpoint = "/marathon/${id}";
+        $endpoint = "/marathons/${id}";
         try {
             $apiJson = $this->oengusApiClient->apiGet($endpoint);
         } catch (OengusHttpException $e) {
