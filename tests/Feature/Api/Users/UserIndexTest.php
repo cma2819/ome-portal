@@ -48,7 +48,7 @@ class UserIndexTest extends TestCase
             }
         }
 
-        $response = $this->actingAs($this->authUser(), 'api')->getJson(route('api.v1.users.index'));
+        $response = $this->actingAs($this->authUser(), 'api')->getJson(route('api.v1.users.index', ['page' => 0]));
         $response->assertSuccessful();
 
         $response->assertJson([

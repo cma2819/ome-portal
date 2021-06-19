@@ -27,7 +27,7 @@ class UserIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'page' => ['nullable', 'numeric', 'minimum:0'],
+            'page' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 }
