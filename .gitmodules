@@ -2,3 +2,6 @@
 	url = https://github.com/cma2819/clogger.git
 [submodule ".logger"]
 	url = https://github.com/cma2819/clogger.git
+[submodule "authenticate-with-discord"]
+	path = authenticate-with-discord
+	url = https://github.com/cma2819/php-auth-discord
