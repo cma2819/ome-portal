@@ -11,6 +11,7 @@
         "php": "^7.4",
         "ext-gd": "*",
         "ext-redis": "*",
+        "cma/auth-discord": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.0",
@@ -84,5 +85,11 @@
         "test:feature": [
             "phpunit --testdox --testsuite=Feature"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/cma2819/php-auth-discord"
+        }
+    ]
 }
