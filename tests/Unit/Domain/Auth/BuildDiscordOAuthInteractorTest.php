@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Domain\Auth;
 
+use AuthDiscord\AuthDiscord;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthRequest;
 use Ome\Auth\UseCases\BuildDiscordOAuthInteractor;
 use PHPUnit\Framework\TestCase;
@@ -13,8 +14,12 @@ class BuildDiscordOAuthInteractorTest extends TestCase
     public function testBuildOAuthData()
     {
         $mockStateGenerator = new MockStateGenerator('random value');
+        $authDiscord = new AuthDiscord();
 
-        $result = (new BuildDiscordOAuthInteractor($mockStateGenerator))->interact(
+        $result = (new BuildDiscordOAuthInteractor(
+            $mockStateGenerator,
+            $authDiscord
+        ))->interact(
             new BuildDiscordOAuthRequest(
                 '123456789',
                 'https://example.com',

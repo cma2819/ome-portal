@@ -2,6 +2,7 @@
 
 namespace Ome\Auth\UseCases;
 
+use AuthDiscord\AuthDiscord;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthRequest;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthResponse;
 use Ome\Auth\Interfaces\UseCases\BuildDiscordOAuth\BuildDiscordOAuthUseCase;
@@ -13,28 +14,29 @@ class BuildDiscordOAuthInteractor implements BuildDiscordOAuthUseCase
 
     protected OAuthStateGenerator $stateGenerator;
 
+    protected AuthDiscord $authDiscord;
+
     public function __construct(
-        OAuthStateGenerator $stateGenerator
+        OAuthStateGenerator $stateGenerator,
+        AuthDiscord $authDiscord
     ) {
         $this->stateGenerator = $stateGenerator;
+        $this->authDiscord = $authDiscord;
     }
 
     public function interact(BuildDiscordOAuthRequest $request): BuildDiscordOAuthResponse
     {
         $state = $this->stateGenerator->generate();
 
-        $discordAuthParams = [
-            'response_type' => 'code',
-            'client_id' => $request->getClientId(),
-            'scope' => implode(' ', $request->getScopes()),
-            'state' => $state,
-            'redirect_url' => $request->getRedirectUrl(),
-            'prompt' => 'consent'
-        ];
-        $query = http_build_query($discordAuthParams);
+        $oAuthUri = $this->authDiscord->buildDiscordOAuthUri(
+            $request->getClientId(),
+            $state,
+            $request->getRedirectUrl(),
+            $request->getScopes()
+        );
 
         return new BuildDiscordOAuthResponse(
-            self::DISCORD_OAUTH_URL . '?' . $query,
+            $oAuthUri,
             $state
         );
     }

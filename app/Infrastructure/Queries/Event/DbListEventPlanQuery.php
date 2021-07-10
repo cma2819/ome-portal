@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\QUeries\Event;
+namespace App\Infrastructure\Queries\Event;
 
 use App\Infrastructure\Eloquents\EventPlan as EventPlanEloquent;
 use Ome\Event\Entities\EventPlan;

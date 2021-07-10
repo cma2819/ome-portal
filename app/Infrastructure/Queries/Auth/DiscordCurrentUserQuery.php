@@ -2,19 +2,24 @@
 
 namespace App\Infrastructure\Queries\Auth;
 
-use Illuminate\Support\Facades\Http;
+use AuthDiscord\AuthDiscord;
 use Ome\Auth\Entities\DiscordUser;
 use Ome\Auth\Interfaces\Queries\CurrentDiscordUserQuery;
 
 class DiscordCurrentUserQuery implements CurrentDiscordUserQuery
 {
-    private const DISCORD_USER_ME_ENDPOINT = '/users/@me';
+    protected AuthDiscord $authDiscord;
+
+    public function __construct(
+        AuthDiscord $authDiscord
+    ) {
+        $this->authDiscord = $authDiscord;
+    }
 
     public function fetch(string $token): DiscordUser
     {
-        $url = config('services.discord.api_url') . self::DISCORD_USER_ME_ENDPOINT;
-        $response = Http::withToken($token)->get($url);
+        $user = $this->authDiscord->getCurrentUser($token);
 
-        return DiscordUser::createFromApiJson(json_decode($response->body(), true));
+        return DiscordUser::createFromApiJson($user->jsonSerialize());
     }
 }

@@ -4,7 +4,6 @@ namespace Tests\Feature\Api\Auth;
 
 use App\Api\Discord\DiscordApiClient;
 use App\Infrastructure\Eloquents\DiscordRolePermission;
-use App\Infrastructure\Eloquents\TwitchConnection;
 use App\Infrastructure\Eloquents\User;
 use App\Infrastructure\Eloquents\UserDiscord;
 use App\Infrastructure\Queries\Permission\GetDiscordRolesForUserQuery;
@@ -13,7 +12,6 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Http;
 use Ome\Auth\Interfaces\Queries\FindDiscordByIdQuery;
 use Ome\Permission\Entities\RolePermission;
 use Ome\Permission\Interfaces\Queries\GetRolesForUserQuery;
