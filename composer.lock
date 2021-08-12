@@ -116,12 +116,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cma2819/php-auth-discord.git",
-                "reference": "b971700f8ed4d03c5f7b4ad67bed9e9557d15e9c"
+                "reference": "d6c9aa941fa0bf9fc737bfdcfad86d4892ab4b32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cma2819/php-auth-discord/zipball/b971700f8ed4d03c5f7b4ad67bed9e9557d15e9c",
-                "reference": "b971700f8ed4d03c5f7b4ad67bed9e9557d15e9c",
+                "url": "https://api.github.com/repos/cma2819/php-auth-discord/zipball/d6c9aa941fa0bf9fc737bfdcfad86d4892ab4b32",
+                "reference": "d6c9aa941fa0bf9fc737bfdcfad86d4892ab4b32",
                 "shasum": ""
             },
             "require": {
@@ -160,7 +160,7 @@
                 "source": "https://github.com/cma2819/php-auth-discord/tree/master",
                 "issues": "https://github.com/cma2819/php-auth-discord/issues"
             },
-            "time": "2021-07-10T10:40:00+00:00"
+            "time": "2021-08-12T21:28:19+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
