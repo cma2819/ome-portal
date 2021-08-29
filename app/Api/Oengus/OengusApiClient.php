@@ -34,7 +34,9 @@ class OengusApiClient
         $url = $this->apiUrl . $endpoint;
         Logger::debug('string', 'Api.Oengus', 'Get request with Oengus API Client to [{url}].', ['url' => $url]);
 
-        $response = Http::get($url);
+        $response = Http::withHeaders([
+            'oengus-version' => 1,
+        ])->get($url);
         if ($response->failed()) {
             Logger::debug('string', 'Api.Oengus', 'Failed to get request to oengus api with status:' . $response->status());
             throw new OengusHttpException($response->status(), 'Failed to get request to endpoint[' . $endpoint . '].');
