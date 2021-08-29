@@ -102,7 +102,7 @@ export default class RecentlyEventComponent extends Vue {
       return '';
     }
 
-    const time = this.event.startAt.toLocaleTimeString();
+    const time = this.event.startAt.toLocaleTimeString([], {hour12: false});
     const splitTime = time.split(':');
     return `${this.event.startAt.toLocaleDateString()} ${splitTime[0]}:${splitTime[1]}`
   }
@@ -112,7 +112,7 @@ export default class RecentlyEventComponent extends Vue {
       return '';
     }
 
-    const time = this.event.endAt.toLocaleTimeString();
+    const time = this.event.endAt.toLocaleTimeString([], {hour12: false});
     const splitTime = time.split(':');
     return `${this.event.endAt.toLocaleDateString()} ${splitTime[0]}:${splitTime[1]}`
   }
