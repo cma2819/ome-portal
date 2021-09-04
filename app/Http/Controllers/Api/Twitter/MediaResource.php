@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Twitter;
 
 use App\Exceptions\Twitter\TwitterException;
+use App\Facades\Logger;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Twitter\MediaStoreRequest;
 use Ome\Twitter\Interfaces\UseCases\UploadMedia\UploadMediaRequest;
@@ -27,6 +28,7 @@ class MediaResource extends Controller
                 new UploadMediaRequest($file->getPathname(), $file->getClientMimeType())
             );
         } catch (TwitterException $e) {
+            Logger::debug('string', 'Api.Twitter', $e->getMessage());
             abort($e->getStatusCode());
         }
 
