@@ -6,5 +6,5 @@ interface TwitterException
 {
     public function getStatusCode(): int;
 
-    public function getMessage(): string;
+    public function getMessage();
 }
