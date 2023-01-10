@@ -14,7 +14,10 @@ class BuildDiscordOAuthInteractorTest extends TestCase
     public function testBuildOAuthData()
     {
         $mockStateGenerator = new MockStateGenerator('random value');
-        $authDiscord = new AuthDiscord();
+        $authDiscord = new AuthDiscord(
+            '123456789',
+            'client_secret',
+        );
 
         $result = (new BuildDiscordOAuthInteractor(
             $mockStateGenerator,

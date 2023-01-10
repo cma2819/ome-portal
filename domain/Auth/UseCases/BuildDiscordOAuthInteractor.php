@@ -29,7 +29,6 @@ class BuildDiscordOAuthInteractor implements BuildDiscordOAuthUseCase
         $state = $this->stateGenerator->generate();
 
         $oAuthUri = $this->authDiscord->buildDiscordOAuthUri(
-            $request->getClientId(),
             $state,
             $request->getRedirectUrl(),
             $request->getScopes()

@@ -17,7 +17,7 @@ class UpdateAuthenticateUserTest extends TestCase
     public function testUpdateAuthenticateUser()
     {
         /** @var UserEloquent */
-        $userEloquent = factory(UserEloquent::class)->create();
+        $userEloquent = UserEloquent::factory()->create();
         $userDiscord = new UserDiscordEloquent(['discord_id' => '100000000']);
         $userDiscord->user()->associate($userEloquent);
         $userDiscord->save();

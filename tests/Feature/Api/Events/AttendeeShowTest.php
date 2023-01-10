@@ -34,7 +34,7 @@ class AttendeeShowTest extends TestCase
             'slug' => 'RM1'
         ]);
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $runnerAttendee = EventAttendee::create([
             'user_id' => $user->id,
             'attend_scope' => 'runner',
@@ -102,9 +102,9 @@ class AttendeeShowTest extends TestCase
     public function testNoAuthorization()
     {
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         /** @var User */
-        $showUser = factory(User::class)->create();
+        $showUser = User::factory()->create();
 
         $response = $this->actingAs($user)->getJson(route('api.v1.attendees.show', [
             'event' => 'rtamarathon',

@@ -18,7 +18,7 @@ class EventScheme extends Model
         'start_at' => 'datetime',
         'end_at' => 'datetime',
         'explanation' => 'string',
-        'detail' => 'string,'
+        'detail' => 'string'
     ];
 
     public function planner()

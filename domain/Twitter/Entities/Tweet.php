@@ -56,7 +56,7 @@ class Tweet implements JsonSerializable
             $mediaArrayJson = $json['extended_entities']['media'];
 
             foreach ($mediaArrayJson as $mediaJson) {
-                $medias[] = $mediaJson['id'];
+                $mediaIds[] = $mediaJson['id'];
             }
         }
         return new self(
@@ -67,17 +67,12 @@ class Tweet implements JsonSerializable
         );
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
-        $mediaJson = [];
-        foreach ($this->medias as $media) {
-            $mediaJson[] = $media->jsonSerialize();
-        }
         return [
             'id' => $this->id,
             'text' => $this->text,
-            'user' => $this->user->jsonSerialize(),
-            'medias' => $mediaJson,
+            'medias' => $this->mediaIds,
             'createdAt' => $this->createdAt->format('c')
         ];
     }

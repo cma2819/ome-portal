@@ -12,7 +12,7 @@ trait AuthTwitterUser
 
     protected function setUpTwitterUser(): void
     {
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
         $userDiscord = new UserDiscord(['discord_id' => '123456789']);
         $userDiscord->user()->associate($this->user);
         $userDiscord->save();

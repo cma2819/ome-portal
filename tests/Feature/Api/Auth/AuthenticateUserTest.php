@@ -46,7 +46,7 @@ class AuthenticateUserTest extends TestCase
         );
 
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $streamers = [
             Streamer::createRegisteredStreamer(
                 $user->id,
@@ -127,7 +127,7 @@ class AuthenticateUserTest extends TestCase
         );
 
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $userDiscord = new UserDiscord(['discord_id' => '123456789']);
         $userDiscord->user()->associate($user);

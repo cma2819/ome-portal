@@ -32,7 +32,7 @@ class AttendeeStoreTest extends TestCase
             'slug' => 'RM1'
         ]);
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($this->authUser(), 'api')->postJson(route('api.v1.attendees.store', [
             'event' => 'rtamarathon',

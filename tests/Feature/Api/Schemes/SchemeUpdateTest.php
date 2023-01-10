@@ -26,7 +26,7 @@ class SchemeUpdateTest extends TestCase
     public function testSchemeUpdate()
     {
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $userDiscord = new UserDiscord(['discord_id' => '198765432']);
         $userDiscord->user()->associate($user);
         $userDiscord->save();

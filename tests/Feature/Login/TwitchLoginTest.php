@@ -14,8 +14,7 @@ class TwitchLoginTest extends TestCase
     /** @test */
     public function testTwitchLoginWithNewUser()
     {
-        /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user, 'api')->withSession([
             'twitch_state' => 'oauth-state',

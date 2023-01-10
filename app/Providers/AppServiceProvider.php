@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Api\Discord\DiscordApiClient;
 use App\Api\Oengus\OengusApiClient;
 use App\Api\Twitch\TwitchApiClient;
+use AuthDiscord\AuthDiscord;
 use Clogger\Logger;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use Illuminate\Contracts\Foundation\Application;
@@ -38,6 +39,14 @@ class AppServiceProvider extends ServiceProvider
                 config('services.discord.cache_expire')
             );
         });
+
+        $this->app->bind(AuthDiscord::class, function (Application $app) {
+            return new AuthDiscord(
+                config('services.discord.client_id'),
+                config('services.discord.client_secret'),
+            );
+        });
+
         $this->app->bind(TwitchApiClient::class, function (Application $app) {
             return new TwitchApiClient(
                 config('services.twitch.client_id'),

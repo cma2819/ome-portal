@@ -26,7 +26,7 @@ class SchemeStatusUpdateTest extends TestCase
     public function testStatusUpdateSuccess()
     {
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $userDiscord = new UserDiscord(['discord_id' => '198765432']);
         $userDiscord->user()->associate($user);
         $userDiscord->save();
@@ -86,7 +86,7 @@ class SchemeStatusUpdateTest extends TestCase
     public function testStatusUpdateByNotAdmin()
     {
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $userDiscord = new UserDiscord(['discord_id' => '198765432']);
         $userDiscord->user()->associate($user);
         $userDiscord->save();

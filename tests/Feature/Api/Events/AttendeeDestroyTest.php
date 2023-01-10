@@ -36,7 +36,7 @@ class AttendeeDestroyTest extends TestCase
             'slug' => 'RM1'
         ]);
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $runnerAttendee = EventAttendee::create([
             'user_id' => $user->id,
             'attend_scope' => 'runner',
@@ -95,7 +95,7 @@ class AttendeeDestroyTest extends TestCase
             'slug' => 'RM1'
         ]);
         /** @var User */
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'id' => $this->authUser()->id + 1,
         ]);
         EventAttendee::create([

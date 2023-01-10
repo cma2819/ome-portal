@@ -40,7 +40,7 @@ class EventPlan
         string $explanation
     ): self {
 
-        if ($name > self::NAME_MAX_LENGTH) {
+        if (strlen($name) > self::NAME_MAX_LENGTH) {
             throw new LengthValidationException('name', '<', self::NAME_MAX_LENGTH);
         }
         return new self(

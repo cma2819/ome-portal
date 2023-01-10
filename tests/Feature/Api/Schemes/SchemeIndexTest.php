@@ -29,7 +29,7 @@ class SchemeIndexTest extends TestCase
     public function testSchemeIndex()
     {
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $userDiscord = new UserDiscord(['discord_id' => '198765432']);
         $userDiscord->user()->associate($user);
         $userDiscord->save();
@@ -71,7 +71,7 @@ class SchemeIndexTest extends TestCase
         $this->useNoRoleUser();
 
         /** @var User */
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $userDiscord = new UserDiscord(['discord_id' => '198765432']);
         $userDiscord->user()->associate($user);
         $userDiscord->save();
@@ -88,7 +88,7 @@ class SchemeIndexTest extends TestCase
         $eventScheme->save();
 
         /** @var User */
-        $anotherUser = factory(User::class)->create();
+        $anotherUser = User::factory()->create();
         $anotherUserDiscord = new UserDiscord(['discord_id' => '234567891']);
         $anotherUserDiscord->user()->associate($anotherUser);
         $anotherUserDiscord->save();

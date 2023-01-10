@@ -21,8 +21,6 @@ class DiscordAuthenticateTokenQuery implements AuthenticateTokenQuery
     public function fetch(string $clientId, string $clientSecret, string $code, string $redirectUrl, array $scopes): string
     {
         return $this->authDiscord->getAuthenticateToken(
-            $clientId,
-            $clientSecret,
             $code,
             $redirectUrl,
             $scopes

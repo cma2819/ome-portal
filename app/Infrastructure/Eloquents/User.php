@@ -2,13 +2,17 @@
 
 namespace App\Infrastructure\Eloquents;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableInterface;
 
-class User extends Authenticatable
+class User extends Authenticatable implements AuthenticatableInterface
 {
     use HasApiToken;
     use Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -41,5 +45,10 @@ class User extends Authenticatable
     public function canAccessToAdmin(): bool
     {
         return $this->can('access-to-admin');
+    }
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }
