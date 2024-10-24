@@ -44,7 +44,7 @@
         "oengus-api": "^0.9.29",
         "resources": "^0.4.3",
         "twitter-text": "^3.1.0",
-        "vue": "^2.6.11",
+        "vue": "^3.0.0",
         "vue-class-component": "^7.2.5",
         "vue-hot-reload-api": "^2.3.4",
         "vue-i18n": "^8.20.0",
